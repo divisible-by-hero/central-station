@@ -10,13 +10,14 @@
 
 .sidebar
 {
-    width:350px;
+    width:300px;
     float:left;
 }
 
-.content
+.defectContent
 {
     float:right;
+    width:78%;
 }
 
 
