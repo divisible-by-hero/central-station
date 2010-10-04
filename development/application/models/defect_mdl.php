@@ -21,6 +21,11 @@ class Defect_mdl extends CI_Model {
 
     public function createDefect(){
 
+        $defectData = array('defectTitle'=>$this->defectTitle);
+        $insertString = $this->db->insert_string($this->defectTable, $defectData);
+        log_message('info', 'Defect_mdl::createDefect executes query ' . $insertString);
+        $this->db->query($insertString);
+
     }
 
     public function getDefect($defectID){
