@@ -48,10 +48,13 @@ a.button span
     display:block;
 }
 
-.form .formItem input
+.form .formItem input,
+.form .formItem select
 {
     display:block;
     width:100%;
 }
+
+
 
 /* End Forms */
