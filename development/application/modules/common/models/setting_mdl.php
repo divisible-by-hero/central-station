@@ -29,5 +29,20 @@ class Setting_mdl extends CI_Model {
         
     }
 
+    public function getSetting($settingName){
+
+        $settingSQL = "SELECT settingValue WHERE settingName = '$settingName'";
+        $settingData = $this->db->query($settingSQL);
+        if ($settingData->num_rows == 0){
+            show_error("Setting " . $settingName . " cannot be found");
+        } else {
+            foreach($settingData->result() as $row){
+                $settingValue = $row->settingValue;
+
+            }
+            return $settingValue;
+        }
+    }
+
 }
 ?>
