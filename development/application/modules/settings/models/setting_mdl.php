@@ -1,40 +1,55 @@
 <?php
 /**
- * Description of setting_mdl
+ * Gets and Sets settings for the app.
  *
- * @author derek
+ * @author Derek Stegelman
  */
 class Setting_mdl extends CI_Model {
 
-    var $settingID;
-    var $settingName;
-    var $settingValue;
-    var $settingTable;
+    public $settingTable;
+    public $settingID;
+    public $settingName;
+    public $settingValue;
 
-    function  __construct() {
+
+    private function  __construct() {
         parent::CI_Model();
+        $this->load->config('settings');
         $this->settingTable = $this->config->item('settingTable');
+    }
+
+
+    /**
+     *  Set Variables
+     *
+     * @author Derek Stegelman
+     * @updated Oct 5 2010
+     *
+     */
+
+    public function setSetting($settingName, $settingValue){
+
+        $settingData = array('settingValue'=>$settingValue);
+        $settingWhere = "settingName = '$settingName'";
+        $settingUpdate = $this->db->update_string($this->settingTable, $settingData, $settingWhere);
+        $this->db->query($settingUpdate);
+
+
     }
 
     public function getSetting($settingName){
 
-        $selectQuery = "SELECT * FROM $this->settingTable WHERE settingName = $settingName";
-        $setting = $this->db->query($selectQuery);
-        foreach($setting->result() as $row){
-            $value = $row->settingValue;
+        $settingSQL = "SELECT settingValue WHERE settingName = '$settingName'";
+        $settingData = $this->db->query($settingSQL);
+        if ($settingData->num_rows == 0){
+            show_error("Setting " . $settingName . " cannot be found");
+        } else {
+            foreach($settingData->result() as $row){
+                $settingValue = $row->settingValue;
+
+            }
+            return $settingValue;
         }
-        return $value;
-
-    }
-
-    public function setSetting($settingName, $settingValue){
-
-        $updateData = array('settingValue' => $settingValue);
-        $where = "settingName = $settingName";
-        $updateString = $this->db->update_string($this->settingTable, $updateData, $where);
-        log_message('info', 'Setting_mdl::setSetting() is executing a query ' . $updateString);
-        $this->db->query($updateString);
-
     }
 
 }
