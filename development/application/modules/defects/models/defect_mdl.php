@@ -2,7 +2,7 @@
 /**
  * Description of defect_mdl
  *
- * @author derek
+ * @author Derek Stegelman
  */
 class Defect_mdl extends CI_Model {
 
@@ -29,10 +29,23 @@ class Defect_mdl extends CI_Model {
     }
 
     public function getDefect($defectID){
+
+        if($defectID == 0){
+
+            //Select All Defects
+
+            $getDefectSQL = "SELECT * FROM $this->defectTable";
+        } else {
+
         $getDefectSQL = "SELECT * FROM $this->defectTable WHERE defectID = $defectID";
+
+        }
+        
         $executeDefect = $this->db->query($getDefectSQL);
         return $executeDefect;
     }
+
+    
 
 }
 ?>
