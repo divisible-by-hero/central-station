@@ -19,5 +19,11 @@ function js($url){
     return $javascript;
 }
 
+function css($fileName){
+    $builtURL = base_url() . "assets/css/" . $fileName;
+    $outputCSS = "<link href='$builtURL' type='text/css' rel='stylesheet'>";
+    return $outputCSS;
+}
+
 
 ?>

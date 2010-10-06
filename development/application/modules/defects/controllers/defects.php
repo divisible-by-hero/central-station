@@ -7,9 +7,7 @@
 class Defects extends Controller {
 
 
-    private function __construct(){
-        parent::Controller();
-    }
+    
 
     public function index(){
         $this->load->view('defectListing');
@@ -18,7 +16,13 @@ class Defects extends Controller {
     public function view($defectID){
 
         $this->load->model('defect_mdl');
-        $defectData = $this->Defect_mdl->getDefect($defectID);
+        $this->data['defectData'] = $this->Defect_mdl->getDefect($defectID);
+        $this->load->view('singleDefect', $this->data);
+        
+    }
+
+    public function viewDefect($filterID){
+
         
     }
 }
