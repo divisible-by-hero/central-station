@@ -14,13 +14,13 @@ function getJquery(){
 }
 
 function js($url){
-    $builtURL = base_url() . "assets/javascript/" . $url;
+    $builtURL = base_url() . "assets/javascript/" . $url . ".js";
     $javascript = "<script type='text/javascript' src='$builtURL'></script>";
     return $javascript;
 }
 
 function css($fileName){
-    $builtURL = base_url() . "assets/css/" . $fileName;
+    $builtURL = base_url() . "assets/css/" . $fileName . ".css";
     $outputCSS = "<link href='$builtURL' type='text/css' rel='stylesheet'>";
     return $outputCSS;
 }
