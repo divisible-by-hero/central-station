@@ -131,6 +131,7 @@ body
     border-radius:3px;
     padding:7px;
     margin-bottom:10px;
+    position:relative;
 }
 
 .box.grey
