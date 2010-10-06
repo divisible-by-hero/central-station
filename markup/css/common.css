@@ -8,36 +8,141 @@
 
 /* Layout */
 
+body
+{
+    font-family:Neucha, Arial;
+}
+
+
+
+/* Header */
+
+.header
+{
+    background:#642391;
+    padding-top:14px;
+    padding-left:11px;
+    margin-bottom:15px;
+}
+
+.header h1
+{
+    display:inline-block;
+    font-size:27pt;
+    color:#fff;
+    text-shadow: 6px 6px 6px #000;
+}
+
+.header a.createDefect
+{
+    margin-left:15px;
+    width:150px;
+}
+
+.header div.search
+{
+    right: 10px;
+    top:10px;
+    position: absolute;
+}
+
+.header ul
+{
+    margin-top:20px;
+}
+
+.header ul li
+{
+    display:inline;
+    margin-right:7px;
+    background:#dddddd;
+    border-right:1px solid #000;
+    border-left:1px solid #000;
+    padding: 5px 9px 0px 9px;
+    -moz-border-radius-topleft:3px;
+    -moz-border-radius-topright:3px;
+    
+}
+
+.header ul li.active
+{
+    background:#fff;
+}
+
+
+/* End Header */
+
+.mainContent
+{
+    width:66%;
+    float:left;
+    padding-right: 15px;
+    padding-left:15px;
+}
+
+.mainContent h2,
+.sidebar h2
+{
+    border-bottom:1px solid #ccc;
+    padding-bottom:2px;
+}
+
+/* End Content */
+
+/* Sidebar */
+
 .sidebar
 {
-    width:300px;
-    float:left;
+    margin-left:70%;
+    padding-right:10px;
 }
 
-.defectContent
+.sidebar h2
 {
-    float:right;
-    width:78%;
+    margin-bottom:10px;
 }
 
+/* Boxes */
+
+.box
+{
+    -moz-border-radius:3px;
+    -webkit-border-radius:3px;
+    border-radius:3px;
+    padding:7px;
+}
+
+.box.grey
+{
+    background:#eee;
+}
 
 /* Buttons */
 
 a.button
 {
-    -webkit-border-radius:3px;
-    -moz-border-radius:3px;
-    border-radius:3px;
+    -webkit-border-radius:5px;
+    -moz-border-radius:5px;
+    border-radius:5px;
     text-align:center;
     display:inline-block;
     background:#000;
     padding:7px;
+    cursor:pointer;
+    -moz-box-shadow: 0 1px 3px #999;
+    -webkit-box-shadow: 0 1px 3px #999;
 }
 
 a.button span
 {
     color:#fff;
 }
+
+a.button.createDefect
+{
+    background:#4FDB07;
+}
+
 
 /* End Buttons */
 
