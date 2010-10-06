@@ -46,6 +46,16 @@ body
     position: absolute;
 }
 
+.header input.search
+{
+    -moz-border-radius:2px;
+    -webkit-border-radius:2px;
+    border-radius:2px;
+    font-size:12pt;
+    border:1px;
+    vertical-align:middle;
+}
+
 .header ul
 {
     margin-top:20px;
@@ -85,6 +95,7 @@ body
 {
     border-bottom:1px solid #ccc;
     padding-bottom:2px;
+    margin-bottom:10px;
 }
 
 /* End Content */
@@ -97,9 +108,18 @@ body
     padding-right:10px;
 }
 
-.sidebar h2
+/* Footer */
+
+.footer
 {
-    margin-bottom:10px;
+    background:#ddd;
+    height:40px;
+    padding-top:20px;
+}
+
+.footer p
+{
+    margin-left:25px;
 }
 
 /* Boxes */
@@ -110,11 +130,27 @@ body
     -webkit-border-radius:3px;
     border-radius:3px;
     padding:7px;
+    margin-bottom:10px;
 }
 
 .box.grey
 {
     background:#eee;
+}
+
+/* Graph */
+
+.graph
+{
+    border:3px solid #ccc;
+}
+
+.graph .bar
+{
+    width:75%;
+    height:25px;
+    background: #642391;
+    
 }
 
 /* Buttons */
