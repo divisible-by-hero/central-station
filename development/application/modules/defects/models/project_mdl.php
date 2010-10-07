@@ -15,16 +15,16 @@ class Project_mdl extends CI_Model {
 
         if ($projectID == 0){
 
-        $projectSQL = "SELECT * FROM $this->projectTable";
+       
+        $projectData = $this->db->get($this->projectTable);
 
         } else {
 
-            $projectSQL = "SELECT * FROM $this->projectTable WHERE projectID = $projectID";
+            
+            $projectData = $this->db->get_where($this->projectTable, array('projectID'=>$projectID));
         }
 
-        log_message('info', 'Project_mdl::getProject() executing query ' . $projectSQL);
-        $projectData = $this->db->query($projectSQL);
-
+        
         return $projectData;
 
     }

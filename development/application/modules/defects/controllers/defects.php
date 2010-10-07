@@ -28,9 +28,7 @@ class Defects extends Controller {
 
     public function createDefect(){
 
-        if(!isset($this->input->post('defectTitle'))){
-            $this->load->view('addDefectModal');
-        }
+        
 
     }
 }

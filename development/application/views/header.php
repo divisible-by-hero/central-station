@@ -1,8 +1,12 @@
 <!DOCTYPE HTML>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        
+        <link href='http://fonts.googleapis.com/css?family=Neucha&subset=latin' rel='stylesheet' type='text/css'>
         <?php echo getJquery(); ?>
+        <?php echo js('facebox/facebox'); ?>
+        <?php echo css('facebox/facebox'); ?>
+        <?php echo js('ckeditor/ckeditor'); ?>
         <?php echo css('style'); ?>
         <?php echo js('defecttracker'); ?>
         <title></title>
