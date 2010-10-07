@@ -1,5 +1,21 @@
 <?php
 
+/**
+ *
+ * Asset Helper - Loads css, javascript, and common markup controls to a page with ease.
+ *
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Global Helpers
+ *
+ *
+ * Last Modified Oct 7 2010
+ *
+ *
+ *
+ *
+ */
+
 
 function commonButton($controller, $text){
 
@@ -11,6 +27,11 @@ function commonButton($controller, $text){
 function getJquery(){
     $jquery = "<script type='text/javascript' src='http://code.jquery.com/jquery-1.4.2.min.js'></script>";
     return $jquery;
+}
+
+function getJqueryUI(){
+    $jqueryUI = "<script type='text/javascript' src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>";
+    return $jqueryUI;
 }
 
 function js($url){
@@ -25,5 +46,6 @@ function css($fileName){
     return $outputCSS;
 }
 
+/* End of Asset_helper.php */
 
 ?>

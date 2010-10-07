@@ -10,7 +10,10 @@
  * @author derek
  */
 class Settings {
-    
+
+    public function getSetting($settingName){
+        
+    }
     
 
 

@@ -4,12 +4,13 @@
         
         <link href='http://fonts.googleapis.com/css?family=Neucha&subset=latin' rel='stylesheet' type='text/css'>
         <?php echo getJquery(); ?>
+        <?php echo getJqueryUI(); ?>
         <?php echo js('facebox/facebox'); ?>
         <?php echo css('facebox/facebox'); ?>
         <?php echo js('ckeditor/ckeditor'); ?>
         <?php echo css('style'); ?>
         <?php echo js('defecttracker'); ?>
-        <title></title>
+        <title><?php echo getSetting('appTitle'); ?></title>
     </head>
     <body>
       <div class="header">

@@ -1,12 +1,12 @@
 <?php
 /**
- * 
+ * Controls Helper
  *
  * @author Derek Stegelman
  * @package CI Defect Tracker
  * @subpackage Control Helper
  * 
- *
+ * Last Modified Oct 7 2010
  *
  */
 
@@ -45,6 +45,20 @@ function priorityDropdownList(){
 
     $CI =& get_instance();
     $CI->load->library('controls');
+    
+}
+
+/**
+ *
+ * statusDropdownList()
+ *
+ * @param void
+ * @return a drop down list of available statuses.
+ *
+ *
+ */
+
+function statusDropdownList (){
     
 }
 
