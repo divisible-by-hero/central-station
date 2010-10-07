@@ -2,7 +2,7 @@
 /**
  * Description of Controls
  *
- * @author derek
+ * @author Derek Stegelman
  */
 class Controls {
     //put your code here
@@ -12,10 +12,7 @@ class Controls {
 
 
 
-    var $projectID;
-    var $projectTitle;
-    var $projectDescription;
-    var $projectTable;
+    
 
     public function  __construct() {
         $this->ci =& get_instance();

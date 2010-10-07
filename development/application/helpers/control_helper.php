@@ -20,8 +20,8 @@
  */
 
 function projectDropdownList(){
-    $CI =& get_instance();
-    //$CI->load->library('controls');
+    $CI2 =& get_instance();
+    $CI2->load->library('controls');
 //    //$projects = $CI->controls->getProject(0);
 //    $dropData = array();
 //    foreach($projects->result() as $row){
