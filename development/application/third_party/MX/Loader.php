@@ -118,8 +118,8 @@ class MX_Loader extends CI_Loader
 		$class = strtolower(end(explode('/', $library)));
 		
 		if (isset($this->_ci_classes[$class]) AND $_alias = $this->_ci_classes[$class])
-			//return CI::$APP->$_alias;
-                        return self::$APP->$_alias;
+			return CI::$APP->$_alias;
+                        
 			
 		($_alias = $object_name) OR $_alias = $class;
 		list($path, $_library) = Modules::find($library, $this->_module, 'libraries/');
@@ -141,8 +141,8 @@ class MX_Loader extends CI_Loader
 		}
 		
 		$this->_ci_assign_to_models();
-		//return CI::$APP->$_alias;
-                return self::$APP->$_alias;
+		return CI::$APP->$_alias;
+               
     }
 
 	/** Load an array of libraries **/
