@@ -8,7 +8,7 @@
         </div>
         <div class="formItem">
             <label for="defectProject">Project</label>
-            
+            <?php echo projectDropdownList(); ?>
         </div>
         <div class="formItem">
             <label for="defectDescription">Description</label>

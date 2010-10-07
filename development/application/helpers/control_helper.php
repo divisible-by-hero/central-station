@@ -33,6 +33,19 @@ function projectDropdownList(){
 
 }
 
+/**
+ * priorityDropdownList()
+ *
+ * @param void
+ * @return a Drop down list of priorities available via the database
+ *
+ */
 
+function priorityDropdownList(){
+
+    $CI =& get_instance();
+    $CI->load->library('controls');
+    
+}
 
 ?>
