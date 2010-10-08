@@ -46,6 +46,12 @@ function css($fileName){
     return $outputCSS;
 }
 
+function loadColorScheme($color){
+    $colorStylesheet = base_url() . "assets/css/colorscheme/" . $color . ".css";
+    $css = "<link href='$colorStylesheet' type='text/css' rel='stylesheet'>";
+    return $css;
+}
+
 /* End of Asset_helper.php */
 
 ?>

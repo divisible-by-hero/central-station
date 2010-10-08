@@ -9,6 +9,7 @@
         <?php echo css('facebox/facebox'); ?>
         <?php echo js('ckeditor/ckeditor'); ?>
         <?php echo css('style'); ?>
+        <?php echo loadColorScheme(getSetting('theme')); ?>
         <?php echo js('defecttracker'); ?>
         <title><?php echo getSetting('appTitle'); ?></title>
     </head>
@@ -20,6 +21,7 @@
             <input type="search" name="search" id="search" class="search">
             <a class="button"><span>Search</span></a>
           </div>
+          <a class="help" href="<?php echo base_url(); ?>help">Help</a>
           <ul>
               <li class="active"><a href="#">Dashboard</a></li>
               <li><a href="#">Projects</a></li>

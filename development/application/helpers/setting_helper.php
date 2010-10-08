@@ -2,8 +2,8 @@
 
 function getSetting($settingName){
     $CI =& get_instance();
-    $CI->load->model('settings/Setting_mdl');
-    $settingValue = $CI->Setting_mdl->getSetting($settingName);
+    $CI->load->library('settings');
+    $settingValue = $CI->settings->getSetting($settingName);
     return $settingValue;
 }
 

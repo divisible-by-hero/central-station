@@ -23,6 +23,7 @@ function projectDropdownList(){
     $CI =& get_instance();
     $CI->load->library('controls');
     $CI->load->helper('form');
+    $CI->controls->setTable(getSetting('projectTable'));
     $projects = $CI->controls->getProject(0);
     $dropData = array();
     foreach($projects->result() as $row){
