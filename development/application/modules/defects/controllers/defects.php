@@ -10,16 +10,10 @@
  * Last Modified Oct 7 2010
  *
  */
-class Defects extends Controller {
+class Defects extends MY_Controller {
 
 
-   function Defects(){
-
-       // Why can't I set this to a private __construct() ???
-       parent::Controller();
-       $this->load->model('Defect_mdl');
-       $this->Defect_mdl->defectTable = getSetting('defectTable');
-   }
+  
 
     public function index(){
 

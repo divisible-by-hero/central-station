@@ -2,14 +2,14 @@
 
 /**
  *
- * Asset Helper - Loads css, javascript, and common markup controls to a page with ease.
+ * @name Asset Helper - Loads css, javascript, and common markup controls to a page with ease.
  *
  * @author Derek Stegelman
  * @package CI Defect Tracker
  * @subpackage Global Helpers
  *
  *
- * Last Modified Oct 7 2010
+ * Last Modified Oct 8 2010
  *
  *
  *

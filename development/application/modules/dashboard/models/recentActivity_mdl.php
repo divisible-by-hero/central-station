@@ -4,8 +4,7 @@
  * @name Recent Activity Model
  * @package CI Defect Tracker
  * @subpackage Dashboard Module
- * @category Dashbaord Models
- *
+ * @category Dashbaord Module
  * @author Derek Stegelman - CI Defect Tracker Dev Team
  *
  *

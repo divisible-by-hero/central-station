@@ -19,6 +19,10 @@ class Defect_mdl extends CI_Model {
     var $defectPriorityID;
     var $defectTable;
 
+    function setTable($name){
+        $this->defectTable = $name;
+    }
+
     public function createDefect(){
 
         $this->defectCreatedDate = date("m/d/y");
@@ -37,6 +41,8 @@ class Defect_mdl extends CI_Model {
             //Select All Defects
 
             $getDefectSQL = "SELECT * FROM $this->defectTable";
+
+            // @todo rewrite with active record
         } else {
 
         $getDefectSQL = "SELECT * FROM $this->defectTable WHERE defectID = $defectID";

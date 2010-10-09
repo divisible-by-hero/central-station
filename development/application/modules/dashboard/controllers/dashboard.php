@@ -1,10 +1,22 @@
 <?php
 /**
- * Description of dashboard
+ * 
+ * @name Dashboard Controller
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Dashboard Module
+ * @category Dashboard Module Controllers
  *
- * @author derek
+ * Last Updated October 8 2010
+ * 
  */
-class Dashboard extends Controller {
-    //put your code here
+
+
+class Dashboard extends MY_Controller {
+    
+
+    function index(){
+        $this->load->view('dashboard');
+    }
 }
 ?>

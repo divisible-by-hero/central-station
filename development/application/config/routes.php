@@ -32,7 +32,7 @@
 | would be loaded.
 */
 
-$route['default_controller'] = "defects";
+$route['default_controller'] = "dashboard";
 
 
 /* End of file routes.php */

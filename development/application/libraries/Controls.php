@@ -1,13 +1,19 @@
 <?php
 /**
- * Description of Controls
- *
+ * @name Controls Library
+ * @package CI Defect Tracker
+ * @subpackage Libraries
  * @author Derek Stegelman
+ *
+ *
+ * Last Modified October 8 2010
+ *
  */
+
 class Controls {
-    //put your code here
 
-
+    // CI Object
+    
     private $ci;
 
     private $projectTable;
@@ -22,7 +28,6 @@ class Controls {
             $this->projectTable = $name;
         }
     }
-
 
     public function getProject($projectID){
       

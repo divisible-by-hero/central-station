@@ -1,17 +1,19 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @name Settings Library
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Libraries
+ * 
+ * Last Updated October 8 2010
+ *
+ *
  */
 
-/**
- * Description of Settings
- *
- * @author derek
- */
 class Settings {
 
-     private $ci;
+    private $ci;
 
     private $settingTable;
 
