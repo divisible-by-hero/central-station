@@ -66,7 +66,7 @@ $autoload['helper'] = array('url', 'asset', 'setting', 'control', 'gravatar');
 |
 */
 
-$autoload['config'] = array();
+$autoload['config'] = array('settings');
 
 
 /*

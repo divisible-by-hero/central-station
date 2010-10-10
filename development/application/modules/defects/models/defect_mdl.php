@@ -53,6 +53,8 @@ class Defect_mdl extends CI_Model {
         return $executeDefect;
     }
 
+   
+
     
 
 }

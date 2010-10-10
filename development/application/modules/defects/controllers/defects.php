@@ -21,6 +21,7 @@ class Defects extends MY_Controller {
         $this->load->view('defectListing', $this->data);
     }
 
+    
     public function view($defectID){
 
         $this->load->model('defect_mdl');
