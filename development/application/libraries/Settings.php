@@ -17,10 +17,10 @@ class Settings {
 
     private $settingTable;
 
-    public function  __construct() {
+    private function  __construct() {
         $this->ci =& get_instance();
         $this->ci->load->database();
-        $this->settingTable = 'settingTable';
+        $this->settingTable = $this->ci->config->item('settingsTable');
     }
 
     public function getSetting($settingName){
@@ -31,8 +31,13 @@ class Settings {
         foreach($settingData->result() as $row){
             $settingValue = $row->settingValue;
         }
-        return $settingValue;
-        
+        return $settingValue;  
+    }
+
+    public function setSetting($settingName, $settingValue){
+
+
+        return true;
     }
     
 

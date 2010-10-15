@@ -18,15 +18,10 @@ class Controls {
 
     private $projectTable;
 
-    public function  __construct() {
+    private function  __construct() {
         $this->ci =& get_instance();
-        $this->ci->load->database();
-    }
-
-    public function setTable($name){
-        if(isset($name)){
-            $this->projectTable = $name;
-        }
+        
+        $this->ci->config->item('projectTable');
     }
 
     public function getProject($projectID){

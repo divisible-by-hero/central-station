@@ -17,8 +17,8 @@ class MY_Controller extends Controller {
     function  MY_Controller() {
         parent::Controller();
 
-        // Set the Defect Table from settings.
-        $this->Defect_mdl->defectTable = getSetting('defectTable');
+
+        
     }
 }
 ?>
