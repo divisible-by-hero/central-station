@@ -38,7 +38,7 @@ class Post_mdl extends CI_Model {
 
         $data = array('postID'=>$this->postID,
                       'postCreatedDate'=>date('m/y/d'),
-                      'postTitle'=>$this->postedTitle,
+                      'postTitle'=>$this->postTitle,
                       'postContent'=>$this->postContent);
 
         $this->db->insert($this->postTable, $data);
@@ -52,7 +52,18 @@ class Post_mdl extends CI_Model {
     }
 
     public function update(){
+        $data = array('postTitle'=>$this->postTitle,
+                      'postContent'=>$this->postContent);
         
+        $this->db->where('postID', $this->postID);
+
+        $this->db->update($this->postTable, $data);
+    }
+
+    public function delete(){
+
+        $this->db->where("postID", $this->postID);
+        $this->db->delete($this->postTable);
     }
 
 
