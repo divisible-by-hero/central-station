@@ -6,6 +6,7 @@
 
 $config['settingsTable'] = "settings";
 $config['projectTable'] = "projects";
-$config['postTable'] = "forumPosts";
-
+$config['forumPostTable'] = "forumPosts";
+$config['forumReplyTable'] = "forumReplyTable";
+$config['userTable'] = "usersTable";
 ?>

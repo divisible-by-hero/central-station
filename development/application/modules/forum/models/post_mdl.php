@@ -66,6 +66,8 @@ class Post_mdl extends CI_Model {
         $this->db->delete($this->postTable);
     }
 
+    // End CRUD
+
 
 }
 ?>

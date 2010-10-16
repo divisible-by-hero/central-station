@@ -1,39 +1,35 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 
 /**
- * Description of Users
+ * @name User Library
  *
- * @author derek
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Libraries
+ *
+ * Last Modified Oct 16 2010
+ *
  */
+
 class Users {
-    //put your code here
-}
 
-<?php
-/*
-* FotoTastic - a web based photo album
-* Copyright (C) 2009-2010 Derek Stegelman http://derek.stegelman.com
-*
-* This program is free software; you can redistribute it and/or modify
-* it under the terms of the GNU General Public License as published by
-* the Free Software Foundation; either version 2 of the License, or (at
-* your option) any later version.
-*
-* This program is distributed in the hope that it will be useful, but
-* WITHOUT ANY WARRANTY; without even the implied warranty of
-* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-* General Public License for more details.
-*
-* You should have received a copy of the GNU General Public License
-* along with this program; if not, write to the Free Software
-* Foundation, Inc., 51 Franklin Street - Fifth Floor, Boston, MA  02110-1301, USA.
-*/
+    /*
+     * CI Super Object
+     *
+     *
+     */
 
-class User_mdl extends CI_Model {
+
+    private $ci;
+
+
+    /*
+     *  Define Users Table
+     *
+     */
+
+    private $userTable;
+
 
     // User Properties
 
@@ -47,15 +43,23 @@ class User_mdl extends CI_Model {
     var $userDateCreated;
     var $userTable;
 
-    function User_mdl(){
-        parent::CI_Model();
-        $this->userTable = $this->config->item('userTable');
+    function Users(){
+        $ci =& get_instance();
+        $this->userTable = $this->ci->config->item('userTable');
 
     }
 
-    // User Methods
+    /*
+     * Login
+     * @params, User Object
+     * @returns useriD - -1 if authentication fails.
+     *
+     *
+     */
 
-    // Login Method
+    
+
+    
 
     function login(){
 
@@ -319,6 +323,4 @@ class User_mdl extends CI_Model {
 
 
 }
-?>
-
 ?>
