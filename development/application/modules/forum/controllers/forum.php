@@ -1,15 +1,24 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @name Forum Controller
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Forums Module
+ *
+ * Last Updated October 16 2010
+ *
+ *
  */
 
-/**
- * Description of forum
- *
- * @author derek
- */
-class forum {
-    //put your code here
+class Forum extends MY_Controller {
+
+    function Forum(){
+        parent::My_Controller();
+    }
+
+
+
+
 }
 ?>

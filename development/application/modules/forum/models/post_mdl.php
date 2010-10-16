@@ -1,15 +1,60 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ *
+ * @name Forum Post Model
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Forums Module
+ *
+ * Last Updated October 16 2010
+ *
+ *
  */
 
-/**
- * Description of post_mdl
- *
- * @author derek
- */
-class post_mdl {
-    //put your code here
+class Post_mdl extends CI_Model {
+
+    // Vars
+
+    public $postID;
+    public $postCreatedDate;
+    public $postTitle;
+    public $postContent;
+
+    // Private vars
+
+    private $postTable;
+
+
+    //Constructor...
+
+    function Post_mdl(){
+        parent::CI_Model();
+        $this->postTable = $this->config->item('postTable');
+    }
+
+    // CRUD
+
+    public function create(){
+
+        $data = array('postID'=>$this->postID,
+                      'postCreatedDate'=>date('m/y/d'),
+                      'postTitle'=>$this->postedTitle,
+                      'postContent'=>$this->postContent);
+
+        $this->db->insert($this->postTable, $data);
+    }
+
+    public function read(){
+
+        $posts = $this->db->get($this->postTable);
+        return $posts;
+
+    }
+
+    public function update(){
+        
+    }
+
+
 }
 ?>
