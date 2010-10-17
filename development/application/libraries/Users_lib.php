@@ -11,7 +11,7 @@
  *
  */
 
-class Users {
+class Users_lib {
 
     /*
      * CI Super Object
@@ -41,10 +41,11 @@ class Users {
     var $userLastName;
     var $userFirstName;
     var $userDateCreated;
-    var $userTable;
+   
 
-    function Users(){
-        $ci =& get_instance();
+    function Users_lib(){
+        $this->ci =& get_instance();
+        $this->ci->load->library('encrypt');
         $this->userTable = $this->ci->config->item('userTable');
 
     }
@@ -95,13 +96,13 @@ class Users {
 
         // Exectute Query
 
-        $query = $this->db->query($UserQuery);
+        $query = $this->ci->db->query($UserQuery);
 
         if ($query->num_rows() == 0){
             log_message('debug', 'User_mdl: $query->num_rows() returned a null or 0 value.');
             return -1; // This indicates that the query returned no records.  ERROR.
         } else {}
-        $getUsersInfo = $this->db->query($UserQuery);
+        $getUsersInfo = $this->ci->db->query($UserQuery);
         log_message('debug', 'User_mdl: Executing query to find password. ' . $UserQuery);
 
         // Get The Info
@@ -115,7 +116,7 @@ class Users {
 
         // Decode password.
 
-        $unencryptPass = $this->encrypt->decode($dbPassword);
+        $unencryptPass = $this->ci->encrypt->decode($dbPassword);
 
 
         // Check the password against the password provided.
@@ -131,7 +132,7 @@ class Users {
 
                );
 
-        $this->session->set_userdata($newdata);
+        $this->ci->session->set_userdata($newdata);
 
             return $dbUserID;
 
@@ -156,7 +157,7 @@ class Users {
 
     function isLoggedIn(){
         log_message('debug', 'isLoggedIn method hit');
-        if ($this->session->userdata("isLoggedIn") == 1){
+        if ($this->ci->session->userdata("isLoggedIn") == 1){
             return TRUE;
         } else {
             return FALSE;

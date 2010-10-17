@@ -16,11 +16,10 @@ class MY_Controller extends Controller {
 
     function  MY_Controller() {
         parent::Controller();
-        $this->load->library('users/ion_auth');
-        if (!$this->ion_auth->logged_in()) {
-	    	//redirect them to the login page
-            redirect('auth/login', 'refresh');
-    	}
+        if (!isLoggedIn())
+        {
+            redirect('users/login');
+        }
     }
 }
 ?>

@@ -50,7 +50,7 @@ $autoload['libraries'] = array('database', 'session');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'asset', 'setting', 'control', 'gravatar');
+$autoload['helper'] = array('url', 'asset', 'setting', 'control', 'gravatar', 'user');
 
 
 /*

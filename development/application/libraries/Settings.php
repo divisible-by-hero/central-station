@@ -6,7 +6,7 @@
  * @package CI Defect Tracker
  * @subpackage Libraries
  * 
- * Last Updated October 8 2010
+ * Last Updated October 17 2010
  *
  *
  */
@@ -17,9 +17,9 @@ class Settings {
 
     private $settingTable;
 
-    private function  __construct() {
+    function Settings() {
         $this->ci =& get_instance();
-        $this->ci->load->database();
+        
         $this->settingTable = $this->ci->config->item('settingsTable');
     }
 
