@@ -29,6 +29,7 @@ class Post_mdl extends CI_Model {
 
     function Post_mdl(){
         parent::CI_Model();
+        $this->load->config('forum');
         $this->postTable = $this->config->item('postTable');
     }
 
@@ -67,6 +68,11 @@ class Post_mdl extends CI_Model {
     }
 
     // End CRUD
+
+    public function getPostAndReplies($postID)
+    {
+        
+    }
 
 
 }

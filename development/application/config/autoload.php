@@ -95,7 +95,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('defects/Defect_mdl');
+$autoload['model'] = array();
 
 
 

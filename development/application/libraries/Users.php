@@ -54,7 +54,7 @@ class Users {
      * @params, User Object
      * @returns useriD - -1 if authentication fails.
      *
-     *
+     * @todo - Salt/hash.
      */
 
     

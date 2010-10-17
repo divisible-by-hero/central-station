@@ -13,3 +13,7 @@ replyContent blob not null,
 PRIMARY KEY (replyID)
 );
 
+-- Settings to add
+
+insert into settings('settingName', 'settingValue') VALUES('forumName', 'Bobs Forum');
+insert into settings('settingName', 'settingValue') values('defectName', 'Defect');
