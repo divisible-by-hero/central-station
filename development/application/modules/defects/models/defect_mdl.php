@@ -17,45 +17,54 @@ class Defect_mdl extends CI_Model {
     var $defectUserID;
     var $defectStatusID;
     var $defectPriorityID;
-    var $defectTable;
+    private $defectTable;
 
-    function setTable($name){
-        $this->defectTable = $name;
+    function Defect_mdl()
+    {
+        $this->defectTable = $this->config->item('defectTable');
     }
 
-    public function createDefect(){
-
-        $this->defectCreatedDate = date("m/d/y");
-
+    public function create(){
         $defectData = array('defectTitle'=>$this->defectTitle);
-        $insertString = $this->db->insert_string($this->defectTable, $defectData);
+        $insertString = $this->db->insert($this->defectTable, $defectData);
         log_message('info', 'Defect_mdl::createDefect executes query ' . $insertString);
-        $this->db->query($insertString);
-
+        
     }
 
-    public function getDefect($defectID){
+    public function read($defectID = null){
 
-        if($defectID == 0){
+        if($defectID != null){
 
-            //Select All Defects
+            //Select certain defect
 
-            $getDefectSQL = "SELECT * FROM $this->defectTable";
+           $defects = $this->db->get_where($this->defectTable, array('defectID'=>$defectID));
 
             // @todo rewrite with active record
         } else {
 
-        $getDefectSQL = "SELECT * FROM $this->defectTable WHERE defectID = $defectID";
+            $defects = $this->db->get($this->defectTable);
 
         }
-        
-        $executeDefect = $this->db->query($getDefectSQL);
-        return $executeDefect;
+        return $defects;
     }
 
-   
+    public function update()
+    {
+        $data = array('defectTitle'=>$this->defectTitle,
+                      'defectModifiedDate'=>$this->defectModifiedDate,
+                      'defectDescription'=>$this->defectDescription,
+                      'defectProjectID'=>$this->defectProjectID,
+                      'defectUserID'=>$this->defectUserID,
+                      'defectStatusID'=>$this->defectStatusID,
+                      'defectPriorityID'=>$this->defectPriorityID);
+        $this->db->where('defectID', $this->defectID);
+        $this->db->update($this->defectTable, $data);
+    }
 
-    
-
+    public function delete()
+    {
+        $this->db->where('defectID', $this->defectID);
+        $this->db->delete($this->defectTable);
+    }
 }
 ?>

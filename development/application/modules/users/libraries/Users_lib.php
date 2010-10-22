@@ -41,7 +41,7 @@ class Users_lib {
     var $userLastName;
     var $userFirstName;
     var $userDateCreated;
-   
+
 
     function Users_lib(){
         $this->ci =& get_instance();
@@ -58,9 +58,9 @@ class Users_lib {
      * @todo - Salt/hash.
      */
 
-    
 
-    
+
+
 
     function login(){
 
