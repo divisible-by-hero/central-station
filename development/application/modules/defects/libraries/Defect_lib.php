@@ -45,6 +45,20 @@ class Defect_lib {
         $this->ci->Defect_mdl->create();
     }
 
+    public function getDefect($defectID = null)
+    {
+
+        // Instantiate object
+
+        $this->ci->load->model('Defect_mdl');
+
+        // Grab the data
+
+        $defectInfo = $this->ci->Defect_mdl->read($defectID);
+        return $defectInfo;
+
+    }
+
 
 }
 ?>

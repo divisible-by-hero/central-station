@@ -21,34 +21,57 @@ class Defects extends MY_Controller {
     function Defects()
     {
         parent::MY_Controller();
-        $this->load->model('Defect_mdl');
+        $this->load->library('defect_lib');
         $this->data['defectName'] = getSetting('defectName');
 
     }
     public function index(){
 
-        $this->data['defectData'] = $this->Defect_mdl->getDefect(0);
+        $this->data['defectData'] = $this->defect_lib->getDefect();
         $this->load->view('defectListing', $this->data);
     }
 
     
     public function view($defectID){
 
-        $this->load->model('defect_mdl');
+        
         $this->data['defectData'] = $this->Defect_mdl->getDefect($defectID);
         $this->load->view('singleDefect', $this->data);
         
     }
 
-    public function viewDefect($filterID){
+    public function create()
+    {
+        // Instantiate form validation library
 
-        
+        $this->load->library('form_validation');
+
+        // Set form validation rules
+
+        $this->form_validation->set_rules();
+
+
+
+        // Run
+
+        if(!$this->form_validation->run())
+        {
+            $this->load->view('createDefect');
+        }
+        else
+        {
+            // Instantiate the object
+
+            $this->defect_lib->defectTitle = $this->input->post('defectTitle');
+
+            // Create the defect
+
+            $this->defect_lib->create();
+
+
+        }
     }
 
-    public function createDefect(){
-
-        
-
-    }
+ 
 }
 ?>
