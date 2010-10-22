@@ -16,10 +16,11 @@ class MY_Controller extends Controller {
 
     function  MY_Controller() {
         parent::Controller();
-        if (!isLoggedIn())
-        {
-            redirect('users/login');
-        }
+//        if (!isLoggedIn())
+//        {
+//            redirect('users/login');
+//        }
+        // Commented out until lib is done.
     }
 }
 ?>

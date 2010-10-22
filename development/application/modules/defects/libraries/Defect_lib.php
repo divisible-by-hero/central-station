@@ -1,4 +1,13 @@
 <?php
+/**
+ *
+ * @name Defect_lib
+ * @package CI Defect Tracker
+ * @author Derek Stegelman
+ *
+ * Last Modified October 22 2010
+ *
+ */
 
 class Defect_lib {
 
@@ -23,6 +32,15 @@ class Defect_lib {
         // Contructor..
         $this->ci =& get_instance();  
     }
+
+    /*
+     * create()
+     * @returns void
+     * @params All properites of the defect library object
+     *
+     * Creates a defect, uses model methods to interact with the database.
+     *
+     */
 
     public function create()
     {
@@ -56,7 +74,21 @@ class Defect_lib {
 
         $defectInfo = $this->ci->Defect_mdl->read($defectID);
         return $defectInfo;
+    }
 
+    public function delete()
+    {
+        // Instantiate object
+
+        $this->ci->load->model('Defect_mdl');
+
+        // Load the object
+
+        $this->ci->Defect_mdl->defectID = $this->defectID;
+
+        // Fire the method
+
+        $this->ci->Defect_mdl->delete();
     }
 
 
