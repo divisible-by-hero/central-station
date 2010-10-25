@@ -35,7 +35,7 @@ class Defects extends MY_Controller {
     public function view($defectID){
 
         
-        $this->data['defectData'] = $this->Defect_mdl->getDefect($defectID);
+        $this->data['defectData'] = $this->defect_lib->getDefect($defectID);
         $this->load->view('singleDefect', $this->data);
         
     }
