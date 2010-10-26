@@ -4,9 +4,9 @@
  * @package CI Defect Tracker
  * @subpackage Libraries
  * @author Derek Stegelman
+ * @version 1.0
  *
- *
- * Last Modified October 8 2010
+ * Last Modified October 25 2010
  *
  */
 
@@ -15,6 +15,8 @@ class Controls {
     // CI Object
     
     private $ci;
+
+    // Project table
 
     private $projectTable;
 

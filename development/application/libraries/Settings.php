@@ -5,15 +5,20 @@
  * @author Derek Stegelman
  * @package CI Defect Tracker
  * @subpackage Libraries
+ * @version 1.0
  * 
- * Last Updated October 17 2010
+ * Last Updated October 25 2010
  *
  *
  */
 
 class Settings {
 
+    // CI Super Object
+
     private $ci;
+
+    // Settings Table define.
 
     private $settingTable;
 
