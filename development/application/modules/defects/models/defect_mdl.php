@@ -1,9 +1,17 @@
 <?php
 /**
- * Description of defect_mdl
- *
+ * 
+ * @name Defect Model
  * @author Derek Stegelman
+ * @package CI Defect Tracker
+ * @subpackage Defect Module
+ * @version 1.0
+ *
+ * Last Updated October 25, 2010
+ * @todo Document
  */
+
+
 class Defect_mdl extends CI_Model {
 
     // Vars
@@ -22,16 +30,24 @@ class Defect_mdl extends CI_Model {
     
     private $defectTable;
 
+    // Contruct
+
     public function __construct()
     {
         parent::CI_Model();
         $this->defectTable = $this->config->item('defectTable');
     }
-
+    /**
+     *
+     * @name create()
+     * @param void
+     *
+     *
+     *
+     */
     public function create(){
         $defectData = array('defectTitle'=>$this->defectTitle);
-        $insertString = $this->db->insert($this->defectTable, $defectData);
-        log_message('info', 'Defect_mdl::createDefect executes query ' . $insertString);
+        $this->db->insert($this->defectTable, $defectData);
         
     }
 

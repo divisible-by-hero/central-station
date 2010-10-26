@@ -8,7 +8,7 @@
  * @author Derek Stegelman
  *
  * Last udpated October 25, 2010
- *
+ * @todo Document and finish CRUD.
  */
 
 class Status_mdl extends CI_Model {

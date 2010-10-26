@@ -3,10 +3,13 @@
  * @name Project_mdl
  * @author Derek Stegelman
  * @package CI Defect Tracker
+ * @subpackage Defect Module
+ * @version 1.0
  *
  * Last Updated October 25, 2010
  *
- * 
+ * @todo Document and finish CRUD.
+ *
  */
 class Project_mdl extends CI_Model {
 

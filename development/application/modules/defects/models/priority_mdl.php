@@ -2,10 +2,14 @@
 /**
  * @name Priority Table
  * @package CI Defect Tracker
+ * @subpackage Defect Module
  * @author Derek Stegelman
+ * @version 1.0
  *
  * Last updated October 25, 2010
  *
+ * @todo Document, and finish CRUD.
+ * 
  */
 class Priority_mdl extends CI_Model {
 
