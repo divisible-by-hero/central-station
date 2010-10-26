@@ -75,7 +75,7 @@
 
 
       </div>
-      <div class="footer clear">
+      <div class="mainFooter clear">
           <p>&copy; 2010 CI Defect Tracker</p>
       </div>
 

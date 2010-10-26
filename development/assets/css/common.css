@@ -129,14 +129,14 @@ body
 
 /* Footer */
 
-.footer
+.mainFooter
 {
     background:#ddd;
     height:40px;
     
 }
 
-.footer p
+.mainFooter p
 {
     margin-left:25px;
     padding-top:20px;

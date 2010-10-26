@@ -16,7 +16,7 @@
     <body>
       <div class="header">
           <h1>Codeigniter Defect Tracker</h1>
-          <a class="button createDefect"><span>Add Defect</span></a>
+          <a class="button createDefect" rel="facebox" href="<?php echo site_url(); ?>defects/create"><span>Add Defect</span></a>
           <div class="search">
             <input type="search" name="search" id="search" class="search">
             <a class="button"><span>Search</span></a>

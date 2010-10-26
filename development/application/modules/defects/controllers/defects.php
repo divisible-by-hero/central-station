@@ -25,6 +25,7 @@ class Defects extends MY_Controller {
         $this->data['defectName'] = getSetting('defectName');
 
     }
+    
     public function index(){
 
         $this->data['defectData'] = $this->defect_lib->getDefect();
@@ -44,32 +45,33 @@ class Defects extends MY_Controller {
     {
         // Instantiate form validation library
 
-        $this->load->library('form_validation');
+//        $this->load->library('form_validation');
+//
+//        // Set form validation rules
+//
+//        //$this->form_validation->set_rules('defectTitle', 'Defect Title', 'required|xss_clean');
+//
+//
+//
+//        // Run
+//
+//        if(!$this->form_validation->run())
+//        {
+//            $this->load->view('modals/addDefectModal');
+//        }
+//        else
+//        {
+//            // Instantiate the object
+//
+//            $this->defect_lib->defectTitle = $this->input->post('defectTitle');
+//
+//            // Create the defect
+//
+//            $this->defect_lib->create();
 
-        // Set form validation rules
 
-        $this->form_validation->set_rules();
-
-
-
-        // Run
-
-        if(!$this->form_validation->run())
-        {
-            $this->load->view('createDefect');
-        }
-        else
-        {
-            // Instantiate the object
-
-            $this->defect_lib->defectTitle = $this->input->post('defectTitle');
-
-            // Create the defect
-
-            $this->defect_lib->create();
-
-
-        }
+        //}
+        $this->load->view('defects/modals/addDefectModal');
     }
 
  

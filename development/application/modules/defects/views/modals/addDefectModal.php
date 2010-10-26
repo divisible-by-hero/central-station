@@ -3,7 +3,7 @@
     <h1>Add Defect</h1>
     <div class="form">
         <div class="formItem">
-            <label for="defectTitle"><?php echo getSetting('defectTitle'); ?> Title</label>
+            <label for="defectTitle"><?php echo getSetting('defectName'); ?> Title</label>
             <input type="text" name="defectTitle" id="defectTitle">
         </div>
         <div class="formItem">
@@ -12,10 +12,10 @@
         </div>
         <div class="formItem">
             <label for="defectDescription">Description</label>
-            <textarea cols="5" rows="20"></textarea>
+            <textarea cols="44" rows="12"></textarea>
         </div>
         <a class="button">
-            <span>Create <?php echo getSetting('defectTitle'); ?></span>
+            <span>Create <?php echo getSetting('defectName'); ?></span>
         </a>
     </div>
     
