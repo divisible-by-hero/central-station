@@ -17,10 +17,14 @@ class Defect_mdl extends CI_Model {
     var $defectUserID;
     var $defectStatusID;
     var $defectPriorityID;
+
+    // Object Table
+    
     private $defectTable;
 
-    function Defect_mdl()
+    public function __construct()
     {
+        parent::CI_Model();
         $this->defectTable = $this->config->item('defectTable');
     }
 

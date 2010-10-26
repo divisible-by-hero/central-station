@@ -5,7 +5,7 @@
  * @package CI Defect Tracker
  * @author Derek Stegelman
  *
- * Last Modified October 22 2010
+ * Last Modified October 25 2010
  *
  */
 
@@ -27,10 +27,10 @@ class Defect_lib {
     var $defectStatusID;
     var $defectPriorityID;
 
-    public function Defect_lib()
+    public function __contruct()
     {
         // Contructor..
-        $this->ci =& get_instance();  
+        $this->ci =& get_instance();
     }
 
     /*

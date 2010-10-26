@@ -1,14 +1,29 @@
 <?php
 /**
- * Description of priority_mdl
+ * @name Priority Table
+ * @package CI Defect Tracker
+ * @author Derek Stegelman
  *
- * @author derek
+ * Last updated October 25, 2010
+ *
  */
 class Priority_mdl extends CI_Model {
 
     var $priorityID;
     var $priorityName;
-    var $priorityTable;
+    
+
+    // Object Table
+
+    private $priorityTable;
+
+    public function  __construct() {
+        parent::CI_Model();
+        $this->priorityTable = $this->config->item('priorityTable');
+
+    }
+    
+    // @todo CRUD
 
     public function getPriority($priorityID){
 

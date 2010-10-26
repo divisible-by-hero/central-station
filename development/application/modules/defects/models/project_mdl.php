@@ -1,15 +1,29 @@
 <?php
 /**
- * Description of project_mdl
+ * @name Project_mdl
+ * @author Derek Stegelman
+ * @package CI Defect Tracker
  *
- * @author derek
+ * Last Updated October 25, 2010
+ *
+ * 
  */
 class Project_mdl extends CI_Model {
 
     var $projectID;
     var $projectTitle;
     var $projectDescription;
-    var $projectTable;
+
+    // Object Table
+
+    private $projectTable;
+
+    public function  __construct() {
+        parent::CI_Model();
+        $this->projectTable = $this->config->item('projectTable');
+    }
+
+    // @todo CRUD
 
     public function getProject($projectID){
 
