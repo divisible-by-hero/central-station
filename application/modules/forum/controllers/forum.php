@@ -14,7 +14,7 @@
 class Forum extends MY_Controller {
 
     function Forum(){
-        parent::My_Controller();
+        parent::MY_Controller();
     }
 
 

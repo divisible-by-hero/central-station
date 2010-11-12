@@ -12,7 +12,7 @@
  */
 
 
-class Users extends Controller {
+class Users extends CI_Controller {
 
     /*
      * Constructor - Load dependencies and other stuff.
@@ -22,7 +22,7 @@ class Users extends Controller {
 
     function Users()
     {
-        parent::Controller();
+        parent::CI_Controller();
     }
 
     /*

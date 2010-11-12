@@ -1,10 +1,10 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Auth extends Controller {
+class Auth extends MY_Controller {
  
     function __construct() 
     {
-        parent::__construct();
+        parent::MY_Controller;
         $this->load->library('ion_auth');
         $this->load->library('session');
         $this->load->library('form_validation');

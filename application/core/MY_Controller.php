@@ -11,11 +11,11 @@
  */
 
 
-class MY_Controller extends Controller {
+class MY_Controller extends CI_Controller {
 
 
     function  MY_Controller() {
-        parent::Controller();
+        parent::CI_Controller();
 //        if (!isLoggedIn())
 //        {
 //            redirect('users/login');
