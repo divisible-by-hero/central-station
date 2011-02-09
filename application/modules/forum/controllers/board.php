@@ -36,7 +36,9 @@ class Board extends CI_Controller {
 
     public function index()
     {
-        $this->load->view('boards');
+        $this->template->write_view('content', 'boards');
+        $this->template->render();
+        //$this->load->view('boards');
     }
 }
 ?>
