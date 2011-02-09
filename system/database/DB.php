@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2010, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -27,7 +27,21 @@ function &DB($params = '', $active_record_override = NULL)
 	// Load the DB config file if a DSN string wasn't passed
 	if (is_string($params) AND strpos($params, '://') === FALSE)
 	{
-		include(APPPATH.'config/database'.EXT);
+		
+		$file_path = APPPATH.'config/'.ENVIRONMENT.'/database'.EXT;
+		
+		if ( ! file_exists($file_path))
+		{
+			log_message('debug', 'Database config for '.ENVIRONMENT.' environment is not found. Trying global config.');
+			$file_path = APPPATH.'config/database'.EXT;
+			
+			if ( ! file_exists($file_path))
+			{
+				continue;
+			}
+		}
+		
+		include($file_path);
 
 		if ( ! isset($db) OR count($db) == 0)
 		{

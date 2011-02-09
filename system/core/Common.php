@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2010, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -208,15 +208,20 @@
 			return $_config[0];
 		}
 
+		$file_path = APPPATH.'config/'.ENVIRONMENT.'/config'.EXT;
+
 		// Fetch the config file
-		if ( ! file_exists(APPPATH.'config/config'.EXT))
+		if ( ! file_exists($file_path))
 		{
-			exit('The configuration file does not exist.');
+			$file_path = APPPATH.'config/config'.EXT;
+			
+			if ( ! file_exists($file_path))
+			{
+				exit('The configuration file does not exist.');
+			}
 		}
-		else
-		{
-			require(APPPATH.'config/config'.EXT);
-		}
+	
+		require($file_path);
 
 		// Does the $config array exist in the file?
 		if ( ! isset($config) OR ! is_array($config))

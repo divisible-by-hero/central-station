@@ -6,7 +6,7 @@
  *
  * @package		CodeIgniter
  * @author		ExpressionEngine Dev Team
- * @copyright	Copyright (c) 2008 - 2010, EllisLab, Inc.
+ * @copyright	Copyright (c) 2008 - 2011, EllisLab, Inc.
  * @license		http://codeigniter.com/user_guide/license.html
  * @link		http://codeigniter.com
  * @since		Version 1.0
@@ -287,12 +287,12 @@ class CI_DB_mysql_driver extends CI_DB {
 		if (is_array($str))
 		{
 			foreach($str as $key => $val)
-			{
+	   		{
 				$str[$key] = $this->escape_str($val, $like);
-			}
+	   		}
 
-			return $str;
-		}
+	   		return $str;
+	   	}
 
 		if (function_exists('mysql_real_escape_string') AND is_resource($this->conn_id))
 		{
@@ -532,7 +532,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _insert($table, $keys, $values)
 	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+		return "INSERT INTO ".$table." (`".implode('`, `', $keys)."`) VALUES (".implode(', ', $values).")";
 	}
 
 	// --------------------------------------------------------------------
@@ -551,7 +551,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _replace($table, $keys, $values)
 	{
-		return "REPLACE INTO ".$table." (".implode(', ', $keys).") VALUES (".implode(', ', $values).")";
+		return "REPLACE INTO ".$table." (`".implode('`, `', $keys)."`) VALUES (".implode(', ', $values).")";
 	}
 
 	// --------------------------------------------------------------------
@@ -569,7 +569,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	 */
 	function _insert_batch($table, $keys, $values)
 	{
-		return "INSERT INTO ".$table." (".implode(', ', $keys).") VALUES ".implode(', ', $values);
+		return "INSERT INTO ".$table." (`".implode('`, `', $keys)."`) VALUES ".implode(', ', $values);
 	}
 
 	// --------------------------------------------------------------------
@@ -592,7 +592,7 @@ class CI_DB_mysql_driver extends CI_DB {
 	{
 		foreach($values as $key => $val)
 		{
-			$valstr[] = $key." = ".$val;
+			$valstr[] = sprintf('`%s` = %s', $key, $val);
 		}
 
 		$limit = ( ! $limit) ? '' : ' LIMIT '.$limit;
