@@ -11,10 +11,16 @@
  *
  */
 
-class Forum extends MY_Controller {
+class Forum extends CI_Controller {
 
-    function Forum(){
-        parent::MY_Controller();
+    function __construct(){
+        parent::__construct();
+    }
+
+    function index()
+    {
+        $this->template->write_view('content', 'forums');
+        $this->template->render();
     }
 
 
