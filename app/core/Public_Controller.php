@@ -1,6 +1,6 @@
 <?php
 
-class Public_Controller extends MY_Controller {
+class Public_Controller extends CoreController {
     
 
     public function  __construct() {

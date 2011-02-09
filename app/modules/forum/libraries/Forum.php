@@ -26,12 +26,12 @@
 * @author		Derek Stegelman
 */
 
-class Forum {
+class Forum extends CoreLibrary {
     //put your code here
 
     public function __construct()
     {
-        
+        parent::__construct();
     }
 }
 ?>
