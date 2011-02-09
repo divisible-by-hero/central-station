@@ -52,7 +52,7 @@ $autoload['packages'] = array(APPPATH.'third_party');
 |	$autoload['libraries'] = array('database', 'session', 'xmlrpc');
 */
 
-$autoload['libraries'] = array('database', 'session', 'template');
+$autoload['libraries'] = array();
 
 
 /*
@@ -64,7 +64,7 @@ $autoload['libraries'] = array('database', 'session', 'template');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'asset', 'setting', 'control', 'gravatar', 'user');
+$autoload['helper'] = array();
 
 
 /*
@@ -80,7 +80,7 @@ $autoload['helper'] = array('url', 'asset', 'setting', 'control', 'gravatar', 'u
 |
 */
 
-$autoload['config'] = array('settings');
+$autoload['config'] = array();
 
 
 /*
@@ -91,7 +91,7 @@ $autoload['config'] = array('settings');
 |
 |	$autoload['language'] = array('lang1', 'lang2');
 |
-| NOTE: Do not include the "_lang" part of your file.  For example 
+| NOTE: Do not include the "_lang" part of your file.  For example
 | "codeigniter_lang.php" would be referenced as array('codeigniter');
 |
 */
@@ -110,7 +110,6 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array();
-
 
 
 /* End of file autoload.php */

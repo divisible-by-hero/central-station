@@ -61,8 +61,8 @@ class CI_URI {
 	{
 		if (strtoupper($this->config->item('uri_protocol')) == 'AUTO')
 		{
-			// Is the request coming from the command line?
-			if (defined('STDIN'))
+			// Arguments exist, it must be a command line request
+			if ( ! empty($_SERVER['argv']))
 			{
 				$this->uri_string = $this->_parse_cli_args();
 				return;
@@ -173,12 +173,6 @@ class CI_URI {
 			$_SERVER['QUERY_STRING'] = '';
 			$_GET = array();
 		}
-		
-		if ($uri == '/' || empty($uri))
-		{
-			return '/';
-		}
-				
 		$uri = parse_url($uri, PHP_URL_PATH);
 
 		// Do some final cleaning of the URI and return it

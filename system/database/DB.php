@@ -27,21 +27,7 @@ function &DB($params = '', $active_record_override = NULL)
 	// Load the DB config file if a DSN string wasn't passed
 	if (is_string($params) AND strpos($params, '://') === FALSE)
 	{
-		
-		$file_path = APPPATH.'config/'.ENVIRONMENT.'/database'.EXT;
-		
-		if ( ! file_exists($file_path))
-		{
-			log_message('debug', 'Database config for '.ENVIRONMENT.' environment is not found. Trying global config.');
-			$file_path = APPPATH.'config/database'.EXT;
-			
-			if ( ! file_exists($file_path))
-			{
-				continue;
-			}
-		}
-		
-		include($file_path);
+		include(APPPATH.'config/database'.EXT);
 
 		if ( ! isset($db) OR count($db) == 0)
 		{

@@ -375,11 +375,7 @@ class CI_User_agent {
 	 */
 	public function is_referral()
 	{
-		if ( ! isset($_SERVER['HTTP_REFERER']) OR $_SERVER['HTTP_REFERER'] == '')
-		{
-			return FALSE;
-		}
-		return TRUE;
+		return ( ! isset($_SERVER['HTTP_REFERER']) OR $_SERVER['HTTP_REFERER'] == '');
 	}
 
 	// --------------------------------------------------------------------
