@@ -22,7 +22,7 @@
  * as this file.
  *
  */
-	$system_path = "system";
+	$system_path = "core";
 
 /*
  *---------------------------------------------------------------
@@ -38,7 +38,7 @@
  * NO TRAILING SLASH!
  *
  */
-	$application_folder = "application";
+	$application_folder = "app";
 
 /*
  * --------------------------------------------------------------------
