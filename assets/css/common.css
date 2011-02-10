@@ -5,6 +5,15 @@
     Description:
         Purpose of the stylesheet follows.
 */
+/* K-State color scheme
+
+* Deep Purple 500078
+* lighter purple 67009C
+* gray/silver 6E6E6E
+* "white" F8F8FF
+
+*/
+
 
 /* Layout */
 
@@ -24,14 +33,18 @@ body
     padding-left:11px;
     margin-bottom:15px;
     position: relative;
+    background: #500078;
+    height: 120px;
+    border-bottom: 10px solid #67009C;
 }
+
+
 
 .header h1
 {
     display:inline-block;
-    font-size:27pt;
+    font-size:20pt;
     color:#fff;
-    text-shadow: 6px 6px 6px #000;
 }
 
 .header a.createDefect
@@ -121,10 +134,8 @@ body
 
 .sidebar
 {
-    margin-left:70%;
-    padding-right:10px;
-    border-left:1px solid #000;
-    padding-left:15px;
+    float: right;
+    width: 370px;
 }
 
 /* Footer */

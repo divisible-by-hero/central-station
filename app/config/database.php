@@ -38,7 +38,7 @@
 | the active record class
 */
 
-$active_group = 'default';
+$active_group = 'dev';
 $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
@@ -57,6 +57,22 @@ $db['default']['swap_pre'] = '';
 $db['default']['autoinit'] = TRUE;
 $db['default']['stricton'] = FALSE;
 
+
+$db['dev']['hostname'] = 'localhost';
+$db['dev']['username'] = 'root';
+$db['dev']['password'] = 'root';
+$db['dev']['database'] = 'defectTracker';
+$db['dev']['dbdriver'] = 'mysql';
+$db['dev']['dbprefix'] = '';
+$db['dev']['pconnect'] = TRUE;
+$db['dev']['db_debug'] = TRUE;
+$db['dev']['cache_on'] = FALSE;
+$db['dev']['cachedir'] = '';
+$db['dev']['char_set'] = 'utf8';
+$db['dev']['dbcollat'] = 'utf8_general_ci';
+$db['dev']['swap_pre'] = '';
+$db['dev']['autoinit'] = TRUE;
+$db['dev']['stricton'] = FALSE;
 
 /* End of file database.php */
 /* Location: ./application/config/database.php */

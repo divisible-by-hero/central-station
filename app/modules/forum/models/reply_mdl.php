@@ -26,13 +26,22 @@
 * @author		Derek Stegelman
 */
 
-class Forum_mdl extends CoreModel {
+class Reply_mdl extends CoreModel {
     //put your code here
 
     public function __construct()
     {
         parent::__construct();
-        $this->_table = 'defect_forum';
+        $this->_table = 'defect_forum_post_reply';
+    }
+
+    public function get_replies($post_id)
+    {
+        return $this->db->select('*, defect_authentication.id as userID')
+                        ->from('defect_forum_post_reply')
+                        ->join('defect_authentication', 'defect_authentication.id = defect_forum_post_reply.author_id')
+                        ->where('post_id', $post_id)
+                        ->get();
     }
 }
 ?>
