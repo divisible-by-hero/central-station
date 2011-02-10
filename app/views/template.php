@@ -1,16 +1,16 @@
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>hi this is using the template</title>
+        <title>Issue Tracking?</title>
+        <!-- Begin CSS Delcarations -->
         <?php echo link_tag('assets/css/style.css'); ?>
+
+        <!-- Begin JS Declarations -->
     </head>
     <body>
         <div class="header">
+            <h2>Company Name?</h2>
             <h1>Issue Tracker</h1>
         </div>
         <div class="content">
@@ -20,8 +20,7 @@ and open the template in the editor.
         </div>
         <div class="sidebar">
             <a class="button"><span>Add Issue</span></a>
-            
-
+            <!-- Will Probably need a sidebar content region -->
         </div>
     </body>
 </html>

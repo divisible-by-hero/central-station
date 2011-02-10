@@ -1,17 +1,16 @@
-/* 
-    Document   : common
-    Created on : Oct 2, 2010, 10:23:31 PM
-    Author     : derek
-    Description:
-        Purpose of the stylesheet follows.
-*/
+/***************** Common.css ****************
+*   Author: Derek Stegelman
+*   Date: February 9 2011
+*
+*
+*********************************************/
+
 /* K-State color scheme
 
 * Deep Purple 500078
 * lighter purple 67009C
 * gray/silver 6E6E6E
 * "white" F8F8FF
-
 */
 
 
@@ -21,8 +20,6 @@ body
 {
     font-family:Neucha, Arial;
 }
-
-
 
 /* Header */
 
