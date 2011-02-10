@@ -1,4 +1,8 @@
 <?php
+/* 
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
 
 /**
 * Open Cook Book
@@ -22,19 +26,12 @@
 * @author		Derek Stegelman
 */
 
-class Board extends CI_Controller {
+class defect_mdl {
     //put your code here
 
     public function __construct()
     {
-        parent::__construct();
-    }
-
-    public function index()
-    {
-        $this->template->write_view('content', 'boards');
-        $this->template->render();
-        //$this->load->view('boards');
+        
     }
 }
 ?>

@@ -38,8 +38,8 @@
 |
 */
 
-$route['forum'] = "board";
-
+$route['forum'] = 'forum';
+$route['forum/viewthread/$1'] = 'forums/view_thread/$1';
 
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */
