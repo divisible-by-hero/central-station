@@ -56,5 +56,6 @@ class Post_mdl extends CoreModel {
                         ->where('defect_forum_post.id', $post_id)
                         ->get();
     }
+
 }
 ?>

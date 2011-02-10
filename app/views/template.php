@@ -26,23 +26,23 @@
 
 
   <!-- CSS : implied media="all" -->
-  <link rel="stylesheet" href="css/style.css?v=2">
   <?php echo link_tag('assets/css/style.css'); ?>
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
  
   <!-- All JavaScript at the bottom, except for Modernizr which enables HTML5 elements & feature detects -->
-  <script src="js/libs/modernizr-1.6.min.js"></script>
+  <script src="<?php echo base_url(); ?>assets/javascript/libs/modernizr-1.6.min.js"></script>
 
 </head>
 
 <body>
 
-<div class="header">
-            <h2>Company Name?</h2>
-            <h1>Issue Tracker</h1>
-        </div>
+    <div class="header">
+        <h2>Company Name?</h2>
+        <h1>Issue Tracker</h1>
+    </div>
+    <div id="wrapper">
         <div class="content">
             <?php
             echo $content;
@@ -53,24 +53,15 @@
             <!-- Will Probably need a sidebar content region -->
         </div>
 
+    </div>
+        
+
   <!-- Javascript at the bottom for fast page loading -->
 
   <!-- Grab Google CDN's jQuery. fall back to local if necessary -->
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
   <script>!window.jQuery && document.write(unescape('%3Cscript src="js/libs/jquery-1.4.2.js"%3E%3C/script%3E'))</script>
   
-  
-  <!-- scripts concatenated and minified via ant build script-->
-  <script src="js/plugins.js"></script>
-  <script src="js/script.js"></script>
-  <!-- end concatenated and minified scripts-->
-  
- 
-  <!-- yui profiler and profileviewer - remove for production -->
-  <script src="js/profiling/yahoo-profiling.min.js"></script>
-  <script src="js/profiling/config.js"></script>
-  <!-- end profiling code -->
-
 
   <!-- asynchronous google analytics: mathiasbynens.be/notes/async-analytics-snippet 
        change the UA-XXXXX-X to be your site's ID -->
@@ -87,23 +78,3 @@
   
 </body>
 </html>
-
-
-
-
-
-
-<?php echo link_tag('assets/css/style.css'); ?>
-<div class="header">
-            <h2>Company Name?</h2>
-            <h1>Issue Tracker</h1>
-        </div>
-        <div class="content">
-            <?php
-            echo $content;
-            ?>
-        </div>
-        <div class="sidebar">
-            <a class="button"><span>Add Issue</span></a>
-            <!-- Will Probably need a sidebar content region -->
-        </div>

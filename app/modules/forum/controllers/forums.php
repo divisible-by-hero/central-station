@@ -32,8 +32,7 @@ class Forums extends CoreController {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('Forum_mdl');
-        $this->load->model('Post_mdl');
+        $this->load->library('forum');
         $this->load->model('Reply_mdl');
         $this->load->helper('forum');
     }
@@ -60,20 +59,66 @@ class Forums extends CoreController {
         // Get original post info
         $data['post'] = $this->Post_mdl->get_post_detail($thread_id);
         log_message('info', $this->db->last_query());
+
+        // Record the view
+        $this->post->record_view($thread_id);
+        
         // Build and render the template
         $this->template->write_view('content', 'post_detail', $data);
         $this->template->render();
-
     }
 
     public function new_reply($thread_id)
     {
-        
+        $this->load->library('form_validation');
+
+        // Set validation rules
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+
+        // Check for form submission
+
+        if(!$this->form_validation->run())
+        {
+            // Validation failed, show form
+            $this->template->write_view('content', 'forms/new_reply');
+            $this->template->render();
+        }
+        else
+        {
+            // Process form.
+            $reply_data = array('post_id'=>$thread_id, 'title'=>$this->input->post('title'),
+                'reply'=>$this->input->post('reply_content'));
+            $this->Reply_mdl->create($reply_data);
+        }
     }
 
     public function new_post($board_id)
     {
-        
+
+        $this->load->library('form_validation');
+
+        //Set Rules
+
+        $this->form_validation->set_rules('username', 'Username', 'required');
+
+        //Check for Validation
+
+        if(!$this->form_validation->run())
+        {
+            // Validation failed, show form
+            $this->template->write_view('content', 'forms/new_post');
+            $this->template->render();
+        }
+        else
+        {
+            // Process new post.
+            $this->forum->post_title = $this->input->post('post_title');
+            $this->forum->post_content = $this->input->post('post_content');
+            $this->forum->board_id = $board_id;
+            $this->forum->process_new_post();
+        }
+
     }
 }
 ?>
