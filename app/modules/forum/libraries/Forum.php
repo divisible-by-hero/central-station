@@ -39,7 +39,7 @@ class Forum extends CoreLibrary {
     {
         parent::__construct();
         // Load dependent models
-        $this->load->model('Post_mdl');
+        $this->ci->load->model('Post_mdl');
     }
 
     public function process_new_post()

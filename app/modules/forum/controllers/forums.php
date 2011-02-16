@@ -30,13 +30,17 @@ class Forums extends CoreController {
         $this->load->library('forum');
         $this->load->model('Reply_mdl');
         $this->load->helper('forum');
-        $this->load->model('board');
+        $this->load->model('Board_mdl');
     }
 
     public function index()
     {
         // Show all forums and boards
-        $this->template->write_view('content', 'boards');
+
+        // Get all boards
+        $data['forums'] = $this->Forum_mdl->get();
+
+        $this->template->write_view('content', 'boards', $data);
         $this->template->render();
     }
 
@@ -58,7 +62,7 @@ class Forums extends CoreController {
         $data['replies'] = $this->Reply_mdl->get_replies($thread_id);
 
         // Get original post info
-        $data['post'] = $this->Post_mdl->get_post_detail($thread_id);
+        $data['thread'] = $this->Post_mdl->get_post_detail($thread_id);
         log_message('info', $this->db->last_query());
 
         // Record the view

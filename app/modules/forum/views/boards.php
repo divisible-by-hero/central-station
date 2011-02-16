@@ -1,7 +1,7 @@
 <div id="forums">
     <?php foreach($forums->result() as $forum) { ?>
     <div class="forum">
-        <h2><?php echo $title; ?></h2>
+        <h2><?php echo $forum->title; ?></h2>
         <table>
             <tr>
                 <th>Forum Name</th>
@@ -9,6 +9,7 @@
                 <th>Replies</th>
                 <th>Latest Post Info</th>
             </tr>
+            <?php $boards = getBoardObject($forum->id); ?>
             <?php foreach($boards->result() as $board) { ?>
             <tr>
                 <td>
@@ -16,15 +17,18 @@
                     <p><?php echo $board->description; ?></p>
                 </td>
                 <td>
-                    <?php echo $board->topic_count; ?>
+                    <?php echo getTopicCount($board->id); ?>
                 </td>
                 <td>
-                    <?php echo $board->reply_count; ?>
+                    <?php echo getBoardReplies($board->id); ?>
                 </td>
                 <td>
-                    <a href="#"><?php echo $board->latest_post; ?></a>
-                    <span>Posted: <?php echo $board->latest_post_time; ?> ago</span>
-                    <span>Author: <a href="#"><?php echo $board->latest_post_author; ?></a></span>
+                    <?php $posts = getLatestPostObject($board->id) ?>
+                    <?php foreach($posts->result() as $post) { ?>
+                    <a href="#"><?php echo $post->post ?></a>
+                    <span>Posted: <?php echo $post->publish_date; ?> ago</span>
+                    <span>Author: <a href="#"><?php echo $post->author; ?></a></span>
+                    <?php } ?>
                 </td>
             </tr>
            
