@@ -57,5 +57,15 @@ class Post_mdl extends CoreModel {
                         ->get();
     }
 
+    public function get_latest_post($board_id)
+    {
+        return $this->db->select('*')
+                        ->from($this->_table)
+                        ->where('board_id', $board_id)
+                        ->order_by('id', 'desc')
+                        ->limit('1')
+                        ->get();
+    }
+
 }
 ?>

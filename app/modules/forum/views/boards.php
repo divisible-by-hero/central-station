@@ -13,14 +13,14 @@
             <?php foreach($boards->result() as $board) { ?>
             <tr>
                 <td>
-                    <h3><a href="#"><?php echo $board->title; ?></a></h3>
+                    <h3><a href="<?php echo site_url('forum/viewboard/' . $board->id); ?>"><?php echo $board->title; ?></a></h3>
                     <p><?php echo $board->description; ?></p>
                 </td>
                 <td>
                     <?php echo getTopicCount($board->id); ?>
                 </td>
                 <td>
-                    <?php echo getBoardReplies($board->id); ?>
+                    <?php //echo getBoardReplies($board->id); ?>23
                 </td>
                 <td>
                     <?php $posts = getLatestPostObject($board->id) ?>

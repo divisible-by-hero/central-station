@@ -47,7 +47,7 @@ class Forums extends CoreController {
     public function view_board($board_id)
     {
         // View all threads for a board
-        $data['posts'] = $this->Post_mdl->get_posts($board_id);
+        $data['threads'] = $this->Post_mdl->get_posts($board_id);
         log_message('info', $this->db->last_query());
         $this->template->write_view('content', 'posts', $data);
         $this->template->render();

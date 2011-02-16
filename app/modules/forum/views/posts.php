@@ -1,6 +1,6 @@
 <div id="forums">
     <div class="forum">
-        <h2><?php echo $title; ?></h2>
+        <h2>Title of Board</h2>
         <table>
             <tr>
                 <th>Topic</th>
@@ -11,22 +11,20 @@
             <?php foreach($threads->result() as $thread) { ?>
             <tr>
                 <td>
-                    <h3><a href="#"><?php echo $thread->title; ?></a></h3>
-                    <p>Author: <a href="#"><?php echo $thread->author; ?></a></p>
+                    <h3><a href="<?php echo site_url('forum/viewthread/' . $thread->id); ?>"><?php echo $thread->title; ?></a></h3>
+                    <p>Author: <a href="<?php echo site_url('users/profile/' . $thread->username); ?>"><?php echo $thread->username; ?></a></p>
                 </td>
                 <td>
-                    <?php echo $thread->reply_count; ?>
+                    <?php echo $thread->replies; ?>
                 </td>
                 <td>
-                    <?php echo $thread->view_count; ?>
+                    <?php echo getViews($thread->id) ?>
                 </td>
                 <td>
-
                     <span>Posted: <?php echo $thread->latest_post_time; ?> ago</span>
-                    <span>Author: <a href="#"><?php echo $thread->latest_post_author; ?></a></span>
+                    <span>Author: <a href="<?php echo site_url('users/profile/' . $thread->username); ?>"><?php echo $thread->username; ?></a></span>
                 </td>
             </tr>
-
             <?php } ?>
         </table>
     </div>
