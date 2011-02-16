@@ -1,29 +1,33 @@
-<div class="post">
-    <?php foreach($post->result() as $post_detail) { ?>
-    <?php $postID = $post_detail->id; ?>
-    <h2><?php echo $post_detail->title; ?></h2>
-    <div class="photo">
-        <?php echo getGravatar($post_detail->email); ?>
-        <a href="#" class="username"><?php echo $post_detail->username; ?></a>
-    </div>
-    <p class="content">
-        <?php echo $post_detail->content; ?>
-    </p>
-    <?php } ?>
-</div>
-<div class="replies">
-    <?php foreach($replies->result() as $reply) { ?>
-    <div class="reply">
-        <h3><?php echo $reply->title; ?></h3>
-        <div class="photo">
-            <?php echo getGravatar($reply->email); ?>
-            <a href="#" class="username"><?php echo $post_detail->username; ?></a>
+<div id="forums">
+    <div class="forum">
+        <h2><?php echo $title; ?></h2>
+        <div class="forumDetails">
+            <a href="#"><?php echo $thread_author; ?></a>
+            <span>Posted: <?php echo $thread_post_date; ?></span>
         </div>
-        <p class="content">
-            <?php echo $reply->reply; ?>
-        </p>
-        
+        <div class="thread">
+            <div class="author">
+                <span></span>
+                <span>Total Posts: <?php echo $author_thread_count; ?></span>
+                <span>Joined: <?php echo $author_date_joined; ?></span>
+            </div>
+            <div class="threadContent">
+                <?php echo $thread_content; ?>
+            </div>
+        </div>
+        <div class="replies">
+            <?php foreach($replies->result() as $reply) { ?>
+                <div class="thread">
+                    <div class="author">
+                        <span></span>
+                        <span>Total Posts: <?php echo $reply->author_thread_count; ?></span>
+                        <span>Joined: <?php echo $reply->author_date_joined; ?></span>
+                    </div>
+                    <div class="threadContent">
+                        <?php echo $reply->content; ?>
+                    </div>
+                </div>
+            <?php } ?>
+        </div>
     </div>
-    <?php } ?>
 </div>
-<a class="button" href="<?php echo site_url('forum/reply/' . $postID); ?>"><span>Reply</span></a>

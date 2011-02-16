@@ -14,5 +14,9 @@ function getViews($thread_id)
     return 23;
 }
 
+function getForumDrop()
+{
+    
+}
 
 ?>
