@@ -43,6 +43,12 @@ class Forums extends CoreController {
         $this->template->write_view('content', 'boards', $data);
         $this->template->render();
     }
+    
+    /*
+    * View Board
+    *
+    *
+    */
 
     public function view_board($board_id)
     {

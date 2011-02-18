@@ -6,7 +6,6 @@
             <tr>
                 <th>Forum Name</th>
                 <th>Topics</th>
-                <th>Replies</th>
                 <th>Latest Post Info</th>
             </tr>
             <?php $boards = getBoardObject($forum->id); ?>
@@ -18,9 +17,6 @@
                 </td>
                 <td>
                     <?php echo getTopicCount($board->id); ?>
-                </td>
-                <td>
-                    <?php //echo getBoardReplies($board->id); ?>23
                 </td>
                 <td>
                     <?php $posts = getLatestPostObject($board->id) ?>

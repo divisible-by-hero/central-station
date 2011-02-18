@@ -7,6 +7,9 @@
 function getReplies($thread_id)
 {
     return 23;
+    $CI =& get_instance();
+    $replies = $CI->Reply_mdl->getWhere('post_id', $thread_id);
+    return $replies->num_rows();
 }
 
 function getViews($thread_id)
@@ -36,9 +39,9 @@ function getTopicCount($board_id)
 
 function getBoardReplies($board_id)
 {
-    $CI =& get_instance();
-    $replies = $CI->Reply_mdl->getWhere('board_id', $board_id);
-    return $replies->num_rows();
+    //$CI =& get_instance();
+    //$replies = $CI->Reply_mdl->getWhere('board_id', $board_id);
+    //return $replies->num_rows();
 }
 
 function getBoardObject($forum_id)
