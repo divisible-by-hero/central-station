@@ -64,7 +64,7 @@ $autoload['libraries'] = array('template', 'database');
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('url', 'gravatar', 'html');
+$autoload['helper'] = array('url', 'gravatar', 'html', 'users/user');
 
 
 /*

@@ -14,7 +14,7 @@
 | path to your installation.
 |
 */
-$config['base_url']	= 'http://localhost:1986/defect/';
+$config['base_url']	= 'http://localhost/defect/';
 
 /*
 |--------------------------------------------------------------------------

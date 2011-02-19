@@ -59,4 +59,11 @@ function getLatestPostObject($board_id)
 
 }
 
+function get_latest_reply_object($thread_id)
+{
+    $CI =& get_instance();
+    $CI->load->model('Reply_mdl');
+    return $CI->Reply_mdl->getWhere('post_id', $thread_id);
+}
+
 ?>

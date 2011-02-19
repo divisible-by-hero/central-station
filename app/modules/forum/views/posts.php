@@ -21,7 +21,8 @@
                     <?php echo getViews($thread->id) ?>
                 </td>
                 <td>
-                    <span>Posted: <?php echo $thread->latest_post_time; ?> ago</span>
+                    <?php $replies = get_lastest_reply_object($thread->id); ?>
+                    <span>Posted: <?php //echo $thread->latest_post_time; ?>2 min ago</span>
                     <span>Author: <a href="<?php echo site_url('users/profile/' . $thread->username); ?>"><?php echo $thread->username; ?></a></span>
                 </td>
             </tr>

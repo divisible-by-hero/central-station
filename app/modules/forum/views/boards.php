@@ -21,9 +21,9 @@
                 <td>
                     <?php $posts = getLatestPostObject($board->id) ?>
                     <?php foreach($posts->result() as $post) { ?>
-                    <a href="#"><?php echo $post->post ?></a>
-                    <span>Posted: <?php echo $post->publish_date; ?> ago</span>
-                    <span>Author: <a href="#"><?php echo $post->author; ?></a></span>
+                    <a href="<?php echo site_url('forum/viewthread/' . $post->id); ?>"><?php echo $post->title ?></a>
+                    <span>Posted: <?php date('m/y/d'); ?> ago</span>
+                    <span>Author: <a href="#">Derek Stegelman</a></span>
                     <?php } ?>
                 </td>
             </tr>
