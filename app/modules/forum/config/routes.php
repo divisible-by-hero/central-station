@@ -43,5 +43,7 @@ $route['forum/viewthread/(:num)'] = 'forums/view_thread/$1';
 $route['forum/viewboard/(:num)'] = 'forums/view_board/$1';
 $route['forum/reply/(:num)'] = 'forums/new_reply/$1';
 
+
+
 /* End of file routes.php */
 /* Location: ./application/config/routes.php */

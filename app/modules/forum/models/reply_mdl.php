@@ -43,5 +43,6 @@ class Reply_mdl extends CoreModel {
                         ->where('post_id', $post_id)
                         ->get();
     }
+    
 }
 ?>

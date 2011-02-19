@@ -34,5 +34,14 @@ class Board_mdl extends CoreModel {
         parent::__construct();
         $this->_table = 'defect_forum_board';
     }
+
+    public function getBoards($forum_id)
+    {
+        // board title, description, topic count, reply count, latest_post, latest post author, latest post time
+        return $this->db->select('*')
+                        ->where('forum_id', $forum_id)
+                        ->get($this->_table);
+
+    }
 }
 ?>
