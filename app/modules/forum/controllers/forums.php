@@ -31,6 +31,7 @@ class Forums extends CoreController {
         $this->load->model('Reply_mdl');
         $this->load->helper('forum');
         $this->load->model('Board_mdl');
+        $this->template->write_view('sidebar', 'sidebar');
     }
 
     public function index()

@@ -216,7 +216,8 @@ button {  width: auto; overflow: visible; }
 .clearfix { zoom: 1; }
 
  /* Primary Styles
-    Author: 
+    Author: Derek Stegelman
+    Created: Feb 20 2011
  */
 
  /* Globals */
@@ -340,11 +341,12 @@ td.authorInfo span
     display: block;
 }
 
-/*** Thread ***/
+/**** Thread ****/
 
 .thread
 {
     clear: both;
+    margin-bottom: 12px;
 }
 
 .thread .author
@@ -363,6 +365,11 @@ td.authorInfo span
 {
     margin-bottom: 15px;
     margin-top: 15px;
+}
+
+.fixit
+{
+    clear:both;
 }
 
 /*** End Forum ***/

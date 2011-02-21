@@ -42,7 +42,7 @@ $route['forum'] = 'forums';
 $route['forum/viewthread/(:num)'] = 'forums/view_thread/$1';
 $route['forum/viewboard/(:num)'] = 'forums/view_board/$1';
 $route['forum/reply/(:num)'] = 'forums/new_reply/$1';
-
+$route['forum/newpost/(:num)'] = 'forums/new_post/$1';
 
 
 /* End of file routes.php */

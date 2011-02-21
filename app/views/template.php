@@ -53,12 +53,8 @@
         </div>
     </div>
     <div id="wrapper">
-        <div class="sidebar">
-            <h2>Add Something</h2>
-            <a class="button small gray" href="#"><span>Add Something</span></a>
-            <!-- Will Probably need a sidebar content region -->
-            <h3>Forum Status</h3>
-        </div>
+        <?php echo $sidebar; ?>
+        
         <div class="content">
             <?php
             echo $content;

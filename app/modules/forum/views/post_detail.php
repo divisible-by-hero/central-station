@@ -16,6 +16,7 @@
             <div class="threadContent">
                 <?php echo $thread->content; ?>
             </div>
+            <div class="fixit"></div>
         </div>
         <?php } ?>
         <div class="replies">
@@ -29,6 +30,7 @@
                     <div class="threadContent">
                         <?php echo $reply->reply; ?>
                     </div>
+                    <div class="fixit"></div>
                 </div>
             <?php } ?>
         </div>
