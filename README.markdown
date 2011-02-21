@@ -9,3 +9,13 @@ A codeigniter based Defect/Issue tracking system.  In very early development.
 
 
 # Contributors #
+
+Myself
+
+# Install #
+
+Coming Soon.
+
+# Demo #
+
+Coming Soon.
