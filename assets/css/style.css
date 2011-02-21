@@ -342,12 +342,28 @@ td.authorInfo span
 
 /*** Thread ***/
 
-.thread .author
+.thread
 {
-    
+    clear: both;
 }
 
+.thread .author
+{
+    float:left;
+    width: 120px;
+}
 
+.thread .threadContent
+{
+    float: left;
+    width: 600px;
+}
+
+.replies
+{
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
 
 /*** End Forum ***/
 
