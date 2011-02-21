@@ -215,17 +215,16 @@ button {  width: auto; overflow: visible; }
 /* Fix clearfix: blueprintcss.lighthouseapp.com/projects/15318/tickets/5-extra-margin-padding-bottom-of-page */
 .clearfix { zoom: 1; }
 
-
-
-
-
-
  /* Primary Styles
     Author: 
  */
 
+ /* Globals */
 
-
+ body
+ {
+     background: #ddd;
+}
 
 .header
 {
@@ -235,11 +234,10 @@ button {  width: auto; overflow: visible; }
     margin-bottom:15px;
     position: relative;
     background: #500078;
-    height: 120px;
+    height: 79px;
     border-bottom: 10px solid #67009C;
+    position: relative;
 }
-
-
 
 .header h1
 {
@@ -248,15 +246,123 @@ button {  width: auto; overflow: visible; }
     color:#fff;
 }
 
+.header .userContainer
+{
+    padding: 10px;
+    background: #67009C;
+    position: absolute;
+    top: 9px;
+    right: 120px;
+    -moz-border-radius: 3px;
+}
+
+.userContainer img
+{
+    background: #fff;
+    padding: 4px;
+    float: left;
+}
+
+.userContainer ol
+{
+    float: left;
+}
+
+.userContainer li
+{
+    list-style-type: none;
+    display: inline-block;
+    float:left;
+    margin-right: 5px;
+    color: #fff;
+}
+
+.userContainer input
+{
+    position: absolute;
+    bottom: 16px;
+    left: 77px;
+    width: 69%;
+}
+
+
+/* CONTENT */
+
+#wrapper
+{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+
+#wrapper .content
+{
+    width: 64%;
+    float:left;
+    padding:20px;
+    -moz-border-radius-topright:4px;
+    -moz-border-radius-topleft: 4px;
+    background: #500078;
+    color: #fff;
+}
+
+
+/* Table Styles */
+
+th
+{
+    text-align: left;
+}
+
+td,
+th
+{
+    padding-right: 5px;
+}
+
+td.boardName
+{
+    width: 520px;
+}
+
+
+/* Module Specific Styles */
+
+/*** Forum ***/
+
+.forum h2
+{
+    font-size: 18px;
+}
+
+td.authorInfo span
+{
+    display: block;
+}
+
+/*** Thread ***/
+
+.thread .author
+{
+    
+}
 
 
 
+/*** End Forum ***/
 
 
+/* End Module Specific Styles */
 
+/* Begin Sidebar */
 
-
-
+.sidebar
+{
+    width: 425px;
+    float: right;
+    background: #ddd;
+    padding: 15px;
+}
 
 /*
  * Media queries for responsive design

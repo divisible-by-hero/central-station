@@ -1,8 +1,5 @@
 <?php
-/* 
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 function getReplies($thread_id)
 {
@@ -64,6 +61,18 @@ function get_latest_reply_object($thread_id)
     $CI =& get_instance();
     $CI->load->model('Reply_mdl');
     return $CI->Reply_mdl->getWhere('post_id', $thread_id);
+}
+
+function get_authors_post_count($user_id)
+{
+    // temp
+    return '23';
+}
+
+function get_author_date_joined($user_id)
+{
+    // temp
+    return '12/25/1986';
 }
 
 ?>

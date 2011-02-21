@@ -133,6 +133,7 @@ CREATE  TABLE IF NOT EXISTS `defectTracker`.`defect_forum_post` (
   `content` LONGBLOB NULL ,
   `author_id` MEDIUMINT(8) NOT NULL ,
   `board_id` INT NOT NULL ,
+  `date_created` DATE not null,
   PRIMARY KEY (`id`) )
 ENGINE = InnoDB;
 

@@ -68,11 +68,11 @@ class Forums extends CoreController {
         $data['replies'] = $this->Reply_mdl->get_replies($thread_id);
 
         // Get original post info
-        $data['thread'] = $this->Post_mdl->get_post_detail($thread_id);
+        $data['threads'] = $this->Post_mdl->get_post_detail($thread_id);
         log_message('info', $this->db->last_query());
 
         // Record the view
-        $this->post->record_view($thread_id);
+        $this->forum->record_view($thread_id);
         
         // Build and render the template
         $this->template->write_view('content', 'post_detail', $data);

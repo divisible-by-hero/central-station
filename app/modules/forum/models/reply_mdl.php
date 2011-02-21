@@ -37,7 +37,7 @@ class Reply_mdl extends CoreModel {
 
     public function get_replies($post_id)
     {
-        return $this->db->select('*, defect_authentication.id as userID')
+        return $this->db->select('*, defect_authentication.id as author_id')
                         ->from('defect_forum_post_reply')
                         ->join('defect_authentication', 'defect_authentication.id = defect_forum_post_reply.author_id')
                         ->where('post_id', $post_id)

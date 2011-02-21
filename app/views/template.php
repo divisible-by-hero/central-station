@@ -13,7 +13,7 @@
        Remove this if you use the .htaccess -->
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  <title></title>
+  <title>Defect Tracker</title>
   <meta name="description" content="">
   <meta name="author" content="">
 
@@ -27,6 +27,7 @@
 
   <!-- CSS : implied media="all" -->
   <?php echo link_tag('assets/css/style.css'); ?>
+  <?php echo link_tag('assets/css/css-buttons.css'); ?>
 
   <!-- Uncomment if you are specifically targeting less enabled mobile browsers
   <link rel="stylesheet" media="handheld" href="css/handheld.css?v=2">  -->
@@ -41,18 +42,28 @@
     <div class="header">
         <h2>Company Name?</h2>
         <h1>Issue Tracker</h1>
+        <div class="userContainer">
+            <?php echo getGravatar('dstegelman@gmail.com', 40); ?>
+            <ol>
+                <li>Derek Stegelman</li>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">Sign Out</a></li>
+            </ol>
+            <input type="search" name="search">
+        </div>
     </div>
     <div id="wrapper">
+        <div class="sidebar">
+            <h2>Add Something</h2>
+            <a class="button small gray" href="#"><span>Add Something</span></a>
+            <!-- Will Probably need a sidebar content region -->
+            <h3>Forum Status</h3>
+        </div>
         <div class="content">
             <?php
             echo $content;
             ?>
         </div>
-        <div class="sidebar">
-            <a class="button"><span>Add Issue</span></a>
-            <!-- Will Probably need a sidebar content region -->
-        </div>
-
     </div>
         
 

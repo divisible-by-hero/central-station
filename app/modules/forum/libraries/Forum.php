@@ -50,7 +50,7 @@ class Forum extends CoreLibrary {
         $post_data = array('title'=>$this->post_title, 'content'=>$this->post_content,
                 'board_id'=>$this->board_id, 'author_id'=>$this->author_id);
 
-        $this->Post_mdl->create($post_data);
+        $this->ci->Post_mdl->create($post_data);
         $post_id = //Unkonwn;
 
         $view_data = array('views'=>0, 'post_id'=>$post_id);
@@ -60,7 +60,7 @@ class Forum extends CoreLibrary {
 
     public function record_view($post_id)
     {
-        $current_view = $this->db->where('post_id', $post_id)
+        $current_view = $this->ci->db->where('post_id', $post_id)
                                  ->get('defect_forum_post_views');
         foreach($current_view->result() as $view)
         {
@@ -74,7 +74,7 @@ class Forum extends CoreLibrary {
         // Update the record.
 
         $view_data = array('views'=>$new_views);
-        $this->db->where('post_id', $post_id)
+        $this->ci->db->where('post_id', $post_id)
                  ->update('defect_forum_post_views', $view_data);
 
     }
