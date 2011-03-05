@@ -7,6 +7,13 @@ A codeigniter based Defect/Issue tracking system.  In very early development.
 * Ticket tracking
 * Project tracking
 
+# Modules
+
+* Projects
+** Issues
+** Activity Dashboard
+** Forums
+** Repo view??
 
 # Contributors #
 
