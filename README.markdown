@@ -1,4 +1,4 @@
-A codeigniter based Defect/Issue tracking system.  In very early development.
+A codeigniter based Defect/Issue tracking system.  In very early development.  This really is shaping up to be a PHP version of Redmine.
 
 # Goals #
 
@@ -12,8 +12,9 @@ A codeigniter based Defect/Issue tracking system.  In very early development.
 * Projects
 ** Issues
 ** Activity Dashboard
+** Wiki
 ** Forums
-** Repo view??
+** Repo view (git initially)
 
 # Contributors #
 
