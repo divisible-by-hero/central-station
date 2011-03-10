@@ -1,20 +1,25 @@
 <?php
-
 /**
-* Core Model
+* iRoam
 *
-* Open Cook Book is a simple CodeIgniter based cooking application that stores recipes.
+* iRoam is a simple web travel application.  Meant to help you share your trips with family and friends.
 *
-* @package		CodeIgniter
-* @subpackage           Core Classes
+* @package		iRoam
 * @version		1.0
-* @author		Derek Stegelman <http://derek.stegelman.com>
+* @author		Derek Stegelman <stegelman.com>
 * @license		Apache License v2.0
-* @copyright		2010 OpenCookBook
+* @copyright	2010 - 2011 iRoam
 */
 
 // ----------------------------------------------------------------
 
+/**
+* Static Pages Controller
+*
+* @package		iRoam
+* @category		Controllers
+* @author		Derek Stegelman
+*/
 class CoreModel extends CI_Model {
 
     public $_table;
@@ -53,36 +58,11 @@ class CoreModel extends CI_Model {
 
         }
     }
-    
-    /*
-     * getCount
-     * 
-     * @author Derek Stegelman
-     * @access Public
-     * @param null
-     */
 
     public function getCount()
     {
         log_message('info', 'Get count!');
         return $this->db->count_all($this->_table);
-    }
-    
-    /*
-     * getCountWhere
-     * 
-     * @author Derek Stegelman
-     * @access Public
-     * @param key, Value Strings
-     * 
-     */
-    
-    public function getCountWhere($key, $value)
-    {
-//    	return $this->db->where($key, $value)
-//                        ->count_all($this->_table);
-        $counts = $this->db->where($key, $value)->get($this->_table);
-        return $counts->num_rows();
     }
 
     /*
@@ -95,9 +75,16 @@ class CoreModel extends CI_Model {
 
     public function getWhere($key, $value)
     {
-        log_message('info', 'Performing get where..' . ' where ' . $key . ' equals ' . $value);
+        log_message('info', 'Performing get where..');
         return $this->db->where($key, $value)
                         ->get($this->_table);
+    }
+    
+    public function get_where_many($data)
+    {
+    
+    	return $this->db->where($data)
+    					->get($this->_table);
     }
 
     /*

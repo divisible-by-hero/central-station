@@ -26,12 +26,13 @@
 * @author		Derek Stegelman
 */
 
-class forum_mdl {
+class Forum_mdl extends CoreModel {
     //put your code here
 
     public function __construct()
     {
-        
+        parent::__construct();
+        $this->_table = 'defect_forum';
     }
 }
 ?>
