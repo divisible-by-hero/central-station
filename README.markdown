@@ -16,14 +16,38 @@ A codeigniter based Defect/Issue tracking system.  In very early development.  T
 ** Forums
 ** Repo view (git initially)
 
+# Packages
+* Authentication Package
+* Template package
+
+
 # Contributors #
 
 Myself
 
-# Install #
+# ToDos
 
+[] Forums
+	[] Models
+	[] Controllers
+	[] Libraries
+	[] Views
+[] Issues
+	[] Models
+	[] Controllers
+	[] Libraries
+	[] Views
+[] Wiki
+	[] Models
+	[] Controllers
+	[] Libraries
+	[] Views
+[] Activity
+[] Repository Browser
+
+
+# Install #
 Coming Soon.
 
 # Demo #
-
 Coming Soon.
