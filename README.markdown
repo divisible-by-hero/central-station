@@ -10,11 +10,11 @@ A codeigniter based Defect/Issue tracking system.  In very early development.  T
 # Modules
 
 * Projects
-** Issues
-** Activity Dashboard
-** Wiki
-** Forums
-** Repo view (git initially)
+* Issues
+* Activity Dashboard
+* Wiki
+* Forums
+* Repo view (git initially)
 
 # Packages
 * Authentication Package
