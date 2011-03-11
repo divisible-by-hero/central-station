@@ -26,12 +26,30 @@
 * @author		Derek Stegelman
 */
 
-class issues {
+class Issues extends CI_Controller {
     //put your code here
 
     public function __construct()
     {
         
     }
+    
+    public function add_issue()
+    {
+        
+    }
+    
+    public function edit_issue($issue_slug)
+    {
+        
+    }
+    
+    public function view_issue($issue_slug)
+    {
+        
+        
+    }
+    
+    
 }
 ?>
