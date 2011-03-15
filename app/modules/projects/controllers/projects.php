@@ -26,10 +26,26 @@
 * @author		Derek Stegelman
 */
 
-class projects {
+class Projects extends CI_Controller {
     //put your code here
 
     public function __construct()
+    {
+        
+    }
+    
+    public function add_project()
+    {
+        
+        
+    }
+    
+    public function view_project($project_slug)
+    {
+        
+    }
+    
+    public function edit_project($project_slug)
     {
         
     }
