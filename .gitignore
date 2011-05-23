@@ -1,6 +1,3 @@
-app/logs
-nbproject
-deploy.sh
-defect.esproj
-app/config/config.php
-app/config/database.php
+.project
+.pydevproject
+
