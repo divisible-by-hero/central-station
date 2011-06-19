@@ -1,4 +1,4 @@
-A codeigniter based Defect/Issue tracking system.  In very early development.  This really is shaping up to be a PHP version of Redmine.
+A Django based Defect/Issue tracking system.  In very early development.  This really is shaping up to be a django version of Redmine.
 
 # Goals #
 
@@ -10,15 +10,16 @@ A codeigniter based Defect/Issue tracking system.  In very early development.  T
 # Modules
 
 * Projects
-* Issues
+* Defects
 * Activity Dashboard
 * Wiki
 * Forums
 * Repo view (git initially)
 
-# Packages
-* Authentication Package
-* Template package
+# Dependencies
+* Django 1.3 or greater
+* django-piston
+* South
 
 
 # Contributors #
