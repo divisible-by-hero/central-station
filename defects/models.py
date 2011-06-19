@@ -6,7 +6,7 @@ from defects.choices import *
 
 class Category(models.Model):
     name = models.CharField(max_length=250)
-    slug = models.SlugField()
+    slug = models.SlugField(editable=False)
     
     def __unicode__(self):
         return self.name
