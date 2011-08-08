@@ -23,42 +23,34 @@ def compress_js():
     local("cd assets/admin/js && java -jar compressor.jar -o '.js$:.min.js' *.js")
     
 def sync_db():
-    local("python manage.py syncdb")
+    local("python manage.py syncdb --settings=settings.local")
     # NEed to add support for settings.lcoal
 def migrate():
-    local("python manage.py migrate")
+    local("python manage.py migrate --settings=settings.local")
     
 def run_server():
-    local("python manage.py runserver")
+    local("python manage.py runserver --settings=settings.local")
     
-def deploy_local():
-    compress_css()
-    #compress_js()
-    #sync_db()
-    #migrate()
-    #run_server()
+def run_pip():
+    local("pip install -r requirements.txt")
     
-
-def get_code(env):
-    # pull new code
-    local("git pull origin %s" % env)
-    # push to assets cdn.
-    if env == "production":
-        local("cd assets && cp -r * ~/static/prod")
-    else:
-        local("cd assets && cp -r * ~/static/staging")
-        
+def build_migration(app):
+    local("python manage.py schemamigration %s --auto --settings=settings.local" % app)
 
 
+def sass():
+    '''
+        You need to add more instances of this method and function to each place you have css.
     
-def deploy(env):
-    get_code(env)
+    '''
+    path = 'media/css'
+    for file in glob.glob(os.path.join(path, '*.sass')):
+        basename, extension = os.path.splitext(file)
+        local("sass %s:build/%s.min.css --style compressed" % (file, basename))
+
+def run():
     run_pip()
-    sync_db(env)
-    auto_migration(env)
-    print("Migrations complete for %s" % env)
-    restart_apache(env)
-    print("Memory Usage")
-    memory_usage()
-    print("Deployment to %s server complete" % env)
+    sync_db()
+    migrate()
+    run_server()
 

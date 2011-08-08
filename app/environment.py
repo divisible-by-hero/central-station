@@ -11,13 +11,7 @@ prev_sys_path = list(sys.path)
 site.addsitedir(path('apps'))
 site.addsitedir(path('lib'))
 site.addsitedir(path('vendor'))
-#if os.path.exists(path('vendor')):
-#    for directory in os.listdir(path('vendor')):
-#        full_path = path('vendor/%s' % directory)
-#        if os.path.isdir(full_path):
-#            site.addsitedir(full_path)
 
-# Move the new items to the front of sys.path. (via virtualenv)
 new_sys_path = []
 for item in list(sys.path):
     if item not in prev_sys_path:

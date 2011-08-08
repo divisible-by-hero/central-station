@@ -5,21 +5,15 @@
 
 '''
 import os
-
-
 import environment
-
-
 path = lambda root,*a: os.path.join(root, *a)
 ROOT = os.path.dirname(os.path.abspath(__file__))
-
-
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
-    ('Derek Stegelman', 'derekst@ksu.edu'),
+    #('', ''),
 )
 
 MANAGERS = ADMINS
@@ -113,20 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django_cas.middleware.CASMiddleware',
-    'kstate.utils.auth.middleware.LocalAuthenticationMiddleware',
 )
-
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-    'kstate.utils.auth.backends.PopulatedCASBackend',
-)
-
-CAS_SERVER_URL = "https://signin.k-state.edu/WebISO/login"
-CAS_LOGOUT_COMPLETELY = True
-AUTH_PROFILE_MODULE = 'kstate.people.Profile'
-
-
 
 ROOT_URLCONF = 'urls.local'
 
@@ -146,7 +127,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
-    'blog',
+    'browser',
+    'defects',
+    'forum',
+    'project',
     'django.contrib.admin',
     'south',
 
