@@ -149,16 +149,7 @@ INSTALLED_APPS = (
     'blog',
     'django.contrib.admin',
     'south',
-    'tagging',
-    'kstate.people',
-    'kstate.service_catalog',
-    'kstate.event_registration',
-    'kstate.utils',
-    'api_manager',
 
-    #'video',
-    # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
