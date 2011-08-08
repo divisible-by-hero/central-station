@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block main_content %}
+
+<h1>New Defect</h1>
+
+
+
+
+
+<form id="Defect_save" name="Defect_save" action="." method="post" class="data_form">
+    {% csrf_token %}
+
+    {{ form.non_field_errors }}
+    <div class="padding">
+        <ul>
+            <li>
+                <span style="width: 23%">
+                    {{ form.application.errors }}
+                    <label for="Defect_save_system">System</label>
+                    {{ form.application }}
+                    
+                </span>
+                <span style="width: 23%">
+                    {{ form.version.errors }}
+                    <label for="Defect_save_releaseId">Release</label>
+                    {{ form.version }}
+                        
+                            
+                </span>
+                <span style="width: 23%">
+                    {{ form.type.errors }}
+                    <label for="Defect_save_typeId">Type</label>
+                    {{ form.type }}
+                    
+                </span>
+                <span style="width: 23%">
+                    {{ form.priority.errors }}
+                    <label for="Defect_save_data_priority">Priority</label>
+                    {{ form.priority }}
+                    
+                </span>
+            </li>
+            <li>
+                {{ form.description.errors }}
+                <label for="Defect_save_defect_description">Description</label>
+                {{ form.description }}
+                
+            </li>
+            <li>
+                {{ form.url.errors }}
+                <label for="Defect_save_defect_url">URL</label>
+                {{ form.url }}
+                
+            </li>
+            <input id="Defect_save_0" value="Create Defect" class="button" type="submit">
+
+        </ul>
+    </div>
+</form>
+{% endblock %}

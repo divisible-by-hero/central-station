@@ -1,0 +1,4 @@
+django==1.3
+south
+django-tagging
+django-piston

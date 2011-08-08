@@ -1,0 +1,78 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+    <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <title>DefectTracker</title>
+    
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/styles.css" type="text/css" media="screen" charset="utf-8">
+ 
+
+
+</head>
+
+<body>
+    <div id="header">
+
+        <p id="home_link"><a href="{% url defects.views.defect_list %}"> </a></p>
+
+        <ul id="header_tabs">
+            <li><a href="{% url defects.views.defect_list %}">Defect List</a></li>
+            <li id="new_link"><a href="{% url defects.views.add_defect %}" title="Create New Defect">New Defect</a></li>
+            <li><a href="#">Forum</a></li>
+        </ul>
+
+       
+
+
+        <form id="DefectCommands_search" name="DefectCommands_search" action="/DefectTracker/commands/DefectCommands_search.action" method="post">
+            <input name="searchString" id="search_box" value="Keyword or Defect #" onfocus="this.value=''" onblur="if(this.value==''){this.value='Keyword or Defect #';}" type="text">
+        </form>
+        <ul id="prologue">
+            <li><a href="#" id="advanced_link">Advanced</a></li>
+            <li><a href="https://defect.ome.ksu.edu/DefectTracker/forms/User_open.action">Preferences</a></li>
+            <li><a href="https://defect.ome.ksu.edu/DefectTracker/commands/DefectCommands_logout.action">Sign&nbsp;off</a></li>
+            
+            
+        </ul>
+    </div><!-- end #header -->
+
+    <!-- advanced options -->
+    
+
+
+
+<!-- end #advanced_ops -->
+
+    <!-- end #advanced_ops -->
+<div style="margin: 0px; overflow: hidden; height: 46px;"><div style="margin: 0px;" id="advanced_ops">
+    <ul>
+        
+            <li>
+                <h3>DefectTracker Management</h3>
+                <p>
+                    <a href="/admin/auth/">Users</a> |
+                    <a href="{% url projects.views.version_list %}">Versions</a> |
+                    <a href="{% url projects.views.app_list %}">Applications</a>
+                </p>
+        </li>
+        <li>
+            <h3>Forum Management</h3>
+            <p>
+                <a href="#">Users</a> |
+                <a href="#">SOmething else</a> |
+            </p>
+        </li>
+
+    </ul>
+    <div class="clear"> </div>
+</div></div><div id="content_area">
+ 
+    
+{% block main_content %}{% endblock %}
+
+</div><!-- end #content_area -->
+
+
+
+</body></html>

@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+
+
+
+    <h1>Administer Releases</h1>
+
+
+
+
+<a class="button" style="float: right; margin: 10px 10px 0pt;" href="{% url projects.views.add_version %}">Add version</a>
+
+<div class="clear"><div>
+    
+<div class="padding">
+    
+    <table class="data_table">
+<thead><tr><th>
+
+        <a href="">Release Id</a>
+        
+    </th>
+<th>
+
+        <a href="">Version</a>
+        
+    </th>
+<th>
+
+        <a href="">Release Date</a>
+        
+    </th>
+<th>
+
+        <a href="">Current Type</a>
+        
+    </th>
+<th>
+
+        
+    </th>
+</tr></thead>
+
+    <tbody>
+        {% for version in versions %}
+        <tr class="{% if forloop.counter|divisibleby:2 %} even {% else %} odd {% endif %}"><td>
+
+            <a href="https://defect.ome.ksu.edu/DefectTracker/forms/Release_open.action?id=2901">
+                {{ version.id }}
+            </a>
+    </td>
+<td>
+<a href="https://defect.ome.ksu.edu/DefectTracker/forms/Release_open.action?id=2901">
+                {{ version.number }}
+            </a>
+        
+    </td>
+<td>{{ version.release_date }}
+    </td>
+<td>
+
+        
+        {{ version.get_status_display }}
+    </td>
+<td>
+
+        <a href="javascript:hideRelease(2901)">Hide</a>
+    </td>
+</tr>
+{% endfor %}
+</tbody></table>
+
+</div>
+
+{% endblock %}
