@@ -4,7 +4,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    
+    url(r'^defects/', include('defects.urls')),
 
 
     url(r'^admin/', include(admin.site.urls)),

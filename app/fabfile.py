@@ -1,6 +1,6 @@
 from __future__ import with_statement
 from fabric.api import local, cd
-
+import os, glob
 
 def compress_css():
     #local("cd assets/admin/css && rm -r build")
@@ -46,7 +46,7 @@ def sass():
     path = 'media/css'
     for file in glob.glob(os.path.join(path, '*.sass')):
         basename, extension = os.path.splitext(file)
-        local("sass %s:build/%s.min.css --style compressed" % (file, basename))
+        local("sass %s:%s.min.css --style compressed" % (file, basename))
 
 def run():
     run_pip()
