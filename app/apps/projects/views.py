@@ -3,6 +3,7 @@
 #from django.shortcuts import get_object_or_404, redirect
 #from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.simple import direct_to_template
+from django.shortcuts import render
 ## Import your models.
 from projects.models import *
 from projects.forms import *
@@ -16,7 +17,10 @@ from django.contrib.auth.decorators import login_required
 #
 #'''
 #
-#
+
+def project_view(request):
+    return render(request, 'projects/dashboard.html')
+
 def version_list(request):
     
     versions = Version.objects.all()

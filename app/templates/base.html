@@ -2,10 +2,34 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/core.min.css">
+        {% block extra_head %}{% endblock %}
     </head>
     <body>
         <section class="container_12">
-            <h1>Central Station</h1>
+            <header>
+                <h1>Central Station</h1>
+                <nav>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Issues</a></li>
+                        <li><a href="#">Repo</a></li>
+                        <li><a href="#">Projects</a></li>
+                    </ul>
+                </nav>
+            </header>
+            <section class="grid_9">
+            {% block main_content %}{% endblock %}
+            </section>
+            <aside class="grid_3">
+                <article id="user_info">
+                    <img src="http://dummyimage.com/75x75">
+                    <h1>John Doe</h1>
+                    <span>Developer</span>
+                </article>
+            </aside>
+            <footer>
+                
+            </footer>
         </section>
     </body>
 </html>
