@@ -1,0 +1,21 @@
+@import url("reset.css");
+@import url("css3buttons.css");
+
+
+
+
+
+.main_content
+{
+	width:80%;
+	float:left;
+	padding:40px;
+}
+
+.sidebar
+{
+	width:20%;
+	float:right;
+	background: #ddd;
+}
+
