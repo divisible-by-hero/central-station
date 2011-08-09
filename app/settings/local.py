@@ -132,7 +132,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'browser',
     'defects',
-    'forum',
+    #'forum',
     'projects',
     'newsfeed',
     'django.contrib.admin',

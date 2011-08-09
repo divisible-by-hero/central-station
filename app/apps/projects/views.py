@@ -33,7 +33,7 @@ def add_application(request):
     extra_context = {}
     extra_context['form'] = ApplicationForm()
     
-    return direct_to_template(request, template="projects/add_form.html", extra_context=extra_context)
+    return render(request, "projects/add_form.html", extra_context)
 
 def add_version(request):
     extra_context = {}

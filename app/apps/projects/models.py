@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+
 # Slugify is a handy method to have around for use.
 from nutsbolts.utils.slugs import unique_slugify
 from projects.choices import *
