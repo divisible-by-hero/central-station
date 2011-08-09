@@ -51,6 +51,7 @@ def sass():
 def run():
     run_pip()
     sync_db()
+    sass()
     migrate()
     run_server()
 
