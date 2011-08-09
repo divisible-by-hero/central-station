@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 # Slugify is a handy method to have around for use.
-from django.template.defaultfilters import slugify
+from nutsbolts.utils.slugs import unique_slugify
 from projects.choices import *
 # Create your models here.
 
@@ -14,7 +14,7 @@ class App(models.Model):
         return self.name
     
     def save(self):
-        self.slug = slugify(self.name)
+        unique_slugify(self, self.name)
         super(App, self).save()
     
 
@@ -26,3 +26,8 @@ class Version(models.Model):
     
     def __unicode__(self):
         return self.number
+    
+    
+def get_activity(app):
+    
+    return ''

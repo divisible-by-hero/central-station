@@ -1,25 +1,16 @@
-## Below are some common methods/functions used in my views.
-#
-#from django.shortcuts import get_object_or_404, redirect
-#from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.simple import direct_to_template
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 ## Import your models.
 from projects.models import *
 from projects.forms import *
-## Import tagging stuff if you are using the tagging module. Remove if not.
-#from tagging.models import Tag, TaggedItem
-## Authentication stuff.  This is a handly decorator used to force a user to login.
 from django.contrib.auth.decorators import login_required
-#
-#'''
-#    The following are a few random views that you can use.  
-#
-#'''
-#
 
-def project_view(request):
-    return render(request, 'projects/dashboard.html')
+def app_view(request, app_slug):
+    app = get_object_or_404(App, slug=app_slug)
+    context = {'app': app}
+    
+    return render(request, 'projects/dashboard.html', context)
 
 def version_list(request):
     
