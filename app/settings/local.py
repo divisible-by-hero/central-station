@@ -117,6 +117,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
     "./apps/blog/templates",
     "./apps/defects/templates",
+    "./apps/projects/templates",
+    "./apps/newsfeed/templates",
     "./templates"
 )
 
@@ -132,6 +134,7 @@ INSTALLED_APPS = (
     'defects',
     'forum',
     'projects',
+    'newsfeed',
     'django.contrib.admin',
     'south',
 

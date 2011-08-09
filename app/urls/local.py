@@ -6,7 +6,7 @@ urlpatterns = patterns('',
 
     url(r'^defects/', include('defects.urls')),
     url(r'^projects/', include('projects.urls')),
-
+    url(r'^$', 'newsfeed.views.dashboard'),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',
