@@ -1,8 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
-## Import your views and feeds from your app.
-#from newapp.views import *
-#from newapp.feeds import *
 from defects.views import *
+
 urlpatterns = patterns('',
     url(r'^$', defect_list, name="defect_list"),
     url(r'^view/(?P<defect_id>\d+)/$', defect_detail, name="defect_detail"),

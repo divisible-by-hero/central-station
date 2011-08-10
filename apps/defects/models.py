@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-# Slugify is a handy method to have around for use.
-from django.template.defaultfilters import slugify
+from nutsbolts.utils.slugs import unique_slugify
 from defects.choices import *
 from projects.models import App, Version
 # Create your models here.

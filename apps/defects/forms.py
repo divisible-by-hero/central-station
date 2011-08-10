@@ -1,12 +1,3 @@
-#from django import forms
-#from django.forms import Textarea
-#from bookmarks.models import *
-#
-#
-#class BookmarkForm(forms.ModelForm):
-#    class Meta:
-#        model = Bookmark
-
 from django import forms
 from defects.models import *
 
