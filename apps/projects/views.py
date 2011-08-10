@@ -1,7 +1,5 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.views.generic.simple import direct_to_template
 from django.shortcuts import render, get_object_or_404
-## Import your models.
 from projects.models import *
 from projects.forms import *
 from django.contrib.auth.decorators import login_required
@@ -13,32 +11,21 @@ def app_view(request, app_slug):
     return render(request, 'projects/dashboard.html', context)
 
 def version_list(request):
-    
-    versions = Version.objects.all()
-    
-    extra_context = {}
-    extra_context['versions'] = versions
-    return direct_to_template(request, template="projects/version_list.html", extra_context=extra_context)
-
+    context = {'versions': Version.objects.all()}
+    return render(request, 'projects/version_list.html', context)
 
 def app_list(request):
-    
-    apps = App.objects.all()
-    extra_context = {}
-    extra_context['apps'] = apps
-    
-    return direct_to_template(request, template="projects/app_list.html", extra_context=extra_context)
+    context = {'apps': App.objects.all()}
+    return render(request, 'projects/app_list.html', context)
 
 def add_application(request):
-    extra_context = {}
-    extra_context['form'] = ApplicationForm()
-    
-    return render(request, "projects/add_form.html", extra_context)
+    context = {'form': ApplicationForm()}
+    return render(request, 'projects/all_form.html', context)
 
 def add_version(request):
-    extra_context = {}
-    extra_context['form'] = VersionForm()
-    return direct_to_template(request, template="projects/add_form.html", extra_context=extra_context)
+    context = {'form': VersionForm()}
+    return render(request, 'projects/add_form.html', context)
+
 ## View using pagination
 #def top_rated(request):
 #    extra_context = { }
