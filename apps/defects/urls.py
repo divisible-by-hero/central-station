@@ -16,6 +16,6 @@ urlpatterns = patterns('',
 #    # This is the pattern for a slug, or alpha chars.
 #    url(r'^slug/(?P<brew_slug>[-\w]+)/$', delete_bookmark, name="delete_bookmark"),
 #    # Redirect to API urls.
-#    url(r'^api/', include('bookmarks.api.urls')),
+    url(r'^api/', include('defects.api.urls')),
 #    
 )

@@ -2,3 +2,4 @@ django==1.3
 south
 django-piston
 git+git://github.com/dstegelman/nutsbolts-utils.git
+git+git://github.com/kstateome/api-management.git

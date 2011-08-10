@@ -1,11 +1,11 @@
-#from django.conf.urls.defaults import *
-#from piston.resource import Resource
-#from api.handlers.brew import BrewHandler
-## You must use the CsrfExempt resource class becuase POSTING will fail otherwise.
-#from api.utils import CsrfExemptResource
-#
-#brew_handler = CsrfExemptResource(BrewHandler)
-#urlpatterns = patterns('',
-#	url(r'^$', brew_handler),
-#	# OTher stuff can be added here..
-#)
+from django.conf.urls.defaults import *
+from defects.api.handlers.defect import DefectsHandler 
+from api_manager.utils import CsrfExemptResource
+
+defects_handler = CsrfExemptResource(DefectsHandler)
+
+
+urlpatterns = patterns('',
+    url(r'^$', defects_handler),
+
+)
