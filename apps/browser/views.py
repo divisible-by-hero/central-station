@@ -3,7 +3,8 @@ from django.shortcuts import render, redirect
 from django.conf import settings
 
 def repos(request):
-    return ''
+    context = {}
+    return render(request, 'browser/repo.html', context)
 
 
 def view_repo(request):

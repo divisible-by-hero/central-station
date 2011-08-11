@@ -2,7 +2,8 @@ from django.conf.urls.defaults import patterns, include, url
 from defects.views import *
 
 urlpatterns = patterns('',
-    url(r'^$', defect_list, name="defect_list"),
+    #url(r'^$', defect_list, name="defect_list"),
+    url(r'^$', all_defects, name="all_defects"),
     url(r'^view/(?P<defect_id>\d+)/$', defect_detail, name="defect_detail"),
     url(r'^add/$', add_defect, name="add_defect"),
 #    # Homepage url , always name your URLS

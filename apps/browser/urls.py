@@ -5,7 +5,7 @@ from browser.views import *
 
 urlpatterns = patterns('',
     
-
+    url(r'^repos/$', repos, name="repos"),
     url(r'^browser/$', view_repo, name="view_repo"),
     url(r'^view/(?P<file_name>[-\w./]+)/$', view_file, name="view_file"),
     url(r'^view_dir/(?P<path>[-\w./]+)', view_dir),

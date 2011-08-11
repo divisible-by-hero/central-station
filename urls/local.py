@@ -7,7 +7,7 @@ urlpatterns = patterns('',
     url(r'^$', 'newsfeed.views.dashboard'),
     url(r'^defects/', include('defects.urls')),
     url(r'^projects/', include('projects.urls')),
-
+    url(r'^browser/', include('browser.urls')),
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'^static/(?P<path>.*)$', 'django.views.static.serve',

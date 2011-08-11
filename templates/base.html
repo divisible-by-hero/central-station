@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
+        <title>{% block main_title %}Central Station - Dashboard{% endblock %}</title>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/core.min.css">
         
         {% block extra_head %}{% endblock %}
@@ -14,12 +15,12 @@
                 {% block main_nav %}
                 <nav>
                     <ul>
-                        <li class="active"><a href="#">Dashboard</a></li>
-                        <li><a href="#">Projects</a></li>
-                        <li><a href="#">Repos</a></li>
-                        <li><a href="#">Defects</a></li>
-                        <li><a href="#">Users</a></li>
-                        <li><a href="#">Settings</a></li>
+                        <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url newsfeed.views.dashboard %}">Dashboard</a></li>
+                        <li {% block project_menu_item %}{% endblock %}><a href="{% url projects.views.app_list %}">Projects</a></li>
+                        <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.repos %}">Repos</a></li>
+                        <li {% block defects_menu_item %}{% endblock %}><a href="{% url defects.views.all_defects %}">Defects</a></li>
+                        <li>{% block users_menu_item %}{% endblock %}<a href="#">Users</a></li>
+                        <li>{% block settings_menu_item %}{% endblock %}<a href="#">Settings</a></li>
                     </ul>
                 </nav>
                 {% endblock %}

@@ -2,6 +2,10 @@ from django.db import models
 from django.contrib.auth.models import User
 from projects.models import App
 
+
+
+
+
 class Activity(models.Model):
     user = models.ForeignKey(User)
     action = models.CharField(max_length=400)

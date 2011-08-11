@@ -5,6 +5,13 @@ from defects.forms import *
 import datetime
 from django.contrib.auth.decorators import login_required
 
+
+def all_defects(request):
+
+    return render(request, 'defects/defect_list.html')
+
+
+
 def defect_list(request):
     context = {'defect_count': Defect.objects.count()}
     context['defects'] = Defect.objects.all()

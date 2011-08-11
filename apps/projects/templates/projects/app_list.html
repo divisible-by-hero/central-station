@@ -1,75 +1,9 @@
 {% extends "base.html" %}
-
+{% block dashboard_menu_item %}{% endblock %}
+{% block project_menu_item %}class="active"{% endblock %}
 {% block main_content %}
-
-
-
-    <h1>Administer Systems</h1>
-
-
-
-
-<a style="float: right; margin: 10px 10px 0pt;" class="button" href="{% url projects.views.add_application %}">Add App</a>
-<div class="clear"><div>
-    
-<div class="padding">
-    
-    <table class="data_table">
-<thead><tr><th>
-
-        <a href="">System Id</a>
-        
-    </th>
-<th>
-
-        <a href="">Name</a>
-        
-    </th>
-<th>
-
-        <a href="">Release Date</a>
-        
-    </th>
-<th>
-
-        <a href="">Current Type</a>
-        
-    </th>
-<th>
-
-        
-    </th>
-</tr></thead>
-
-    <tbody>
-        {% for app in apps %}
-        <tr class="{% if forloop.counter|divisibleby:2 %} even {% else %} odd {% endif %}"><td>
-
-            <a href="https://defect.ome.ksu.edu/DefectTracker/forms/Release_open.action?id=2901">
-                {{ app.id }}
-            </a>
-    </td>
-<td>
-<a href="https://defect.ome.ksu.edu/DefectTracker/forms/Release_open.action?id=2901">
-                {{ app.name }}
-            </a>
-        
-    </td>
-<td>
-    </td>
-<td>
-
-        
-        
-    </td>
-<td>
-
-        <a href="javascript:hideRelease(2901)">Hide</a>
-    </td>
-</tr>
+{% for app in apps %}
+    {{ app }}
 {% endfor %}
-</tbody></table>
-
-</div>
 
 {% endblock %}
