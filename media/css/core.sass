@@ -5,39 +5,88 @@
 
 
 body
-    font-family: Verdana,sans-serif
+	font-family: Verdana,sans-serif
 
 a
-    text-decoration: none
-    color: #000
-    
-
-
+	text-decoration: none
+	color: #000
+	
 #main_content
-    float: left
-    width: 66%
-    
+	float: left
+	width: 66%
+	padding: 30px
+
+	h1
+		border-bottom: 1px solid #000
+		margin-bottom: 15px
+
+	.activity
+		margin-bottom: 10px
+		border-bottom: 1px solid #bbb
+		min-height: 80px
+		
+		img
+			float: left
+
+		p
+			margin: 10px
+
+		h2
+			margin-left: 90px
+
 #sidebar
-    margin-left: 70%
-    background: #EEEEEE
-    
+	margin-left: 70%
+	padding: 20px
+	background: #EEEEEE
+	
+	h1
+		display: inline-block
+		margin-left: 10px
+
+	#user_info
+		border-bottom: 1px solid #bbb
+
+		img
+			float: left
+
+
 header
-    background: #512888
-    padding: 15px
-    padding-bottom: 0
+	background: #512888
+	padding: 15px
+	padding-bottom: 0
 
-header h1
-    font-size: 20pt
-    color: #fff
+	h1
+		font-size: 20pt
+		color: #fff
 
-header nav
-    margin-top: 20px
+	nav
+		margin-top: 20px
 
-nav ul li
-    display: inline-block
-    background: #CCCCCC
-    padding: 5px
-    
-nav ul li a
-    color: #000
-    font-size: 13px
+		ul li
+			display: inline-block
+			background: #CCCCCC
+			padding: 5px
+			
+			a
+				color: #000
+				font-size: 13px
+
+		ul li.active
+			background: #fff
+	
+	#user_links
+		position: absolute
+		right: 30px
+		top: 10px
+		font-size: 13px
+		
+
+		li
+			display: inline-block
+			color: #fff
+			margin-right: 7px
+			
+			a
+				color: #fff
+				text-decoration: underline
+

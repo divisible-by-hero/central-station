@@ -2,8 +2,12 @@
 {% block main_content %}
 <h1>Project Activity</h1>
 {% for activity in feed %}
-
-    {{ activity }}
+    <article class="activity">
+    <img src="http://dummyimage.com/75x75">
+    <h2>{{ activity.user.first_name }} {{ activity.user.last_name }}</h2>
+    <p>{{ activity.action }}</p>
+    <span class="date">{{ activity.date_action }}</span>
+    </article>
     
 {% endfor %}
 {% endblock %}

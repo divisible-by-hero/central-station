@@ -11,14 +11,23 @@
         <section class="container_12">
             <header>
                 <h1>Central Station</h1>
+                {% block main_nav %}
                 <nav>
                     <ul>
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#">Issues</a></li>
-                        <li><a href="#">Repo</a></li>
+                        <li class="active"><a href="#">Dashboard</a></li>
                         <li><a href="#">Projects</a></li>
+                        <li><a href="#">Repos</a></li>
+                        <li><a href="#">Defects</a></li>
+                        <li><a href="#">Users</a></li>
+                        <li><a href="#">Settings</a></li>
                     </ul>
                 </nav>
+                {% endblock %}
+                <ul id="user_links">
+                    <li>Welcome, {{ request.user.username }}</li>
+                    <li><a href="#">Personal Settings</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </ul>
             </header>
             <section id="main_content">
             {% block main_content %}{% endblock %}
