@@ -4,8 +4,6 @@ from projects.models import App
 
 
 
-
-
 class Activity(models.Model):
     user = models.ForeignKey(User)
     action = models.CharField(max_length=400)
@@ -14,3 +12,7 @@ class Activity(models.Model):
     
     def __unicode__(self):
         return "%s %s" % (self.user.username, self.action)
+
+
+    class Meta:
+        ordering = ['-date_action']
