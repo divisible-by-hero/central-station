@@ -6,9 +6,9 @@ from projects.views import *
 urlpatterns = patterns('',
     url(r'^apps/$', app_list, name="app_list"),
     url(r'^versions/$', version_list, name="version_list"),
-    url(r'^application/add/$' , add_application, name="add_application"),
+    url(r'^newapp/$' , add_application, name="add_application"),
     url(r'^version/add/$', add_version, name="add_version"),
-    url(r'^app/(?P<app_slug>[-\w]+)/$', app_view, name="app_view"),
+    url(r'^app/(?P<app_slug>[-\w]+)/$', app, name="app"),
 #    # Homepage url , always name your URLS
 #    url(r'^$', homepage, name="homepage"),
 #    # URl with add and nothing after

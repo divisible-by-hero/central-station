@@ -1,14 +1,9 @@
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from projects.models import *
 from projects.forms import *
 from django.contrib.auth.decorators import login_required
-
-def app_view(request, app_slug):
-    app = get_object_or_404(App, slug=app_slug)
-    context = {'app': app}
-    
-    return render(request, 'projects/dashboard.html', context)
+from newsfeed.models import Activity
 
 def version_list(request):
     context = {'versions': Version.objects.all()}
@@ -19,12 +14,28 @@ def app_list(request):
     return render(request, 'projects/app_list.html', context)
 
 def add_application(request):
-    context = {'form': ApplicationForm()}
-    return render(request, 'projects/all_form.html', context)
+    if request.method == "POST":
+        form = ApplicationForm(request.POST)
+        if form.is_valid():
+            app = form.save()
+            activity = Activity(application=app)
+            activity.action = "Created a new application, %s" % app.name
+            activity.user = request.user
+            activity.save()
+            return redirect("app", app.slug)
+    else:
+        form = ApplicationForm()
+    context = {'form': form}
+
+    return render(request, 'projects/add_form.html', context)
 
 def add_version(request):
     context = {'form': VersionForm()}
     return render(request, 'projects/add_form.html', context)
+
+def app(request, app_slug):
+    context = {}
+    return render(request, 'projects/app_list.html', context)
 
 ## View using pagination
 #def top_rated(request):

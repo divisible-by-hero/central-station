@@ -13,6 +13,10 @@ class App(models.Model):
     def save(self):
         unique_slugify(self, self.name)
         super(App, self).save()
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('projects.views.app', (), {'app_slug': self.slug})
     
 
 class Version(models.Model):
