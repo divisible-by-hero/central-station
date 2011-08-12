@@ -107,6 +107,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'nutsbolts.utils.auth.middleware.RequireLoginMiddleware',
 )
 
 ROOT_URLCONF = 'urls.local'
@@ -119,6 +120,7 @@ TEMPLATE_DIRS = (
     "./apps/defects/templates",
     "./apps/projects/templates",
     "./apps/newsfeed/templates",
+    "./apps/profile/templates",
     "./templates"
 )
 
