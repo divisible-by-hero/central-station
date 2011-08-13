@@ -5,6 +5,7 @@ from defects.forms import *
 import datetime
 from django.contrib.auth.decorators import login_required
 from newsfeed.models import Activity
+from projects.models import App
 
 def all_defects(request):
     context = {'defects': Defect.objects.all()}
@@ -24,6 +25,12 @@ def defect_list(request):
     except EmptyPage:
         context['defects'] = paginator.page(paginator.num_pages)
     return render(request, 'defects/defect_list.html', context)
+
+def open_app_defects(request, app_slug):
+    app = get_object_or_404(App, slug=app_slug)
+    context = {'defects': Defect.objects.filter(application=app)}
+    return render(request, 'defects/list.html', context)
+
 
 
 def defect_detail(request, defect_id):

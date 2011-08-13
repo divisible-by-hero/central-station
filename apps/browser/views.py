@@ -42,3 +42,6 @@ def view_file(request, file_name):
     context = {'file': file}
     context['file_text'] = file.read()
     return render(request, 'browser/file.html', context)
+
+def view_app_repo(request, app_slug):
+    return ''

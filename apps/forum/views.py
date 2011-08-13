@@ -1,7 +1,7 @@
 # Create your views here.
 ## Below are some common methods/functions used in my views.
 #
-from django.shortcuts import get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect, render
 #from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.views.generic.simple import direct_to_template
 ## Import your models.
@@ -20,3 +20,7 @@ from django.contrib.auth.decorators import login_required
 def board(request, board_slug):
     
     posts = Post.objects.filter()
+    return ''
+
+def view_forum_app(request, app_slug):
+    return render(request, 'defects/login.html')

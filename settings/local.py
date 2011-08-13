@@ -142,6 +142,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'south',
     'profile',
+    'forum',
 
 )
 

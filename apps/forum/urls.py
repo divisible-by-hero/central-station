@@ -1,7 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-## Import your views and feeds from your app.
-#from newapp.views import *
-#from newapp.feeds import *
+from forum.views import view_forum_app
 
 urlpatterns = patterns('',
     
@@ -18,4 +16,5 @@ urlpatterns = patterns('',
 #    # Redirect to API urls.
 #    url(r'^api/', include('bookmarks.api.urls')),
 #    
+    url(r'^app/(?P<app_slug>[-\w]+)/forum/$', view_forum_app, name="view_forum_app"),
 )
