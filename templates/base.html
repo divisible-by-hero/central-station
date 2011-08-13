@@ -25,6 +25,7 @@
                 </nav>
                 {% endblock %}
                 <ul id="user_links">
+                    {% block extra_user_links %}{% endblock %}
                     <li>Welcome, {{ user.username }}</li>
                     <li><a href="#">Personal Settings</a></li>
                     <li><a href="#">Sign Out</a></li>

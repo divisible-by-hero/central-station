@@ -1,3 +1,5 @@
 {% extends "projects/base_project.html" %}
 
-{% block project_title %}{{ app.name }}{% endblock %}
+{% block main_content %}
+{% include "newsfeed/dash_feed.html" %}
+{% endblock %}

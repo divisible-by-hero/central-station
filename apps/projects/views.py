@@ -35,6 +35,7 @@ def add_version(request):
 
 def app(request, app_slug):
     context = {'app': get_object_or_404(App, slug=app_slug)}
+    context['feed'] = Activity.objects.filter(application=context['app'])
     return render(request, 'projects/app_index.html', context)
 
 ## View using pagination
