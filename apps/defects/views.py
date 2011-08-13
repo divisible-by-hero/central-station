@@ -4,11 +4,11 @@ from defects.models import *
 from defects.forms import *
 import datetime
 from django.contrib.auth.decorators import login_required
-
+from newsfeed.models import Activity
 
 def all_defects(request):
-
-    return render(request, 'defects/defect_list.html')
+    context = {'defects': Defect.objects.all()}
+    return render(request, 'defects/defect_list.html', context)
 
 
 
@@ -25,7 +25,7 @@ def defect_list(request):
         context['defects'] = paginator.page(paginator.num_pages)
     return render(request, 'defects/defect_list.html', context)
 
-@login_required
+
 def defect_detail(request, defect_id):
     context = {'defect': get_object_or_404(Defect, pk=defect_id)}
 
@@ -38,11 +38,11 @@ def defect_detail(request, defect_id):
             obj.save()
             return redirect("defect_detail", defect_id=obj.id)
     else:
-        form = DefectForm(instance=defect)
+        form = DefectForm(instance=context['defect'])
         context['form'] = form
     return render(request, 'defects/defect_detail.html', context)
 
-@login_required
+
 def add_defect(request):
     if request.method == "POST":
         form = DefectForm(request.POST)
@@ -51,6 +51,13 @@ def add_defect(request):
             obj.creator = request.user
             obj.status = "open"
             obj.save()
+
+            activity = Activity(application=obj.application)
+            activity.user = request.user
+            activity.action = "Added a new defect #%s" % obj.id
+            activity.save()
+
+
             return redirect("defect_detail", defect_id=obj.id)
     else:
         form = DefectForm()

@@ -1,1 +1,12 @@
 {% extends "base.html" %}
+{% block main_content %}
+<table>
+{% for defect in defects %}
+    <tr>
+        <td>{{ defect.id }}</td>
+        <td><a href="{{ defect.get_absolute_url }}">{{ defect.description }}</a></td>
+    </tr>
+{% endfor %}   
+
+</table>
+{% endblock %}
