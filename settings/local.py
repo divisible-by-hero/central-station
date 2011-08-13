@@ -112,6 +112,8 @@ MIDDLEWARE_CLASSES = (
 
 ROOT_URLCONF = 'urls.local'
 
+AUTH_PROFILE_MODULE = 'profile.UserProfile'
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
@@ -139,6 +141,7 @@ INSTALLED_APPS = (
     'newsfeed',
     'django.contrib.admin',
     'south',
+    'profile',
 
 )
 
