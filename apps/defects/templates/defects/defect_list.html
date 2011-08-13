@@ -1,6 +1,10 @@
-{% extends "base.html" %}
+{% extends "defects/base.html" %}
 {% block main_content %}
 <table>
+    <tr>
+        <th>Defect ID</th>
+        <th>Description</th>
+    </tr>
 {% for defect in defects %}
     <tr>
         <td>{{ defect.id }}</td>

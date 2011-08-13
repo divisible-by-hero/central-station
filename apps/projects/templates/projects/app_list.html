@@ -5,7 +5,7 @@
 <h3>Active Projects</h3><a href="{% url projects.views.add_application %}">Add Project</a>
 {% for app in apps %}
 <article class="app">
-    <a href="{{ app.get_absolute_url }}">{{ app.name }}</a>
+    <a href="{{ app.get_absolute_url }}">{{ app.name }}</a><a href="#" class="delete">Delete</a>
 </article>
 {% endfor %}
 
