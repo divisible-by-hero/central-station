@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block project_title %}{{ app.name }}{% endblock %}
+{% block main_nav %}
+
+<nav>
+    <ul>
+        <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url newsfeed.views.dashboard %}">Project Home</a></li>
+        <li {% block project_menu_item %}{% endblock %}><a href="{% url projects.views.app_list %}">Defects</a></li>
+        <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.repos %}">Repository</a></li>
+        <li {% block defects_menu_item %}{% endblock %}><a href="{% url defects.views.all_defects %}">Forums</a></li>
+        <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.all_users %}">Users</a></li>
+        <li {% block settings_menu_item %}{% endblock %}><a href="#">Settings</a></li>
+    </ul>
+</nav>
+{% endblock %}
+
+            

@@ -34,8 +34,8 @@ def add_version(request):
     return render(request, 'projects/add_form.html', context)
 
 def app(request, app_slug):
-    context = {}
-    return render(request, 'projects/app_list.html', context)
+    context = {'app': get_object_or_404(App, slug=app_slug)}
+    return render(request, 'projects/app_index.html', context)
 
 ## View using pagination
 #def top_rated(request):
