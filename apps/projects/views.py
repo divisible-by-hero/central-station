@@ -60,8 +60,8 @@ def settings(request, app_slug):
             return redirect('app', app.slug)
     else:
         form = ApplicationForm(instance=app)
-    context = {'form':form}
-    return render(request, 'projects/add_form.html', context)
+    context = {'form':form, 'app':app}
+    return render(request, 'projects/project_settings.html', context)
 
 ## View using pagination
 #def top_rated(request):
