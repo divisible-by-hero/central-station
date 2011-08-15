@@ -10,6 +10,7 @@ urlpatterns = patterns('',
     url(r'^browser/', include('browser.urls')),
     url(r'^users/', include('profile.urls')),
     url(r'^forums/', include('forum.urls')),
+    url(r'^wiki/', include('wiki.urls')),
     
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'profile/login.html'}),
     url(r'^admin/', include(admin.site.urls)),

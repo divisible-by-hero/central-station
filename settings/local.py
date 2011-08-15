@@ -143,6 +143,7 @@ INSTALLED_APPS = (
     'south',
     'profile',
     'forum',
+    'wiki',
 
 )
 
