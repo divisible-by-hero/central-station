@@ -6,3 +6,6 @@ def all_users(request):
     context = {'users': User.objects.all()}
 
     return render(request, 'profile/user_list.html', context)
+
+def settings(request):
+    return render(request, 'profile/settings.html')
