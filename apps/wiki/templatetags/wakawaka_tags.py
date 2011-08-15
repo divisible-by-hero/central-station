@@ -1,12 +1,13 @@
 # from http://open.e-scribe.com/browser/python/django/apps/protowiki/templatetags/wikitags.py
 # copyright Paul Bissex, MIT license
+# Changes for Central Station by Derek Stegelman 2011
 import re
 from django.core.exceptions import ObjectDoesNotExist
 from django.template import Library
 from django.utils.safestring import mark_safe
 from django.core.urlresolvers import reverse
-from wakawaka.models import WikiPage
-from wakawaka.urls import WIKI_SLUG
+from wiki.models import WikiPage
+from wiki.urls import WIKI_SLUG
 
 register = Library()
 

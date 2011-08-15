@@ -1,7 +1,7 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
-from wakawaka.views import *
+from wiki.views import *
 
 # Wiki slugs must been CamelCase but slashes are fine, if each slug
 # is also a CamelCase/OtherSide

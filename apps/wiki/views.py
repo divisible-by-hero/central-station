@@ -7,8 +7,8 @@ from django.http import HttpResponseRedirect, HttpResponseBadRequest,\
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext, ugettext_lazy as _
 from django.core.exceptions import ObjectDoesNotExist
-from wakawaka.forms import WikiPageForm, DeleteWikiPageForm
-from wakawaka.models import WikiPage, Revision
+from wiki.forms import WikiPageForm, DeleteWikiPageForm
+from wiki.models import WikiPage, Revision
 
 __all__ = ['index', 'page', 'edit', 'revisions', 'changes', 'revision_list', 'page_list']
 
