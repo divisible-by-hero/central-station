@@ -1,4 +1,7 @@
-
+{% extends "projects/base_project.html" %}
+{% block dashboard_menu_item %}{% endblock %}
+{% block repos_menu_item %}class="active"{% endblock %}
+{% block main_content %}
 <h3>Branches</h3>
 
 <ul>
@@ -27,3 +30,4 @@
 <li>{{ log }}</li>
 {% endfor %}
 </ul>
+{% endblock %}
