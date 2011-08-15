@@ -13,6 +13,9 @@ class App(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(editable=False)
     git_repo_dir = models.CharField(max_length=500)
+    enable_wiki = models.BooleanField()
+    enable_forum = models.BooleanField()
+    enable_defects = models.BooleanField()
     
     def __unicode__(self):
         return self.name

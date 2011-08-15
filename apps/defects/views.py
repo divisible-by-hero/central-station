@@ -28,8 +28,8 @@ def defect_list(request):
 
 def open_app_defects(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'defects': Defect.objects.filter(application=app)}
-    return render(request, 'defects/defect_list.html', context)
+    context = {'defects': Defect.objects.filter(application=app), 'app':app}
+    return render(request, 'defects/project_list.html', context)
 
 
 
