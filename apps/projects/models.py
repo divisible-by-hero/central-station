@@ -1,3 +1,9 @@
+'''
+    Author: Derek Stegelman
+    Package: Projects App
+
+'''
+
 from django.db import models
 from django.contrib.auth.models import User
 from nutsbolts.utils.slugs import unique_slugify
@@ -6,6 +12,7 @@ from projects.choices import *
 class App(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(editable=False)
+    git_repo_dir = models.CharField(max_length=500)
     
     def __unicode__(self):
         return self.name

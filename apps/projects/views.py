@@ -1,3 +1,9 @@
+'''
+    Author: Derek Stegelman
+    Package: Projects App
+
+'''
+
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from projects.models import *
@@ -37,6 +43,25 @@ def app(request, app_slug):
     context = {'app': get_object_or_404(App, slug=app_slug)}
     context['feed'] = Activity.objects.filter(application=context['app'])
     return render(request, 'projects/app_index.html', context)
+
+'''
+    Settings View - Show and enable the change of settings per project
+'''
+def settings(request, app_slug):
+    app = get_object_or_404(App, slug=app_slug)
+    if request.method == "POST":
+        form = ApplicationForm(request.POST, instance=app)
+        if form.is_valid():
+            new_app = form.save()
+            activity = Activity(application=app)
+            activity.action = "Updated the settings on %s" % app.name
+            activity.user = request.user
+            activity.save()
+            return redirect('app', app.slug)
+    else:
+        form = ApplicationForm(instance=app)
+    context = {'form':form}
+    return render(request, 'projects/add_form.html', context)
 
 ## View using pagination
 #def top_rated(request):

@@ -11,7 +11,7 @@
         <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.view_app_repo app_slug=app.slug %}">Repository</a></li>
         <li {% block defects_menu_item %}{% endblock %}><a href="{% url forum.views.view_forum_app app_slug=app.slug %}">Forums</a></li>
         <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.all_users %}">Users</a></li>
-        <li {% block settings_menu_item %}{% endblock %}><a href="#">Settings</a></li>
+        <li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>
     </ul>
 </nav>
 {% endblock %}

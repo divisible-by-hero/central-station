@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^newapp/$' , add_application, name="add_application"),
     url(r'^version/add/$', add_version, name="add_version"),
     url(r'^app/(?P<app_slug>[-\w]+)/$', app, name="app"),
+    url(r'^app/(?P<app_slug>[-\w]+)/settings/$', settings, name="app"),
 #    # Homepage url , always name your URLS
 #    url(r'^$', homepage, name="homepage"),
 #    # URl with add and nothing after
