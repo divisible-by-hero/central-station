@@ -23,4 +23,4 @@ class Defect(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('defects.views.defect_detail', (), {'defect_id': self.id})
+        return ('defects.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})

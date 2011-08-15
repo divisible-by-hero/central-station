@@ -33,7 +33,7 @@ def open_app_defects(request, app_slug):
 
 
 
-def defect_detail(request, defect_id):
+def defect_detail(request, defect_id, app_slug=None):
     context = {'defect': get_object_or_404(Defect, pk=defect_id)}
 
     if request.method == "POST":
