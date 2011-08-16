@@ -17,6 +17,7 @@
 
 # Thanks
 
+* Wiki core provided in part by Waka Waka
 
 # License
 

@@ -3,15 +3,12 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from defects.models import *
 from defects.forms import *
 import datetime
-from django.contrib.auth.decorators import login_required
 from newsfeed.models import Activity
 from projects.models import App
 
 def all_defects(request):
-    context = {'defects': Defect.objects.all()}
+    context = {'defects': Defect.objects.open()}
     return render(request, 'defects/defect_list.html', context)
-
-
 
 def defect_list(request):
     context = {'defect_count': Defect.objects.count()}
@@ -28,7 +25,7 @@ def defect_list(request):
 
 def open_app_defects(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'defects': Defect.objects.filter(application=app), 'app':app}
+    context = {'defects': Defect.objects.open().by_app(app_slug), 'app':app}
     return render(request, 'defects/project_list.html', context)
 
 
@@ -62,6 +59,7 @@ def add_defect(request):
             activity = Activity(application=obj.application)
             activity.user = request.user
             activity.action = "Added a new defect #%s" % obj.id
+            activity.defect = obj
             activity.save()
 
 
@@ -70,21 +68,3 @@ def add_defect(request):
         form = DefectForm()
     context = {'form': form }
     return render(request, 'defects/add_defect.html', context)
-
-
-#@login_required
-#def add(request):
-#
-#    if request.method == "POST":
-#        form = RecipeForm(request.POST, request.FILES)
-#
-#        if form.is_valid():
-#            form.save()
-#            return redirect("homepage")
-#    else:
-#        form = RecipeForm()
-#        extra_context = { }
-#        extra_context['photo_recipes'] = Recipe.objects.published()[:9]
-#        extra_context['form'] = form
-#
-#    return direct_to_template(request, template='cookbook/add.html', extra_context=extra_context)
