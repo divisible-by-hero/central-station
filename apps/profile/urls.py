@@ -5,6 +5,7 @@ urlpatterns = patterns('',
     #url(r'^$', defect_list, name="defect_list"),
     url(r'^$', all_users, name="all_users"),
     url(r'^settings/$', settings, name="personal_settings"),
+    url(r'^app/(?P<app_slug>[-\w]+)/$', app_user_list, name="app_user_list"),
     #url(r'^view/(?P<defect_id>\d+)/$', defect_detail, name="defect_detail"),
     #url(r'^add/$', add_defect, name="add_defect"),
 #    # Homepage url , always name your URLS

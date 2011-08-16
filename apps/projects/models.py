@@ -16,6 +16,7 @@ class App(models.Model):
     enable_wiki = models.BooleanField()
     enable_forum = models.BooleanField()
     enable_defects = models.BooleanField()
+    users = models.ManyToManyField(User)
     
     def __unicode__(self):
         return self.name
