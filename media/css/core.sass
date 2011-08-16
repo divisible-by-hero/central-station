@@ -1,6 +1,10 @@
 @import reset.scss
 
 
+@mixin background-gradient($color1, $color2)
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to ($color2))
+	background-image: -moz-linear-gradient(0% 100% 90deg, $color1, $color2)
+
 /* Set Global colors and such */
 
 
@@ -75,6 +79,7 @@ a
 
 header
 	background: #512888
+	@include background-gradient(#521888, #8730C9)
 	padding: 15px
 	padding-bottom: 0
 
