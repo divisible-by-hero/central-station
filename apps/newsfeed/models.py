@@ -6,7 +6,7 @@ from django.db.models.query import QuerySet
 
 class ActivityMixin(object):
     def by_app(self, app_slug):
-        return self.fliter(application__slug=app_slug)
+        return self.filter(application__slug=app_slug)
 
 class ActivityQuerySet(QuerySet, ActivityMixin):
     pass

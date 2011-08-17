@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from defects.views import *
+from defects.feeds import DefectFeed
 
 urlpatterns = patterns('',
     #url(r'^$', defect_list, name="defect_list"),
@@ -13,7 +14,7 @@ urlpatterns = patterns('',
 #    # URl with add and nothing after
 #    url(r'^add/$', add, name="add_bookmark"),
 #    # Feed URL
-#    url(r'^feed/$', BrewFeed()),
+    url(r'^feed/$', DefectFeed()),
 #    # This is the pattern for ids or other integers
 #    url(r'^edit/(?P<bookmark_id>\d+)/$', edit_bookmark, name="edit_bookmark"),
 #    # This is the pattern for a slug, or alpha chars.
