@@ -9,7 +9,7 @@ class Migration(SchemaMigration):
     def forwards(self, orm):
         
         # Adding field 'Version.release_date'
-        db.add_column('projects_version', 'release_date', self.gf('django.db.models.fields.DateField')(default='development'), keep_default=False)
+        db.add_column('projects_version', 'release_date', self.gf('django.db.models.fields.DateField')(default=datetime.date.today()), keep_default=False)
 
         # Adding field 'Version.status'
         db.add_column('projects_version', 'status', self.gf('django.db.models.fields.CharField')(default='development', max_length=250), keep_default=False)
