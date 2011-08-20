@@ -36,9 +36,10 @@
             </section>
             <aside id="sidebar">
             {% block sidebar %}
+                {% load gravatar %}
                 <article id="user_info">
-                    <img src="http://dummyimage.com/75x75">
-                    <h1>John Doe</h1>
+                    <img src="{% get_gravatar user.email 75 %}">
+                    <h1>{{ user.first_name }} {{ user.last_name }}</h1>
                     <span>Developer</span>
                 </article>
             {% endblock %}
