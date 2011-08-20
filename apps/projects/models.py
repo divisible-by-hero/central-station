@@ -9,6 +9,7 @@ from django.contrib.auth.models import User
 from nutsbolts.utils.slugs import unique_slugify
 from projects.choices import *
 
+
 class App(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(editable=False)
@@ -28,6 +29,9 @@ class App(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('projects.views.app', (), {'app_slug': self.slug})
+        
+    def open_defects(self):
+        return "6"
     
 
 class Version(models.Model):
