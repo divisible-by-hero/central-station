@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block main_content %}
+<h3>Personal Settings</h3>
+<form action="." method="post">{% csrf_token %}
+    {{ form.as_p }}
+</form>
+{% endblock %}
