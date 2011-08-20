@@ -38,6 +38,8 @@ class Defect(models.Model):
     def __unicode__(self):
         return self.description
     
+    
+    
     @models.permalink
     def get_absolute_url(self):
         return ('defects.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
