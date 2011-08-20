@@ -6,8 +6,11 @@
 
 
 {% block main_content %}
-<form>
+<form method="post" action=".">
 <article class="defect_detail">
+    <input type="submit" value="Save">
+    <input type="button" value="Save and Exit">
+    <input type="button" value="Move to Development">
     <h2>Defect {{ defect.id }} is <span>{{ defect.status }}</span></h2>
     <div class="form_item">
         <label for="description">Description</label>
@@ -24,17 +27,16 @@
 {% block sidebar %}
 <div class="form_item">
     <label for="project">Project</label>
-    <select>
-        <option>Fuck</option>
-        <option>Fuck It</option>
-    </select>
+    {{ form.application }}
 </div>
 <div class="form_item">
+    <label for="type">Type</label>
+    {{ form.type }}
+</div>
+
+<div class="form_item">
     <label for="version">Version</label>
-    <select>
-        <option>Fuck</option>
-        <option>Fuck It</option>
-    </select>
+    {{ form.version }}
 </div>
 {% endblock %}
 
