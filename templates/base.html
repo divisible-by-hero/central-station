@@ -40,7 +40,8 @@
                 <article id="user_info">
                     <img src="{% get_gravatar user.email 75 %}">
                     <h1>{{ user.first_name }} {{ user.last_name }}</h1>
-                    <span>Developer</span>
+                    
+                    <span>{{ user.get_profile.get_role_display }}</span>
                 </article>
             {% endblock %}
             </aside>
