@@ -15,9 +15,6 @@ TEMPLATE_DEBUG = DEBUG
 ADMINS = (
     #('', ''),
 )
-
-GIT_DIR = "/Users/Derek/Documents/code/personal/central-station"
-
 MANAGERS = ADMINS
 
 DATABASES = {
