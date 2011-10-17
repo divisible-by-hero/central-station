@@ -26,7 +26,7 @@ def issue_list(request):
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     context = {'defects': Issue.objects.open().by_app(app_slug), 'app':app}
-    return render(request, 'defects/project_list.html', context)
+    return render(request, 'issues/project_list.html', context)
 
 
 
