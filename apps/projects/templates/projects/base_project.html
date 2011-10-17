@@ -8,7 +8,7 @@
     <ul>
         <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url projects.views.app app_slug=app.slug %}">Project Home</a></li>
         {% if app.enable_defects %}
-        <li {% block defects_menu_item %}{% endblock %}><a href="{% url defects.views.open_app_defects app_slug=app.slug %}">Defects</a></li>
+        <li {% block defects_menu_item %}{% endblock %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
         {% endif %}
         <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.view_app_repo app_slug=app.slug %}">Repository</a></li>
         {% if app.enable_forum %}
