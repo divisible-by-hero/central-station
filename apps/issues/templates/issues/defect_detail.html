@@ -1,0 +1,43 @@
+{% extends "defects/base.html" %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}css/forms.min.css">
+{{ block.super }}
+{% endblock %}
+
+
+{% block main_content %}
+<form method="post" action=".">
+<article class="defect_detail">
+    <input type="submit" value="Save">
+    <input type="button" value="Save and Exit">
+    <input type="button" value="Move to Development">
+    <h2>Defect {{ defect.id }} is <span>{{ defect.status }}</span></h2>
+    <div class="form_item">
+        <label for="description">Description</label>
+        <textarea name="description" id="description">{{ defect.description }}</textarea>
+    </div>
+    <div class="defect_detail">
+        <label for="url">URL</label>
+        <input type="text" id="url" name="url" value="{{ defect.url }}">
+    </div>
+</article>
+
+{% endblock %}
+
+{% block sidebar %}
+<div class="form_item">
+    <label for="project">Project</label>
+    {{ form.application }}
+</div>
+<div class="form_item">
+    <label for="type">Type</label>
+    {{ form.type }}
+</div>
+
+<div class="form_item">
+    <label for="version">Version</label>
+    {{ form.version }}
+</div>
+{% endblock %}
+
+</form>
