@@ -32,7 +32,7 @@ def run_server():
     local("python manage.py runserver --settings=settings.local")
     
 def run_pip():
-    local("pip install -r requirements.txt")
+    local("pip install -r conf/requirements.txt")
     
 def build_migration(app):
     local("python manage.py schemamigration %s --auto --settings=settings.local" % app)
@@ -48,10 +48,10 @@ def sass():
         basename, extension = os.path.splitext(file)
         local("sass %s:%s.min.css --style compressed" % (file, basename))
 
-def run():
+def run_local():
     run_pip()
     sync_db()
-    sass()
+    #sass()
     migrate()
     run_server()
 
