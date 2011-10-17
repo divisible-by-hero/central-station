@@ -9,7 +9,7 @@ from projects.models import App
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
     return render(request, 'issues/issue_list.html', context)
-'''
+
 def issue_list(request):
     context = {'defect_count': Defect.objects.count()}
     context['defects'] = Defect.objects.all()
@@ -21,11 +21,11 @@ def issue_list(request):
         context['defects'] = paginator.page(1)
     except EmptyPage:
         context['defects'] = paginator.page(paginator.num_pages)
-    return render(request, 'defects/defect_list.html', context)
+    return render(request, 'issues/defect_list.html', context)
 
-def open_app_defects(request, app_slug):
+def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'defects': Defect.objects.open().by_app(app_slug), 'app':app}
+    context = {'defects': Issue.objects.open().by_app(app_slug), 'app':app}
     return render(request, 'defects/project_list.html', context)
 
 
@@ -68,4 +68,3 @@ def add_defect(request):
         form = DefectForm()
     context = {'form': form }
     return render(request, 'defects/add_defect.html', context)
-'''
