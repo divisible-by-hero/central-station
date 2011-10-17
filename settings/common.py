@@ -14,6 +14,8 @@ ADMINS = (
     #('', ''),
 )
 
+GIT_DIR = "/Users/Derek/Documents/code/personal/central-station"
+
 MANAGERS = ADMINS
 
 
