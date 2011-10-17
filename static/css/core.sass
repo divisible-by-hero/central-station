@@ -1,0 +1,121 @@
+@import reset.scss
+
+
+@mixin background-gradient($color1, $color2)
+	background-image: -webkit-gradient(linear, 0% 0%, 0% 100%, from($color1), to ($color2))
+	background-image: -moz-linear-gradient(0% 100% 90deg, $color1, $color2)
+
+/* Set Global colors and such */
+
+
+body
+	font-family: Verdana,sans-serif
+
+a
+	
+	color: #000099
+	
+#main_content
+	float: left
+	width: 72%
+	padding: 30px
+
+	h1
+		border-bottom: 1px solid #000
+		margin-bottom: 15px
+
+	.activity
+		margin-bottom: 10px
+		border-bottom: 1px solid #bbb
+		min-height: 80px
+		position: relative
+		
+		img
+			float: left
+
+		p
+			margin: 10px
+			margin-left: 57px
+
+		h2
+			margin-left: 57px
+		
+		span
+			font-size: 10px
+			position: absolute
+			top: 10px
+			right: 10px
+
+
+	.app
+		border: 1px solid #ccc
+		padding: 10px 12px
+		position: relative
+
+		a.delete
+			position: absolute
+			top: 7px
+			font-size: 10px
+			right: 10px
+
+			
+
+#sidebar
+	margin-left: 76%
+	padding: 20px
+	min-height: 400px
+	background: #EEEEEE
+	
+	h1
+		display: inline-block
+		margin-left: 10px
+
+	#user_info
+		border-bottom: 1px solid #bbb
+
+		img
+			float: left
+
+
+header
+	background: #512888
+	@include background-gradient(#521888, #8730C9)
+	padding: 15px
+	padding-bottom: 0
+
+	h1
+		font-size: 20pt
+		color: #fff
+
+	nav
+		margin-top: 20px
+
+		ul li
+			display: inline-block
+			background: #CCCCCC
+			padding: 5px
+			
+			a
+				color: #000
+				font-size: 13px
+				text-decoration: none
+
+		ul li.active
+			background: #fff
+	
+	#user_links
+		position: absolute
+		right: 30px
+		top: 10px
+		font-size: 13px
+		
+
+		li
+			display: inline-block
+			color: #fff
+			margin-right: 7px
+			
+			a
+				color: #fff
+				text-decoration: underline
+
