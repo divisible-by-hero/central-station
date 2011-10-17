@@ -6,13 +6,13 @@
 
 <ul>
     {% for branch in branches %}
-    <li><a href="/git/switch_branch/{{ branch.name }}">{{ branch.name }}</a></li>
+    <li><a href="{% url browser.views.switch_branch branch=branch.name %}">{{ branch.name }}</a></li>
     {% endfor %}
 </ul>
 
 <ul>
     {% for dir in trees %}
-    <li><a href="/git/view_dir/{{ dir.path }}">{{ dir.name }}</li>
+    <li><a href="{% url browser.views.view_dir app_slug=app_slug path=dir.path %}">{{ dir.name }}</li>
     
     {% endfor %}
     
@@ -20,7 +20,7 @@
 
 {% for file in tree %}
 
-<li><a href="/git/view/{{ file.path }}">{{ file.name }}</a></li>
+<li><a href="{% url browser.views.view_file file_name=file.path %}">{{ file.name }}</a></li>
 
 {% endfor %}
 </ul>

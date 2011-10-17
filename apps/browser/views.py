@@ -28,13 +28,16 @@ def switch_branch(request, branch):
     return redirect('view_repo')
 
 
-def view_dir(request, path):
+def view_dir(request, app_slug, path):
     repo = Repo(settings.GIT_DIR)
+    app = get_object_or_404(App, slug=app_slug)
     branch = request.session.get('branch', 'master')
     tree = repo.heads[branch].commit.tree
     context = {}
     context['tree'] = tree[path].blobs
     context['trees'] = tree[path].trees
+    context['app'] = app
+    context['app_slug'] = app.slug
     return render(request, 'browser/repo.html', context)
 
 
@@ -57,5 +60,6 @@ def view_app_repo(request, app_slug):
     context['trees'] = tree.trees
     context['branches'] = repo.heads
     context['app'] = app
+    context['app_slug'] = app.slug
 
     return render(request, 'browser/repo.html', context)
