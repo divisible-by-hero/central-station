@@ -6,8 +6,8 @@ from django.shortcuts import get_object_or_404, redirect, render
 from django.views.generic.simple import direct_to_template
 ## Import your models.
 #from homebrew.models import *
-from defects.models import *
-from defects.forms import *
+from issues.models import *
+from issues.forms import *
 import datetime
 ## Import tagging stuff if you are using the tagging module. Remove if not.
 #from tagging.models import Tag, TaggedItem

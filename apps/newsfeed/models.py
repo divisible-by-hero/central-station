@@ -1,7 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import User
 from projects.models import App
-from defects.models import Defect
+#from defects.models import Defect
+from issues.models import Issue
 from django.db.models.query import QuerySet
 
 class ActivityMixin(object):
@@ -20,7 +21,8 @@ class Activity(models.Model):
     user = models.ForeignKey(User)
     action = models.CharField(max_length=400)
     application = models.ForeignKey(App, blank=True, null=True)
-    defect = models.ForeignKey(Defect, blank=True, null=True)
+    #defect = models.ForeignKey(Defect, blank=True, null=True)
+    issue = models.ForeignKey(Issue, blank=True, null=True)
     date_action = models.DateTimeField(auto_now=True, auto_now_add=True)
     
     objects = ActivityManager()

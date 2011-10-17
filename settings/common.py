@@ -5,7 +5,7 @@
 
 '''
 import os
-import environment
+import conf.environment
 path = lambda root,*a: os.path.join(root, *a)
 ROOT = os.path.dirname(os.path.abspath(__file__))
 

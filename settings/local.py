@@ -5,7 +5,7 @@
 
 '''
 import os
-import environment
+import conf.environment
 path = lambda root,*a: os.path.join(root, *a)
 ROOT = os.path.dirname(os.path.abspath(__file__))
 
@@ -74,7 +74,7 @@ STATIC_URL = 'http://localhost:8000/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = 'http://localhost:8000/static/admin/'
+ADMIN_MEDIA_PREFIX = 'http://localhost:8000/static/grappelli/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -118,11 +118,6 @@ TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
-    "./apps/blog/templates",
-    "./apps/defects/templates",
-    "./apps/projects/templates",
-    "./apps/newsfeed/templates",
-    "./apps/profile/templates",
     "./templates"
 )
 
@@ -135,10 +130,11 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     # Uncomment the next line to enable the admin:
     'browser',
-    'defects',
+    'issues',
     #'forum',
     'projects',
     'newsfeed',
+    'grappelli',
     'django.contrib.admin',
     'south',
     'profile',
