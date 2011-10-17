@@ -29,8 +29,9 @@ def switch_branch(request, branch):
 
 
 def view_dir(request, app_slug, path):
-    repo = Repo(settings.GIT_DIR)
     app = get_object_or_404(App, slug=app_slug)
+    repo = Repo(app.git_repo_dir)
+    
     branch = request.session.get('branch', 'develop')
     tree = repo.heads[branch].commit.tree
     context = {}
