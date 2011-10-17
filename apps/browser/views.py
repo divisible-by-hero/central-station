@@ -9,7 +9,7 @@ def repos(request):
 
 
 def view_repo(request):
-    branch = request.session.get('branch', 'master')
+    branch = request.session.get('branch', 'develop')
     repo = Repo(settings.GIT_DIR)
     heads = repo.heads
     assert repo.bare == False
@@ -31,7 +31,7 @@ def switch_branch(request, branch):
 def view_dir(request, app_slug, path):
     repo = Repo(settings.GIT_DIR)
     app = get_object_or_404(App, slug=app_slug)
-    branch = request.session.get('branch', 'master')
+    branch = request.session.get('branch', 'develop')
     tree = repo.heads[branch].commit.tree
     context = {}
     context['tree'] = tree[path].blobs
