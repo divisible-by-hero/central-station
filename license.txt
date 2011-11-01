@@ -1,6 +1,6 @@
 Central Station "Community Edition" License
 
-Copyright (c) 2010 - 2011, Illumination Developers
+Copyright (c) 2010 - 2011, Derek Stegelman
 All rights reserved.
 
 This license is a legal agreement between you and Illumination Developers, for the use of Central Station Software (the "Software"). By obtaining the Software you agree to be bound by the terms and conditions of this license. Illumination Developers reserves the right to alter this agreement at any time, for any reason, without notice.
