@@ -1,14 +1,8 @@
-'''
-
-    These need to be updated.  In production we will have a common settings file that will be pulled form.  Then overrides.
-
-
-'''
-import os
+# Django settings for your project.
 import conf.environment
-path = lambda root,*a: os.path.join(root, *a)
-ROOT = os.path.dirname(os.path.abspath(__file__))
+import os
 
+SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 ADMINS = (
     #('', ''),
@@ -66,6 +60,17 @@ TEMPLATE_LOADERS = (
     'django.template.loaders.app_directories.Loader',
 #     'django.template.loaders.eggs.Loader',
 )
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    "django.core.context_processors.auth",
+    "django.core.context_processors.debug",
+    "django.core.context_processors.media",
+    "django.core.context_processors.static",
+    "django.core.context_processors.request",
+    "django.contrib.messages.context_processors.messages",
+    "photo_manager.context_processors.theme_files",
+    "photo_manager.context_processors.locations_albums",
+) 
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',
