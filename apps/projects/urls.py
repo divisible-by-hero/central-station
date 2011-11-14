@@ -13,6 +13,6 @@ urlpatterns = patterns('',
 #    # This is the pattern for ids or other integers
 #    url(r'^edit/(?P<bookmark_id>\d+)/$', edit_bookmark, name="edit_bookmark"),
 
-    url(r'^api/', include('projects.api.urls')),
+    
 #    
 )

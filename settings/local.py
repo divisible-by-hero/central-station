@@ -47,7 +47,7 @@ PHOTO_DIRECTORY = os.path.join(SITE_ROOT, 'uploads/images')
 
 TEMPLATE_DIRS = (
     #"/Users/Derek/Documents/code/personal/apps/fotochest/static/photo_manager/themes/default/templates"
-    os.path.join(SITE_ROOT, 'static/photo_manager/themes/default/templates'),
+    os.path.join(SITE_ROOT, ''),
     os.path.join(SITE_ROOT, 'templates')
 )
 
@@ -67,14 +67,20 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     'tastypie',
-    'photo_manager',
-    'api_docs',
+    #'photo_manager',
+    #'api_docs',
     # Everyone should be using south.  Seriously.
     'south',
-    'sorl.thumbnail',
+    'issues',
+    'newsfeed',
+    'projects',
+    'wiki',
+    'browser',
+    'forum',
+    #'sorl.thumbnail',
     #'photo_admin',
-    'locations',
-    'profiles',
+    #'locations',
+    'profile',
     #'tagging',
 
 )
