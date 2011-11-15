@@ -42,10 +42,14 @@ def view_dir(request, app_slug, path):
     return render(request, 'browser/repo.html', context)
 
 
-def view_file(request, file_name):
-    file = open(settings.GIT_DIR + "/" + file_name, 'r')
+def view_file(request, app_slug, file_name):
+    app = get_object_or_404(App, slug=app_slug)
+    
+    file = open(app.git_repo_dir + "/" + file_name, 'r')
     context = {'file': file}
     context['file_text'] = file.read()
+    context['app'] = app
+    context['app_slug'] = app.slug
     return render(request, 'browser/file.html', context)
 
 def view_app_repo(request, app_slug):

@@ -13,7 +13,7 @@
         <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.view_app_repo app_slug=app.slug %}">Repository</a></li>
         {% if app.enable_forum %}
         <li {% block forums_menu_item %}{% endblock %}><a href="{% url forum.views.view_forum_app app_slug=app.slug %}">Forums</a></li>
-        {% endif %}
+    {% endif %}
         <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.app_user_list app_slug=app.slug %}">Users</a></li>
         <li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>
     </ul>

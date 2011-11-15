@@ -3,6 +3,7 @@
     <head>
         <title>{% block main_title %}Central Station - Dashboard{% endblock %}</title>
         <link rel="stylesheet" href="{{ STATIC_URL }}css/core.min.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/gh-buttons.css">
         
         {% block extra_head %}{% endblock %}
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.js"></script>
@@ -11,13 +12,14 @@
     <body>
         <section class="container_12">
             <header>
-                <h1>{% block project_title %}Central Station{% endblock %}</h1>
+                <h1><a href="{% url newsfeed.views.dashboard %}">{% block project_title %}Central Station{% endblock %}</a></h1>
                 {% block main_nav %}
                 <nav>
                     <ul>
                         <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url newsfeed.views.dashboard %}">Dashboard</a></li>
                         <li {% block project_menu_item %}{% endblock %}><a href="{% url projects.views.app_list %}">Projects</a></li>
                         <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.repos %}">Repos</a></li>
+                        <li {% block chats_menu_item %}{% endblock %}><a href="{% url chats.views.rooms %}">Chats</a></li>
                         <li {% block defects_menu_item %}{% endblock %}><a href="{% url issues.views.all_issues %}">Defects</a></li>
                         <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.all_users %}">Users</a></li>
                         <li {% block settings_menu_item %}{% endblock %}><a href="#">Settings</a></li>
@@ -26,9 +28,11 @@
                 {% endblock %}
                 <ul id="user_links">
                     {% block extra_user_links %}{% endblock %}
+                    {% if request.user.is_authenticated %}
                     <li>Welcome, {{ user.username }}</li>
                     <li><a href="{% url profile.views.settings %}">Personal Settings</a></li>
                     <li><a href="{% url django.contrib.auth.views.logout %}">Sign Out</a></li>
+                    {% endif %}
                 </ul>
             </header>
             <section id="main_content">
@@ -36,7 +40,7 @@
             </section>
             <aside id="sidebar">
             {% block sidebar %}
-                {% if request.user %}
+                {% if request.user.is_authenticated %}
                 {% load gravatar %}
                 <article id="user_info">
                     <img src="{% get_gravatar user.email 75 %}">

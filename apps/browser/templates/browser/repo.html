@@ -20,7 +20,7 @@
 
 {% for file in tree %}
 
-<li><a href="{% url browser.views.view_file file_name=file.path %}">{{ file.name }}</a></li>
+<li><a href="{% url browser.views.view_file app_slug=app_slug file_name=file.path %}">{{ file.name }}</a></li>
 
 {% endfor %}
 </ul>

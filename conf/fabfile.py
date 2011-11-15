@@ -89,8 +89,8 @@ def deploy():
     print('Deployment of %s complete' % env.id)
 
 def run_local_server():
-    build_docs()
     pip_install_req('local')
+    build_docs()
     sync_db('local')
     migrate('local')
     run_local()

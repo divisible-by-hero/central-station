@@ -13,10 +13,10 @@ from projects.choices import *
 class App(models.Model):
     name = models.CharField(max_length=250)
     slug = models.SlugField(editable=False)
-    git_repo_dir = models.CharField(max_length=500)
-    enable_wiki = models.BooleanField()
-    enable_forum = models.BooleanField()
-    enable_defects = models.BooleanField()
+    git_repo_dir = models.CharField(max_length=500, null=True, blank=True)
+    enable_wiki = models.BooleanField(default=False)
+    enable_forum = models.BooleanField(default=False)
+    enable_defects = models.BooleanField(default=False)
     users = models.ManyToManyField(User)
     
     def __unicode__(self):
