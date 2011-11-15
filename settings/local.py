@@ -21,7 +21,7 @@ DATABASES = {
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-MEDIA_ROOT = os.path.join(SITE_ROOT, 'uploads')
+MEDIA_ROOT = os.path.join(SITE_ROOT, 'media')
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -45,13 +45,8 @@ ADMIN_MEDIA_PREFIX = 'http://static2.fotochest.com/prod/stegelman/grappelli/'
 
 
 TEMPLATE_DIRS = (
-    #"/Users/Derek/Documents/code/personal/apps/fotochest/static/photo_manager/themes/default/templates"
-    os.path.join(SITE_ROOT, ''),
     os.path.join(SITE_ROOT, 'templates')
 )
-
-
-
 
 ROOT_URLCONF = 'urls.local'
 
@@ -65,9 +60,6 @@ INSTALLED_APPS = (
     'grappelli',
     'django.contrib.admin',
     'tastypie',
-    #'photo_manager',
-    #'api_docs',
-    # Everyone should be using south.  Seriously.
     'south',
     'issues',
     'newsfeed',
@@ -76,10 +68,6 @@ INSTALLED_APPS = (
     'browser',
     'forum',
     'chats',
-    #'sorl.thumbnail',
-    #'photo_admin',
-    #'locations',
     'profile',
-    #'tagging',
 
 )

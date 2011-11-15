@@ -1,19 +1,6 @@
 # Introduction
 
-
-# Installation
-
-* Clone the repo
-* Create a new virtualenv (python 2.6 or 2.7) with pip
-* Install Fabric
-    
-    pip install fabric
-    
-* In the project directory execute the fab file.
-
-    fab run
-
-# Contact
+Refer to the docs for install/other questions.  http://docs.centralstationproject.com
 
 # Thanks
 
