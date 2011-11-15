@@ -2,6 +2,7 @@
 .pydevproject
 *.pyc
 data.db
+dev.db
 .settings
 app/.sass-cache
 .sass-cache/

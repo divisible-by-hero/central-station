@@ -32,8 +32,11 @@ def virtualenv(command):
     with cd(env.directory):
         run(env.activate + '&&' + command)
 
-def install_requirements():
-    virtualenv('pip install -r conf/requirements.txt')
+def install_requirements(env):
+    if env == "local":
+        local("pip install -r conf/requirements.txt")
+    else:
+        virtualenv('pip install -r conf/requirements.txt')
 
 def get_code():
     with cd(env.directory):
@@ -68,15 +71,10 @@ def memory():
 def build_docs():
     local('cd docs && make html')
     
-
-
-
 #Local Commands
 def run_local():
     local('python manage.py runserver --settings=settings.local')
   
-   
-
 def deploy():
     install_requirements()
     pull()
@@ -89,7 +87,7 @@ def deploy():
     print('Deployment of %s complete' % env.id)
 
 def run_local_server():
-    pip_install_req('local')
+    install_requirements('local')
     build_docs()
     sync_db('local')
     migrate('local')
