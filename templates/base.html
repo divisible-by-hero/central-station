@@ -19,7 +19,7 @@
                         <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url newsfeed.views.dashboard %}">Dashboard</a></li>
                         <li {% block project_menu_item %}{% endblock %}><a href="{% url projects.views.app_list %}">Projects</a></li>
                         <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.repos %}">Repos</a></li>
-                        <li><a href="#">Chats</a></li>
+                        <li {% block chats_menu_item %}{% endblock %}><a href="{% url chats.views.rooms %}">Chats</a></li>
                         <li {% block defects_menu_item %}{% endblock %}><a href="{% url issues.views.all_issues %}">Defects</a></li>
                         <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.all_users %}">Users</a></li>
                         <li {% block settings_menu_item %}{% endblock %}><a href="#">Settings</a></li>

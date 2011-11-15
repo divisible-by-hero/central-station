@@ -1,6 +1,15 @@
+{% extends "projects/base_project.html" %}
+{% block dashboard_menu_item %}{% endblock %}
+{% block repos_menu_item %}class="active"{% endblock %}
+{% block main_content %}
+<h3>File</h3>
+
 <pre>
 
 {{ file_text }}
 </pre>
+{% endblock %}
+
+
 
 

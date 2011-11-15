@@ -32,7 +32,7 @@ MEDIA_URL = 'http://localhost:8000/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(SITE_ROOT, 'static')
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -41,9 +41,8 @@ STATIC_URL = 'http://localhost:8000/static/'
 # URL prefix for admin static files -- CSS, JavaScript and images.
 # Make sure to use a trailing slash.
 # Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = 'http://static3.derekandlindy.com/prod/stegelman/grappelli/'
+ADMIN_MEDIA_PREFIX = 'http://static2.fotochest.com/prod/stegelman/grappelli/'
 
-PHOTO_DIRECTORY = os.path.join(SITE_ROOT, 'uploads/images')
 
 TEMPLATE_DIRS = (
     #"/Users/Derek/Documents/code/personal/apps/fotochest/static/photo_manager/themes/default/templates"
@@ -51,7 +50,6 @@ TEMPLATE_DIRS = (
     os.path.join(SITE_ROOT, 'templates')
 )
 
-DOMAIN_STATIC = 'http://localhost:8000/static/'
 
 
 
@@ -77,6 +75,7 @@ INSTALLED_APPS = (
     'wiki',
     'browser',
     'forum',
+    'chats',
     #'sorl.thumbnail',
     #'photo_admin',
     #'locations',
