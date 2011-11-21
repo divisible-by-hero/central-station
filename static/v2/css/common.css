@@ -2,20 +2,48 @@ body
 {
     text-align: center;
     font-size: 14px;
+    font-family: "Marvel";
 }
 
-.wrapper
+.wrapper,
+header
 {
     text-align: left;
     width: 1060px;
     margin: 0 auto;
 }
 
-.large_header
+.wrapper
 {
-    text-align:left;
-    background-color: #512888;
+    margin-top: 20px;
 }
+
+header h1
+{
+    display: inline-block;
+    color: #fff;
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 18px;
+}
+
+header form
+{
+    float: right;
+}
+
+header form input[type="search"]
+{
+    border-radius: 5px;
+    width: 280px;
+}
+
+.other_header
+{
+    background: #512888;
+    padding-top:20px;
+}
+
 
 .main
 {
@@ -24,11 +52,39 @@ body
     padding-right: 300px;
 }
 
+.main h2
+{
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
 .sidebar
 {
     float:right;
     width: 220px;
     
+}
+
+nav.main_navigation ul li
+{
+    display: inline-block;
+    margin-right: 14px;
+    padding-bottom: 6px;
+}
+
+nav.main_navigation li a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+nav.main_navigation li.active a
+{
+    background: #fff;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    padding: 5px;
+    color: #512888;
 }
 
 /* Table Styles */
@@ -63,7 +119,7 @@ table tr:hover
 table span.status
 {
     border-radius: 5px;
-    padding: 5px 20px;
+    padding: 2px 20px;
 }
 
 table span.close
