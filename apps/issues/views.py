@@ -8,7 +8,7 @@ from projects.models import App
 
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
-    return render(request, 'v2/issues.html', context)
+    return render(request, 'issues/issue_list.html', context)
 
 def issue_list(request):
     context = {'defect_count': Defect.objects.count()}

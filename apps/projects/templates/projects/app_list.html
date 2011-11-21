@@ -1,12 +1,10 @@
-{% extends "base.html" %}
+{% extends "v2/base.html" %}
 {% block dashboard_menu_item %}{% endblock %}
 {% block project_menu_item %}class="active"{% endblock %}
 {% block main_content %}
 <h3>Active Projects</h3><a href="{% url projects.views.add_application %}" class="button positive icon add">Add Project</a>
 {% for app in apps %}
-<article class="app">
-    <a href="{{ app.get_absolute_url }}">{{ app.name }}</a><a href="#" class="delete">Delete</a>
-</article>
+{% include "projects/app_list_item.html" %}
 {% endfor %}
 
 {% endblock %}

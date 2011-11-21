@@ -1,0 +1,27 @@
+{% extends "v2/base.html" %}
+{% block main_content %}
+<h2>Issues</h2>
+
+<table>
+    <tr class="heading">
+        <th></th>
+        <th>Issue #</th>
+        <th>Status</th>
+        <th>Type</th>
+        <th>Title</th>
+        <th>Priority</th>
+        <th>Assigned</th>
+        
+    </tr>
+{% for issue in issues %}
+{% include "issues/issue_list_item.html" %}
+{% endfor %}
+</table>
+{% endblock %}
+{% block sidebar_content %}
+    <a href="#" class="button big positive">New Issue</a>
+    <h3>Issue Stats</h3>
+    <h4>My Issues</h4>
+    <h4>All Issues</h4>
+    
+{% endblock %}

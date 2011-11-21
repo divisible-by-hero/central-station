@@ -1,10 +1,10 @@
-{% extends "base.html" %}
+{% extends "v2/base.html" %}
 
-{% block project_title %}{{ app.name }}{% endblock %}
-{% block extra_user_links %}<a href="{% url newsfeed.views.dashboard %}">Dashboard</a>{% endblock %}
+{% block header_title %}{{ app.name }}{% endblock %}
+
 {% block main_nav %}
 
-<nav>
+<nav class="main_navigation">
     <ul>
         <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url projects.views.app app_slug=app.slug %}">Project Home</a></li>
         {% if app.enable_defects %}
