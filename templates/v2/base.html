@@ -16,12 +16,12 @@
         <div class="top_header_wrapper">
         <header id="top_header">
             <ul>
-                <li><a href="#">Dashboard</a></li>
+                <li><a href="{% url newsfeed.views.dashboard %}">Dashboard</a></li>
                 <li><a href="#">Profile</a></li>
             </ul>
             <ul class="settings_nav">
                 <li><a href="#">Edit Settings</a></li>
-                <li><a href="#">Logout</a></li>
+                <li><a href="{% url django.contrib.auth.views.logout %}">Logout</a></li>
             </ul>
                 
         </header>
