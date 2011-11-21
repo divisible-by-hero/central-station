@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Central Station - Dashboard</title>
+        <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}v2/css/styles.css">
+        
+        <script src="{{ STATIC_URL }}v2/js/jquery.min.js" type="text/javascript"></script>
+        <script src="{{ STATIC_URL }}v2/js/modernizr.js" type="text/javascript"></script>
+    </head>
+    <body>
+        <div class="large_header">
+        <header id="top_header">
+            
+        </header>
+        <header id="main_header">
+            <h1>Central Station</h1>
+            <form method="GET" action="#">
+                <input type="search" name="search" id="search_input">
+                <input type="submit" class="button" value="Search">
+            </form>
+            <nav class="main_navigation">
+                <ul>
+                    <li><a href="#">Dashboard</a></li>
+                    <li><a href="#">Issues</a></li>
+                    
+                </ul>
+            </nav>
+        </header>
+        </div>
+        <div class="wrapper">
+        <section class="sidebar">
+            {% block sidebar_content %}{% endblock %}
+        </section>
+        <section class="main">
+            {% block main_content %}{% endblock %}
+        </section>
+        
+        </div>
+    </body>
+</html>

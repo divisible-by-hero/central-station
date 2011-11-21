@@ -1,0 +1,95 @@
+body
+{
+    text-align: center;
+    font-size: 14px;
+}
+
+.wrapper
+{
+    text-align: left;
+    width: 1060px;
+    margin: 0 auto;
+}
+
+.large_header
+{
+    text-align:left;
+    background-color: #512888;
+}
+
+.main
+{
+    
+    width: auto;
+    padding-right: 300px;
+}
+
+.sidebar
+{
+    float:right;
+    width: 220px;
+    
+}
+
+/* Table Styles */
+
+table td
+{
+    padding: 5px 7px;
+    border-bottom: 1px solid #eaeaea;
+}
+
+table tr th
+{
+    padding: 10px 7px;
+}
+
+table tr.odd
+{
+    background-color: #fbfbfb;
+}
+
+table tr.heading
+{
+    background-color: #f3f3f3;
+}
+
+table tr:hover
+{
+    background-color: #cbebf9;
+    cursor: pointer;
+}
+
+table span.status
+{
+    border-radius: 5px;
+    padding: 5px 20px;
+}
+
+table span.close
+{
+    background: #ebe9ea;
+    color: #78756c;
+}
+
+table span.open
+{
+    background: #e5eef7;
+    color: #566eaa;
+}
+
+table span.high
+{
+    color:#FF0000;
+}
+
+table span.low
+{
+    color: green;
+}
+
+/* Issues */
+
+
+
+

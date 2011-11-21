@@ -14,8 +14,8 @@ class Issue(models.Model):
     description = models.TextField()
     url = models.URLField(blank=True)
     creator = models.ForeignKey(User, null=True, blank=True)
-    creation_date = models.DateField(auto_now=True, auto_now_add=True)
-    last_modified_date = models.DateField(editable=False, blank=True)
+    creation_date = models.DateField(auto_now=False, auto_now_add=True)
+    last_modified_date = models.DateField(editable=False, blank=True, null=True, auto_now=True)
     application = models.ForeignKey(App)
     version = models.ForeignKey(Version)
     
