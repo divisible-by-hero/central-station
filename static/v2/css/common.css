@@ -34,14 +34,21 @@ header form
 
 header form input[type="search"]
 {
-    border-radius: 5px;
+    border-radius: 10px;
     width: 280px;
 }
 
 .other_header
 {
     background: #512888;
-    padding-top:20px;
+    padding-top: 12px;
+}
+
+.top_header_wrapper
+{
+    background: #42206E;
+    height: 20px;
+    padding-top: 4px;
 }
 
 
@@ -75,6 +82,7 @@ nav.main_navigation ul li
 nav.main_navigation li a
 {
     color: #fff;
+    font-size: 15px;
     text-decoration: none;
 }
 
@@ -87,6 +95,35 @@ nav.main_navigation li.active a
     color: #512888;
 }
 
+header#top_header
+{
+    
+}
+
+header#top_header ul
+{
+    display: inline-block;
+}
+
+header#top_header li
+{
+    display: inline-block;
+    margin-right: 6px;
+    
+}
+
+header#top_header li a
+{
+    color: #fff;
+    text-decoration: none;
+}
+
+header#top_header ul.settings_nav
+{
+    float:right;
+}
+
+
 /* Table Styles */
 
 table td
@@ -98,6 +135,7 @@ table td
 table tr th
 {
     padding: 10px 7px;
+    font-weight: bold;
 }
 
 table tr.odd
