@@ -1,7 +1,7 @@
 from django.db import models
 from issues.managers import IssueManager
 from django.contrib.auth.models import User
-from nutsbolts.utils.slugs import unique_slugify
+from hadrian.utils.slugs import unique_slugify
 from issues.choices import *
 from projects.models import App, Version
 # Create your models here.

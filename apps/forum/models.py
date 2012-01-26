@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.template.defaultfilters import slugify
+from hadrian.utils.slugs import unique_slugify
 
 class Board(models.Model):
     name = models.CharField(max_length=200)
@@ -10,7 +10,7 @@ class Board(models.Model):
         return self.name
     
     def save(self):
-        self.slug = slugify(self.name)
+        unqiue_slugify(self, self.name)
         super(Board, self).save()
     
 class Post(models.Model):
@@ -25,7 +25,7 @@ class Post(models.Model):
         return self.subject
     
     def save(self):
-        self.slug = slugify(self.subject)
+        unique_slugify(self, self.subject)
         super(Post, self).save()
         
 class Reply(models.Model):

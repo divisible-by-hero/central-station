@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-from nutsbolts.utils.slugs import unique_slugify
+from hadrian.utils.slugs import unique_slugify
 
 class Room(models.Model):
     title = models.CharField(max_length=250)
