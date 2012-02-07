@@ -11,6 +11,7 @@ urlpatterns = patterns('',
 
     url(r'^$', 'newsfeed.views.dashboard'),
     url(r'^defects/', include('issues.urls')),
+    url(r'^docs/', include('api_docs.urls')),
     url(r'^chats/', include('chats.urls')),
     url(r'^projects/', include('projects.urls')),
     url(r'^browser/', include('browser.urls')),

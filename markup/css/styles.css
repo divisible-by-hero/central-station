@@ -1,48 +1,48 @@
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+@import url("html5.css");
+@import url("normalize.css");
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+/* Layout */
+
+#top_header
+{
+    margin-bottom: -21px;
+    background: #333333;
 }
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+
+#top_header h1
+{
+    font-size: 12px;
+    display: inline-block;
+    color: #fff;
 }
-body {
-	line-height: 1;
+
+#top_header select
+{
+    float: right;
 }
-ol, ul {
-	list-style: none;
+
+#main_header
+{
+    background: #8c1e21;
+    position: relative;
+    color: #fff;
 }
-blockquote, q {
-	quotes: none;
+
+.main_navigation li,
+#user_links li
+{
+    display: inline-block;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+
+#main_header .main_navigation li
+{
+    position: absolute;
+    left: 10px;
 }
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
+
+#main_header #user_links
+{
+    position: absolute;
+    right: 0;
+    top: 10px;
 }

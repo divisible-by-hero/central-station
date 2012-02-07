@@ -69,5 +69,6 @@ INSTALLED_APPS = (
     'forum',
     'chats',
     'profile',
+    'api_docs',
 
 )
