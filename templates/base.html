@@ -4,7 +4,7 @@
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <title>Central Station</title>
   <link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" media="screen" />
-  <link rel="stylesheet" id="current-theme" href="assets/stylesheets/web-app-theme/themes/default/style.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="{{ STATIC_URL }}css/gh-buttons.css" type="text/css" />
   <script type="text/javascript" charset="utf-8" src="assets/scripts/jquery-1.3.min.js"></script>
   <script type="text/javascript" charset="utf-8" src="assets/scripts/jquery.scrollTo.js"></script>
 <style>
@@ -432,7 +432,7 @@
                   <span>{{ user.get_profile.get_role_display }}</span>
               </article>
           {% endif %}
-      
+          <a class="button icon add" href="#">Add</a>
         <div class="block">
           <h3>Simple Block</h3>
           <div class="content">
