@@ -3,6 +3,11 @@
 
 /* Global Styles */
 
+body
+{
+    font-family: 'Voces', cursive;
+}
+
 header nav
 {
     background: #47326e;
