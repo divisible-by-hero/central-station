@@ -1,6 +1,11 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1>Project Activity</h1>
+
+<h1>Recent Activity <a href="#" class="btn btn-success btn-small">
+    <i class="icon-plus icon-white"></i>
+    Add New Project
+</a></h1>
+
 {% load gravatar_tags %}
 {% for activity in feed %}
     <article class="activity">
