@@ -4,3 +4,4 @@ def apps(request):
     context = {}
     context['apps'] = App.objects.all()
     return context
+    
