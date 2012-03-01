@@ -26,6 +26,6 @@ class Issue(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'issue_id': self.id})
+        return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
         
         

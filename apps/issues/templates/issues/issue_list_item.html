@@ -1,11 +1,11 @@
 <tr class="{% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %} issue" id="issue_{{ issue.id }}">
-    <td width="5%">
+    <td width="2%">
         <input type="checkbox" name="check_{{ issue.id }}" id="check_{{ issue.id }}">
     </td>
-    <td width="10%">{{ issue.id }}</td>
+    <td width="5%">{{ issue.id }}</td>
     <td width="10%"><span class="status {{ issue.status }}">{{ issue.get_status_display }}</span></td>
     <td width="10%">{{ issue.get_type_display }}</td>
-    <td width="30%"><a href="{{ issue.get_absolute_url }}">{{ issue.description }}</a></td>
+    <td width="30%"><a href="{{ issue.get_absolute_url }}">{{ issue.description|truncatewords:8 }}</a></td>
     <td width="5%"><span class="{{ issue.priority }}">{{ issue.get_priority_display }}</span></td>
     <td width="10%">{{ issue.creator.username }}</td>
 </tr>

@@ -5,10 +5,10 @@
 {% block main_content %}
 <h1>{{ app.name }}</h1>
 <ul class="nav nav-tabs">
-<li class="active">
+<li {% block dashboard_menu_item %}{% endblock %}>
 <a href="{% url projects.views.app app_slug=app.slug %}">Dashboard</a>
 </li>
-<li><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
+<li {% block issues_menu_item %}{% endblock %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
 <li><a href="#">Milestones</a></li>
 <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.app_user_list app_slug=app.slug %}">Users</a></li>
 <li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>

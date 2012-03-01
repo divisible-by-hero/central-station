@@ -25,7 +25,7 @@ def issue_list(request):
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'defects': Issue.objects.open().by_app(app_slug), 'app':app}
+    context = {'issues': Issue.objects.open().by_app(app_slug), 'app':app}
     return render(request, 'issues/project_list.html', context)
 
 
@@ -44,7 +44,7 @@ def defect_detail(request, defect_id, app_slug=None):
     else:
         form = DefectForm(instance=context['defect'])
         context['form'] = form
-    return render(request, 'defects/defect_detail.html', context)
+    return render(request, 'issues/issue_detail.html', context)
 
 
 def add_defect(request):
