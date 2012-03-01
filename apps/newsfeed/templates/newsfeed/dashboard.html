@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block main_content %}
 <h1>Project Activity</h1>
-{% load gravatar %}
+{% load gravatar_tags %}
 {% for activity in feed %}
     <article class="activity">
     <img src="{% get_gravatar activity.user.email 45 %}">

@@ -1,4 +1,4 @@
-{% load gravatar %}
+{% load gravatar_tags %}
 {% for activity in feed %}
     <article class="activity">
     <img src="{% get_gravatar activity.user.email 45 %}">
