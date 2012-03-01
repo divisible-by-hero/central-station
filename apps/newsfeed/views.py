@@ -6,5 +6,5 @@ from django.contrib import messages
 @login_required
 def dashboard(request):
     context = {'feed': Activity.objects.all() }
-    messages.add_message(request, messages.INFO, 'Hello world.')
+    #messages.add_message(request, messages.SUCCESS, 'Hello world.')
     return render(request, 'newsfeed/dashboard.html', context)

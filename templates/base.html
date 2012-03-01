@@ -93,7 +93,7 @@
         <div class="span9">
         {% if messages %}
         {% for message in messages %}
-        <div class="alert alert-error">
+        <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
         <a class="close" data-dismiss="alert">×</a>
         <h4 class="alert-heading">Warning!</h4>
         {{ message }}
