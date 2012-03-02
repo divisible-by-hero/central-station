@@ -6,6 +6,3 @@ class ApplicationForm(forms.ModelForm):
         model = App
         exclude = ('users',)
         
-class VersionForm(forms.ModelForm):
-    class Meta:
-        model = Version

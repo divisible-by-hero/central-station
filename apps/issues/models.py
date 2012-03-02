@@ -3,7 +3,7 @@ from issues.managers import IssueManager
 from django.contrib.auth.models import User
 from hadrian.utils.slugs import unique_slugify
 from issues.choices import *
-from projects.models import App, Version
+from projects.models import App
 # Create your models here.
 
 
@@ -17,7 +17,6 @@ class Issue(models.Model):
     creation_date = models.DateField(auto_now=False, auto_now_add=True)
     last_modified_date = models.DateField(editable=False, blank=True, null=True, auto_now=True)
     application = models.ForeignKey(App)
-    version = models.ForeignKey(Version)
     
     objects = IssueManager()
     

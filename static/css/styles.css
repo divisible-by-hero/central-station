@@ -39,3 +39,22 @@ article.activity span.date
     left: 0;
 }
 
+
+
+/* Issues */
+
+article.add_issue input[type="submit"]
+{
+    margin-top: 20px;
+}
+
+article.add_issue .form-inline
+{
+    margin-top: 20px;
+}
+
+article.add_issue form div.form-inline select
+{
+    
+    margin-right: 45px;
+}
