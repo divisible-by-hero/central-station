@@ -1,8 +1,8 @@
 {% extends "projects/base_project.html" %}
-{% block dashboard_menu_item %}{% endblock %}
+
 {% block settings_menu_item %}class="active"{% endblock %}
 {% block main_content %}
-
+{{ block.super }}
 <form action="." method="POST">{% csrf_token %}
     {{ form.as_p }}
     <input type="submit" value="Save Settings" class="button positive">
