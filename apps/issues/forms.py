@@ -12,3 +12,7 @@ class IssueForm(forms.ModelForm):
         exclude = ('creator', 'application')
         
         
+        
+class MilestoneForm(forms.ModelForm):
+    class Meta:
+        model = Milestone

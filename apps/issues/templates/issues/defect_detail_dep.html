@@ -4,7 +4,7 @@
 
 {% block main_content %}
 {{ block.super }}
-<form method="post" action=".">
+<form method="post" action=".">{% csrf_token %}
 <article class="defect_detail">
     <input type="submit" value="Save" class="btn btn-primary">
     <input type="button" value="Save and Exit" class="btn">

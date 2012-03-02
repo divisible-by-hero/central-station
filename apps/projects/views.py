@@ -63,6 +63,13 @@ def settings(request, app_slug):
     context = {'form':form, 'app':app}
     return render(request, 'projects/project_settings.html', context)
 
+def users(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    return render(request, "projects/users.html", context)
+
+
 ## View using pagination
 #def top_rated(request):
 #    extra_context = { }
