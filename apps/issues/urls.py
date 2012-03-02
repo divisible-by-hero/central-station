@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^$', all_issues, name="all_issues"),
     #url(r'^view/(?P<defect_id>\d+)/$', defect_detail, name="defect_detail"),
     url(r'^app/(?P<app_slug>[-\w]+)/open/$', open_app_issues, name="open_app_issues"),
+    url(r'^app/(?P<app_slug>[-\w]+)/milestones/$', milestone_list),
     url(r'^app/(?P<app_slug>[-\w]+)/view/(?P<defect_id>\d+)/$', defect_detail, name="app_defect"),
     url(r'^app/(?P<app_slug>[-\w]+)/add/$', add_defect, name="add_defect"),
 #    # Homepage url , always name your URLS

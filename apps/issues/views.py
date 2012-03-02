@@ -31,10 +31,11 @@ def open_app_issues(request, app_slug):
 
 
 def defect_detail(request, defect_id, app_slug=None):
-    context = {'defect': get_object_or_404(Defect, pk=defect_id)}
-
+    app = get_object_or_404(App, slug=app_slug)
+    context = {'defect': get_object_or_404(Issue, pk=defect_id)}
+    context['app'] = app    
     if request.method == "POST":
-        form = DefectForm(request.POST, instance=defect)
+        form = IssueForm(request.POST, instance=defect)
         if form.is_valid():
             obj = form.save()
             obj.status = "open"
@@ -42,9 +43,9 @@ def defect_detail(request, defect_id, app_slug=None):
             obj.save()
             return redirect("defect_detail", defect_id=obj.id)
     else:
-        form = DefectForm(instance=context['defect'])
+        form = IssueForm(instance=context['defect'])
         context['form'] = form
-    return render(request, 'issues/issue_detail.html', context)
+    return render(request, 'issues/defect_detail_dep.html', context)
 
 
 def add_defect(request, app_slug):
@@ -73,3 +74,14 @@ def add_defect(request, app_slug):
     context['form'] = form
     
     return render(request, 'issues/add_defect.html', context)
+    
+    
+    
+# Milestones
+def milestone_list(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    context['milestones'] = Milestone.objects.filter(app=app)
+    return render(request, 'issues/milestones.html', context)
+        

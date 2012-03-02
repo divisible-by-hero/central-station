@@ -1,0 +1,33 @@
+{% extends "issues/project_base.html" %}
+{% block issues_menu_item %}{% endblock %}
+{% block milestones_menu_item %}class="active"{% endblock %}
+{% block main_content %}
+{{ block.super }}
+
+<h2>Milestones<a href="" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Milestone</a></h2>
+
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Milestone #</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        
+    </tr>
+    </thead>
+    <tbody>
+    {% for milestone in milestones %}
+    <tr>
+        <td><input type="checkbox" name="check_{{ milestone.id }}" id="check_{{ milestone.id }}"></td>
+        <td>{{ milestone.id }}</td>
+        <td>{{ milestone.name }}</td>
+        <td>{{ milestone.description }}</td>
+        <td>{{ milestone.due_date }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Central Station</title>
+    <title>{% block title %}{% endblock %} | Central Station</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -14,9 +14,6 @@
       body {
         padding-top: 60px;
         padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
       }
     </style>
     <link href="{{ STATIC_URL }}css/responsive.css" rel="stylesheet">
@@ -109,27 +106,10 @@
           
         </div><!--/span-->
         <div class="span3">
-          <div class="well sidebar-nav">
+          <div class="well">
           {% block sidebar %}
           {% endblock %}
-            <ul class="nav nav-list">
-              <li class="nav-header">Sidebar</li>
-              <li class="active"><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li class="nav-header">Sidebar</li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-              <li><a href="#">Link</a></li>
-            </ul>
+            
           </div><!--/.well -->
         </div><!--/span-->
         
