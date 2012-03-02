@@ -8,12 +8,7 @@
 
 {% load gravatar_tags %}
 {% for activity in feed %}
-    <article class="activity">
-    <img src="{% get_gravatar activity.user.email 45 %}">
-    <h2>{{ activity.user.first_name }} {{ activity.user.last_name }}</h2>
-    <p>{{ activity.action }}</p>
-    <span class="date">{{ activity.date_action }}</span>
-    </article>
+    {% include "newsfeed/feed_item.html" %}
     
 {% endfor %}
 {% endblock %}
