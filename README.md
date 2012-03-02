@@ -1,3 +1,18 @@
+# Installation
+
+Quickly get up and running
+
+* clone/download and move into the root of the project
+
+Next simply::
+
+    pip install fabric
+    
+    fab run_local
+    
+Done.
+
+
 # Introduction
 
 Refer to the docs for install/other questions.  http://docs.centralstationproject.com
