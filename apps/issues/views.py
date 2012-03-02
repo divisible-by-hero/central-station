@@ -63,11 +63,11 @@ def add_defect(request, app_slug):
             activity = Activity(application=obj.application)
             activity.user = request.user
             activity.action = "Added a new defect #%s" % obj.id
-            activity.defect = obj
+            activity.issue = obj
             activity.save()
 
-
-            return redirect("defect_detail", defect_id=obj.id)
+            return redirect("open_app_issues", app_slug=app.slug)
+            #return redirect("defect_detail", defect_id=obj.id)
     else:
         form = IssueForm()
     context['form'] = form
