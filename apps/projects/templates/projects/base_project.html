@@ -1,24 +1,24 @@
 {% extends "base.html" %}
 
 {% block header_title %}{{ app.name }}{% endblock %}
-{% block main_nav %}
+{% block title %}{{ app.name }}{% endblock %}
+{% block main_content %}
+<h1>{{ app.name }}</h1>
+<ul class="nav nav-tabs">
+<li {% block dashboard_menu_item %}{% endblock %}>
+<a href="{% url projects.views.app app_slug=app.slug %}">Dashboard</a>
+</li>
+<li {% block issues_menu_item %}{% endblock %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
+<li {% block milestones_menu_item %}{% endblock %}><a href="{% url issues.views.milestone_list app_slug=app.slug %}">Milestones</a></li>
+<li {% block users_menu_item %}{% endblock %}><a href="{% url projects.views.users app_slug=app.slug %}">Users</a></li>
+<li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>
 
-<div id="main-navigation">
-    <ul class="wat-cf">
-        <li {% block dashboard_menu_item %}class="active"{% endblock %}><a href="{% url projects.views.app app_slug=app.slug %}">Project Home</a></li>
-        {% if app.enable_defects %}
-        <li {% block defects_menu_item %}{% endblock %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
-        {% endif %}
-        <li {% block repos_menu_item %}{% endblock %}><a href="{% url browser.views.view_app_repo app_slug=app.slug %}">Repository</a></li>
-        {% if app.enable_forum %}
-        <li {% block forums_menu_item %}{% endblock %}><a href="{% url forum.views.view_forum_app app_slug=app.slug %}">Forums</a></li>
-    {% endif %}
-        <li {% block users_menu_item %}{% endblock %}><a href="{% url profile.views.app_user_list app_slug=app.slug %}">Users</a></li>
-        <li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>
-    </ul>
-</div>
+</ul>
+
+
 {% endblock %}
 
 {% block sidebar %}
 <h3>{{ app.open_defects }} Open Defects</h3>
+<h3>Current Milestones</h3>
 {% endblock %}

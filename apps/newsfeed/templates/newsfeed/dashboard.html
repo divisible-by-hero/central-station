@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h1>Project Activity</h1>
-{% load gravatar %}
+
+<h1>Recent Activity <a href="{% url projects.views.add_application %}" class="btn btn-success btn-small pull-right">
+    <i class="icon-plus icon-white"></i>
+    Add New Project
+</a></h1>
+
+{% load gravatar_tags %}
 {% for activity in feed %}
-    <article class="activity">
-    <img src="{% get_gravatar activity.user.email 45 %}">
-    <h2>{{ activity.user.first_name }} {{ activity.user.last_name }}</h2>
-    <p>{{ activity.action }}</p>
-    <span class="date">{{ activity.date_action }}</span>
-    </article>
+    {% include "newsfeed/feed_item.html" %}
     
 {% endfor %}
 {% endblock %}

@@ -1,35 +1,27 @@
-{% extends "defects/base.html" %}
-{% block extra_head %}
-<link rel="stylesheet" href="{{ STATIC_URL }}css/forms.min.css">
-{{ block.super }}
-{% endblock %}
+{% extends "issues/project_base.html" %}
 {% block main_content %}
+{{ block.super }}
 {{ form.errors }}
+
+<article class="add_issue">
+<h2>Add Issue</h2>
 <form method="POST" action=".">{% csrf_token %}
-<article class="defect_detail">
-{{ form }}
-    <h2>Defect {{ defect.id }} is <span>{{ defect.status }}</span></h2>
-    <label for="description">Description</label>
-    <textarea name="description" id="description">{{ defect.description }}</textarea>
-    <label for="url">URL</label>
-    <input type="text" id="url" name="url" value="{{ defect.url }}">
+    {{ form.url.label_tag }}
+    <input type="text" class="span9" name="url">
+    {{ form.description.label_tag }}
+    <textarea class="span9" name="description" rows="8"></textarea>
+    <div class="form-inline">
+    {{ form.type.label_tag }}
+    {{ form.type }}
+    {{ form.priority.label_tag }}
+    {{ form.priority }}
+    {{ form.milestone.label_tag }}
+    {{ form.milestone }}
+    </div>
+    
+    <input type="submit" class="btn btn-primary" value="Submit Issue">
+   </form>
 </article>
 
 {% endblock %}
 
-{% block sidebar %}
-<label for="project">Project</label>
-<select>
-    <option>Fuck</option>
-    <option>Fuck It</option>
-</select>
-
-<label for="version">Version</label>
-<select>
-    <option>Fuck</option>
-    <option>Fuck It</option>
-</select>
-<input type="submit" value="Create">
-{% endblock %}
-
-</form>
