@@ -9,6 +9,10 @@ class IssueForm(forms.ModelForm):
 
     class Meta:
         model = Issue
-        exclude = ('creator')
+        exclude = ('creator', 'application')
         
         
+        
+class MilestoneForm(forms.ModelForm):
+    class Meta:
+        model = Milestone

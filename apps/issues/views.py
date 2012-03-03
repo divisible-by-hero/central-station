@@ -5,6 +5,7 @@ from issues.forms import *
 import datetime
 from newsfeed.models import Activity
 from projects.models import App
+from django.contrib import messages
 
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
@@ -25,46 +26,80 @@ def issue_list(request):
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'defects': Issue.objects.open().by_app(app_slug), 'app':app}
+    context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app}
     return render(request, 'issues/project_list.html', context)
 
 
 
 def defect_detail(request, defect_id, app_slug=None):
-    context = {'defect': get_object_or_404(Defect, pk=defect_id)}
-
+    app = get_object_or_404(App, slug=app_slug)
+    issue = get_object_or_404(Issue, pk=defect_id)
+    context = {'defect': issue}
+    context['app'] = app    
     if request.method == "POST":
-        form = DefectForm(request.POST, instance=defect)
+        form = IssueForm(request.POST, instance=issue)
         if form.is_valid():
             obj = form.save()
             obj.status = "open"
             obj.last_modified_date = datetime.date.today()
             obj.save()
-            return redirect("defect_detail", defect_id=obj.id)
+            messages.add_message(request, messages.SUCCESS, "Issue Saved")
+            return redirect("defect_detail", defect_id=obj.id, app_slug=app.slug)
     else:
-        form = DefectForm(instance=context['defect'])
+        form = IssueForm(instance=context['defect'])
         context['form'] = form
-    return render(request, 'defects/defect_detail.html', context)
+    return render(request, 'issues/defect_detail_dep.html', context)
 
 
-def add_defect(request):
+def add_defect(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
     if request.method == "POST":
-        form = DefectForm(request.POST)
+        form = IssueForm(request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.creator = request.user
             obj.status = "open"
+            obj.application = app
             obj.save()
 
             activity = Activity(application=obj.application)
             activity.user = request.user
             activity.action = "Added a new defect #%s" % obj.id
-            activity.defect = obj
+            activity.issue = obj
             activity.save()
 
-
-            return redirect("defect_detail", defect_id=obj.id)
+            return redirect("open_app_issues", app_slug=app.slug)
+            #return redirect("defect_detail", defect_id=obj.id)
     else:
-        form = DefectForm()
-    context = {'form': form }
-    return render(request, 'defects/add_defect.html', context)
+        form = IssueForm()
+    context['form'] = form
+    
+    return render(request, 'issues/add_defect.html', context)
+    
+    
+def add_milestone(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    if request.method == "POST":
+        form = MilestoneForm(request.POST)
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.save()
+            
+            return redirect("milestone_list", app_slug=app.slug)
+    else:
+        form = MilestoneForm()
+    context['form'] = form
+    return render(request, 'issues/add_milestone.html', context)
+    
+# Milestones
+def milestone_list(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    context['milestones'] = Milestone.objects.filter(app=app)
+    return render(request, 'issues/milestones.html', context)
+        

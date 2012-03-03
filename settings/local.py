@@ -70,5 +70,6 @@ INSTALLED_APPS = (
     'chats',
     'profile',
     'api_docs',
+    'hadrian.contrib.gravatar',
 
 )

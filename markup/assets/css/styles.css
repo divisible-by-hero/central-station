@@ -1,0 +1,66 @@
+@import url("normalize.css");
+
+
+/* Global Styles */
+
+body
+{
+    font-family: 'Voces', cursive;
+}
+
+header nav
+{
+    background: #47326e;
+    height: 60px;
+}
+
+
+/* Defect Styles */
+
+.defect aside
+{
+    background: #fff;
+    width: 300px;
+    float: left;
+    padding: 10px;
+    border-right: 2px solid #bbbbbb;
+    min-height: 800px;
+}
+
+.defect label
+{
+    font-weight: bold;
+    display: block;
+    margin-bottom: 6px;
+}
+
+.defect input
+{
+    width: 90%;
+}
+
+.defect aside select
+{
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+.defect section
+{
+    background: #dddddd;
+    padding-left: 335px;
+    padding-top: 10px;
+    min-height: 800px;
+}
+
+.defect h1
+{
+    margin-top: 0;
+}
+
+.defect section textarea
+{
+    width: 800px;
+    height: 220px;
+}
+

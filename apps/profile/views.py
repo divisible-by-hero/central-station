@@ -9,7 +9,7 @@ def all_users(request):
     return render(request, 'profile/user_list.html', context)
 
 def settings(request):
-    user_profile = get_object_or_404(UserProfile, user=request.user)
+    user_profile, created = UserProfile.objects.get_or_create(user=request.user)
     if request.method == "POST":
         form = ProfileForm(request.POST, instance=user_profile)
         if form.is_valid():
