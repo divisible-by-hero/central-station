@@ -1,0 +1,19 @@
+Metadata-Version: 1.0
+Name: django-central-station
+Version: 0.1dev
+Summary: Project tracking
+Home-page: http://github.com/dstegelman/central-station
+Author: Derek Stegelman
+Author-email: dstegelman@gmail.com
+License: MIT
+Description: UNKNOWN
+Platform: UNKNOWN
+Classifier: Development Status :: 1 - Planning
+Classifier: Environment :: Web Environment
+Classifier: Intended Audience :: End Users/Desktop
+Classifier: Natural Language :: English
+Classifier: Operating System :: OS Independent
+Classifier: Programming Language :: Python
+Classifier: Topic :: Internet :: WWW/HTTP :: Dynamic Content :: CGI Tools/Libraries
+Classifier: Topic :: Utilities
+Classifier: License :: OSI Approved :: MIT License

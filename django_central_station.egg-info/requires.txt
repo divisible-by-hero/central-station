@@ -1,0 +1,4 @@
+django
+south
+sorl-thumbnail
+django-tastypie

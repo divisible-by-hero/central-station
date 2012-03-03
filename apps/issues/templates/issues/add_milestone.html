@@ -1,0 +1,19 @@
+{% extends "issues/project_base.html" %}
+{% block milestones_menu_item %}class="active"{% endblock %}
+{% block issues_menu_item %}{% endblock %}
+{% block main_content %}
+{{ block.super }}
+{{ form.errors }}
+
+<article class="add_issue">
+<h2>Add Milestone</h2>
+<form method="POST" action=".">{% csrf_token %}
+   {{ form }}
+   
+    
+    <input type="submit" class="btn btn-primary" value="Submit Milestone">
+   </form>
+</article>
+
+{% endblock %}
+

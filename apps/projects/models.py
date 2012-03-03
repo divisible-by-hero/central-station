@@ -33,13 +33,8 @@ class App(models.Model):
     def open_defects(self):
         return "6"
     
-
-class Version(models.Model):
-    app = models.ForeignKey(App)
-    number = models.CharField(max_length=250)
-    release_date = models.DateField()
-    status = models.CharField(max_length=250, choices=PROJECT_CHOICES)
     
-    def __unicode__(self):
-        return self.number
+
+        
+    
     

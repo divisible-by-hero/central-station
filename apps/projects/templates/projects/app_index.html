@@ -1,5 +1,8 @@
 {% extends "projects/base_project.html" %}
-
+{% block dashboard_menu_item %}class="active"{% endblock %}
 {% block main_content %}
-{% include "newsfeed/dash_feed.html" %}
+{{ block.super }}
+{% for activity in feed %}
+{% include "newsfeed/feed_item.html" %}
+{% endfor %}
 {% endblock %}
