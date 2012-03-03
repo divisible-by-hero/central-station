@@ -70,7 +70,7 @@
                         <b class="caret"></b>
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Personal Settings</a></li>
+                        <li><a href="{% url profile.views.settings %}">Personal Settings</a></li>
                         <li class="divider"></li>
                         <li><a href="{% url django.contrib.auth.views.logout %}">Sign out</a></li>
                     </ul>
@@ -92,7 +92,7 @@
         {% for message in messages %}
         <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
         <a class="close" data-dismiss="alert">×</a>
-        <h4 class="alert-heading">Warning!</h4>
+        <h4 class="alert-heading">{% if message.tags == "success" %}Success{% else %}Warning!{% endif %}</h4>
         {{ message }}
         </div>
         {% endfor %}

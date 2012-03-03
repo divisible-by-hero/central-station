@@ -5,6 +5,7 @@ from issues.forms import *
 import datetime
 from newsfeed.models import Activity
 from projects.models import App
+from django.contrib import messages
 
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
@@ -42,6 +43,7 @@ def defect_detail(request, defect_id, app_slug=None):
             obj.status = "open"
             obj.last_modified_date = datetime.date.today()
             obj.save()
+            messages.add_message(request, messages.SUCCESS, "Issue Saved")
             return redirect("defect_detail", defect_id=obj.id, app_slug=app.slug)
     else:
         form = IssueForm(instance=context['defect'])

@@ -6,8 +6,9 @@
 {{ block.super }}
 <form method="post" action=".">{% csrf_token %}
 <article class="defect_detail">
-    <input type="submit" value="Save" class="btn btn-primary">
-    <input type="button" value="Save and Exit" class="btn">
+    <input type="submit" value="Save" class="btn btn-primary pull-right">
+    <input type="button" value="Save and Exit" class="btn btn-success pull-right">
+    <input type="button" class="btn btn-danger pull-right" value="Close">
     <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}">{{ defect.status }}</span></h2>
     <div class="form_item">
         <label for="description">Description</label>
