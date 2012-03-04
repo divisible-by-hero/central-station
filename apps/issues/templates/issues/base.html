@@ -1,2 +1,5 @@
 {% extends "projects/base.html" %}
+{% block extra_head %}
+<link rel="stylesheet" href="{{ STATIC_URL }}issues/css/styles.css">
+{% endblock %}
 {% block issues_menu_item %}class="active"{% endblock %}
