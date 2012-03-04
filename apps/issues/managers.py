@@ -8,6 +8,12 @@ class IssueMixin(object):
     def by_app(self, app_slug):
         return self.filter(application__slug=app_slug)
     
+    def closed(self):
+        return self.filter(status="closed")
+        
+    def by_milestone(self, milestone_id):
+        return self.filter(milestone__pk=milestone_id)
+    
 class IssueQuerySet(QuerySet, IssueMixin):
     pass
 

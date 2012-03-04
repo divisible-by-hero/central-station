@@ -1,9 +1,11 @@
+from __future__ import division
 from django.db import models
 from issues.managers import IssueManager
 from django.contrib.auth.models import User
 from hadrian.utils.slugs import unique_slugify
 from issues.choices import *
 from projects.models import App
+from datetime import date
 # Create your models here.
 
 class Milestone(models.Model):
@@ -21,11 +23,18 @@ class Milestone(models.Model):
     
     @property    
     def progress(self):
-        return "56"
-        
+        closed = Issue.objects.closed().by_app(self.app.slug).by_milestone(self.id).count()
+        all = Issue.objects.by_app(self.app.slug).by_milestone(self.id).count()
+        if all != 0:
+            return closed/all * 100
+        else:
+            return 0
     @property
     def past_due(self):
-        return True
+        if date.today() > self.due_date:
+            return True
+        else:
+            return False
 
 class Issue(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, blank=True)

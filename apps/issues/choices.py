@@ -7,6 +7,7 @@ This file is used for listing choices.   It is a good idea to keep them seperate
 STATUS_CHOICES = (
     ('open', 'Open'),
     ('in-progress', 'In Progress'),
+    ('closed', 'Closed'),
 )
 
 ISSUE_TYPES = (
