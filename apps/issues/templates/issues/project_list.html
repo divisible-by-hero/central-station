@@ -3,3 +3,26 @@
 {{ block.super }}
 {% include "issues/issue_list.html" %}
 {% endblock %}
+{% block sidebar %}
+<h2>Filters</h2>
+<h3>Priority</h3>
+<select name="filter">
+<option>All</option>
+<option>Closed</option>
+<option>High</option>
+</select>
+<h3>Ticket Status</h3>
+<select name="filter">
+<option>All</option>
+<option>Closed</option>
+<option>High</option>
+</select>
+<h3>Milestone</h3>
+<select name="filter">
+<option>All</option>
+<option>Closed</option>
+<option>High</option>
+</select>
+<br/>
+<input type="submit" class="btn btn-primary" value="Filter">
+{% endblock %}
