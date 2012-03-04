@@ -14,6 +14,14 @@ class Milestone(models.Model):
     
     def __unicode__(self):
         return self.name
+        
+    @property
+    def complete(self):
+        return False
+    
+    @property    
+    def progress(self):
+        return "56"
 
 class Issue(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, blank=True)

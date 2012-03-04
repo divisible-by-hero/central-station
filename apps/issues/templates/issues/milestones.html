@@ -12,7 +12,7 @@
         <th></th>
         <th>Milestone #</th>
         <th>Name</th>
-        <th>Description</th>
+        <th>Progress</th>
         <th>Due Date</th>
         
     </tr>
@@ -23,7 +23,14 @@
         <td><input type="checkbox" name="check_{{ milestone.id }}" id="check_{{ milestone.id }}"></td>
         <td>{{ milestone.id }}</td>
         <td>{{ milestone.name }}</td>
-        <td>{{ milestone.description }}</td>
+        <td>
+            <div class="progress {% if milestone.complete %}progress-success{% else %}progress-info{% endif %}
+            progress-striped active">
+            <div class="bar"
+
+            style="width: {{ milestone.progress }}%;"></div>
+            </div>
+        </td>
         <td>{{ milestone.due_date }}</td>
     </tr>
     {% endfor %}
