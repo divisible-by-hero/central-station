@@ -22,6 +22,10 @@ class Milestone(models.Model):
     @property    
     def progress(self):
         return "56"
+        
+    @property
+    def past_due(self):
+        return True
 
 class Issue(models.Model):
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, blank=True)
