@@ -1,6 +1,7 @@
 from django import forms
 from issues.models import *
 
+
 class IssueForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
@@ -16,3 +17,4 @@ class IssueForm(forms.ModelForm):
 class MilestoneForm(forms.ModelForm):
     class Meta:
         model = Milestone
+        

@@ -1,6 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from issues.models import *
+from issues.choices import *
 from issues.forms import *
 import datetime
 from newsfeed.models import Activity
@@ -26,6 +27,7 @@ def issue_list(request):
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
+    priorities = ISSUE_PRIORITIES
     context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app}
     return render(request, 'issues/project_list.html', context)
 
