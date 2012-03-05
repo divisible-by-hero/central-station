@@ -78,7 +78,7 @@ def defect_detail(request, defect_id, app_slug=None):
     context = {'defect': issue}
     context['app'] = app    
     if request.method == "POST":
-        form = IssueForm(request.POST, instance=issue)
+        form = IssueForm(app, request.POST, instance=issue)
         if form.is_valid():
             obj = form.save()
             obj.status = "open"
@@ -87,7 +87,7 @@ def defect_detail(request, defect_id, app_slug=None):
             messages.add_message(request, messages.SUCCESS, "Issue Saved")
             return redirect("defect_detail", defect_id=obj.id, app_slug=app.slug)
     else:
-        form = IssueForm(instance=context['defect'])
+        form = IssueForm(app, instance=context['defect'])
         context['form'] = form
     return render(request, 'issues/defect_detail_dep.html', context)
 
