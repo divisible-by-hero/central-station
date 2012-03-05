@@ -19,10 +19,11 @@
         <input type="text" id="url" name="url" value="{{ defect.url }}" class="span9">
     </div>
 </article>
-
+</form>
 {% endblock %}
 
 {% block sidebar %}
+<form method="post" action=".">{% csrf_token %}
 
 {{ form.milestone.label_tag }}
 {{ form.milestone }}

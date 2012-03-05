@@ -30,6 +30,7 @@
 
             style="width: {{ milestone.progress }}%;"></div>
             </div>
+            <span class="muted">{{ milestone.closed_issues }} closed - {{ milestone.open_issues }} open</span>
         </td>
         <td>{% if milestone.past_due %}<span class="label label-important">{{ milestone.due_date }}</span>{% else %}{{ milestone.due_date }}{% endif %}</td>
     </tr>

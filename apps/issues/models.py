@@ -29,6 +29,15 @@ class Milestone(models.Model):
             return closed/all * 100
         else:
             return 0
+            
+    @property
+    def open_issues(self):
+        return Issue.objects.open().by_app(self.app.slug).by_milestone(self.id).count()
+    
+    @property
+    def closed_issues(self):
+        return Issue.objects.closed().by_app(self.app.slug).by_milestone(self.id).count()
+    
     @property
     def past_due(self):
         if date.today() > self.due_date:

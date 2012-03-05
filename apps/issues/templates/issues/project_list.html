@@ -1,9 +1,25 @@
 {% extends "issues/base.html" %}
 {% block main_content %}
 {{ block.super }}
+<ul class="nav nav-pills">
+        <li {% if all %}class="active"{% endif %}><a href="{% url issues.views.no_filter_app_issues app_slug=app.slug %}">All</a></li>
+        <li {% if open %}class="active"{% endif %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Open</a></li>
+        <li {% if closed %}class="active"{% endif %}><a href="{% url issues.views.closed_app_issues app_slug=app.slug %}">Closed</a></li>
+        <li class="dropdown">
+          <a href="#" data-toggle="dropdown" class="dropdown-toggle">Dropdown <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li><a href="#">Action</a></li>
+            <li><a href="#">Another action</a></li>
+            <li><a href="#">Something else here</a></li>
+            <li class="divider"></li>
+            <li><a href="#">Separated link</a></li>
+          </ul>
+        </li>
+      </ul>
 {% include "issues/issue_list.html" %}
 {% endblock %}
 {% block sidebar %}
+<form method="post" action=".">{% csrf_token %}
 <h2>Filters</h2>
 <h3>Priority</h3>
 <select name="filter_priority">
@@ -34,4 +50,5 @@
 
 <input type="submit" class="btn btn-primary" value="Filter">
 <a href="#" class="btn btn-success">Filter and Save</a>
+</form>
 {% endblock %}

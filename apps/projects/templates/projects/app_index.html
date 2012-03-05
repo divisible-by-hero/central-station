@@ -6,3 +6,17 @@
 {% include "newsfeed/feed_item.html" %}
 {% endfor %}
 {% endblock %}
+
+{% block sidebar %}
+<h2>Milestones</h2>
+{% for milestone in milestones %}
+<h4>{{ milestone.name }} {% if milestone.past_due %}<span class="label label-important">{{ milestone.due_date }}</span>{% else %}<span>{{ milestone.due_date }}</span>{% endif %}</h4>
+<div class="progress {% if milestone.complete %}progress-success{% else %}progress-info{% endif %}
+            progress-striped active">
+            <div class="bar"
+
+            style="width: {{ milestone.progress }}%;"></div>
+            </div>
+{% endfor %}
+
+{% endblock %}

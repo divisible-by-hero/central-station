@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from projects.models import *
 from projects.forms import *
+from issues.models import Milestone
 from django.contrib.auth.decorators import login_required
 from newsfeed.models import Activity
 
@@ -42,6 +43,7 @@ def add_version(request):
 def app(request, app_slug):
     context = {'app': get_object_or_404(App, slug=app_slug)}
     context['feed'] = Activity.objects.by_app(app_slug)
+    context['milestones'] = Milestone.objects.filter(app__slug=app_slug)
     return render(request, 'projects/app_index.html', context)
 
 '''

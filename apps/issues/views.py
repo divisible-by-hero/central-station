@@ -8,6 +8,9 @@ from newsfeed.models import Activity
 from projects.models import App
 from django.contrib import messages
 
+def project_milestones(app_slug=None):
+    return Milestone.objects.filter(app__slug=app_slug)
+
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
     return render(request, 'issues/issue_list.html', context)
@@ -27,8 +30,44 @@ def issue_list(request):
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    priorities = ISSUE_PRIORITIES
-    context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app}
+    context = {'issues': Issue.objects.open().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
+    paginator = Paginator(context['issues'], 20)
+    context['open'] = True
+    page = request.GET.get('page', 1)
+    try:
+        context['issues'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['issues'] = paginator.page(1)
+    except EmptyPage:
+        context['issues'] = paginator.page(paginator.num_pages)
+    return render(request, 'issues/project_list.html', context)
+
+def closed_app_issues(request, app_slug):
+    app = get_object_or_404(App, slug=app_slug)
+    context = {'issues': Issue.objects.closed().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
+    paginator = Paginator(context['issues'], 20)
+    context['closed'] = True
+    page = request.GET.get('page', 1)
+    try:
+        context['issues'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['issues'] = paginator.page(1)
+    except EmptyPage:
+        context['issues'] = paginator.page(paginator.num_pages)
+    return render(request, 'issues/project_list.html', context)
+
+def no_filter_app_issues(request, app_slug):
+    app = get_object_or_404(App, slug=app_slug)
+    context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
+    paginator = Paginator(context['issues'], 20)
+    context['all'] = True
+    page = request.GET.get('page', 1)
+    try:
+        context['issues'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['issues'] = paginator.page(1)
+    except EmptyPage:
+        context['issues'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/project_list.html', context)
 
 
