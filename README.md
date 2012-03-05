@@ -17,6 +17,10 @@ Done.
 
 ![Alt text](http://centralstationproject.com/images/issues.png)
 
+![Dashboard](http://centralstationproject.com/images/dashboard.png)
+
+![Adding an issue](http://centralstationproject.com/images/add_issue.png)
+
 
 # Introduction
 
