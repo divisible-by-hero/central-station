@@ -13,6 +13,11 @@ Next simply::
 Done.
 
 
+## Screen Shots
+
+![Alt text](http://centralstationproject.com/images/issues.png)
+
+
 # Introduction
 
 Refer to the docs for install/other questions.  http://docs.centralstationproject.com
