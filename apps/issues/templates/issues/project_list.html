@@ -1,6 +1,7 @@
 {% extends "issues/base.html" %}
 {% block main_content %}
 {{ block.super }}
+<h2>Issues</h2>
 <ul class="nav nav-pills pull-left">
         <li {% if all %}class="active"{% endif %}><a href="{% url issues.views.no_filter_app_issues app_slug=app.slug %}">All</a></li>
         <li {% if open %}class="active"{% endif %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Open</a></li>
