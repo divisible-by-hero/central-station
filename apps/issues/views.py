@@ -97,7 +97,7 @@ def add_defect(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     context['app'] = app
     if request.method == "POST":
-        form = IssueForm(request.POST)
+        form = IssueForm(app, request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
             obj.creator = request.user
@@ -114,7 +114,7 @@ def add_defect(request, app_slug):
             return redirect("open_app_issues", app_slug=app.slug)
             #return redirect("defect_detail", defect_id=obj.id)
     else:
-        form = IssueForm()
+        form = IssueForm(app)
     context['form'] = form
     
     return render(request, 'issues/add_defect.html', context)
@@ -128,6 +128,7 @@ def add_milestone(request, app_slug):
         form = MilestoneForm(request.POST)
         if form.is_valid():
             obj = form.save(commit=False)
+            obj.application = app
             obj.save()
             
             return redirect("milestone_list", app_slug=app.slug)

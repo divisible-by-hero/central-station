@@ -52,6 +52,7 @@ class Issue(models.Model):
     description = models.TextField()
     url = models.URLField(blank=True)
     creator = models.ForeignKey(User, null=True, blank=True)
+    assigned_to = models.ForeignKey(User, related_name="assignee", null=True, blank=True)
     creation_date = models.DateField(auto_now=False, auto_now_add=True)
     last_modified_date = models.DateField(editable=False, blank=True, null=True, auto_now=True)
     application = models.ForeignKey(App)

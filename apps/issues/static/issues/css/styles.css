@@ -10,6 +10,17 @@ article.add_issue .form-inline
     margin-top: 20px;
 }
 
+article.add_issue .inline-field
+{
+    width: 300px;
+    float: left;
+}
+
+article.add_issue .inline-field label
+{
+    display: block;
+}
+
 article.add_issue form div.form-inline select
 {
     
