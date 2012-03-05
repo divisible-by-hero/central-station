@@ -9,7 +9,7 @@
     <input type="submit" value="Save" class="btn btn-primary pull-right">
     <input type="button" value="Save and Exit" class="btn btn-success pull-right">
     <input type="button" class="btn btn-danger pull-right" value="Close">
-    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}">{{ defect.status }}</span></h2>
+    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}{% if defect.status == "closed" %}label-important{% endif %}">{{ defect.status }}</span></h2>
     <div class="form_item">
         <label for="description">Description</label>
         <textarea name="description" id="description" class="span9" rows="8">{{ defect.description }}</textarea>
