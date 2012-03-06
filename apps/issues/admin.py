@@ -8,3 +8,4 @@ class IssueAdmin(admin.ModelAdmin):
 admin.site.register(Issue, IssueAdmin)
 
 admin.site.register(Milestone)
+admin.site.register(Comment)

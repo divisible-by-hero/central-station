@@ -21,3 +21,9 @@ class MilestoneForm(forms.ModelForm):
         model = Milestone
         exclude = ('application')
         
+class CommentForm(forms.ModelForm):
+    
+    class Meta:
+        model = Comment
+        exclude = ('author', 'issue')
+        

@@ -75,8 +75,10 @@ def no_filter_app_issues(request, app_slug):
 def defect_detail(request, defect_id, app_slug=None):
     app = get_object_or_404(App, slug=app_slug)
     issue = get_object_or_404(Issue, pk=defect_id)
+    comments = Comment.objects.filter(issue=issue)
     context = {'defect': issue}
-    context['app'] = app    
+    context['app'] = app
+    context['comments'] = comments    
     if request.method == "POST":
         form = IssueForm(app, request.POST, instance=issue)
         if form.is_valid():
@@ -88,7 +90,9 @@ def defect_detail(request, defect_id, app_slug=None):
             return redirect("defect_detail", defect_id=obj.id, app_slug=app.slug)
     else:
         form = IssueForm(app, instance=context['defect'])
+        comment_form = CommentForm()
         context['form'] = form
+        context['comment_form'] = comment_form
     return render(request, 'issues/defect_detail_dep.html', context)
 
 

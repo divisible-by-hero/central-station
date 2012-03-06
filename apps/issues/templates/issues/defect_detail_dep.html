@@ -1,7 +1,14 @@
 {% extends "issues/base.html" %}
+{% block extra_js %}
+<script>
+$("#comment-form").hide();
+$("#add-comment").click(function(){
+    $("#comment-form").show();
 
+});
+</script>
 
-
+{% endblock %}
 {% block main_content %}
 {{ block.super }}
 <form method="post" action=".">{% csrf_token %}
@@ -21,6 +28,27 @@
         <label for="url">URL</label>
         <input type="text" id="url" name="url" value="{{ defect.url }}" class="span9">
     </div>
+    
+    <h3>Comments</h3>
+    <a href="#" class="btn btn-info pull-right" id="add-comment">Add Comment</a>
+    <form method="post" action="." id="comment-form">{% csrf_token %}
+    {{ comment_form.comment.label_tag }}
+    <textarea name="comment" id="comment" class="span9" rows="8"></textarea>
+    {{ comment_form.file.label_tag }}
+    {{ comment_form.file }}
+    <div class="clearfix"></div>
+    <input type="submit" class="btn btn-primary" value="Add Comment">
+    </form>
+    <div class="clearfix"></div>
+    <div class="comments">
+    {% for comment in comments %}
+    <div class="comment {% if forloop.counter|divisibleby:2 %}even{% else %}odd{% endif %}">
+        <span>{{ comment.creation_date }} by {{ comment.author.username }}</span>
+        <p>{{ comment }}</p>
+    </div>
+    {% endfor %}
+    </div>
+    
 </article>
 </form>
 {% endblock %}

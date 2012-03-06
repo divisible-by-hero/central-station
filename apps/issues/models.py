@@ -70,9 +70,10 @@ class Issue(models.Model):
         
 class Comment(models.Model):
     issue = models.ForeignKey(Issue)
+    author = models.ForeignKey(User)
     comment = models.TextField(null=True, blank=True)
     creation_date = models.DateField(auto_now_add=True)
-    file = models.FileField(upload_to="issues/comments")
+    file = models.FileField(upload_to="issues/comments", null=True, blank=True)
     
     def __unicode__(self):
         return self.comment
