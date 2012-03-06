@@ -68,4 +68,18 @@ class Issue(models.Model):
         return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
         
         
-
+class Comment(models.Model):
+    issue = models.ForeignKey(Issue)
+    comment = models.TextField(null=True, blank=True)
+    creation_date = models.DateField(auto_now_add=True)
+    file = models.FileField(upload_to="issues/comments")
+    
+    def __unicode__(self):
+        return self.comment
+    
+    
+    
+    
+    
+    
+    
