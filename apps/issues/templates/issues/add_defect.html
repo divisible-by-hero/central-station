@@ -6,10 +6,13 @@
 <article class="add_issue">
 <h2>Add Issue</h2>
 <form method="POST" action=".">{% csrf_token %}
-    {{ form.url.label_tag }}
-    <input type="text" class="span9" name="url">
+    
     {{ form.description.label_tag }}
     <textarea class="span9" name="description" rows="8"></textarea>
+    {{ form.url.label_tag }}
+    <input type="text" class="span9" name="url">
+    {{ form.file.label_tag }}
+    {{ form.file }}
     <div class="form-inline clearfix">
         <div class="inline-field">
     {{ form.type.label_tag }}

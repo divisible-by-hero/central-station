@@ -19,11 +19,11 @@ $(function() {
     <input type="submit" value="Save" class="btn btn-primary pull-right">
     <input type="button" value="Save and Exit" class="btn btn-success pull-right">
     {% if defect.status == "open" %}
-    <a href = "#" class="btn btn-primary pull-right">Move to In Progress</a>
+    <a href = "{% url issues.views.move_to_in_progress issue_id=defect.id app_slug=defect.application.slug %}" class="btn btn-primary pull-right">Move to In Progress</a>
     {% endif %}
     <a href="{% url issues.views.close_issue app_slug=defect.application.slug issue_id=defect.id %}" class="btn btn-danger pull-right">Close</a>
     
-    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}{% if defect.status == "closed" %}label-important{% endif %}">{{ defect.status }}</span></h2>
+    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}{% if defect.status == "closed" %}label-important{% endif %}{% if defect.status == "in-progress" %}label-info{% endif %}">{{ defect.status }}</span></h2>
     <div class="form_item">
         <label for="description">Description</label>
         <textarea name="description" id="description" class="span9" rows="8">{{ defect.description }}</textarea>
@@ -32,6 +32,10 @@ $(function() {
         <label for="url">URL</label>
         <input type="text" id="url" name="url" value="{{ defect.url }}" class="span9">
     </div>
+    {% if defect.file %}
+    <span class="label label-important">File Attached</span>
+    <a href="{{ defect.file.url }}">{{ defect.file }}</a>
+    {% endif %}
     </form>
     <h3>Comments</h3>
     <a class="pull-right" id="add-comment">Add Comment</a>
@@ -63,7 +67,7 @@ $(function() {
 {% endblock %}
 
 {% block sidebar %}
-<form method="post" action=".">{% csrf_token %}
+
 
 {{ form.milestone.label_tag }}
 {{ form.milestone }}
@@ -77,6 +81,6 @@ $(function() {
 <span>{{ defect.creation_date }}</span>
 <h3>Modified Date</h3>
 <span>{{ defect.last_modified_date }}</span>
-</form>
+
 {% endblock %}
 
