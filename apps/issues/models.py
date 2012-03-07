@@ -51,6 +51,7 @@ class Issue(models.Model):
     priority = models.CharField(max_length=20, choices=ISSUE_PRIORITIES)
     description = models.TextField()
     url = models.URLField(blank=True)
+    file = models.FileField(upload_to="issues/issue", null=True, blank=True)
     creator = models.ForeignKey(User, null=True, blank=True)
     assigned_to = models.ForeignKey(User, related_name="assignee", null=True, blank=True)
     creation_date = models.DateField(auto_now=False, auto_now_add=True)
@@ -66,6 +67,9 @@ class Issue(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
+        
+    class Meta:
+        ordering = ['-id']
         
         
 class Comment(models.Model):
