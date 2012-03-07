@@ -1,51 +1,37 @@
-<html>
-<head>
-<link rel="stylesheet" href="{{ STATIC_URL }}css/core.css" type="text/css" media="screen" />
-</head>
+{% extends "base.html" %}
+{% block title %}Login{% endblock %}
+{% block extra_style %}
+<style>
+.navbar .nav,
+.well,
+.navbar-search
+{
+    display: none;
+}
+
+</style>
+
+{% endblock %}
+{% block main_content %}
 
 
-<div id="box">
-      <h1>Web App Theme</h1>
-      <div class="block" id="block-login">
-        <h2>Login Box</h2>
-        <div class="content login">
-          <div class="flash">
             {% if form.errors %}
-            <div class="message notice">
+            <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">×</a>
+            <h4 class="alert-heading">Error</h4>
             <p>Your username and password didn't match. Please try again.</p>
+            </div>
             {% endif %}
-            </div>
-            
-          </div>
+
+
           <form method="post" action="{% url django.contrib.auth.views.login %}" class="form login">{% csrf_token %}
-            <div class="group wat-cf">
-              <div class="left">
-                <label class="label right">Login</label>
-
-              </div>
-              <div class="right">
+                {{ form.username.label_tag }}
                 {{ form.username }}
-              </div>
-            </div>
-            <div class="group wat-cf">
-              <div class="left">
-                <label class="label right">Password</label>
-
-              </div>
-              <div class="right">
+                {{ form.password.label_tag }}
                 {{ form.password }}
-              </div>
-            </div>
-            <div class="group navform wat-cf">
-              <div class="right">
-                <button class="button" type="submit">
-                <input type="hidden" name="next" value="{% url newsfeed.views.dashboard %}" />
-                  <img src="images/icons/key.png" alt="Save" /> Login
-                </button>
-
-              </div>
-            </div>
+                <div class="clearfix"></div>
+            <input type="submit" class="btn btn-primary" value="Login">
           </form>
-        </div>
-      </div>
 
+
+{% endblock %}
