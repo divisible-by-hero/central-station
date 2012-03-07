@@ -47,3 +47,29 @@ article.defect_detail .btn
     margin-top: 15px;
 }
 
+.comments .comment 
+{
+    border:  1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 15px;
+}
+
+.comments .comment.even
+{
+    background-color: #F9F9F9;
+}
+
+.comments .comment p
+{
+    margin-top: 9px;
+}
+
+
+
+
+
+
+
+
+

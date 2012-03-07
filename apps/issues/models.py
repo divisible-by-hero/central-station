@@ -73,13 +73,18 @@ class Comment(models.Model):
     author = models.ForeignKey(User)
     comment = models.TextField(null=True, blank=True)
     creation_date = models.DateField(auto_now_add=True)
+    creation_date_time = models.DateTimeField(auto_now_add=True)
     file = models.FileField(upload_to="issues/comments", null=True, blank=True)
     
     def __unicode__(self):
         return self.comment
     
-    
-    
+    @property
+    def is_issue_author(self):
+        if self.issue.creator == self.author:
+            return True
+        else:
+            return False
     
     
     
