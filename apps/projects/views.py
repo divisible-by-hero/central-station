@@ -8,6 +8,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render, get_object_or_404, redirect
 from projects.models import *
 from projects.forms import *
+from django.contrib.auth.models import User
 from issues.models import Milestone
 from django.contrib.auth.decorators import login_required
 from newsfeed.models import Activity
@@ -68,6 +69,7 @@ def settings(request, app_slug):
 def users(request, app_slug):
     context = {}
     app = get_object_or_404(App, slug=app_slug)
+    context['users'] = User.objects.all()
     context['app'] = app
     return render(request, "projects/users.html", context)
 
