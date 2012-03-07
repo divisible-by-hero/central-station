@@ -76,6 +76,12 @@ def close_issue(request, app_slug, issue_id):
     issue.save()
     messages.add_message(request, messages.INFO, "Issue %s Closed" % issue_id)
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
+    
+def move_to_in_progress(request, app_slug, issue_id):
+    issue = Issue.objects.get(pk=issue_id)
+    issue.status = "in-progress"
+    issue.save()
+    return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
 
 def handle_comment(request):
     if request.POST:
