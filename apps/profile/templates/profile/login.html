@@ -29,6 +29,7 @@
                 {{ form.username }}
                 {{ form.password.label_tag }}
                 {{ form.password }}
+                <input type="hidden" name="next" id="next" value="{% url newsfeed.views.dashboard %}">
                 <div class="clearfix"></div>
             <input type="submit" class="btn btn-primary" value="Login">
           </form>

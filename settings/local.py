@@ -62,6 +62,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'tastypie',
     'south',
+    'core',
     'issues',
     'newsfeed',
     'projects',
