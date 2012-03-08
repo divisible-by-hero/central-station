@@ -32,6 +32,11 @@ article.activity p
     top: 22px;
 }
 
+article.activity img
+{
+    border-radius: 5px;
+}
+
 article.activity span.date
 {
     position: absolute;
