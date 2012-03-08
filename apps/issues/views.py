@@ -7,6 +7,7 @@ import datetime
 from newsfeed.models import Activity
 from projects.models import App
 from django.contrib import messages
+from django.db.models import Q
 
 def project_milestones(app_slug=None):
     return Milestone.objects.filter(app__slug=app_slug)
@@ -27,6 +28,33 @@ def issue_list(request):
     except EmptyPage:
         context['defects'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/issue_list.html', context)
+    
+    
+def issue_filter(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    context['project_milestones'] = project_milestones()
+    if request.method == "POST":
+        status = request.POST.get('filter_status')
+        priority = request.POST.get('filter_priority')
+        type = request.POST.get('filter_type')
+        milestone = request.POST.get('filter_milestone')
+        milestone_obj = Milestone.objects.get(pk=milestone)
+        issues = Issue.objects.by_app(app_slug).filter(status=status, priority=priority, type=type, milestone=milestone_obj)
+        print issues
+        paginator = Paginator(issues, 40)
+        page = request.GET.get('page', 1)
+        try:
+            context['issues'] = paginator.page(page)
+        except PageNotAnInteger:
+            context['issues'] = paginator.page(1)
+        except EmptyPage:
+            context['issues'] = paginator.page(paginator.num_pages)
+        return render(request, 'issues/project_list.html', context)
+    else:
+        return redirect("issues.views.open_app_issues", app_slug=app.slug)
+        
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
