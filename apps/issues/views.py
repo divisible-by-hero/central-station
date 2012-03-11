@@ -8,12 +8,19 @@ from newsfeed.models import Activity
 from projects.models import App
 from django.contrib import messages
 
+#@todo: Clean up this file badly.  Decision is still pending on defects/issues/bugs.
+
+
 def project_milestones(app_slug=None):
     return Milestone.objects.filter(app__slug=app_slug)
 
+#@todo: Remove this:
+'''
 def all_issues(request):
     context = {'issues': Issue.objects.open()}
     return render(request, 'issues/issue_list.html', context)
+'''
+#@todo: Map filters to these, about 3 or four functions could be slimmed down based upon filtering.
 
 def issue_list(request):
     context = {'defect_count': Defect.objects.count()}
@@ -27,6 +34,9 @@ def issue_list(request):
     except EmptyPage:
         context['defects'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/issue_list.html', context)
+
+#@todo: This is the new issues Method.  Will take a filter type and build queries
+
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
@@ -72,15 +82,13 @@ def no_filter_app_issues(request, app_slug):
 
 def close_issue(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
-    issue.status = "closed"
-    issue.save()
+    issue.close()
     messages.add_message(request, messages.INFO, "Issue %s Closed" % issue_id)
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
-    
+       
 def move_to_in_progress(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
-    issue.status = "in-progress"
-    issue.save()
+    issue.move_to_in_progress()
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
 
 def handle_comment(request):
