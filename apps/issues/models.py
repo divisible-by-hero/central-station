@@ -19,7 +19,11 @@ class Milestone(models.Model):
         
     @property
     def complete(self):
-        return False
+        issues = Issue.objects.by_milestone(self.id).count()
+        if issues == 0:
+            return True
+        else:
+            return False
     
     @property    
     def progress(self):
@@ -67,7 +71,16 @@ class Issue(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
-        
+    
+    def close(self):
+        # Do something
+        self.status = "closed"
+        self.save()
+    
+    def move_to_in_progress(self):
+        self.status = "in-progress"
+        self.save()
+    
     class Meta:
         ordering = ['-id']
         

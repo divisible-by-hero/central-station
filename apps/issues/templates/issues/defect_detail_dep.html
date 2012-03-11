@@ -23,7 +23,7 @@ $(function() {
     {% endif %}
     <a href="{% url issues.views.close_issue app_slug=defect.application.slug issue_id=defect.id %}" class="btn btn-danger pull-right">Close</a>
     
-    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}{% if defect.status == "closed" %}label-important{% endif %}{% if defect.status == "in-progress" %}label-info{% endif %}">{{ defect.status }}</span></h2>
+    <h2>Defect {{ defect.id }} is <span class="label {% if defect.status == "open" %}label-success{% endif %}{% if defect.status == "closed" %}label-important{% endif %}{% if defect.status == "in-progress" %}label-info{% endif %}">{{ defect.get_status_display }}</span></h2>
     <div class="form_item">
         <label for="description">Description</label>
         <textarea name="description" id="description" class="span9" rows="8">{{ defect.description }}</textarea>
