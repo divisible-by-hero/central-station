@@ -37,7 +37,7 @@ def issue_list(request):
     return render(request, 'issues/issue_list.html', context)
     
     
-def issue_filter(request, app_slug):
+def issue_filter(request, app_slug, filter_type=None):
     context = {}
     app = get_object_or_404(App, slug=app_slug)
     context['app'] = app
@@ -49,20 +49,21 @@ def issue_filter(request, app_slug):
         milestone = request.POST.get('filter_milestone')
         milestone_obj = Milestone.objects.get(pk=milestone)
         issues = Issue.objects.by_app(app_slug).filter(status=status, priority=priority, type=type, milestone=milestone_obj)
-        print issues
-        paginator = Paginator(issues, 40)
-        page = request.GET.get('page', 1)
-        try:
-            context['issues'] = paginator.page(page)
-        except PageNotAnInteger:
-            context['issues'] = paginator.page(1)
-        except EmptyPage:
-            context['issues'] = paginator.page(paginator.num_pages)
-        return render(request, 'issues/project_list.html', context)
     else:
-        return redirect("issues.views.open_app_issues", app_slug=app.slug)
         
-
+        # Non search, just filter.
+        return redirect("issues.views.open_app_issues", app_slug=app.slug)
+    
+    paginator = Paginator(issues, 40)
+    page = request.GET.get('page', 1)
+    try:
+        context['issues'] = paginator.page(page)
+    except PageNotAnInteger:
+        context['issues'] = paginator.page(1)
+    except EmptyPage:
+        context['issues'] = paginator.page(paginator.num_pages)
+        
+    return render(request, 'issues/project_list.html', context)
 #@todo: This is the new issues Method.  Will take a filter type and build queries
 
 
