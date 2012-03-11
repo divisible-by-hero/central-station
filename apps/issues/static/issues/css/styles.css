@@ -66,7 +66,10 @@ article.defect_detail .btn
 }
 
 
-
+a.add-comment
+{
+    cursor: pointer;
+}
 
 
 
