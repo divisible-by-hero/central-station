@@ -50,9 +50,18 @@ def issue_filter(request, app_slug, filter_type=None):
         milestone_obj = Milestone.objects.get(pk=milestone)
         issues = Issue.objects.by_app(app_slug).filter(status=status, priority=priority, type=type, milestone=milestone_obj)
     else:
-        
-        # Non search, just filter.
-        return redirect("issues.views.open_app_issues", app_slug=app.slug)
+        if filter_type == None:
+            return redirect("django.views.defaults.server_error")
+        if filter_type == "open":
+            issues = Issue.objects.open().by_app(app_slug)
+            context['open'] = True
+        elif filter_type == "closed":
+            issues = Issue.objects.closed().by_app(app_slug)
+            context['closed'] = True
+        else:
+            #All
+            issues = Issue.objects.all().by_app(app_slug)
+            context['all'] = True
     
     paginator = Paginator(issues, 40)
     page = request.GET.get('page', 1)
@@ -64,8 +73,6 @@ def issue_filter(request, app_slug, filter_type=None):
         context['issues'] = paginator.page(paginator.num_pages)
         
     return render(request, 'issues/project_list.html', context)
-#@todo: This is the new issues Method.  Will take a filter type and build queries
-
 
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
