@@ -1,0 +1,24 @@
+{% extends "issues/base.html" %}
+{% block milestones_menu_item %}class="active"{% endblock %}
+{% block issues_menu_item %}{% endblock %}
+{% block main_content %}
+{{ block.super }}
+{{ form.errors }}
+
+<article class="add_issue">
+<h2>Add Milestone</h2>
+<form method="POST" action=".">{% csrf_token %}
+   {{ form.name.label_tag }}
+   <input type="text" name="name" id="name" class="span9">
+   {{ form.description.label_tag }}
+   <textarea name="description" id="description" class="span9" rows="8"></textarea>
+   {{ form.due_date.label_tag }}
+   {{ form.due_date }}
+   <div class="clearfix"></div>
+    
+    <input type="submit" class="btn btn-primary" value="Add Milestone">
+   </form>
+</article>
+
+{% endblock %}
+

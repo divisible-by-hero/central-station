@@ -1,0 +1,52 @@
+/* Global styles */
+
+h1
+{
+    margin-bottom: 20px;
+}
+
+
+article.activity
+{
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ddd;
+}
+
+article.activity h2,
+article.activity p
+{
+    position: absolute;
+    left: 53px;
+}
+
+article.activity h2
+{
+    top: -10px;
+}
+
+article.activity p
+{
+    top: 22px;
+}
+
+article.activity img
+{
+    border-radius: 5px;
+}
+
+article.activity span.date
+{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+
+
+
+
+
+

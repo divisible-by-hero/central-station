@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block dashboard_menu_item %}{% endblock %}
+{% block users_menu_item %}class="active"{% endblock %}
+{% block main_content %}
+
+{% for user in users %}
+
+    {{ user.first_name }}
+{% endfor %}
+
+{% endblock %}

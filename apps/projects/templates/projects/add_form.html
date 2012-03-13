@@ -1,0 +1,16 @@
+{% extends "projects/base.html" %}
+
+{% block main_content %}
+<div class="padding">
+    
+    <form action="." method="POST">{% csrf_token %}
+        
+    
+    {{ form.as_p }}
+    <input type="submit" value="Add App" class="btn btn-primary">
+    </form>
+</div>
+
+
+
+{% endblock %}

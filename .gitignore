@@ -2,4 +2,10 @@
 .pydevproject
 *.pyc
 data.db
+dev.db
 .settings
+app/.sass-cache
+.sass-cache/
+django_central_station.egg-info
+dist
+
