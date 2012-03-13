@@ -72,7 +72,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "projects.context_processors.apps",
     "issues.context_processors.constants",
     "core.context_processors.settings",
-    "issues.context_processors.project_milestones",
 ) 
 
 MIDDLEWARE_CLASSES = (

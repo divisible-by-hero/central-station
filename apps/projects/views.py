@@ -80,6 +80,18 @@ def users(request, app_slug):
     context['app'] = app
     return render(request, "projects/users.html", context)
 
+def add_users(request, app_slug):
+    context = {}
+    app = get_object_or_404(App, slug=app_slug)
+    context['app'] = app
+    context['users'] = User.objects.all()
+    if request.method == "POST":
+        for item in request.POST:
+            if item != "csrfmiddlewaretoken":
+                user = User.objects.get(pk=item)
+                app.users.add(user)
+                app.save()
+    return render(request, "projects/users.html", context)
 
 ## View using pagination
 #def top_rated(request):

@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     url(r'^version/add/$', add_version, name="add_version"),
     url(r'^app/(?P<app_slug>[-\w]+)/$', app, name="app"),
     url(r'^app/(?P<app_slug>[-\w]+)/users/$', users, name="users"),
+    url(r'^app/(?P<app_slug>[-\w]+)/users_add/$', add_users, name="add_users"),
     url(r'^app/(?P<app_slug>[-\w]+)/settings/$', settings, name="app"),
     url(r'^feed/$', AppFeed()),
 #    # This is the pattern for ids or other integers
