@@ -2,7 +2,7 @@ from django.conf.urls.defaults import patterns, include, url
 from issues.views import *
 
 urlpatterns = patterns('',
-    url(r'^$', all_issues, name="all_issues"),
+    
     url(r'^app/(?P<app_slug>[-\w]+)/open/$', issue_filter, {'filter_type': 'open'}, name="open_app_issues"),
     url(r'^app/(?P<app_slug>[-\w]+)/closed/$', issue_filter, {'filter_type': 'closed'}, name="closed_app_issues"),
     url(r'^app/(?P<app_slug>[-\w]+)/close/(?P<issue_id>[-\w]+)/$', close_issue, name="close_issue",),

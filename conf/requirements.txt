@@ -5,3 +5,4 @@ hadrian
 GitPython
 django-grappelli
 sphinx
+django-api-docs

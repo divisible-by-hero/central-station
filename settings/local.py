@@ -66,12 +66,8 @@ INSTALLED_APPS = (
     'issues',
     'newsfeed',
     'projects',
-    'wiki',
-    'browser',
-    'forum',
-    'chats',
     'profile',
-    'api_docs',
+    #'api_docs',
     'hadrian.contrib.gravatar',
 
 )

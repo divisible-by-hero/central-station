@@ -8,21 +8,14 @@ from newsfeed.models import Activity
 from projects.models import App
 from django.contrib import messages
 from django.db.models import Q
+from django.contrib.auth.decorators import login_required
 
 #@todo: Clean up this file badly.  Decision is still pending on defects/issues/bugs.
+#@todo: Make adding comments Ajaxy
+#@todo: Make moving defect states, ajaxy
 
-
-def project_milestones(app_slug=None):
-    return Milestone.objects.filter(app__slug=app_slug)
-
-#@todo: Remove this:
 '''
-def all_issues(request):
-    context = {'issues': Issue.objects.open()}
-    return render(request, 'issues/issue_list.html', context)
-'''
-#@todo: Map filters to these, about 3 or four functions could be slimmed down based upon filtering.
-
+@login_required
 def issue_list(request):
     context = {'defect_count': Defect.objects.count()}
     context['defects'] = Defect.objects.all()
@@ -35,13 +28,13 @@ def issue_list(request):
     except EmptyPage:
         context['defects'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/issue_list.html', context)
-    
-    
+'''    
+@login_required
 def issue_filter(request, app_slug, filter_type=None):
     context = {}
     app = get_object_or_404(App, slug=app_slug)
     context['app'] = app
-    context['project_milestones'] = project_milestones()
+    context['project_milestones'] = Milestone.objects.filter(app__slug=app_slug)
     if request.method == "POST":
         status = request.POST.get('filter_status')
         priority = request.POST.get('filter_priority')
@@ -73,10 +66,11 @@ def issue_filter(request, app_slug, filter_type=None):
         context['issues'] = paginator.page(paginator.num_pages)
         
     return render(request, 'issues/project_list.html', context)
-
+'''
+@login_required
 def open_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    context = {'issues': Issue.objects.open().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
+    context = {'issues': Issue.objects.open().by_app(app_slug), 'app':app}
     paginator = Paginator(context['issues'], 20)
     context['open'] = True
     page = request.GET.get('page', 1)
@@ -88,6 +82,7 @@ def open_app_issues(request, app_slug):
         context['issues'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/project_list.html', context)
 
+@login_required
 def closed_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     context = {'issues': Issue.objects.closed().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
@@ -102,6 +97,7 @@ def closed_app_issues(request, app_slug):
         context['issues'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/project_list.html', context)
 
+@login_required
 def no_filter_app_issues(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
@@ -115,18 +111,21 @@ def no_filter_app_issues(request, app_slug):
     except EmptyPage:
         context['issues'] = paginator.page(paginator.num_pages)
     return render(request, 'issues/project_list.html', context)
-
+'''
+@login_required
 def close_issue(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
     issue.close()
     messages.add_message(request, messages.INFO, "Issue %s Closed" % issue_id)
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
-       
+
+@login_required       
 def move_to_in_progress(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
     issue.move_to_in_progress()
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
 
+@login_required
 def handle_comment(request):
     if request.POST:
         form = CommentForm(request.POST, request.FILES)
@@ -140,8 +139,8 @@ def handle_comment(request):
             return redirect("defect_detail", defect_id=issue.id, app_slug=issue.application.slug)
     return redirect("newsfeed.views.dashboard")
 
-
-def defect_detail(request, defect_id, app_slug=None):
+@login_required
+def defect_detail(request, defect_id, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     issue = get_object_or_404(Issue, pk=defect_id)
     comments = Comment.objects.filter(issue=issue)
@@ -164,7 +163,7 @@ def defect_detail(request, defect_id, app_slug=None):
         context['comment_form'] = comment_form
     return render(request, 'issues/defect_detail_dep.html', context)
 
-
+@login_required
 def add_defect(request, app_slug):
     context = {}
     app = get_object_or_404(App, slug=app_slug)
@@ -192,7 +191,7 @@ def add_defect(request, app_slug):
     
     return render(request, 'issues/add_defect.html', context)
     
-    
+@login_required    
 def add_milestone(request, app_slug):
     context = {}
     app = get_object_or_404(App, slug=app_slug)
@@ -211,6 +210,7 @@ def add_milestone(request, app_slug):
     return render(request, 'issues/add_milestone.html', context)
     
 # Milestones
+@login_required
 def milestone_list(request, app_slug):
     context = {}
     app = get_object_or_404(App, slug=app_slug)

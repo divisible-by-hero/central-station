@@ -13,14 +13,17 @@ from issues.models import Milestone
 from django.contrib.auth.decorators import login_required
 from newsfeed.models import Activity
 
+@login_required
 def version_list(request):
     context = {'versions': Version.objects.all()}
     return render(request, 'projects/version_list.html', context)
 
+@login_required
 def app_list(request):
     context = {'apps': App.objects.all()}
     return render(request, 'projects/app_list.html', context)
 
+@login_required
 def add_application(request):
     if request.method == "POST":
         form = ApplicationForm(request.POST)
@@ -37,10 +40,12 @@ def add_application(request):
 
     return render(request, 'projects/add_form.html', context)
 
+@login_required
 def add_version(request):
     context = {'form': VersionForm()}
     return render(request, 'projects/add_form.html', context)
 
+@login_required
 def app(request, app_slug):
     context = {'app': get_object_or_404(App, slug=app_slug)}
     context['feed'] = Activity.objects.by_app(app_slug)
@@ -50,6 +55,7 @@ def app(request, app_slug):
 '''
     Settings View - Show and enable the change of settings per project
 '''
+@login_required
 def settings(request, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     if request.method == "POST":
@@ -66,6 +72,7 @@ def settings(request, app_slug):
     context = {'form':form, 'app':app}
     return render(request, 'projects/project_settings.html', context)
 
+@login_required
 def users(request, app_slug):
     context = {}
     app = get_object_or_404(App, slug=app_slug)

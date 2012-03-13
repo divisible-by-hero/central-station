@@ -2,12 +2,15 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from projects.models import App
 from profile.forms import *
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def all_users(request):
     context = {'users': User.objects.all()}
 
     return render(request, 'profile/user_list.html', context)
 
+@login_required
 def settings(request):
     user_profile, created = UserProfile.objects.get_or_create(user=request.user)
     if request.method == "POST":
@@ -19,6 +22,7 @@ def settings(request):
     context = {'form':form}
     return render(request, 'profile/settings.html', context)
 
+@login_required
 def app_user_list(request, app_slug):
     context = {'app':get_object_or_404(App, slug=app_slug)}
     

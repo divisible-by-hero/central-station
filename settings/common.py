@@ -72,6 +72,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "projects.context_processors.apps",
     "issues.context_processors.constants",
     "core.context_processors.settings",
+    "issues.context_processors.project_milestones",
 ) 
 
 MIDDLEWARE_CLASSES = (
@@ -80,7 +81,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'api_docs.middleware.ContentTypeMiddleware',
+    #'api_docs.middleware.ContentTypeMiddleware',
     #'hadrian.utils.auth.middleware.RequireLoginMiddleware',
 )
 

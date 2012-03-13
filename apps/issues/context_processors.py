@@ -1,4 +1,5 @@
 from issues.choices import *
+from issues.models import *
 
 def constants(request):
     context = {}
@@ -8,3 +9,11 @@ def constants(request):
     return context
     
     
+def project_milestones(request, *args, **kwargs):
+    context = {}
+    try:
+        if kwargs.pop('app_slug'):
+            context['project_milestones'] = Milestone.objects.filter(app__slug=app_slug)
+    except:
+        pass
+    return context

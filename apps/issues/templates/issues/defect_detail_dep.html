@@ -38,7 +38,8 @@ $(function() {
     {% endif %}
     </form>
     <h3>Comments</h3>
-    <a class="pull-right" id="add-comment">Add Comment</a>
+    <a class="pull-left" id="add-comment">Add Comment</a>
+    <div class="clearfix"></div>
     <form method="post" action="{% url issues.views.handle_comment %}" id="comment-form">{% csrf_token %}
     <input type="hidden" value="{{ defect.id }}" name="issue_id">
     {{ comment_form.comment.label_tag }}
