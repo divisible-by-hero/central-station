@@ -10,7 +10,7 @@ from django.contrib import messages
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 
-#@todo: Clean up this file badly.  Decision is still pending on defects/issues/bugs.
+#@todo: Clean up this file badly.  Decision is still pending on defects/issues/bugs. ITs ISSUES!
 #@todo: Make adding comments Ajaxy
 #@todo: Make moving defect states, ajaxy
 

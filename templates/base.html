@@ -30,9 +30,29 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    
   </head>
 
   <body>
+	<div class="modal hide fade" id="myModal">
+            <div class="modal-header">
+              <a data-dismiss="modal" class="close">×</a>
+              <h3>Add A User to this Project</h3>
+            </div>
+            <form method="POST" action=".">
+            <div class="modal-body">
+             
+              <h3>Hello</</h3>
+          </div>
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Add User(s)">
+              <a data-dismiss="modal" class="btn" href="#">Close</a>
+              
+            </div>
+            </form>
+          </div>
+
+
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -68,7 +88,7 @@
                   <ul class="dropdown-menu">
                       <li><a href="#">All Users</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Add</a></li>
+                      <li><a href="#myModal" data-toggle="modal">Add Users</a></li>
                   </ul>
               </li>
               <li><a href="{% url core.views.change_settings %}">Settings</a></li>

@@ -14,11 +14,10 @@
                   <thead>
                   <tr>
                       <th></th>
-                  
                       <th>Username</th>
                       <th>First Name</th>
                       <th>Last Name</th>
-                      
+                      <th>Role</th>
                   </tr>
                   </thead>
                   <tbody>
@@ -30,6 +29,7 @@
                       <td>{{ user.username }}</td>
                       <td>{{ user.first_name }}</td>
                       <td>{{ user.last_name }}</td>
+                  	  <td>{{ user.get_profile.role }}</td>
                   </tr>
                   {% endfor %}
                   </tbody>
@@ -48,21 +48,20 @@
     <thead>
     <tr>
         <th></th>
-        <th>User ID</th>
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
-        
+        <th>Role</th>
     </tr>
     </thead>
     <tbody>
     {% for user in app.users.all %}
     <tr>
         <td><input type="checkbox" name="check_{{ user.id }}" id="check_{{ user.id }}"></td>
-        <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
+    	<td>{{ user.get_profile.get_role_display }}</td>
     </tr>
     {% endfor %}
     </tbody>
