@@ -27,17 +27,17 @@ article.add_issue form div.form-inline select
     margin-right: 45px;
 }
 
-article.defect_detail h2
+article.issue_detail h2
 {
     margin-top: 10px;
 }
 
-article.defect_detail h2 span.label
+article.issue_detail h2 span.label
 {
     font-size: 24px;
 }
 
-article.defect_detail .btn
+article.issue_detail .btn
 {
     margin-right: 8px;
 }
