@@ -81,7 +81,7 @@ def handle_comment(request):
 @login_required
 def issue_detail(request, issue_id, app_slug):
     app = get_object_or_404(App, slug=app_slug)
-    issue = get_object_or_404(Issue, pk=defect_id)
+    issue = get_object_or_404(Issue, pk=issue_id)
     comments = Comment.objects.filter(issue=issue)
     context = {'issue': issue}
     context['app'] = app

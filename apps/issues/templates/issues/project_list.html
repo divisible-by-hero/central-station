@@ -8,7 +8,7 @@
         <li {% if closed %}class="active"{% endif %}><a href="{% url closed_app_issues app_slug=app.slug %}">Closed</a></li>
         
       </ul>
-      <a href="{% url issues.views.add_defect app_slug=app.slug %}" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Issue</a>
+      <a href="{% url issues.views.add_issue app_slug=app.slug %}" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Issue</a>
       <div class="clearfix"></div>
 {% include "issues/issue_list.html" %}
 {% endblock %}

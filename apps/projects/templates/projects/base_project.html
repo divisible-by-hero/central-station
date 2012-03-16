@@ -8,7 +8,7 @@
 <li {% block dashboard_menu_item %}{% endblock %}>
 <a href="{% url projects.views.app app_slug=app.slug %}">Dashboard</a>
 </li>
-<li {% block issues_menu_item %}{% endblock %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Issues</a></li>
+<li {% block issues_menu_item %}{% endblock %}><a href="{% url issues.views.issue_filter app_slug=app.slug %}">Issues</a></li>
 <li {% block milestones_menu_item %}{% endblock %}><a href="{% url issues.views.milestone_list app_slug=app.slug %}">Milestones</a></li>
 <li {% block users_menu_item %}{% endblock %}><a href="{% url projects.views.users app_slug=app.slug %}">Users</a></li>
 <li {% block settings_menu_item %}{% endblock %}><a href="{% url projects.views.settings app_slug=app.slug %}">Settings</a></li>

@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models.query import QuerySet
 
 class ActivityMixin(object):
     def by_app(self, app_slug):
