@@ -80,7 +80,7 @@ def handle_comment(request):
     return redirect("newsfeed.views.dashboard")
 
 @login_required
-def defect_detail(request, defect_id, app_slug):
+def issue_detail(request, issue_id, app_slug):
     app = get_object_or_404(App, slug=app_slug)
     issue = get_object_or_404(Issue, pk=defect_id)
     comments = Comment.objects.filter(issue=issue)
