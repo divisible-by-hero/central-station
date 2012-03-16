@@ -73,6 +73,7 @@
                       <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
+                  		<li class="nav-header">Active Projects</li>
                       {% for app in apps %}
                       <li><a href="{{ app.get_absolute_url }}">{{ app.name }}</a></li>
                       {% endfor %}
