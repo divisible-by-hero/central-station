@@ -19,9 +19,9 @@ class App(models.Model):
     def __unicode__(self):
         return self.name
     
-    def save(self):
+    def save(self, *args, **kwargs):
         unique_slugify(self, self.name)
-        super(App, self).save()
+        super(App, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):

@@ -29,6 +29,7 @@ def add_application(request):
         form = ApplicationForm(request.POST)
         if form.is_valid():
             app = form.save()
+            app.users.add(request.user)
             activity = Activity(application=app)
             activity.action = "Created a new application, %s" % app.name
             activity.user = request.user
