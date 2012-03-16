@@ -1,23 +1,13 @@
 from django.db import models
 from django.contrib.auth.models import User
 from projects.models import App
-#from defects.models import Defect
 from issues.models import Issue
 from django.db.models.query import QuerySet
+from newsfeed.managers import *
 
-class ActivityMixin(object):
-    def by_app(self, app_slug):
-        return self.filter(application__slug=app_slug)
-
-class ActivityQuerySet(QuerySet, ActivityMixin):
-    pass
-
-class ActivityManager(models.Manager, ActivityMixin):
-    def get_query_set(self):
-        return ActivityQuerySet(self.model, using=self._db)
- 
 
 class Activity(models.Model):
+    # This needs to take a model object and an object_id
     user = models.ForeignKey(User)
     action = models.CharField(max_length=400)
     application = models.ForeignKey(App, blank=True, null=True)
