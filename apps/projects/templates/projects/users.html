@@ -2,7 +2,7 @@
 {% block users_menu_item %}class="active"{% endblock %}
 {% block main_content %}
 {{ block.super }}
-<div class="modal hide fade" id="myModal">
+<div class="modal hide fade" id="projectUsers">
             <div class="modal-header">
               <a data-dismiss="modal" class="close">×</a>
               <h3>Add A User to this Project</h3>
@@ -42,7 +42,7 @@
             </div>
             </form>
           </div>
-<h2>Users<a href="#myModal" data-toggle="modal" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Users</a></h2>
+<h2>Users<a href="#projectUsers" data-toggle="modal" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Users</a></h2>
 
 <table class="table table-striped">
     <thead>

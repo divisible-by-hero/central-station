@@ -28,8 +28,8 @@ class App(models.Model):
         return ('projects.views.app', (), {'app_slug': self.slug})
     
     @property        
-    def open_defects(self):
-        return Issues.objects.open().by_app(self.slug).count()
+    def open_issues(self):
+        return "5"
     
     
 
