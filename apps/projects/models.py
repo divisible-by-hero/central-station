@@ -8,7 +8,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from hadrian.utils.slugs import unique_slugify
 from projects.choices import *
-
+from issues.models import *
 
 class App(models.Model):
     name = models.CharField(max_length=250)
@@ -19,16 +19,17 @@ class App(models.Model):
     def __unicode__(self):
         return self.name
     
-    def save(self):
+    def save(self, *args, **kwargs):
         unique_slugify(self, self.name)
-        super(App, self).save()
+        super(App, self).save(*args, **kwargs)
 
     @models.permalink
     def get_absolute_url(self):
         return ('projects.views.app', (), {'app_slug': self.slug})
-        
+    
+    @property        
     def open_defects(self):
-        return "6"
+        return Issues.objects.open().by_app(self.slug).count()
     
     
 
