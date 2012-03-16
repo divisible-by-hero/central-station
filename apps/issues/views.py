@@ -13,22 +13,7 @@ from django.contrib.auth.decorators import login_required
 #@todo: Clean up this file badly.  Decision is still pending on defects/issues/bugs. ITs ISSUES!
 #@todo: Make adding comments Ajaxy
 #@todo: Make moving defect states, ajaxy
-
-'''
-@login_required
-def issue_list(request):
-    context = {'defect_count': Defect.objects.count()}
-    context['defects'] = Defect.objects.all()
-    paginator = Paginator(context['defects'], 40)
-    page = request.GET.get('page', 1)
-    try:
-        context['defects'] = paginator.page(page)
-    except PageNotAnInteger:
-        context['defects'] = paginator.page(1)
-    except EmptyPage:
-        context['defects'] = paginator.page(paginator.num_pages)
-    return render(request, 'issues/issue_list.html', context)
-'''    
+    
 @login_required
 def issue_filter(request, app_slug, filter_type=None):
     context = {}
@@ -66,52 +51,7 @@ def issue_filter(request, app_slug, filter_type=None):
         context['issues'] = paginator.page(paginator.num_pages)
         
     return render(request, 'issues/project_list.html', context)
-'''
-@login_required
-def open_app_issues(request, app_slug):
-    app = get_object_or_404(App, slug=app_slug)
-    context = {'issues': Issue.objects.open().by_app(app_slug), 'app':app}
-    paginator = Paginator(context['issues'], 20)
-    context['open'] = True
-    page = request.GET.get('page', 1)
-    try:
-        context['issues'] = paginator.page(page)
-    except PageNotAnInteger:
-        context['issues'] = paginator.page(1)
-    except EmptyPage:
-        context['issues'] = paginator.page(paginator.num_pages)
-    return render(request, 'issues/project_list.html', context)
 
-@login_required
-def closed_app_issues(request, app_slug):
-    app = get_object_or_404(App, slug=app_slug)
-    context = {'issues': Issue.objects.closed().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
-    paginator = Paginator(context['issues'], 20)
-    context['closed'] = True
-    page = request.GET.get('page', 1)
-    try:
-        context['issues'] = paginator.page(page)
-    except PageNotAnInteger:
-        context['issues'] = paginator.page(1)
-    except EmptyPage:
-        context['issues'] = paginator.page(paginator.num_pages)
-    return render(request, 'issues/project_list.html', context)
-
-@login_required
-def no_filter_app_issues(request, app_slug):
-    app = get_object_or_404(App, slug=app_slug)
-    context = {'issues': Issue.objects.all().by_app(app_slug), 'app':app, 'project_milestones':project_milestones()}
-    paginator = Paginator(context['issues'], 20)
-    context['all'] = True
-    page = request.GET.get('page', 1)
-    try:
-        context['issues'] = paginator.page(page)
-    except PageNotAnInteger:
-        context['issues'] = paginator.page(1)
-    except EmptyPage:
-        context['issues'] = paginator.page(paginator.num_pages)
-    return render(request, 'issues/project_list.html', context)
-'''
 @login_required
 def close_issue(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
