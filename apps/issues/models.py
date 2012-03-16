@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from hadrian.utils.slugs import unique_slugify
 from issues.choices import *
 from projects.models import App
+from newsfeed.models import Activity
 from datetime import date
 # Create your models here.
 
@@ -72,10 +73,17 @@ class Issue(models.Model):
     def get_absolute_url(self):
         return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
     
-    def close(self):
+    def close(self, user):
         # Do something
         self.status = "closed"
         self.save()
+        activity = Activity(application=self.application)
+        activity.user = user
+        activity.action = "Closed issue #%s" % self.id
+        activity.issue = self
+        activity.save()
+
+        
     
     def move_to_in_progress(self):
         self.status = "in-progress"

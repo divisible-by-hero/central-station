@@ -115,7 +115,7 @@ def no_filter_app_issues(request, app_slug):
 @login_required
 def close_issue(request, app_slug, issue_id):
     issue = Issue.objects.get(pk=issue_id)
-    issue.close()
+    issue.close(request.user)
     messages.add_message(request, messages.INFO, "Issue %s Closed" % issue_id)
     return redirect("defect_detail", defect_id=issue_id, app_slug=issue.application.slug)
 
