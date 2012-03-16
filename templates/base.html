@@ -96,8 +96,10 @@
             </ul>
             
             
-            <ul class="nav pull-right">
+            <ul class="nav pull-right user">
                 <li class="dropdown">
+                	{% load gravatar_tags %}
+                    <img src="{% get_gravatar request.user.email 30 %}" class="profile_img pull-left">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }}
                         <b class="caret"></b>
                     </a>

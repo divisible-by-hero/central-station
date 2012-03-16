@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 from projects.models import App
 from issues.models import Issue
-from django.db.models.query import QuerySet
 from newsfeed.managers import *
 
 
