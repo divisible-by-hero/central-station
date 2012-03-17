@@ -9,3 +9,5 @@ class UserFactory(factory.Factory):
 
 class IssueFactory(factory.Factory):
     FACTORY_FOR = Issue
+
+    issue.creator = factory.SubFactory(UserFactory)
