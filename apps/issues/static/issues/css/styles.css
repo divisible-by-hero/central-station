@@ -73,6 +73,119 @@ a#add-comment
 
 
 
+.datepicker {
+    background-clip: padding-box;
+    background-color: #FFFFFF;
+    border-color: rgba(0, 0, 0, 0.2);
+    border-radius: 4px 4px 4px 4px;
+    border-style: solid;
+    border-width: 1px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    display: none;
+    margin-bottom: 18px;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 4px;
+    position: absolute;
+    width: 218px;
+    z-index: 900;
+}
+.datepicker .nav {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #DDDDDD;
+    box-shadow: 0 1px 0 #FFFFFF inset;
+    color: #808080;
+    font-weight: bold;
+    padding: 4px 0;
+    width: 100%;
+}
+.datepicker .nav:before, .datepicker .nav:after {
+    content: "";
+    display: table;
+}
+.datepicker .nav:after {
+    clear: both;
+}
+.datepicker .nav span {
+    display: block;
+    float: left;
+    height: 28px;
+    line-height: 28px;
+    position: relative;
+    text-align: center;
+}
+.datepicker .nav .bg {
+    background-color: #FDF5D9;
+    border-radius: 4px 4px 4px 4px;
+    height: 28px;
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.datepicker .nav .fg {
+    left: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+.datepicker .button {
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+    padding: 0 4px;
+}
+.datepicker .button:hover {
+    background-color: #808080;
+    color: #FFFFFF;
+}
+.datepicker .months {
+    float: left;
+    margin-left: 4px;
+}
+.datepicker .months .name {
+    padding: 0;
+    width: 72px;
+}
+.datepicker .years {
+    float: right;
+    margin-right: 4px;
+}
+.datepicker .years .name {
+    padding: 0;
+    width: 36px;
+}
+.datepicker .dow, .datepicker .days div {
+    float: left;
+    line-height: 25px;
+    text-align: center;
+    width: 30px;
+}
+.datepicker .dow {
+    color: #808080;
+    font-weight: bold;
+}
+.datepicker .calendar {
+    padding: 4px;
+}
+.datepicker .days div {
+    border-radius: 4px 4px 4px 4px;
+    cursor: pointer;
+}
+.datepicker .days div:hover {
+    background-color: #0064CD;
+    color: #FFFFFF;
+}
+.datepicker .overlap {
+    color: #BFBFBF;
+}
+.datepicker .today {
+    background-color: #FEE9CC;
+}
+.datepicker .selected {
+    background-color: #BFBFBF;
+    color: #FFFFFF;
+}
+
 
 
 

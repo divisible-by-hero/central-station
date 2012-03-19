@@ -38,15 +38,15 @@
 	<div class="modal hide fade" id="myModal">
             <div class="modal-header">
               <a data-dismiss="modal" class="close">×</a>
-              <h3>Add A User to this Project</h3>
+              <h3>Add A User</h3>
             </div>
             <form method="POST" action=".">
             <div class="modal-body">
-             
-              <h3>Hello</</h3>
+            {{ new_user_form }}
+              
           </div>
             <div class="modal-footer">
-              <input type="submit" class="btn btn-primary" value="Add User(s)">
+              <input type="submit" class="btn btn-primary" value="Add User">
               <a data-dismiss="modal" class="btn" href="#">Close</a>
               
             </div>
@@ -102,7 +102,7 @@
                     {% if request.user.is_authenticated %}
                 	{% load gravatar_tags %}
                     <img src="{% get_gravatar request.user.email 30 %}" class="profile_img pull-left">
-                    {% endfor %}
+                    {% endif %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }}
                         <b class="caret"></b>
                     </a>
