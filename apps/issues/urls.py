@@ -1,5 +1,10 @@
 from django.conf.urls.defaults import patterns, include, url
+from issues.api import IssueResource
+from tastypie.api import Api
 from issues.views import *
+
+v1_api = Api(api_name="v1")
+v1_api.register(IssueResource())
 
 urlpatterns = patterns('',
     
@@ -14,5 +19,7 @@ urlpatterns = patterns('',
     url(r'^(?P<app_slug>[-\w]+)/add/$', add_issue, name="add_issue"),
     url(r'^(?P<app_slug>[-\w]+)/milestone/add/$', add_milestone, name="add_milestone"),
     url(r'^handle_comment/$', handle_comment, name="handle_comment"),
+    
+    url(r'^api/', include(v1_api.urls)),
     
 )
