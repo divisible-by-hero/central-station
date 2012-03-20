@@ -9,6 +9,7 @@
 
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}css/bootstrap.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/font-awesome.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     <style type="text/css">
@@ -18,7 +19,7 @@
       }
     </style>
     {% block extra_style %}{% endblock %}
-    <link href="{{ STATIC_URL }}css/responsive.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -30,9 +31,29 @@
     <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
+    
   </head>
 
   <body>
+	<div class="modal hide fade" id="myModal">
+            <div class="modal-header">
+              <a data-dismiss="modal" class="close">×</a>
+              <h3>Add A User</h3>
+            </div>
+            <form method="POST" action=".">
+            <div class="modal-body">
+            {{ new_user_form }}
+              
+          </div>
+            <div class="modal-footer">
+              <input type="submit" class="btn btn-primary" value="Add User">
+              <a data-dismiss="modal" class="btn" href="#">Close</a>
+              
+            </div>
+            </form>
+          </div>
+
+
 
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
@@ -52,6 +73,7 @@
                       <b class="caret"></b>
                   </a>
                   <ul class="dropdown-menu">
+                  		<li class="nav-header">Active Projects</li>
                       {% for app in apps %}
                       <li><a href="{{ app.get_absolute_url }}">{{ app.name }}</a></li>
                       {% endfor %}
@@ -68,15 +90,19 @@
                   <ul class="dropdown-menu">
                       <li><a href="#">All Users</a></li>
                       <li class="divider"></li>
-                      <li><a href="#">Add</a></li>
+                      <li><a href="#myModal" data-toggle="modal">Add Users</a></li>
                   </ul>
               </li>
               <li><a href="{% url core.views.change_settings %}">Settings</a></li>
             </ul>
             
             
-            <ul class="nav pull-right">
+            <ul class="nav pull-right user">
                 <li class="dropdown">
+                    {% if request.user.is_authenticated %}
+                	{% load gravatar_tags %}
+                    <img src="{% get_gravatar request.user.email 30 %}" class="profile_img pull-left">
+                    {% endif %}
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{{ request.user.username }}
                         <b class="caret"></b>
                     </a>
@@ -108,7 +134,7 @@
         </div>
         {% endfor %}
         {% endif %}
-          <div class="span11">
+          <div class="span9">
               <div class="main_content">
               {% block main_content %}
               {% endblock %}

@@ -2,63 +2,66 @@
 {% block users_menu_item %}class="active"{% endblock %}
 {% block main_content %}
 {{ block.super }}
-<div class="modal hide fade" id="myModal">
+<div class="modal hide fade" id="projectUsers">
             <div class="modal-header">
               <a data-dismiss="modal" class="close">×</a>
               <h3>Add A User to this Project</h3>
             </div>
+            <form method="POST" action="{% url projects.views.add_users app_slug=app.slug %}">{% csrf_token %}
             <div class="modal-body">
              
               <table class="table table-striped">
                   <thead>
                   <tr>
                       <th></th>
-                      <th>User ID</th>
                       <th>Username</th>
                       <th>First Name</th>
                       <th>Last Name</th>
-                      
+                      <th>Role</th>
                   </tr>
                   </thead>
                   <tbody>
+                  
                   {% for user in users %}
                   <tr>
-                      <td><input type="checkbox" name="check_{{ user.id }}" id="check_{{ user.id }}"></td>
-                      <td>{{ user.id }}</td>
+                      <td><input type="checkbox" name="{{ user.id }}" id="{{ user.id }}"></td>
+                      
                       <td>{{ user.username }}</td>
                       <td>{{ user.first_name }}</td>
                       <td>{{ user.last_name }}</td>
+                  	  <td>{{ user.get_profile.role }}</td>
                   </tr>
                   {% endfor %}
                   </tbody>
               </table>
           </div>
             <div class="modal-footer">
-              <a class="btn btn-primary" href="#">Add User(s)</a>
+              <input type="submit" class="btn btn-primary" value="Add User(s)">
               <a data-dismiss="modal" class="btn" href="#">Close</a>
+              
             </div>
+            </form>
           </div>
-<h2>Users<a href="#myModal" data-toggle="modal" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Users</a></h2>
+<h2>Users<a href="#projectUsers" data-toggle="modal" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Users</a></h2>
 
 <table class="table table-striped">
     <thead>
     <tr>
         <th></th>
-        <th>User ID</th>
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
-        
+        <th>Role</th>
     </tr>
     </thead>
     <tbody>
     {% for user in app.users.all %}
     <tr>
         <td><input type="checkbox" name="check_{{ user.id }}" id="check_{{ user.id }}"></td>
-        <td>{{ user.id }}</td>
         <td>{{ user.username }}</td>
         <td>{{ user.first_name }}</td>
         <td>{{ user.last_name }}</td>
+    	<td>{{ user.get_profile.get_role_display }}</td>
     </tr>
     {% endfor %}
     </tbody>

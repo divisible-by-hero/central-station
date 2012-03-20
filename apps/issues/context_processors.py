@@ -7,4 +7,3 @@ def constants(request):
     context['status_choices'] = STATUS_CHOICES
     return context
     
-    

@@ -2,7 +2,6 @@ from __future__ import division
 from django.db import models
 from issues.managers import IssueManager
 from django.contrib.auth.models import User
-from hadrian.utils.slugs import unique_slugify
 from issues.choices import *
 from projects.models import App
 from datetime import date
@@ -19,7 +18,11 @@ class Milestone(models.Model):
         
     @property
     def complete(self):
-        return False
+        issues = Issue.objects.by_milestone(self.id).count()
+        if issues == 0:
+            return True
+        else:
+            return False
     
     @property    
     def progress(self):
@@ -66,8 +69,17 @@ class Issue(models.Model):
     
     @models.permalink
     def get_absolute_url(self):
-        return ('issues.views.defect_detail', (), {'app_slug': self.application.slug, 'defect_id': self.id})
-        
+        return ('issues.views.issue_detail', (), {'app_slug': self.application.slug, 'issue_id': self.id})
+    
+    def close(self, user):
+        # Do something
+        self.status = "closed"
+        self.save()
+    
+    def move_to_in_progress(self):
+        self.status = "in-progress"
+        self.save()
+    
     class Meta:
         ordering = ['-id']
         

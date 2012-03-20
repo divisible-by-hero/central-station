@@ -5,6 +5,17 @@ h1
     margin-bottom: 20px;
 }
 
+.nav img.profile_img
+{
+	border-radius: 5px;
+	margin-top: 5px;
+
+}
+
+.nav.user a.dropdown-toggle
+{
+	display: inline-block;
+}
 
 article.activity
 {

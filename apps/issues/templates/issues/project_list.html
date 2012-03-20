@@ -3,12 +3,12 @@
 {{ block.super }}
 <h2>Issues</h2>
 <ul class="nav nav-pills pull-left">
-        <li {% if all %}class="active"{% endif %}><a href="{% url issues.views.no_filter_app_issues app_slug=app.slug %}">All</a></li>
-        <li {% if open %}class="active"{% endif %}><a href="{% url issues.views.open_app_issues app_slug=app.slug %}">Open</a></li>
-        <li {% if closed %}class="active"{% endif %}><a href="{% url issues.views.closed_app_issues app_slug=app.slug %}">Closed</a></li>
+        <li {% if all %}class="active"{% endif %}><a href="{% url no_filter_app_issues app_slug=app.slug %}">All</a></li>
+        <li {% if open %}class="active"{% endif %}><a href="{% url open_app_issues app_slug=app.slug %}">Open</a></li>
+        <li {% if closed %}class="active"{% endif %}><a href="{% url closed_app_issues app_slug=app.slug %}">Closed</a></li>
         
       </ul>
-      <a href="{% url issues.views.add_defect app_slug=app.slug %}" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Issue</a>
+      <a href="{% url issues.views.add_issue app_slug=app.slug %}" class="btn btn-success btn-small pull-right"><i class="icon-plus icon-white"></i>Add Issue</a>
       <div class="clearfix"></div>
 {% include "issues/issue_list.html" %}
 {% endblock %}

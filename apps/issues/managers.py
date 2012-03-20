@@ -6,7 +6,6 @@ class IssueMixin(object):
     def open(self):
         return self.filter(Q(status="in-progress") | Q(status="open"))
 
-        
     def by_app(self, app_slug):
         return self.filter(application__slug=app_slug)
     

@@ -5,3 +5,5 @@ hadrian
 GitPython
 django-grappelli
 sphinx
+django-api-docs
+factory_boy
