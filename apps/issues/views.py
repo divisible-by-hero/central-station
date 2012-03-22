@@ -75,7 +75,7 @@ def handle_comment(request):
             obj.issue = issue
             obj.save()
             messages.add_message(request, messages.SUCCESS, "Comment Added")
-            return redirect("defect_detail", defect_id=issue.id, app_slug=issue.application.slug)
+            return redirect("issue_detail", issue_id=issue.id, app_slug=issue.application.slug)
     return redirect("newsfeed.views.dashboard")
 
 @login_required
