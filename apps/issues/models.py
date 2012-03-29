@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from issues.choices import *
 from projects.models import App
 from datetime import date
+
 # Create your models here.
 
 class Milestone(models.Model):

@@ -65,6 +65,7 @@ INSTALLED_APPS = (
     'newsfeed',
     'projects',
     'profile',
+    'haystack',
     #'api_docs',
     'hadrian.contrib.gravatar',
 

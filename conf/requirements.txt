@@ -8,3 +8,4 @@ sphinx
 django-api-docs
 factory_boy
 coverage
+django-haystack
