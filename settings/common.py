@@ -96,6 +96,9 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+HAYSTACK_SITECONF='search_indexes'
+HAYSTACK_SEARCH_ENGINE = 'whoosh'
+
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
