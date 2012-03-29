@@ -1,4 +1,4 @@
-from django.conf.urls.defaults import patterns, include, url
+from django.conf.urls import patterns, include, url
 from issues.api import IssueResource
 from tastypie.api import Api
 from issues.views import *
