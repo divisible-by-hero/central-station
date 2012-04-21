@@ -3,7 +3,10 @@
 echo "** Running Unit Tests **"
 
 echo "** Core **"
-coverage -x manage.py test core --settings=settings.local
+coverage -x manage.py test core --settings=settings.test
+
+echo "** Issues **"
+coverage -x manage.py test issues --settings=settings.test
 
 echo "** WRITING COVERAGE **"
 coverage html -d ./reports/coverage_html

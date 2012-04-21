@@ -1,25 +1,28 @@
-Name                     Stmts   Miss  Cover   Missing
-------------------------------------------------------
-apps/core/__init__           0      0   100%   
-apps/core/models             5      1    80%   7
-apps/issues/__init__         0      0   100%   
-apps/issues/choices          6      0   100%   
-apps/issues/managers        17      5    71%   7, 10, 13, 16, 23
-apps/issues/models          72     25    65%   17, 21-25, 29-34, 38, 42, 46-49, 68, 72, 76-77, 80-81, 96, 100-103
-apps/newsfeed/__init__       0      0   100%   
-apps/newsfeed/managers      10      2    80%   6, 13
-apps/newsfeed/models        16      1    94%   20
-apps/profile/__init__        0      0   100%   
-apps/profile/choices         1      0   100%   
-apps/profile/models          9      1    89%   12
-apps/projects/__init__       0      0   100%   
-apps/projects/choices        1      0   100%   
-apps/projects/models        19      5    74%   20, 23-24, 28, 32
-conf/__init__                0      0   100%   
-conf/environment            15      0   100%   
-manage                       6      0   100%   
-settings/__init__            0      0   100%   
-settings/common             19      0   100%   
-settings/local              14      0   100%   
-------------------------------------------------------
-TOTAL                      210     40    81%   
+Name                         Stmts   Miss  Cover   Missing
+----------------------------------------------------------
+apps/core/__init__               0      0   100%   
+apps/core/models                 5      1    80%   7
+apps/issues/__init__             0      0   100%   
+apps/issues/choices              6      0   100%   
+apps/issues/managers            17      5    71%   7, 10, 13, 16, 23
+apps/issues/models              72     25    65%   17, 21-25, 29-34, 38, 42, 46-49, 68, 72, 76-77, 80-81, 96, 100-103
+apps/issues/tests/__init__       1      0   100%   
+apps/issues/tests/tests          1      0   100%   
+apps/newsfeed/__init__           0      0   100%   
+apps/newsfeed/managers          10      2    80%   6, 13
+apps/newsfeed/models            16      1    94%   20
+apps/profile/__init__            0      0   100%   
+apps/profile/choices             1      0   100%   
+apps/profile/models              9      1    89%   12
+apps/projects/__init__           0      0   100%   
+apps/projects/choices            1      0   100%   
+apps/projects/models            19      5    74%   20, 23-24, 28, 32
+conf/__init__                    0      0   100%   
+conf/environment                15      0   100%   
+manage                           6      0   100%   
+settings/__init__                0      0   100%   
+settings/common                 19      0   100%   
+settings/local                  14      0   100%   
+settings/test                   14      0   100%   
+----------------------------------------------------------
+TOTAL                          226     40    82%   

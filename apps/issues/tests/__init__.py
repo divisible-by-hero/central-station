@@ -1,1 +1,1 @@
-from tests import *
+from issues.tests import tests
