@@ -1,58 +1,25 @@
-Name                                                                                                   Stmts   Miss  Cover   Missing
-------------------------------------------------------------------------------------------------------------------------------------
-apps/core/__init__                                                                                         0      0   100%   
-apps/core/migrations/0001_initial                                                                         12      1    92%   22
-apps/core/migrations/__init__                                                                              0      0   100%   
-apps/core/models                                                                                           5      1    80%   7
-apps/issues/__init__                                                                                       0      0   100%   
-apps/issues/choices                                                                                        6      0   100%   
-apps/issues/managers                                                                                      17      5    71%   7, 10, 13, 16, 23
-apps/issues/migrations/0001_initial                                                                       12      1    92%   31
-apps/issues/migrations/0002_auto__del_field_issue_version__chg_field_issue_last_modified_date__chg        15      3    80%   24-30
-apps/issues/migrations/0003_auto__add_milestone                                                           12      1    92%   24
-apps/issues/migrations/0004_auto__add_field_issue_milestone                                               11      1    91%   18
-apps/issues/migrations/0005_auto__add_field_milestone_app                                                 11      1    91%   18
-apps/issues/migrations/0006_auto__add_field_issue_assigned_to                                             11      1    91%   18
-apps/issues/migrations/0007_auto__add_comment                                                             12      1    92%   25
-apps/issues/migrations/0008_auto__chg_field_comment_file                                                  11      1    91%   18
-apps/issues/migrations/0009_auto__add_field_comment_author                                                11      1    91%   18
-apps/issues/migrations/0010_auto__add_field_comment_creation_date_time                                    11      1    91%   18
-apps/issues/migrations/0011_auto__add_field_issue_file                                                    11      1    91%   18
-apps/issues/migrations/__init__                                                                            0      0   100%   
-apps/issues/models                                                                                        72     25    65%   17, 21-25, 29-34, 38, 42, 46-49, 68, 72, 76-77, 80-81, 96, 100-103
-apps/newsfeed/__init__                                                                                     0      0   100%   
-apps/newsfeed/managers                                                                                    10      2    80%   6, 13
-apps/newsfeed/migrations/0001_initial                                                                     12      1    92%   25
-apps/newsfeed/migrations/0002_auto__del_field_activity_app__add_field_activity_application                13      2    85%   21-24
-apps/newsfeed/migrations/0003_auto__add_field_activity_defect                                             11      1    91%   18
-apps/newsfeed/migrations/0004_auto__del_field_activity_defect__add_field_activity_issue                   13      2    85%   21-24
-apps/newsfeed/migrations/__init__                                                                          0      0   100%   
-apps/newsfeed/models                                                                                      16      1    94%   20
-apps/profile/__init__                                                                                      0      0   100%   
-apps/profile/choices                                                                                       1      0   100%   
-apps/profile/migrations/0001_initial                                                                      12      1    92%   23
-apps/profile/migrations/0002_auto__add_field_userprofile_role                                             11      1    91%   18
-apps/profile/migrations/__init__                                                                           0      0   100%   
-apps/profile/models                                                                                        9      1    89%   12
-apps/projects/__init__                                                                                     0      0   100%   
-apps/projects/choices                                                                                      1      0   100%   
-apps/projects/migrations/0001_initial                                                                     15      2    87%   30-33
-apps/projects/migrations/0002_auto__add_field_version_release_date__add_field_version_status              13      2    85%   21-24
-apps/projects/migrations/0003_auto__add_field_app_slug                                                    11      1    91%   18
-apps/projects/migrations/0004_auto__add_field_app_git_repo_dir                                            11      1    91%   18
-apps/projects/migrations/0005_auto__add_field_app_enable_wiki__add_field_app_enable_forum__add_field      15      3    80%   24-30
-apps/projects/migrations/0006_auto                                                                        12      1    92%   23
-apps/projects/migrations/0007_auto__add_field_app_enable_chat__chg_field_app_git_repo_dir                 13      2    85%   21-24
-apps/projects/migrations/0008_auto__del_field_app_enable_chat                                             11      1    91%   18
-apps/projects/migrations/0009_auto__del_version                                                           12      2    83%   18-25
-apps/projects/migrations/0010_auto__del_field_app_git_repo_dir__del_field_app_enable_wiki__del_field      19      5    74%   30-42
-apps/projects/migrations/__init__                                                                          0      0   100%   
-apps/projects/models                                                                                      19      5    74%   20, 23-24, 28, 32
-conf/__init__                                                                                              0      0   100%   
-conf/environment                                                                                          15      0   100%   
-manage                                                                                                     6      0   100%   
-settings/__init__                                                                                          0      0   100%   
-settings/common                                                                                           19      0   100%   
-settings/local                                                                                            13      0   100%   
-------------------------------------------------------------------------------------------------------------------------------------
-TOTAL                                                                                                    553     82    85%   
+Name                     Stmts   Miss  Cover   Missing
+------------------------------------------------------
+apps/core/__init__           0      0   100%   
+apps/core/models             5      1    80%   7
+apps/issues/__init__         0      0   100%   
+apps/issues/choices          6      0   100%   
+apps/issues/managers        17      5    71%   7, 10, 13, 16, 23
+apps/issues/models          72     25    65%   17, 21-25, 29-34, 38, 42, 46-49, 68, 72, 76-77, 80-81, 96, 100-103
+apps/newsfeed/__init__       0      0   100%   
+apps/newsfeed/managers      10      2    80%   6, 13
+apps/newsfeed/models        16      1    94%   20
+apps/profile/__init__        0      0   100%   
+apps/profile/choices         1      0   100%   
+apps/profile/models          9      1    89%   12
+apps/projects/__init__       0      0   100%   
+apps/projects/choices        1      0   100%   
+apps/projects/models        19      5    74%   20, 23-24, 28, 32
+conf/__init__                0      0   100%   
+conf/environment            15      0   100%   
+manage                       6      0   100%   
+settings/__init__            0      0   100%   
+settings/common             19      0   100%   
+settings/local              14      0   100%   
+------------------------------------------------------
+TOTAL                      210     40    81%   
