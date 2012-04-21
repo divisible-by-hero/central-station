@@ -38,27 +38,10 @@ STATIC_ROOT = ''
 # Example: "http://media.lawrence.com/static/"
 STATIC_URL = ''
 
-DOMAIN_STATIC = ''
-
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-ADMIN_MEDIA_PREFIX = ''
 
 ROOT_URLCONF = 'urls.production'
 
-PHOTO_DIRECTORY = ""
 
-
-TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
-    # Always use forward slashes, even on Windows.
-    # Don't forget to use absolute paths, not relative paths.
-    "",
-    
-    # We have added a "Master" template directory here, and below if you choose, add directories for each specific app.
-    #"./newapp/templates"
-)
 
 INSTALLED_APPS = (
     'django.contrib.auth',

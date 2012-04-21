@@ -1,1 +1,0 @@
-# Utilities for django apps would live here.... ONLY FOR THIS PROJECT

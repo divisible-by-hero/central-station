@@ -1,9 +1,8 @@
 django==1.4
-south
+south==0.7.4
 django-tastypie
-hadrian
+hadrian==1.1
 GitPython
-django-grappelli
 sphinx
 django-api-docs
 factory_boy
