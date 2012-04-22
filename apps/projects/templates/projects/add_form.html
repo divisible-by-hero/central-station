@@ -2,12 +2,13 @@
 
 {% block main_content %}
 <div class="padding">
+    <form action="." method="POST" class="well">{% csrf_token %}
+        {{ form.name.label_tag }}
+        <input type="text" class="span6" id="name">
+        {{ form.client.label_tag }}
+        {{ form.client }}
     
-    <form action="." method="POST">{% csrf_token %}
-        
-    
-    {{ form.as_p }}
-    <input type="submit" value="Add App" class="btn btn-primary">
+    <input type="submit" value="Add Project" class="btn btn-primary">
     </form>
 </div>
 

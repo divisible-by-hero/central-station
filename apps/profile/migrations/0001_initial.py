@@ -1,27 +1,25 @@
-# encoding: utf-8
+# -*- coding: utf-8 -*-
 import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
 
+
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        
         # Adding model 'UserProfile'
         db.create_table('profile_userprofile', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('user', self.gf('django.db.models.fields.related.OneToOneField')(to=orm['auth.User'], unique=True)),
             ('email_notifications', self.gf('django.db.models.fields.BooleanField')(default=False)),
+            ('role', self.gf('django.db.models.fields.CharField')(max_length=20)),
         ))
         db.send_create_signal('profile', ['UserProfile'])
 
-
     def backwards(self, orm):
-        
         # Deleting model 'UserProfile'
         db.delete_table('profile_userprofile')
-
 
     models = {
         'auth.group': {
@@ -64,6 +62,7 @@ class Migration(SchemaMigration):
             'Meta': {'object_name': 'UserProfile'},
             'email_notifications': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'role': ('django.db.models.fields.CharField', [], {'max_length': '20'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'to': "orm['auth.User']", 'unique': 'True'})
         }
     }
