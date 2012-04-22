@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Examples · Twitter Bootstrap</title>
+    <title>Central Station | Home</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="">
@@ -10,8 +10,7 @@
     <!-- Le styles -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
     <link href="assets/css/bootstrap-responsive.css" rel="stylesheet">
-    <link href="assets/css/docs.css" rel="stylesheet">
-    <link href="assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylsheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -19,127 +18,132 @@
     <![endif]-->
 
     <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="assets/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="assets/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="assets/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="assets/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="../assets/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../assets/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../assets/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="../assets/ico/apple-touch-icon-57-precomposed.png">
   </head>
 
-  <body data-spy="scroll" data-target=".subnav" data-offset="50">
+  <body>
 
-
-  <!-- Navbar
-    ================================================== -->
-    <div class="navbar navbar-fixed-top">
+    <div class="navbar">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="./index.html">Bootstrap</a>
+          <a class="brand" href="{% url newsfeed.views.dashboard %}">Central Station</a>
           <div class="nav-collapse">
             <ul class="nav">
-              <li class="">
-                <a href="./index.html">Overview</a>
+              
+              <ul class="nav">
+                  <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Projects
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                  		<li class="nav-header">Active Projects</li>
+                      
+                      <li><a href="{{ app.get_absolute_url }}">FotoChest</a></li>
+                      
+                      <li class="divider"></li>
+                      <li><a href="{% url projects.views.add_application %}">Add Project</a></li>
+                  </ul>
+                  </li>
+              </ul>
+              
+              <li class="dropdown">
+                  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Users
+                      <b class="caret"></b>
+                  </a>
+                  <ul class="dropdown-menu">
+                      <li><a href="#">All Users</a></li>
+                      <li class="divider"></li>
+                      <li><a href="#myModal" data-toggle="modal">Add Users</a></li>
+                  </ul>
               </li>
-              <li class="">
-                <a href="./scaffolding.html">Scaffolding</a>
-              </li>
-              <li class="">
-                <a href="./base-css.html">Base CSS</a>
-              </li>
-              <li class="">
-                <a href="./components.html">Components</a>
-              </li>
-              <li class="">
-                <a href="./javascript.html">Javascript plugins</a>
-              </li>
-              <li class="">
-                <a href="./less.html">Using LESS</a>
-              </li>
-              <li class="divider-vertical"></li>
-              <li class="">
-                <a href="./download.html">Customize</a>
-              </li>
-              <li class="active">
-                <a href="./examples.html">Examples</a>
-              </li>
+              <li><a href="{% url core.views.change_settings %}">Settings</a></li>
             </ul>
-          </div>
+            
+            
+            <ul class="nav pull-right user">
+                <li class="dropdown">
+                    
+                    <img src="http://dummyimage.com/25x25" class="profile_img pull-left">
+                    
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">dstegelman
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="{% url profile.views.settings %}">Personal Settings</a></li>
+                        <li class="divider"></li>
+                        <li><a href="{% url django.contrib.auth.views.logout %}">Sign out</a></li>
+                    </ul>
+                </li>
+            </ul>
+            
+            <form class="navbar-search pull-right">
+                <input type="text" class="search-query" placeholder="Search">
+            </form>
+          </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
 
     <div class="container">
-
-<!-- Masthead
-================================================== -->
-<header class="jumbotron subhead" id="overview">
-  <h1>Bootstrap examples</h1>
-  <p class="lead">We've included a few basic examples as starting points for your work with Bootstrap. We encourage folks to iterate on these examples and not simply use them as an end result.</p>
-</header>
-
-
-<ul class="thumbnails bootstrap-examples">
-  <li class="span4">
-    <a class="thumbnail" href="examples/hero.html">
-      <img src="assets/img/examples/bootstrap-example-hero.jpg" alt="">
-    </a>
-    <h3>Basic marketing site</h3>
-    <p>Featuring a hero unit for a primary message and three supporting elements.</p>
-  </li>
-  <li class="span4">
-    <a class="thumbnail" href="examples/fluid.html">
-      <img src="assets/img/examples/bootstrap-example-fluid.jpg" alt="">
-    </a>
-    <h3>Fluid layout</h3>
-    <p>Uses our new responsive, fluid grid system to create a seamless liquid layout.</p>
-  </li>
-  <li class="span4">
-    <a class="thumbnail" href="examples/starter-template.html">
-      <img src="assets/img/examples/bootstrap-example-starter.jpg" alt="">
-    </a>
-    <h3>Starter template</h3>
-    <p>A barebones HTML document with all the Bootstrap CSS and javascript included.</p>
-  </li>
-</ul>
-
-
-     <!-- Footer
-      ================================================== -->
-      <footer class="footer">
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>Designed and built with all the love in the world <a href="http://twitter.com/twitter" target="_blank">@twitter</a> by <a href="http://twitter.com/mdo" target="_blank">@mdo</a> and <a href="http://twitter.com/fat" target="_blank">@fat</a>.</p>
-        <p>Code licensed under the <a href="http://www.apache.org/licenses/LICENSE-2.0" target="_blank">Apache License v2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-        <p>Icons from <a href="http://glyphicons.com">Glyphicons Free</a>, licensed under <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a>.</p>
-      </footer>
-
-    </div><!-- /container -->
-
-
+        <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">×</a>
+        <h4 class="alert-heading">Error</h4>
+        <p>This is an error message.</p>
+        </div>
+        <div class="row">
+            <div class="span9">
+              <h1>Dashboard</h1>
+              
+              <article class="activity">
+                  <img src="http://dummyimage.com/45x45">
+                  <h2>Derek Stegelman</h2>
+                  
+                  <p>Added a new <a href="{{ activity.issue.get_absolute_url }}">issue #{{ activity.issue.id }}</a> in <a href="{{ activity.application.get_absolute_url }}">{{ activity.application.name }}</a></p>
+                  <span class="date">March 12, 2012</span>
+                  
+              </article>
+              <article class="activity">
+                  <h2>Derek Stegelman</h2>
+              
+                  <p>Committed to <a href="{{ activity.application.get_absolute_url }}">Fotochest</a></p>
+                  
+                  <span class="date">March 23, 2012</span>
+              </article>
+              
+            </div>
+            <div class="span3">
+                <div class="well">
+                <h2>Something</h2>
+                </div>
+            </div>
+        </div>
+        
+    </div> <!-- /container -->
 
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-    <script src="assets/js/jquery.js"></script>
-    <script src="assets/js/google-code-prettify/prettify.js"></script>
-    <script src="assets/js/bootstrap-transition.js"></script>
-    <script src="assets/js/bootstrap-alert.js"></script>
-    <script src="assets/js/bootstrap-modal.js"></script>
-    <script src="assets/js/bootstrap-dropdown.js"></script>
-    <script src="assets/js/bootstrap-scrollspy.js"></script>
-    <script src="assets/js/bootstrap-tab.js"></script>
-    <script src="assets/js/bootstrap-tooltip.js"></script>
-    <script src="assets/js/bootstrap-popover.js"></script>
-    <script src="assets/js/bootstrap-button.js"></script>
-    <script src="assets/js/bootstrap-collapse.js"></script>
-    <script src="assets/js/bootstrap-carousel.js"></script>
-    <script src="assets/js/bootstrap-typeahead.js"></script>
-    <script src="assets/js/application.js"></script>
-
+    <script src="../assets/js/jquery.js"></script>
+    <script src="../assets/js/bootstrap-transition.js"></script>
+    <script src="../assets/js/bootstrap-alert.js"></script>
+    <script src="../assets/js/bootstrap-modal.js"></script>
+    <script src="../assets/js/bootstrap-dropdown.js"></script>
+    <script src="../assets/js/bootstrap-scrollspy.js"></script>
+    <script src="../assets/js/bootstrap-tab.js"></script>
+    <script src="../assets/js/bootstrap-tooltip.js"></script>
+    <script src="../assets/js/bootstrap-popover.js"></script>
+    <script src="../assets/js/bootstrap-button.js"></script>
+    <script src="../assets/js/bootstrap-collapse.js"></script>
+    <script src="../assets/js/bootstrap-carousel.js"></script>
+    <script src="../assets/js/bootstrap-typeahead.js"></script>
 
   </body>
 </html>
