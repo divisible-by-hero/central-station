@@ -1,3 +1,5 @@
+[![Build Status](https://secure.travis-ci.org/dstegelman/central-station.png?branch=develop)](http://travis-ci.org/dstegelman/central-station)
+
 # Installation
 
 Quickly get up and running
