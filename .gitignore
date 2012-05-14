@@ -9,3 +9,4 @@ app/.sass-cache
 django_central_station.egg-info
 dist
 .idea
+reports/coverage_html
