@@ -80,12 +80,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ) 
 
 MIDDLEWARE_CLASSES = (
+    'downtime.middleware.DowntimeMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    
 )
 
 
