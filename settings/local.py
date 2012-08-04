@@ -61,5 +61,7 @@ INSTALLED_APPS = (
     'profile',
     #'api_docs',
     'hadrian.contrib.gravatar',
+    'downtime',
+    'knowledge',
 
 )

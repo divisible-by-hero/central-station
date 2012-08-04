@@ -1,7 +1,7 @@
 Name                         Stmts   Miss  Cover   Missing
 ----------------------------------------------------------
 apps/core/__init__               0      0   100%   
-apps/core/models                 5      1    80%   7
+apps/core/models                10      2    80%   7, 14
 apps/issues/__init__             0      0   100%   
 apps/issues/choices              6      0   100%   
 apps/issues/managers            17      5    71%   7, 10, 13, 16, 23
@@ -15,14 +15,13 @@ apps/profile/__init__            0      0   100%
 apps/profile/choices             1      0   100%   
 apps/profile/models              9      1    89%   12
 apps/projects/__init__           0      0   100%   
-apps/projects/choices            1      0   100%   
-apps/projects/models            19      5    74%   20, 23-24, 28, 32
+apps/projects/choices            2      0   100%   
+apps/projects/models            25      4    84%   25-26, 30, 34
 conf/__init__                    0      0   100%   
 conf/environment                15      0   100%   
 manage                           6      0   100%   
 settings/__init__                0      0   100%   
 settings/common                 19      0   100%   
-settings/local                  14      0   100%   
 settings/test                   14      0   100%   
 ----------------------------------------------------------
-TOTAL                          226     40    82%   
+TOTAL                          224     40    82%   

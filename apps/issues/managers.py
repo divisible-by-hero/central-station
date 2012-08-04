@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.db.models import Manager
 
-class IssueMixin(object):
+class IssueQuerySet(QuerySet)
     def open(self):
         return self.filter(Q(status="in-progress") | Q(status="open"))
 
@@ -15,10 +15,8 @@ class IssueMixin(object):
     def by_milestone(self, milestone_id):
         return self.filter(milestone__pk=milestone_id)
     
-class IssueQuerySet(QuerySet, IssueMixin):
-    pass
 
-class IssueManager(Manager, IssueMixin):
+        
+class IssueManager(Manager):
     def get_query_set(self):
         return IssueQuerySet(self.model, using=self._db)
-        
