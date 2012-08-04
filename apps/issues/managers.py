@@ -2,7 +2,7 @@ from django.db.models.query import QuerySet
 from django.db.models import Q
 from django.db.models import Manager
 
-class IssueQuerySet(QuerySet)
+class IssueQuerySet(QuerySet):
     def open(self):
         return self.filter(Q(status="in-progress") | Q(status="open"))
 
@@ -20,3 +20,15 @@ class IssueQuerySet(QuerySet)
 class IssueManager(Manager):
     def get_query_set(self):
         return IssueQuerySet(self.model, using=self._db)
+
+    def open(self):
+        return self.get_query_set().open()
+
+    def by_app(self, app_slug):
+        return self.get_query_set().by_app(app_slug)
+
+    def closed(self):
+        return self.get_query_set().closed()
+
+    def by_milestone(self, milestone_id):
+        return self.get_query_set().by_milestone(milestone_id)

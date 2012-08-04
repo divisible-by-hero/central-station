@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.admin',
+    'django.contrib.markup',
     'tastypie',
     'south',
     'core',
@@ -63,5 +64,6 @@ INSTALLED_APPS = (
     'hadrian.contrib.gravatar',
     'downtime',
     'knowledge',
+    'django_extensions',
 
 )
