@@ -21,4 +21,4 @@ django-celery==2.5.5
 celery==2.5.5
 django-kombu==0.9.4
 PIL
-git+ssh://git@github.com/dstegelman/django-debug-toolbar-user-panel@patch-1-1#egg=debug_toolbar_user_panel
+django-bootstrap-static==2.1.0

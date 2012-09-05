@@ -73,10 +73,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.static",
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
-    "projects.context_processors.apps",
-    "issues.context_processors.constants",
-    "core.context_processors.settings",
-    "core.context_processors.new_user_form",
 ) 
 
 MIDDLEWARE_CLASSES = (
@@ -122,3 +118,30 @@ LOGGING = {
     }
 }
 
+ROOT_URLCONF = 'urls'
+
+INSTALLED_APPS = (
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.sites',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'django.contrib.admin',
+    'django.contrib.markup',
+    #'tastypie',
+    'south',
+    #'core',
+    #'issues',
+    #'newsfeed',
+    #'projects',
+    #'profile',
+    #'api_docs',
+    'hadrian.contrib.gravatar',
+    #'downtime',
+    #'knowledge',
+    'django_extensions',
+    'bootstrap',
+    #'sprints',
+
+)
