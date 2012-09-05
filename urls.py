@@ -13,6 +13,7 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', TemplateView.as_view(template_name='home.html')),
+    url(r'^accounts/', include('accounts.urls')),
     url(r'^issues/', include('issues.urls')),
     url(r'^settings/$', 'core.views.change_settings'),
     url(r'^docs/', include('api_docs.urls')),

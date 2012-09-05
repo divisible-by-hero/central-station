@@ -34,7 +34,20 @@
 </head>
 
 <body>
-<div class="container-fluid">
+
+<div class="container">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class='container'>
+                <a class="brand" href="#">Central Station</a>
+                <ul class='nav pull-right'>
+                    <li><a href="">Login</a></li>
+                    <li><a href="">Sign up</a></li>
+                </ul>
+
+            </div>
+        </div>
+    </div>
     <div class="row-fluid">
         <div class="span9">
             {% if messages %}
@@ -48,6 +61,7 @@
         {% endif %}
         <div class="span9">
             <div class="main_content">
+                {{ request.subdomain }}
                 {% block main_content %}
                 {% endblock %}
             </div>

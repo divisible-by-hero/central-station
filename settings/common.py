@@ -76,6 +76,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ) 
 
 MIDDLEWARE_CLASSES = (
+    'core.middleware.SubdomainMiddleware',
     'downtime.middleware.DowntimeMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -120,6 +121,8 @@ LOGGING = {
 
 ROOT_URLCONF = 'urls'
 
+ACCOUNT_ACTIVATION_DAYS = 12
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -143,5 +146,8 @@ INSTALLED_APPS = (
     'django_extensions',
     'bootstrap',
     #'sprints',
+    'registration',
+    'crispy_forms',
+    'accounts',
 
 )
