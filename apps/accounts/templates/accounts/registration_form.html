@@ -1,5 +1,10 @@
 {% extends "base.html" %}
 {% block main_content %}
 {% load crispy_forms_tags %}
+<form method="POST">
 {% crispy form %}
+<div class='form-actions'>
+<input type="submit" value="Sign Me Up!" class="btn btn-primary">
+</div>
+</form>
 {% endblock main_content %}
