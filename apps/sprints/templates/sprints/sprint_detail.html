@@ -3,9 +3,21 @@
 
 {% block main_content %}
 
-    {{ sprint.name }}
-    {% for story in sprint.story_set.all %}
-        {{ story }}
-    {% endfor %}
+    <style>
+    </style>
+
+    <h1>{{ sprint.name }}</h1>
+    <div id='cs-board'>
+        
+        {% regroup sprint.story_set.all by status as story_list %}
+        {% for story in story_list %}
+        <ul class='cs-board-{{ story.grouper }}'>
+            {% for item in story.list %}
+              <li>{{ item.title }}</li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+    
+    </div>
 
 {% endblock %}
