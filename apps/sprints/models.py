@@ -15,6 +15,5 @@ class Sprint(models.Model):
     start_date = models.DateField(blank=False, null=True)
     end_date = models.DateField(blank=False, null=True)
 
-
     def __unicode__(self):
         return None

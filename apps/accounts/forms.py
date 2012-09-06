@@ -12,10 +12,11 @@ class RegistrationForm(forms.Form):
 
         self.helper = FormHelper()
         self.helper.form_tag = False
+        self.helper.help_text_inline = True
         self.helper.form_show_errors = False
         self.helper.layout = Layout(
             Field('username'),
-            Field('sub_domain'),
+            Field('company_name'),
             Field('email'),
             Field('password'),
             Field('password_confirm'),
@@ -25,7 +26,7 @@ class RegistrationForm(forms.Form):
         return super(RegistrationForm, self).__init__(*args, **kwargs)
 
     username = forms.CharField()
-    sub_domain = forms.CharField()
+    company_name = forms.CharField()
     email = forms.EmailField()
     password = forms.CharField()
     password_confirm = forms.CharField()
