@@ -14,19 +14,7 @@ class AuditBase(models.Model):
     class Meta:
         abstract = True
 
-class Story(AuditBase):
-    title = models.CharField(max_length=250, blank=False, null=True)
-    status = models.CharField(choices=STORY_STATUS, max_length=20, blank=True, null=True)
 
-    def __unicode__(self):
-        return self.title
-
-class Roadblock(AuditBase):
-    title = models.CharField(max_length=250, blank=False, null=True)
-    story = models.ForeignKey(Story, null=True, blank=False)
-
-    def __unicode__(self):
-        return self.title
 
 
 class Sprint(AuditBase):
@@ -39,3 +27,19 @@ class Sprint(AuditBase):
 
     def __unicode__(self):
         return self.name
+
+class Story(AuditBase):
+    title = models.CharField(max_length=250, blank=False, null=True)
+    status = models.CharField(choices=STORY_STATUS, max_length=20, blank=True, null=True)
+    points = models.IntegerField(blank=False, null=False)
+    sprint = models.ForeignKey(Sprint, null=True)
+
+    def __unicode__(self):
+        return self.title
+
+class Roadblock(AuditBase):
+    title = models.CharField(max_length=250, blank=False, null=True)
+    story = models.ForeignKey(Story, null=True, blank=False)
+
+    def __unicode__(self):
+        return self.title
