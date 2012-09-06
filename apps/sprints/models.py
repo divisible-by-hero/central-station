@@ -18,7 +18,7 @@ class Sprint(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     start_date = models.DateField(blank=False, null=True)
     end_date = models.DateField(blank=False, null=True)
-    team = models.ForeignKey(Team)
+    team = models.ForeignKey(Team) # TODO this should be M2M
 
     locked = models.BooleanField()
 
