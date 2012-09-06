@@ -9,8 +9,8 @@ from hadrian.utils.slugs import unique_slugify
 
 class AuditBase(models.Model):
     deleted = models.BooleanField()
-    deleted_date = models.DateField(null=True, blank=True)
-    created_date = models.DateField(null=True, blank=True)
+    deleted_date = models.DateTimeField(null=True, blank=True)
+    created_date = models.DateTimeField(null=True, blank=True, auto_now_add=True)
 
     class Meta:
         abstract = True
