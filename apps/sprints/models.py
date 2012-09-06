@@ -14,9 +14,6 @@ class AuditBase(models.Model):
     class Meta:
         abstract = True
 
-
-
-
 class Sprint(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     start_date = models.DateField(blank=False, null=True)
