@@ -14,8 +14,8 @@ class SprintListView(LoginRequiredMixin, ListView):
 
 class SprintDetailView(LoginRequiredMixin, DetailView):
     model = Sprint
-    
-
+    template_name = 'sprints/sprint_detail.html'
+    context_object_name = 'sprint'
 
 
 class StoryListView(LoginRequiredMixin, ListView):
