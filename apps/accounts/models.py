@@ -7,10 +7,11 @@ from django.contrib.auth.models import User
 
 from hadrian.utils.slugs import unique_slugify
 
+from base import AuditBase
+
 class Account(models.Model):
     company_name = models.CharField(max_length=250, blank=True, null=True)
     slug = models.SlugField()
-    users = models.ManyToManyField(User, null=True, blank=True)
 
     # Main.
     is_active = models.BooleanField()
@@ -23,3 +24,26 @@ class Account(models.Model):
         unique_slugify(self, self.company_name)
         super(Account, self).save(*args, **kwargs)
 
+class Team(AuditBase):
+    name = models.CharField(max_length=250, blank=True, null=True)
+    organization = models.ForeignKey(Account)
+
+class UserProfile(AuditBase):
+    user = models.ForeignKey(User)
+    teams = models.ManyToManyField(Team)
+
+    def __unicode__(self):
+        return self.user.username
+
+    @property
+    def role(self, team):
+        assigned_role = RoleAssigned.objects.get(user=self.user, team=team)
+        return assigned_role.role.name
+
+class Role(AuditBase):
+    name = models.CharField(max_length=250)
+
+class RoleAssigned(AuditBase):
+    user = models.ForeignKey(User)
+    team = models.ForeignKey(Team)
+    role = models.ForeignKey(Role)
