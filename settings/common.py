@@ -76,7 +76,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 ) 
 
 MIDDLEWARE_CLASSES = (
-    'core.middleware.SubdomainMiddleware',
     'downtime.middleware.DowntimeMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -140,14 +139,13 @@ INSTALLED_APPS = (
     #'projects',
     #'profile',
     #'api_docs',
-    'hadrian.contrib.gravatar',
+    #'hadrian.contrib.gravatar',
     #'downtime',
     #'knowledge',
     'django_extensions',
     'bootstrap',
-    #'sprints',
-    'registration',
+    'sprints',
     'crispy_forms',
     'accounts',
-
+    #'accounts',
 )

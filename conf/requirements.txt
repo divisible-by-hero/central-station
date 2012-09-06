@@ -22,4 +22,3 @@ celery==2.5.5
 django-kombu==0.9.4
 PIL
 django-bootstrap-static==2.1.0
-django-subdomains==1.1.1

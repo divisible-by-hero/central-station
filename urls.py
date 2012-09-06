@@ -14,12 +14,10 @@ urlpatterns = patterns('',
 
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^issues/', include('issues.urls')),
-    url(r'^settings/$', 'core.views.change_settings'),
-    url(r'^docs/', include('api_docs.urls')),
+
     url(r'^knowledge/', include('knowledge.urls')),
-    url(r'^projects/', include('projects.urls')),
-    url(r'^users/', include('profile.urls')),
+
+
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'profile/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'profile/logout.html'}, name="logout"),
     url(r'^admin/', include(admin.site.urls)),

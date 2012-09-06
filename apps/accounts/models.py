@@ -7,7 +7,13 @@ from django.contrib.auth.models import User
 
 from hadrian.utils.slugs import unique_slugify
 
-from base import AuditBase
+class AuditBase(models.Model):
+    deleted = models.BooleanField()
+    deleted_date = models.DateField(null=True, blank=True)
+    created_date = models.DateField(null=True, blank=True)
+
+    class Meta:
+        abstract = True
 
 class Account(models.Model):
     company_name = models.CharField(max_length=250, blank=True, null=True)
