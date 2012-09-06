@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+
+{% block main_content %}
+
+    {{ sprint.name }}
+    {% for story in sprint.story_set.all %}
+        {{ story }}
+    {% endfor %}
+
+{% endblock %}
