@@ -24,7 +24,7 @@ class Account(models.Model):
     is_deleted = models.BooleanField()
 
     def __unicode__(self):
-        return self.sub_domain
+        return self.company_name
 
     def save(self, *args, **kwargs):
         unique_slugify(self, self.company_name)
@@ -33,6 +33,9 @@ class Account(models.Model):
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     organization = models.ForeignKey(Account)
+
+    def __unicode__(self):
+        return self.name
 
 class UserProfile(AuditBase):
     user = models.ForeignKey(User)
@@ -49,7 +52,13 @@ class UserProfile(AuditBase):
 class Role(AuditBase):
     name = models.CharField(max_length=250)
 
+    def __unicode__(self):
+        return self.name
+
 class RoleAssigned(AuditBase):
     user = models.ForeignKey(User)
     team = models.ForeignKey(Team)
     role = models.ForeignKey(Role)
+
+    def __unicode__(self):
+        return self.user.username

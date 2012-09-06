@@ -25,6 +25,9 @@ class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
     story = models.ForeignKey(Story, null=True, blank=False)
 
+    def __unicode__(self):
+        return self.title
+
 
 class Sprint(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
@@ -35,4 +38,4 @@ class Sprint(AuditBase):
     locked = models.BooleanField()
 
     def __unicode__(self):
-        return None
+        return self.name
