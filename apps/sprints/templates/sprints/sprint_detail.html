@@ -11,14 +11,18 @@
 $(document).ready(function(){
     $( ".cs-board-column-list" ).sortable({
         connectWith: '.cs-board-column-list',
+        cursor: 'move',
         receive: function(event, ui) {
             //console.log(ui.item)
             var id = ui.item.attr('data-id');
             var status = ui.item.parent().attr('data-column');
-            updateStoryStatus(id, status)
+            updateStoryStatus(id, status);
+            //alert($(this).sortable('serialize'));
 
         }
     });
+    
+    console.log(serializeStories());
 });
 
 function updateStoryStatus(story_id, story_status){
@@ -36,6 +40,60 @@ function updateStoryStatus(story_id, story_status){
 		    }
 		},
 	 });
+}
+
+/*
+Example to send to server on each update
+json = {
+    'stories' : [
+        {
+            'id': 1,
+            'status': 'in-progress',
+            'position': 1
+        },
+        {
+            'id': 2,
+            'status': 'in-progress',
+            'position': 2
+        },
+        {
+            'id': 3,
+            'status': 'testing',
+            'position': 1
+        },
+        {
+            'id': 4,
+            'status': 'done',
+            'position': 1
+        },
+        {
+            'id': 5,
+            'status': 'done',
+            'position': 2
+        },
+        {
+            'id': 6,
+            'status': 'done',
+            'position': 3
+        },
+    ]
+}
+*/
+
+function serializeStories(){
+    //stuff
+    var json = {'stories':[]}
+    
+    $( ".cs-board-column-list" ).each(function(){
+        $(this).children('li.cs-story-card').each(function(){
+            story = {};
+            story.id = $(this).attr('data-id');
+            story.staus = $(this).parent().attr('data-column');
+            story.position = $(this).index();
+            json.stories.push(story);
+        });
+    });
+    return json
 }
 
 
@@ -64,6 +122,7 @@ function updateStoryStatus(story_id, story_status){
     <div id='cs-board'>
         
         {% for col in columns %}
+        <!-- Markup is placeholder... clearly shouldn't be ULs -->
         <ul id='cs-board-header-{{ col.0 }}' class='cs-board-column cs-board-column-header' data-column='{{ col.0 }}'>
             <li>{{ col.1 }}</li>
         </ul>
@@ -72,7 +131,7 @@ function updateStoryStatus(story_id, story_status){
         {% for column in sorted_stories %}
         <ul id='cs-board-{{ column.id }}' class='cs-board-column cs-board-column-list' data-column='{{ column.id }}'>
             {% for story in column.stories %}
-              <li id='cs-story-card-{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
+              <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
                   <h1 class='cs-story-card-points'>{{ story.points }}</h1>
                   <p class='cs-story-card-title'>{{ story.title }}</p>
                   <p class='cs-story-card-title'>{{ story.status }}</p>
