@@ -1,5 +1,21 @@
 {% extends 'base.html' %}
 
+{% block extra_js %}
+<link href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css"/>
+<script src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+<script>
+$(document).ready(function(){
+    $( ".cs-board-column" ).sortable({
+        connectWith: '.cs-board-column',
+        update: function(event, ui) {
+            //ajax call to save state
+        }
+    });
+});
+</script>
+{% endblock %}
+
 
 {% block main_content %}
 
@@ -7,6 +23,11 @@
         ul.cs-board-column { margin: 0; padding:0; width: 20%; height: 500px; float: left; border: 1px solid #333333; }
         ul.cs-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #cccccc; }
         
+        .cs-story-card { clear: both;}
+        .cs-story-card-points { margin: 0; padding: 0; float: left; }
+        .cs-story-card-title { margin: 0 0 0 30px; }
+        
+        .clear { clear: both;}
         
     </style>
 
@@ -17,7 +38,11 @@
         {% for column in sorted_stories %}
         <ul id='cs-board-{{ column.id }}' class='cs-board-column'>
             {% for story in column.stories %}
-              <li>{{ story.title }}</li>
+              <li id='cs-story-card-{{ story.id }}' class='cs-story-card'>
+                  <h1 class='cs-story-card-points'>{{ story.points }}</h1>
+                  <p class='cs-story-card-title'>{{ story.title }}</p>
+                  <div class='clear'></div>
+              </li>
             {% endfor %}
         </ul>
         {% endfor %}
