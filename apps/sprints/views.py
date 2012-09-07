@@ -45,7 +45,7 @@ def sprint_detail(request, id):
         column['stories'] = []
         column_list.append(column)
 
-    context['columns'] = column_list
+    context['columns'] = STORY_STATUS_CHOICES
 
     #Stories, sorted by Column
     for key, group in groupby(stories, lambda x: x.status):
@@ -61,7 +61,6 @@ def sprint_detail(request, id):
                 column_list[index] = column
 
     context['sorted_stories'] = column_list
-
     
     return render(request, 'sprints/sprint_detail.html', context)
 
@@ -105,7 +104,7 @@ def update_story_status(request):
             story.save()
 
             response['success'] = True        
-            response['message'] = "Story %s has been updated" % id
+            response['message'] = "Story: %s has been updated to status: %s" % (id,status)
             response['story_id'] = id
             json = simplejson.dumps(response)
             return HttpResponse(json, mimetype='application/json', status=200)
