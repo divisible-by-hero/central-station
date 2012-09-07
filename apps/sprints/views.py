@@ -11,7 +11,7 @@ from django.utils import simplejson # TODO, use python SL...but I'm on a plane r
 from braces.views import LoginRequiredMixin
 
 from sprints.models import Sprint, Story
-from sprints.choices import STORY_STATUS
+from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
 class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint
@@ -39,7 +39,7 @@ def sprint_detail(request, id):
 
     #Columns, all
     column_list = []    
-    for col in STORY_STATUS:
+    for col in STORY_STATUS_CHOICES:
         column = {}
         column['id'] = col[0]
         column['stories'] = []
@@ -82,25 +82,43 @@ def update_story_status(request):
     Looks for query parms, updates story and returns JSON
 
     """
-    
+    #Build reponse object conditions mature
+    response = {'success':False}
+
+    #Authed?
     if request.user.is_authenticated():
         pass
     else:
-        response = simplejson.dumps({ 'success': False, 'expired': True, 'message': "The current session has expired" })
-        return HttpResponse(response, mimetype='text/json', status=200)   
+        response['expired'] = True
+        response['message'] = "The current session has expired"
+        json = simplejson.dumps(response)
+        return HttpResponse(json, mimetype='text/json', status=200)   
 
-    try:
-        id = request.REQUEST['story_id']
-        status = request.REQUEST['story_status']
-
-        story = Story.objects.get(id=id)
-        story.status = status
-        story.save()
+    #Correct params?
+    id = request.REQUEST['story_id']
+    status = request.REQUEST['story_status']
         
-        response = simplejson.dumps({ 'success': True, 'message': "Story %s has been updated" % id, 'story_id': id })
-        return HttpResponse(response, mimetype='application/json', status=200)
-    except:
-        response = simplejson.dumps({ 'success': False, 'message': "Error: Story %s has NOT been updated" % id, 'story_id': id })
-        return HttpResponse(response, mimetype='application/json', status=200)
+    if id and status and status in VALID_STORY_STATUSES:
+        try:
+            story = Story.objects.get(id=id)
+            story.status = status
+            story.save()
 
+            response['success'] = True        
+            response['message'] = "Story %s has been updated" % id
+            response['story_id'] = id
+            json = simplejson.dumps(response)
+            return HttpResponse(json, mimetype='application/json', status=200)
+        except:
+            response['success'] = False        
+            response['message'] = "Story %s has been NOT updated" % id
+            response['story_id'] = id
+            json = simplejson.dumps(response)
+            return HttpResponse(json, mimetype='application/json', status=200)
 
+    else:
+        response['success'] = False        
+        response['message'] = "Invalid or missing parameters"
+        json = simplejson.dumps(response)
+        return HttpResponse(json, mimetype='application/json', status=400)
+        

@@ -3,7 +3,7 @@ __date__ = '9/5/12'
 
 from django.db import models
 
-from sprints.choices import STORY_STATUS
+from sprints.choices import STORY_STATUS_CHOICES
 from accounts.models import Team
 
 class AuditBase(models.Model):
@@ -27,7 +27,7 @@ class Sprint(AuditBase):
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
-    status = models.CharField(choices=STORY_STATUS, max_length=20, blank=True, null=True)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     points = models.IntegerField(blank=False, null=False)
     sprint = models.ForeignKey(Sprint, null=True)
 
