@@ -132,7 +132,15 @@ def update_stories(request):
     
     _input = request.raw_post_data
     _input = simplejson.loads(request.raw_post_data)
-    print _input
+    #print _input
+    
+    
+    for story in _input['stories']:
+        print story
+        s = Story.objects.get(id=story['id'])
+        s.position = story['position']
+        s.status = story['status']
+        s.save()
     
     json_response = simplejson.dumps({'success':True})
     return HttpResponse(json_response, mimetype='application/json', status=200)

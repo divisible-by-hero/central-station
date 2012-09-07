@@ -73,7 +73,7 @@ function serializeStories(){
         $(this).children('li.cs-story-card').each(function(){
             story = {};
             story.id = $(this).attr('data-id');
-            story.staus = $(this).parent().attr('data-column');
+            story.status = $(this).parent().attr('data-column');
             story.position = $(this).index();
             json.stories.push(story);
         });
