@@ -4,20 +4,25 @@
 {% block main_content %}
 
     <style>
+        ul.cs-board-column { margin: 0; padding:0; width: 20%; height: 500px; float: left; border: 1px solid #333333; }
+        ul.cs-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #cccccc; }
+        
+        
     </style>
 
     <h1>{{ sprint.name }}</h1>
     <div id='cs-board'>
         
-        {% regroup sprint.story_set.all by status as story_list %}
-        {% for story in story_list %}
-        <ul class='cs-board-{{ story.grouper }}'>
-            {% for item in story.list %}
-              <li>{{ item.title }}</li>
+
+        {% for column in sorted_stories %}
+        <ul id='cs-board-{{ column.id }}' class='cs-board-column'>
+            {% for story in column.stories %}
+              <li>{{ story.title }}</li>
             {% endfor %}
         </ul>
         {% endfor %}
-    
+
+        
     </div>
 
 {% endblock %}
