@@ -28,6 +28,8 @@ class Sprint(AuditBase):
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    position = models.IntegerField(blank=True, null=True)
+    
     points = models.IntegerField(blank=False, null=False)
     sprint = models.ForeignKey(Sprint, null=True)
 
@@ -40,3 +42,10 @@ class Roadblock(AuditBase):
 
     def __unicode__(self):
         return self.title
+        
+        
+class OrderedStory(AuditBase):
+    story = models.ForeignKey(Story, null=True, blank=False)
+    position = models.IntegerField(blank=False)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    

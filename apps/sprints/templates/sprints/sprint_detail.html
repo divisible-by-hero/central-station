@@ -28,6 +28,8 @@ $(document).ready(function(){
     
 });
 
+/*
+Maybe Deprecated ?
 function updateStoryStatus(story_id, story_status){
 	$.ajax({
 		type: "POST",
@@ -44,6 +46,7 @@ function updateStoryStatus(story_id, story_status){
 		},
 	 });
 }
+*/
 
 function updateStories(post_data){
 	$.ajax({
@@ -61,46 +64,6 @@ function updateStories(post_data){
 		},
 	 });
 }
-
-    		
-
-/*
-Example to send to server on each update
-json = {
-    'stories' : [
-        {
-            'id': 1,
-            'status': 'in-progress',
-            'position': 1
-        },
-        {
-            'id': 2,
-            'status': 'in-progress',
-            'position': 2
-        },
-        {
-            'id': 3,
-            'status': 'testing',
-            'position': 1
-        },
-        {
-            'id': 4,
-            'status': 'done',
-            'position': 1
-        },
-        {
-            'id': 5,
-            'status': 'done',
-            'position': 2
-        },
-        {
-            'id': 6,
-            'status': 'done',
-            'position': 3
-        },
-    ]
-}
-*/
 
 function serializeStories(){
     //stuff
