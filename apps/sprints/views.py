@@ -5,6 +5,8 @@ from itertools import groupby
 
 from django.views.generic import DetailView, ListView
 from django.shortcuts import render, get_object_or_404, redirect
+from django.http import HttpResponse
+from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
 from braces.views import LoginRequiredMixin
 
@@ -70,3 +72,35 @@ class StoryListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Story.objects.all()
+        
+
+
+#Ajax Views
+
+def update_story_status(request):
+    """
+    Looks for query parms, updates story and returns JSON
+
+    """
+    
+    if request.user.is_authenticated():
+        pass
+    else:
+        response = simplejson.dumps({ 'success': False, 'expired': True, 'message': "The current session has expired" })
+        return HttpResponse(response, mimetype='text/json', status=200)   
+
+    try:
+        id = request.REQUEST['story_id']
+        status = request.REQUEST['story_status']
+
+        story = Story.objects.get(id=id)
+        story.status = status
+        story.save()
+        
+        response = simplejson.dumps({ 'success': True, 'message': "Story %s has been updated" % id, 'story_id': id })
+        return HttpResponse(response, mimetype='application/json', status=200)
+    except:
+        response = simplejson.dumps({ 'success': False, 'message': "Error: Story %s has NOT been updated" % id, 'story_id': id })
+        return HttpResponse(response, mimetype='application/json', status=200)
+
+

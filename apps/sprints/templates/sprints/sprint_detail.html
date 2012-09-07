@@ -4,15 +4,41 @@
 <link href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css"/>
 <script src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
 <script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript">
+    var csrf_token = "{{ csrf_token }}";
+</script>
 <script>
 $(document).ready(function(){
     $( ".cs-board-column" ).sortable({
         connectWith: '.cs-board-column',
-        update: function(event, ui) {
-            //ajax call to save state
+        receive: function(event, ui) {
+            //console.log(ui.item)
+            var id = ui.item.attr('data-id');
+            var status = ui.item.parent().attr('data-column');
+            updateStoryStatus(id, status)
+
         }
     });
 });
+
+function updateStoryStatus(story_id, story_status){
+	$.ajax({
+		type: "POST",
+		url: "/sprints/update/story-status/",
+		dataType: 'json',
+		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&story_status=" + story_status,
+		success: function(data){
+		    if ( data.success ){
+		        //do something
+		    }
+		    else {
+		        //do something else
+		    }
+		},
+	 });
+}
+
+
 </script>
 {% endblock %}
 
@@ -36,9 +62,9 @@ $(document).ready(function(){
         
 
         {% for column in sorted_stories %}
-        <ul id='cs-board-{{ column.id }}' class='cs-board-column'>
+        <ul id='cs-board-{{ column.id }}' class='cs-board-column' data-column='{{ column.id }}'>
             {% for story in column.stories %}
-              <li id='cs-story-card-{{ story.id }}' class='cs-story-card'>
+              <li id='cs-story-card-{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
                   <h1 class='cs-story-card-points'>{{ story.points }}</h1>
                   <p class='cs-story-card-title'>{{ story.title }}</p>
                   <div class='clear'></div>
