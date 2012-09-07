@@ -12,17 +12,20 @@ $(document).ready(function(){
     $( ".cs-board-column-list" ).sortable({
         connectWith: '.cs-board-column-list',
         cursor: 'move',
-        receive: function(event, ui) {
+        receive: function(event, ui){
             //console.log(ui.item)
-            var id = ui.item.attr('data-id');
-            var status = ui.item.parent().attr('data-column');
-            updateStoryStatus(id, status);
+            //var id = ui.item.attr('data-id');
+            //var status = ui.item.parent().attr('data-column');
+            //updateStoryStatus(id, status);
             //alert($(this).sortable('serialize'));
 
+        },
+        stop: function(event, ui){
+            data = serializeStories();
+            updateStories(data);
         }
     });
     
-    console.log(serializeStories());
 });
 
 function updateStoryStatus(story_id, story_status){
@@ -41,6 +44,25 @@ function updateStoryStatus(story_id, story_status){
 		},
 	 });
 }
+
+function updateStories(post_data){
+	$.ajax({
+		type: "POST",
+		url: "/sprints/update/stories/",
+		dataType: 'json',
+        data: JSON.stringify(post_data),
+		success: function(data){
+		    if ( data.success ){
+		        //do something
+		    }
+		    else {
+		        //do something else
+		    }
+		},
+	 });
+}
+
+    		
 
 /*
 Example to send to server on each update

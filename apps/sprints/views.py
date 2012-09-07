@@ -120,4 +120,61 @@ def update_story_status(request):
         response['message'] = "Invalid or missing parameters"
         json = simplejson.dumps(response)
         return HttpResponse(json, mimetype='application/json', status=400)
+
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def update_stories(request):
+    """
+    Looks for query parms, updates story and returns JSON
+
+    """
+    
+    _input = request.raw_post_data
+    _input = simplejson.loads(request.raw_post_data)
+    print _input
+    
+    json_response = simplejson.dumps({'success':True})
+    return HttpResponse(json_response, mimetype='application/json', status=200)
+    
+    '''
+    #Build reponse object conditions mature
+    response = {'success':False}
+
+    #Authed?
+    if request.user.is_authenticated():
+        pass
+    else:
+        response['expired'] = True
+        response['message'] = "The current session has expired"
+        json = simplejson.dumps(response)
+        return HttpResponse(json, mimetype='text/json', status=200)   
+
+    #Correct params?
+    id = request.REQUEST['story_id']
+    status = request.REQUEST['story_status']
         
+    if id and status and status in VALID_STORY_STATUSES:
+        try:
+            story = Story.objects.get(id=id)
+            story.status = status
+            story.save()
+
+            response['success'] = True        
+            response['message'] = "Story: %s has been updated to status: %s" % (id,status)
+            response['story_id'] = id
+            json = simplejson.dumps(response)
+            return HttpResponse(json, mimetype='application/json', status=200)
+        except:
+            response['success'] = False        
+            response['message'] = "Story %s has been NOT updated" % id
+            response['story_id'] = id
+            json = simplejson.dumps(response)
+            return HttpResponse(json, mimetype='application/json', status=200)
+
+    else:
+        response['success'] = False        
+        response['message'] = "Invalid or missing parameters"
+        json = simplejson.dumps(response)
+        return HttpResponse(json, mimetype='application/json', status=400)
+    '''
