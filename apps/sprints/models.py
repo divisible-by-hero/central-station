@@ -35,6 +35,9 @@ class Story(AuditBase):
 
     def __unicode__(self):
         return self.title
+        
+    class Meta:
+        ordering = ['position']
 
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
