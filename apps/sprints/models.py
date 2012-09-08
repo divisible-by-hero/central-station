@@ -3,7 +3,7 @@ __date__ = '9/5/12'
 
 from django.db import models
 
-from sprints.choices import STORY_STATUS
+from sprints.choices import STORY_STATUS_CHOICES
 from accounts.models import Team
 
 class AuditBase(models.Model):
@@ -18,7 +18,7 @@ class Sprint(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     start_date = models.DateField(blank=False, null=True)
     end_date = models.DateField(blank=False, null=True)
-    team = models.ForeignKey(Team)
+    team = models.ForeignKey(Team) # TODO this should be M2M
 
     locked = models.BooleanField()
 
@@ -27,12 +27,17 @@ class Sprint(AuditBase):
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
-    status = models.CharField(choices=STORY_STATUS, max_length=20, blank=True, null=True)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    position = models.IntegerField(blank=True, null=True)
+    
     points = models.IntegerField(blank=False, null=False)
     sprint = models.ForeignKey(Sprint, null=True)
 
     def __unicode__(self):
         return self.title
+        
+    class Meta:
+        ordering = ['position']
 
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
@@ -40,3 +45,10 @@ class Roadblock(AuditBase):
 
     def __unicode__(self):
         return self.title
+        
+        
+class OrderedStory(AuditBase):
+    story = models.ForeignKey(Story, null=True, blank=False)
+    position = models.IntegerField(blank=False)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    

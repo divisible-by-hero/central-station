@@ -1,12 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{% for sprint in sprints %}
-{{ sprint.name }}
+{% extends 'base.html' %}
 
-{% endfor %}
-</body>
-</html>
+
+{% block main_content %}
+    {% for sprint in sprints %}
+    <a href="{{ sprint.id }}">{{ sprint.name }}</a>
+    {% endfor %}
+{% endblock %}
