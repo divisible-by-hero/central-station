@@ -29,7 +29,7 @@ def sprint_detail(request, id):
     context = {}
 
 
-    sprint = Sprint.objects.get(id=id)
+    sprint = get_object_or_404(Sprint, pk=id)
     context['sprint'] = sprint
 
     #Stories, all
