@@ -8,7 +8,7 @@ from tastypie.api import Api
 
 from sprints.api import SprintResource
 
-from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories
+from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories, SprintDetailView
 
 
 v1_api = Api(api_name="v1")
@@ -19,6 +19,8 @@ urlpatterns = patterns('',
 
     url(r'^$', SprintListView.as_view(), name='sprint_list'),
     url(r'^(?P<id>[\d+])/$', sprint_detail, name='sprint_detail'),
+    # As a Class....
+    url(r'^class/(?P<pk>[\d+])/$', SprintDetailView.as_view()),
     
     url(r'^update/story-status/$', update_story_status, name='update_story_status'),
     url(r'^update/stories/$', update_stories, name='update_stories'),
