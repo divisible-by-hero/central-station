@@ -37,6 +37,7 @@
 
 
     <div class="container">
+        
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class='container'>
@@ -49,23 +50,26 @@
                 </div>
             </div>
         </div>
+        
       <div class="row-fluid">
-        <div class="span9">
+        
+        <div class="xspan9 doweneedtheseextradivs?">
         {% if messages %}
-        {% for message in messages %}
-        <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
-        <a class="close" data-dismiss="alert">×</a>
-        <h4 class="alert-heading">{% if message.tags == "success" %}Success{% else %}Warning!{% endif %}</h4>
-        {{ message }}
-        </div>
-        {% endfor %}
+            {% for message in messages %}
+            <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
+                <a class="close" data-dismiss="alert">×</a>
+            <h4 class="alert-heading">{% if message.tags == "success" %}Success{% else %}Warning!{% endif %}</h4>
+            {{ message }}
+            </div>
+            {% endfor %}
         {% endif %}
-          <div class="span9">
-              <div class="main_content">
-              {% block main_content %}
-              {% endblock %}
-              </div>
-          </div>
+        
+        <div class="xspan12 doweneedtheseextradivs?">
+            <div class="main_content">
+            {% block main_content %}
+            {% endblock %}
+            </div>
+        </div>
           
         </div><!--/span-->
         <div class="span3">

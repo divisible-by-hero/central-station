@@ -1,9 +1,136 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
-{{ hi }}
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block extra_js %}
+<link href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css"/>
+<script src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
+<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
+<script type="text/javascript">
+    var csrf_token = "{{ csrf_token }}";
+</script>
+<script>
+$(document).ready(function(){
+    $( ".cs-board-column-list" ).sortable({
+        connectWith: '.cs-board-column-list',
+        cursor: 'move',
+        receive: function(event, ui){
+            //console.log(ui.item)
+            //var id = ui.item.attr('data-id');
+            //var status = ui.item.parent().attr('data-column');
+            //updateStoryStatus(id, status);
+            //alert($(this).sortable('serialize'));
+
+        },
+        stop: function(event, ui){
+            data = serializeStories();
+            updateStories(data);
+        }
+    });
+    
+});
+
+/*
+Maybe Deprecated ?
+function updateStoryStatus(story_id, story_status){
+	$.ajax({
+		type: "POST",
+		url: "/sprints/update/story-status/",
+		dataType: 'json',
+		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&story_status=" + story_status,
+		success: function(data){
+		    if ( data.success ){
+		        //do something
+		    }
+		    else {
+		        //do something else
+		    }
+		},
+	 });
+}
+*/
+
+function updateStories(post_data){
+	$.ajax({
+		type: "POST",
+		url: "/sprints/update/stories/",
+		dataType: 'json',
+        data: JSON.stringify(post_data),
+		success: function(data){
+		    if ( data.success ){
+		        //do something
+		    }
+		    else {
+		        //do something else
+		    }
+		},
+	 });
+}
+
+function serializeStories(){
+    //stuff
+    var json = {'stories':[]}
+    
+    $( ".cs-board-column-list" ).each(function(){
+        $(this).children('li.cs-story-card').each(function(){
+            story = {};
+            story.id = $(this).attr('data-id');
+            story.status = $(this).parent().attr('data-column');
+            story.position = $(this).index();
+            json.stories.push(story);
+        });
+    });
+    return json
+}
+
+
+</script>
+{% endblock %}
+
+
+{% block main_content %}
+
+    <style>
+        ul.cs-board-column { margin: 0; padding:0; width: 24%; height: 500px; float: left; border: 1px solid #333333; }
+        ul.cs-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #cccccc; }
+
+        ul.cs-board-column-header { margin: 0; padding:0; height: 60px; background-color: #333333; }
+        ul.cs-board-column-header li { color: #ffffff; }
+        
+        .cs-story-card { clear: both;}
+        .cs-story-card-points { margin: 0; padding: 0; float: left; }
+        .cs-story-card-title { margin: 0 0 0 30px; }
+        
+        .clear { clear: both;}
+        
+    </style>
+
+    <h1>{{ sprint.name }}</h1>
+    <div id='cs-board'>
+        
+        {% for col in columns %}
+        <!-- Markup is placeholder... clearly shouldn't be ULs -->
+        <ul id='cs-board-header-{{ col.0 }}' class='cs-board-column cs-board-column-header' data-column='{{ col.0 }}'>
+            <li>{{ col.1 }}</li>
+        </ul>
+        {% endfor %}        
+        
+        {% for column in sorted_stories %}
+        <ul id='cs-board-{{ column.id }}' class='cs-board-column cs-board-column-list' data-column='{{ column.id }}'>
+            {% for story in column.stories %}
+              <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
+                  <h1 class='cs-story-card-points'>{{ story.points }}</h1>
+                  <p class='cs-story-card-title'>{{ story.title }}</p>
+                  <p class='cs-story-card-title'>{{ story.status }}</p>
+                  <div class='clear'></div>
+              </li>
+            {% endfor %}
+        </ul>
+        {% endfor %}
+
+        
+    </div>
+
+    <div class='clear'></div>    
+
+
+{% endblock %}
+
