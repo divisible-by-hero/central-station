@@ -17,6 +17,11 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
     template_name = 'sprints/sprint_detail.html'
     context_object_name = 'sprint'
 
+    def get_context_data(self, **kwargs):
+        context = super(SprintDetailView, self).get_context_data(**kwargs)
+        context['hi'] = "hello"
+        return context
+
 
 class StoryListView(LoginRequiredMixin, ListView):
     template_name = 'sprints/story_list.html'
