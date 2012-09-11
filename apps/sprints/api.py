@@ -4,7 +4,7 @@ from tastypie.resources import ModelResource
 from tastypie.authentication import ApiKeyAuthentication
 from tastypie.authorization import ReadOnlyAuthorization
 
-from sprints.models import Sprint
+from sprints.models import Sprint, Roadblock, Story
 
 class SprintResource(ModelResource):
 
@@ -14,3 +14,17 @@ class SprintResource(ModelResource):
         allowed_methods = ['get']
 
 
+class StoryResource(ModelResource):
+
+    class Meta:
+        queryset = Story.objects.all()
+        resource = "story"
+        allowed_methods = ['get']
+
+
+class RoadBlockResource(ModelResource):
+
+    class Meta:
+        queryset = Roadblock.objects.all()
+        resource = "roadblock"
+        allowed_methods = ['get']
