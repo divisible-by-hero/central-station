@@ -25,10 +25,31 @@ class StoryForm(forms.ModelForm):
 
 class RoadBlockForm(forms.ModelForm):
 
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field('title'),
+        )
+
+        super(RoadBlockForm, self).__init__(*args, **kwargs)
+
     class Meta:
         model = Roadblock
 
 class SprintForm(forms.ModelForm):
 
+    def __init__(self):
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field('name'),
+            Field('start_date'),
+            Field('end_date'),
+            Field('team')
+        )
+
+        super(SprintForm, self).__init__(*args, **kwargs)
+        
     class Meta:
         model = Sprint
