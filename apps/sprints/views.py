@@ -24,9 +24,10 @@ class SprintDetailView(DetailView):
     # into a Class.
 
     model = Sprint
-    template_name = 'sprints/sprint_detail.html'
+    template_name = 'sprints/sprint_detail_table.html'
     context_object_name = 'sprint'
     stories = None
+    pk_url_kwarg = 'id'
 
     def sort_out_columns(self):
         self.stories = self.get_object().story_set.all()
