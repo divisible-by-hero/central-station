@@ -139,4 +139,5 @@ INSTALLED_APPS = (
     'sprints',
     'crispy_forms',
     'accounts',
+    'projects',
 )
