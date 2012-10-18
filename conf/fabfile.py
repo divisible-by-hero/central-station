@@ -15,8 +15,8 @@ env.static_dir = '~/static/prod'
 env.project_virtual = '~/.virtualenvs/%s' % PROJECT_ID
 env.activate = 'source ~/.virtualenvs/%s/bin/activate' % PROJECT_ID
 env.deploy_user = PROJECT_USER
-env.apache_bin_dir = "~/webapps/myproj/apache2/bin"
-env.log_location = "~/webapps/logs/user/error_myproj.log"
+env.apache_bin_dir = "~/webapps/django_env/apache2/bin"
+env.log_location = "~/webapps/logs/dstegelman/error_django_env.log"
 env.git_repo = "git@bitbucket.org:divisiblebyhero/%s.git" % PROJECT_ID
 env.production_branch = "production"
 
