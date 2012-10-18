@@ -15,7 +15,7 @@
         <th>Person</th>
     </tr>
     {% for story in sprint.story_set.all %}
-    <tr{% if story.status == 'done' %} class='success'{% endif %}>
+    <tr{% if story.status == 'done' %} class='success'{% elif story.status == 'road-blocked' %} class='error'{% endif %}>
         <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
         <td>{{ story.points }}</td>
         <td>{{ story.get_status_display }}</td>
