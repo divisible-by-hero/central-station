@@ -39,29 +39,5 @@ STATIC_ROOT = ''
 STATIC_URL = ''
 
 
-ROOT_URLCONF = 'urls.production'
 
-
-
-INSTALLED_APPS = (
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.sites',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-    'grappelli',
-    'django.contrib.admin',
-    'tastypie',
-    'photo_manager',
-    'api_docs',
-    # Everyone should be using south.  Seriously.
-    'south',
-    'sorl.thumbnail',
-    #'photo_admin',
-    'locations',
-    'profiles',
-    #'tagging',
-
-)
 

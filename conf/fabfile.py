@@ -17,7 +17,7 @@ env.activate = 'source ~/.virtualenvs/%s/bin/activate' % PROJECT_ID
 env.deploy_user = PROJECT_USER
 env.apache_bin_dir = "~/webapps/myproj/apache2/bin"
 env.log_location = "~/webapps/logs/user/error_myproj.log"
-env.git_repo = "git@github.com:myuser/%s.git" % PROJECT_ID
+env.git_repo = "git@bitbucket.org:divisiblebyhero/%s.git" % PROJECT_ID
 env.production_branch = "production"
 
 

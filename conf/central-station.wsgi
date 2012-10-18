@@ -5,7 +5,7 @@ import os, sys, site
 sys.stdout = sys.stderr
 
 #add virtual env path
-site.addsitedir('/home/user/virtualenvs/project/lib/python2.7/site-packages/')
+site.addsitedir('/home/dstegelman/.virtualenvs/central-station/lib/python2.7/site-packages/')
 
 #Root of Project is up one directory
 PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
