@@ -25,7 +25,10 @@ class Sprint(AuditBase):
     locked = models.BooleanField()
 
     def __unicode__(self):
-        return self.name
+        if self.name:
+            return self.name
+        else:
+            return "Sprint from %s through %s" % (str(self.start_date), str(self.end_date))
 
     def total_points(self):
         points = 0
