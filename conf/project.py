@@ -1,3 +1,3 @@
 PROJECT_ID = 'central-station'
 PROJECT_USER = 'dstegelman'
-PROJECT_HOSTS = ['']
+PROJECT_HOSTS = ['dstegelman.webfactional.com']
