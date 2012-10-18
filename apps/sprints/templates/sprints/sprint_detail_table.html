@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block extra_head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
+{% endblock extra_head %}
+        {% block sidebar_super %}{% endblock sidebar_super %}
+{% block main_content %}
+<h3>Sprint {{ sprint.start_date }} through {{ sprint.end_date }}</h3>
+<table class='table table-bordered'>
+    <tr>
+        <th>Item</th>
+        <th>Story Points</th>
+        <th>Status</th>
+        <th>Ticket</th>
+        <th>Project</th>
+        <th>Person</th>
+    </tr>
+    {% for story in sprint.story_set.all %}
+    <tr{% if story.status == 'done' %} class='success'{% endif %}>
+        <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
+        <td>{{ story.points }}</td>
+        <td>{{ story.get_status_display }}</td>
+        <td></td>
+        <td>{{ story.project }}</td>
+        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+    </tr>
+    {% if story.task_set.all %}
+    {% for task in story.task_set.all %}
+    <tr {% if task.status == 'done' %}class='success' {% endif %}>
+        <td class='cs-row-task'>{{ task }}</td>
+        <td></td>
+        <td>{{ task.get_status_display }}</td>
+        <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
+        <td>{{ story.project }}</td>
+        <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% endfor %}
+
+</table>
+
+<h3>Stats</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>Stat</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Total Story Points</td>
+        <td>{{ sprint.total_points }}</td>
+    </tr>
+    <tr>
+        <td>Completed Points</td>
+        <td>{{ sprint.completed_points }}</td>
+    </tr>
+
+</table>
+
+
+{% endblock main_content %}

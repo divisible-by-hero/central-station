@@ -16,9 +16,12 @@ v1_api.register(SprintResource())
 
 urlpatterns = patterns('',
 
+    #url(r'^(?P<goal_slug>[-\w]+)'),
+
+
 
     url(r'^$', SprintListView.as_view(), name='sprint_list'),
-    url(r'^(?P<id>[\d+])/$', sprint_detail, name='sprint_detail'),
+    url(r'^(?P<id>[\d+])/$', SprintDetailView.as_view(), name='sprint_detail'),
     # As a Class....
     url(r'^class/(?P<pk>[\d+])/$', SprintDetailView.as_view()),
     

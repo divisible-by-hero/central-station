@@ -7,6 +7,7 @@ STORY_STATUS_CHOICES = (
     ('in-progress', "In Progress"),
     ('testing', "Testing"),
     ('done', "Done"),
+    ('road-blocked', "Road Blocked"),
 )
 
 VALID_STORY_STATUSES = []
