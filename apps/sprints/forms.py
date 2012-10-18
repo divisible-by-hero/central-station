@@ -24,14 +24,18 @@ class StoryForm(forms.ModelForm):
 
     class Meta:
         model = Story
-        exclude = ('deleted', 'deleted_date', 'position')
+        exclude = ('deleted', 'deleted_date', 'position', 'sprint')
 
 
 class TaskForm(forms.ModelForm):
+
     def __init__(self, *args, **kwargs):
+        sprint = kwargs.pop('sprint')
         self.helper = FormHelper()
         self.helper.form_tag = False
+
         super(TaskForm, self).__init__(*args, **kwargs)
+        self.fields['story'].queryset = Story.objects.filter(sprint=sprint)
 
     class Meta:
         model = Task

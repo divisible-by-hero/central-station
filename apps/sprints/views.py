@@ -59,7 +59,7 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
         context['stories'] = self.stories
         context['columns'] = STORY_STATUS_CHOICES
         context['sorted_stories'] = self.sort_out_columns()
-        context['task_form'] = TaskForm()
+        context['task_form'] = TaskForm(sprint=self.object)
         context['story_form'] = StoryForm()
         return context
 
@@ -72,6 +72,13 @@ class TaskEditForm(UpdateView):
     model = Task
     template_name = 'sprints/forms/task_form.html'
     form_class = TaskForm
+
+    def get_form_kwargs(self):
+        kwargs = super(TaskEditForm, self).get_form_kwargs()
+        kwargs.update(
+            {'sprint': self.object.story.sprint}
+        )
+        return kwargs
 
 class AddStory(CreateView):
     model = Story

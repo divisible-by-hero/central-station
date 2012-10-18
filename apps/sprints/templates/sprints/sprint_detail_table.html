@@ -36,6 +36,7 @@
     <div class="modal-body">
         {% csrf_token %}
         {% crispy story_form %}
+        <input type="hidden" name="sprint" value="{{ sprint.id }}">
     </div>
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
@@ -46,7 +47,7 @@
 
 
 
-<table class='table table-bordered'>
+<table class='table table-bordered table-hover'>
     <tr>
         <th>Item</th>
         <th>Story Points</th>
