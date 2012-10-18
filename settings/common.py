@@ -5,7 +5,7 @@ import os
 SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 
 ADMINS = (
-    #('', ''),
+    ('Derek Stegelman', 'dstegelman@gmail.com'),
 )
 
 
@@ -86,8 +86,6 @@ MIDDLEWARE_CLASSES = (
 
 
 AUTH_PROFILE_MODULE = 'profile.UserProfile'
-
-
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
