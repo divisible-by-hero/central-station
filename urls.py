@@ -12,14 +12,12 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    url(r'^$', TemplateView.as_view(template_name='base.html')),
+    url(r'^$', 'core.views.homepage', name='homepage'),
+    url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
     url(r'^accounts/', include('accounts.urls')),
-    url(r'^sprints/', include('sprints.urls')),
 
-
-
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'profile/login.html'}),
-    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'profile/logout.html'}, name="logout"),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
     url(r'^admin/', include(admin.site.urls)),
 
 )

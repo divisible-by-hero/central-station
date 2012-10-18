@@ -137,4 +137,5 @@ INSTALLED_APPS = (
     'crispy_forms',
     'accounts',
     'projects',
+    'core',
 )

@@ -38,9 +38,11 @@ class Sprint(AuditBase):
         for story in self.story_set.all():
             if story.status == 'done':
                 points = points + story.points
-
         return points
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('sprint_detail', (), { 'account': self.team.organization.slug, 'id': self.id })
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
@@ -54,9 +56,9 @@ class Story(AuditBase):
     def __unicode__(self):
         return self.title
 
-    @models.permalink
-    def get_absolute_url(self):
-        return "/"
+    #@models.permalink
+    #def get_absolute_url(self):
+        #return ('')
 
     class Meta:
         ordering = ['position']

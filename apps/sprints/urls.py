@@ -21,6 +21,7 @@ urlpatterns = patterns('',
 
 
     url(r'^$', SprintListView.as_view(), name='sprint_list'),
+    #url(r'^')
     url(r'^(?P<id>[\d+])/$', SprintDetailView.as_view(), name='sprint_detail'),
     # As a Class....
     url(r'^class/(?P<pk>[\d+])/$', SprintDetailView.as_view()),

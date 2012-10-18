@@ -41,7 +41,7 @@
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
                 <div class='container'>
-                    <a class="brand" href="#">Central Station</a>
+                    <a class="brand" href="{% url homepage %}">Central Station</a>
                     <ul class='nav pull-right'>
                         {% if not request.user.is_authenticated %}
                         <li><a href="{% url django.contrib.auth.views.login %}">Login</a></li>
@@ -70,6 +70,11 @@
         <div class="xspan12 doweneedtheseextradivs?">
             <div class="main_content">
             {% block main_content %}
+                <ul>
+                {% for sprint in sprints %}
+                    <li><a href="{{ sprint.get_absolute_url }}">Sprint from {{ sprint.start_date }} through {{ sprint.end_date }}</a></li>
+                {% endfor %}
+                </ul>
             {% endblock %}
             </div>
         </div>
