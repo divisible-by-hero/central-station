@@ -1,7 +1,7 @@
 from settings.common import *
 
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 THUMBNAIL_DEBUG = DEBUG
 ## Database Configuration

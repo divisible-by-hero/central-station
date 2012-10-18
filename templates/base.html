@@ -43,8 +43,11 @@
                 <div class='container'>
                     <a class="brand" href="#">Central Station</a>
                     <ul class='nav pull-right'>
-                        <li><a href="">Login</a></li>
-                        <li><a href="">Sign up</a></li>
+                        {% if not request.user.is_authenticated %}
+                        <li><a href="{% url django.contrib.auth.views.login %}">Login</a></li>
+                        {% else %}
+                        <li><a href="{% url django.contrib.auth.views.logout %}">Logout</a></li>
+                        {% endif %}
                     </ul>
 
                 </div>

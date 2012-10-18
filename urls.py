@@ -15,7 +15,7 @@ urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name='home.html')),
     url(r'^accounts/', include('accounts.urls')),
     url(r'^sprints/', include('sprints.urls')),
-    url(r'^knowledge/', include('knowledge.urls')),
+
 
 
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'profile/login.html'}),
