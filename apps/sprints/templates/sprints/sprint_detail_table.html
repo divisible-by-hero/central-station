@@ -84,7 +84,7 @@
     </tr>
     {% if story.task_set.all %}
     {% for task in story.task_set.all %}
-    <tr {% if task.status == 'done' %}class='success' {% elif story.status == 'road-blocked' %}class='error'{% endif %}>
+    <tr {% if task.status == 'done' %}class='success' {% elif task.status == 'road-blocked' %}class='error'{% endif %}>
         <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
         <td></td>
         <td>{{ task.get_status_display }}</td>
