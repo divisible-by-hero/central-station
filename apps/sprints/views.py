@@ -19,7 +19,7 @@ class SprintListView(LoginRequiredMixin, ListView):
     context_object_name = "sprints"
 
 
-class SprintDetailView(DetailView):
+class SprintDetailView(LoginRequiredMixin, DetailView):
     # For an academic exercise, Derek will build the sprint_detail view func
     # into a Class.
 
