@@ -8,6 +8,7 @@
 <div class='btn-group'>
     <a href="#addStory" data-toggle="modal" class="btn">Add Story</a>
     <a href="#addTask" data-toggle="modal" class="btn">Add Task</a>
+    <a href="#addProject" data-toggle="modal" class="btn">Add Project</a>
 </div>
 <div class="modal hide fade" id="addTask">
     <div class="modal-header">
@@ -45,7 +46,23 @@
     </form>
 </div>
 
+<div class="modal hide fade" id="addProject">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Project</h3>
+    </div>
+    <form method='POST' action="{% url project_add %}">
+        <div class="modal-body">
+            {% csrf_token %}
+            {% crispy project_form %}
 
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <input type="submit" value="Add Project" class="btn btn-primary">
+        </div>
+    </form>
+</div>
 
 <table class='table table-bordered table-hover'>
     <tr>

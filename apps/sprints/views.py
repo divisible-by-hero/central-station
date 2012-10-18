@@ -14,6 +14,7 @@ from braces.views import LoginRequiredMixin
 
 from sprints.models import Sprint, Story, Task
 from sprints.forms import StoryForm, TaskForm
+from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
 class SprintListView(LoginRequiredMixin, ListView):
@@ -61,6 +62,7 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
         context['sorted_stories'] = self.sort_out_columns()
         context['task_form'] = TaskForm(sprint=self.object)
         context['story_form'] = StoryForm()
+        context['project_form'] = ProjectForm()
         return context
 
 class StoryEditForm(UpdateView):
