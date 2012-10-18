@@ -15,6 +15,7 @@ class StoryForm(forms.ModelForm):
 
         self.helper = FormHelper()
         self.helper.form_tag = False
+
         self.helper.layout = Layout(
             Field('title'),
         )
@@ -23,16 +24,18 @@ class StoryForm(forms.ModelForm):
 
     class Meta:
         model = Story
+        exclude = ('deleted', 'deleted_date', 'position')
 
 
 class TaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_tag = False
-
-
         super(TaskForm, self).__init__(*args, **kwargs)
 
+    class Meta:
+        model = Task
+        exclude = ('deleted', 'deleted_date')
 class RoadBlockForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):

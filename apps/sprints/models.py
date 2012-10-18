@@ -47,6 +47,14 @@ class Sprint(AuditBase):
     def get_absolute_url(self):
         return ('sprint_detail', (), { 'account': self.team.organization.slug, 'id': self.id })
 
+    @models.permalink
+    def get_story_add(self):
+        return ('story_add', (), {'account': self.team.organization.slug})
+
+    @models.permalink
+    def get_task_add(self):
+        return ('task_add', (), {'account': self.team.organization.slug})
+
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
@@ -59,9 +67,9 @@ class Story(AuditBase):
     def __unicode__(self):
         return self.title
 
-    #@models.permalink
-    #def get_absolute_url(self):
-        #return ('')
+    @models.permalink
+    def get_absolute_url(self):
+        return ('story_edit', (), {'account': self.sprint.team.organization.slug, 'pk': self.id})
 
     class Meta:
         ordering = ['position']
@@ -77,6 +85,10 @@ class Task(AuditBase):
 
     def __unicode__(self):
         return self.title
+
+    @models.permalink
+    def get_absolute_url(self):
+        return ('task_edit', (), {'account': self.story.sprint.team.organization.slug, 'pk': self.id})
 
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)

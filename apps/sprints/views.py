@@ -4,13 +4,16 @@ __date__ = '9/6/12'
 from itertools import groupby
 
 from django.views.generic import DetailView, ListView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.core.urlresolvers import reverse_lazy
 from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
 from braces.views import LoginRequiredMixin
 
-from sprints.models import Sprint, Story
+from sprints.models import Sprint, Story, Task
+from sprints.forms import StoryForm, TaskForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
 class SprintListView(LoginRequiredMixin, ListView):
@@ -56,8 +59,31 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
         context['stories'] = self.stories
         context['columns'] = STORY_STATUS_CHOICES
         context['sorted_stories'] = self.sort_out_columns()
+        context['task_form'] = TaskForm()
+        context['story_form'] = StoryForm()
         return context
 
+class StoryEditForm(UpdateView):
+    model = Story
+    template_name = 'sprints/forms/story_form.html'
+    form_class = StoryForm
+
+class TaskEditForm(UpdateView):
+    model = Task
+    template_name = 'sprints/forms/task_form.html'
+    form_class = TaskForm
+
+class AddStory(CreateView):
+    model = Story
+
+    def get_success_url(self):
+        return self.object.sprint.get_absolute_url()
+
+class AddTask(CreateView):
+    model = Task
+
+    def get_success_url(self):
+        return self.object.story.sprint.get_absolute_url()
 
 
 def sprint_detail(request, id):

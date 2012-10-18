@@ -5,6 +5,47 @@
         {% block sidebar_super %}{% endblock sidebar_super %}
 {% block main_content %}
 <h3>Sprint {{ sprint.start_date }} through {{ sprint.end_date }}</h3>
+<div class='btn-group'>
+    <a href="#addStory" data-toggle="modal" class="btn">Add Story</a>
+    <a href="#addTask" data-toggle="modal" class="btn">Add Task</a>
+</div>
+<div class="modal hide fade" id="addTask">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Task</h3>
+    </div>
+    <form method="POST" action="{{ sprint.get_task_add }}">
+    <div class="modal-body">
+        {% load crispy_forms_tags %}
+            {% csrf_token %}
+        {% crispy task_form %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss='modal'>Close</a>
+        <input type="submit" value="Add Task" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+
+<div class="modal hide fade" id="addStory">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Story</h3>
+    </div>
+    <form method='POST' action="{{ sprint.get_story_add }}">
+    <div class="modal-body">
+        {% csrf_token %}
+        {% crispy story_form %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <input type="submit" value="Add Story" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+
+
+
 <table class='table table-bordered'>
     <tr>
         <th>Item</th>
@@ -26,7 +67,7 @@
     {% if story.task_set.all %}
     {% for task in story.task_set.all %}
     <tr {% if task.status == 'done' %}class='success' {% endif %}>
-        <td class='cs-row-task'>{{ task }}</td>
+        <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
         <td></td>
         <td>{{ task.get_status_display }}</td>
         <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
