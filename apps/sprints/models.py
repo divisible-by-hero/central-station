@@ -9,6 +9,8 @@ from sprints.managers import SprintManager
 from accounts.models import Team
 from projects.models import Project
 
+from actstream import action
+
 class AuditBase(models.Model):
     deleted = models.BooleanField()
     deleted_date = models.DateTimeField(null=True, blank=True)
@@ -70,6 +72,11 @@ class Story(AuditBase):
     def __unicode__(self):
         return self.title
 
+    def save(self, *args, **kwargs):
+
+
+        super(Story, self).save(*args, **kwargs)
+
     @models.permalink
     def get_absolute_url(self):
         return ('story_edit', (), {'account': self.project.account.slug, 'pk': self.id})
@@ -112,4 +119,11 @@ class OrderedStory(AuditBase):
     story = models.ForeignKey(Story, null=True, blank=False)
     position = models.IntegerField(blank=False)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
-    
+
+from django.db.models.signals import post_save
+from actstream import action
+
+def my_handler(sender, instance, created, **kwargs):
+    action.send(instance, verb='was saved', action_object=instance)
+
+post_save.connect(my_handler, sender=Story)

@@ -18,3 +18,4 @@ django-kombu==0.9.4
 PIL
 django-bootstrap-static==2.1.0
 django-braces
+django-activity-stream

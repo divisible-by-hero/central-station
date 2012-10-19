@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     #'tastypie',
     'south',
+    'actstream',
 
     'django_extensions',
     'bootstrap',
@@ -144,3 +145,11 @@ INSTALLED_APPS = (
 CS_SMALL_POINT_VALUE = 1
 CS_MEDIUM_POINT_VALUE = 5
 CS_HARD_POINT_VALUE = 13
+
+ACTSTREAM_SETTINGS = {
+    'MODELS': ('auth.user', 'auth.group', 'sprints.sprint', 'sprints.task', 'sprints.story'),
+    'FETCH_RELATIONS': True,
+    'USE_PREFETCH': True,
+    'USE_JSONFIELD': False,
+    'GFK_FETCH_DEPTH': 1,
+}
