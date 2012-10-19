@@ -14,5 +14,5 @@ def account_home(request, account):
     account = Account.objects.get(slug=account)
     request.session['account_slug'] = account.slug
     sprints = Sprint.objects.current().filter(team__organization=account)
-    context = {'account': account, 'sprints': sprints}
+    context = {'sprints': sprints}
     return render(request, 'accounts/account_home.html', context)

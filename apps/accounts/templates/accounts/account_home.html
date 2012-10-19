@@ -1,24 +1,8 @@
-{% extends "base.html" %}
-        {% block main_title %} - {{ account }} {% endblock main_title %}
-{% block added_nav %}
+{% extends "accounts/base.html" %}
 
-<li><a href="{% url backlog account=account_slug %}">Backlog</a></li>
-<li><a href="{% url account_home account=account_slug %}">Current Sprint</a></li>
-<li class="dropdown">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-        Sprints
-        <b class="caret"></b>
-    </a>
-    <ul class="dropdown-menu">
-        {% for sprint in account_sprints %}
-        <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.team }}</a></li>
-        {% endfor %}
-    </ul>
-</li>
 
-{% endblock added_nav %}
 
-        {% block sidebar_super %}{% endblock sidebar_super %}
+
 
 {% block main_content %}
 {% for sprint in sprints %}

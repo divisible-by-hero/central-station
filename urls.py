@@ -13,8 +13,9 @@ admin.autodiscover()
 urlpatterns = patterns('',
 
     url(r'^$', 'core.views.homepage', name='homepage'),
+    url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
     url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
-    url(r'^accounts/', include('accounts.urls')),
+
     url(r'^projects/', include('projects.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
