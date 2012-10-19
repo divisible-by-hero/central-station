@@ -3,105 +3,121 @@
     "pk": 1, 
     "model": "projects.project", 
     "fields": {
-      "title": "Connect"
+      "title": "Connect",
+        "account": 1
     }
   }, 
   {
     "pk": 2, 
     "model": "projects.project", 
     "fields": {
-      "title": "Pulse"
+      "title": "Pulse",
+        "account": 1
     }
   }, 
   {
     "pk": 3, 
     "model": "projects.project", 
     "fields": {
-      "title": "ITL"
+      "title": "ITL",
+        "account": 1
     }
   }, 
   {
     "pk": 4, 
     "model": "projects.project", 
     "fields": {
-      "title": "Gating"
+      "title": "Gating",
+        "account": 1
     }
   }, 
   {
     "pk": 5, 
     "model": "projects.project", 
     "fields": {
-      "title": "Selective-Scholarship"
+      "title": "Selective-Scholarship",
+        "account": 1
     }
   }, 
   {
     "pk": 6, 
     "model": "projects.project", 
     "fields": {
-      "title": "Common"
+      "title": "Common",
+        "account": 1
     }
   }, 
   {
     "pk": 7, 
     "model": "projects.project", 
     "fields": {
-      "title": "Templates"
+      "title": "Templates",
+        "account": 1
     }
   }, 
   {
     "pk": 8, 
     "model": "projects.project", 
     "fields": {
-      "title": "CBA Mentor"
+      "title": "CBA Mentor",
+        "account": 1
     }
   }, 
   {
     "pk": 9, 
     "model": "projects.project", 
     "fields": {
-      "title": "NUDC"
+      "title": "NUDC",
+        "account": 1
     }
   }, 
   {
     "pk": 10, 
     "model": "projects.project", 
     "fields": {
-      "title": "KSOL"
+      "title": "KSOL",
+      "account": 1
     }
   }, 
   {
     "pk": 11, 
     "model": "projects.project", 
     "fields": {
-      "title": "Elate Wiki"
+      "title": "Elate Wiki",
+        "account": 1
+
     }
   }, 
   {
     "pk": 12, 
     "model": "projects.project", 
     "fields": {
-      "title": "Recruitment"
+      "title": "Recruitment",
+        "account": 1
     }
   }, 
   {
     "pk": 13, 
     "model": "projects.project", 
     "fields": {
-      "title": "Union"
+      "title": "Union",
+       "account": 1
     }
   }, 
   {
     "pk": 14, 
     "model": "projects.project", 
     "fields": {
-      "title": "Secure IT"
+      "title": "Secure IT",
+       "account": 1
     }
   }, 
   {
     "pk": 15, 
     "model": "projects.project", 
     "fields": {
-      "title": "KSOL"
+      "title": "KSOL",
+        "account": 1
     }
   }
 ]
