@@ -44,18 +44,7 @@
                     <a class="brand" href="{% url homepage %}">Central Station{% block main_title %}{% endblock main_title %}</a>
                     <ul class='nav'>
                      {% block added_nav %}{% endblock added_nav %}
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                Accounts
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-                                {% for team in teams %}
-                                <li><a href="{{ team.team.organization.get_absolute_url }}">{{ team.team }} - {{ team.team.organization }}</a></li>
-                                {% endfor %}
-                                <li><a href=""></a></li>
-                            </ul>
-                        </li>
+
                     </ul>
                     <ul class='nav pull-right'>
                         {% if not request.user.is_authenticated %}
@@ -68,6 +57,12 @@
                             </a>
                             <ul class="dropdown-menu">
                                 <li><a href="{% url django.contrib.auth.views.logout %}">Logout</a></li>
+                                <li class="divider"></li>
+                                <li class="nav-header">Accounts</li>
+                                {% for team in teams %}
+                                <li><a href="{{ team.team.organization.get_absolute_url }}">{{ team.team }} - {{ team.team.organization }}</a></li>
+                                {% endfor %}
+
                             </ul>
                         </li>
 
