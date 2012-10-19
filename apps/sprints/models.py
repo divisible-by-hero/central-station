@@ -4,7 +4,7 @@ __date__ = '9/5/12'
 from django.db import models
 from django.contrib.auth.models import User
 
-from sprints.choices import STORY_STATUS_CHOICES
+from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES
 from sprints.managers import SprintManager
 from accounts.models import Team
 from projects.models import Project
@@ -63,7 +63,7 @@ class Story(AuditBase):
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)
     
-    points = models.IntegerField(blank=False, null=False)
+    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False)
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
     project = models.ForeignKey(Project, null=True)
 
