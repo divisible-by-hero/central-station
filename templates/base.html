@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>{% block title %}Home{% endblock %} | {{ settings.application_name }}</title>
+    <title>{% block title %}Central Station{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="issue tracking">
     <meta name="author" content="">
@@ -50,6 +50,10 @@
                         {% if not request.user.is_authenticated %}
                         <li><a href="{% url django.contrib.auth.views.login %}">Login</a></li>
                         {% else %}
+                        <li>
+                            {% load gravatar_tags %}
+                            <img src="{% get_gravatar request.user.email 30 %}" width="30" class="img-rounded">
+                        </li>
                         <li class='dropdown'>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                                 {{ request.user.username }}

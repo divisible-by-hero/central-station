@@ -3,7 +3,10 @@
     background-color: #f9f9f9;
 }
 
-
+.nav img
+{
+    padding-top: 3px;
+}
 h1
 {
     margin-bottom: 20px;

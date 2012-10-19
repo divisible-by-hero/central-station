@@ -130,6 +130,7 @@ INSTALLED_APPS = (
     'django.contrib.markup',
     #'tastypie',
     'south',
+    'hadrian.contrib.gravatar',
 
     'django_extensions',
     'bootstrap',
