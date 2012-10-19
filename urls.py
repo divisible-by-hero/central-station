@@ -11,6 +11,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'core.views.homepage', name='homepage'),
     url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
@@ -19,7 +20,7 @@ urlpatterns = patterns('',
     url(r'^projects/', include('projects.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
-    url(r'^admin/', include(admin.site.urls)),
+
 
 )
 
