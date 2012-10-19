@@ -11,3 +11,4 @@ dist
 .idea
 reports/coverage_html
 .coverage
+.DS_Store

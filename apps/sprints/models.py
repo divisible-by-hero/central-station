@@ -74,6 +74,13 @@ class Story(AuditBase):
     def get_absolute_url(self):
         return ('story_edit', (), {'account': self.project.account.slug, 'pk': self.id})
 
+    @property
+    def roadblocked(self):
+        for task in self.task_set.all():
+            if task.status == 'road-blocked':
+                return True
+        return False
+
     class Meta:
         ordering = ['position']
 
