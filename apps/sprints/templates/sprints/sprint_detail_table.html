@@ -78,15 +78,29 @@
         <th>Ticket</th>
         <th>Project</th>
         <th>Person</th>
+        <th>Action</th>
     </tr>
     {% for story in sprint.story_set.all %}
     <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}">
         <td>{% if story.status %}<span class="label {% if story.status == 'road-blocked' or story.roadblocked %}label-important{% elif story.status == 'in-progress' %}label-info{% elif story.status == 'done' %}label-success{% endif %}">{{ story.get_status_display }}</span>{% endif %}</td>
         <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
-        <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.points }}</td>
+        <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.get_points_display }}</td>
         <td></td>
         <td>{{ story.project }}</td>
         <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn">Action</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#">Mark as Done</a></li>
+                    <li><a href="#">Mark as In progress</a></li>
+                    <li><a href="#">Mark as Roadblocked</a></li>
+                </ul>
+            </div>
+        </td>
     </tr>
     {% if story.task_set.all %}
     {% for task in story.task_set.all %}
@@ -97,6 +111,31 @@
         <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
         <td>{{ story.project }}</td>
         <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn">Action</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    {% if not task.status %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Mark as In progress</a></li>
+                    {% endif %}
+                    {% if task.status != 'done' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='done' %}">Mark as Done</a></li>
+                    {% else %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Re-Open</a></li>
+                    {% endif %}
+
+
+                    {% if task.status != 'road-blocked' and task.status != 'done' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='road-blocked' %}">Mark as Roadblocked</a></li>
+                    {% elif task.status == 'road-blocked' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Clear Roadblock</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </td>
     </tr>
     {% endfor %}
     {% endif %}
@@ -124,3 +163,12 @@
 
 
 {% endblock main_content %}
+
+{% block extra_js %}
+{{ block.super }}
+<script>
+    $(document).ready(function(){
+        $(".error").effect("pulsate", { times:2 }, 1500);
+    });
+</script>
+{% endblock extra_js %}

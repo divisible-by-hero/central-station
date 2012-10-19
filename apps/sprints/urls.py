@@ -9,7 +9,7 @@ from tastypie.api import Api
 from sprints.api import SprintResource
 
 from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog
-
+from sprints.ajax import change_story, change_task
 
 v1_api = Api(api_name="v1")
 v1_api.register(SprintResource())
@@ -22,7 +22,7 @@ urlpatterns = patterns('',
 
     url(r'^$', SprintListView.as_view(), name='sprint_list'),
     url(r'^backlog/$', Backlog.as_view(), name='backlog'),
-    url(r'^sprint/(?P<id>[\d+])/$', SprintDetailView.as_view(), name='sprint_detail'),
+    url(r'^sprint/(?P<id>\d+)/$', SprintDetailView.as_view(), name='sprint_detail'),
     url(r'^stories/add/$', AddStory.as_view(), name='story_add'),
     url(r'^stories/(?P<pk>\d+)/$', StoryEditForm.as_view(), name='story_edit'),
 
@@ -30,10 +30,15 @@ urlpatterns = patterns('',
     url(r'^task/(?P<pk>\d+)/$', TaskEditForm.as_view(), name='task_edit'),
 
     # As a Class....
-    url(r'^class/(?P<pk>[\d+])/$', SprintDetailView.as_view()),
+    url(r'^class/(?P<pk>\d+)/$', SprintDetailView.as_view()),
     
     url(r'^update/story-status/$', update_story_status, name='update_story_status'),
     url(r'^update/stories/$', update_stories, name='update_stories'),
     # API
     url(r'^api/', include(v1_api.urls)),
+
+    #AJAX
+    url(r'^ajax/task/(?P<task_id>\d+)/(?P<change>[-\w]+)/$', change_task, name='ajax_change_task'),
+    url(r'^ajax/story/(?P<story_id>\d+)/(?P<change>[-\w]+)/$', change_story, name='ajax_change_story'),
+
 )
