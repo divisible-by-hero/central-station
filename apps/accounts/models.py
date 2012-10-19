@@ -30,6 +30,10 @@ class Account(models.Model):
         unique_slugify(self, self.company_name)
         super(Account, self).save(*args, **kwargs)
 
+    @models.permalink
+    def get_absolute_url(self):
+        return ('account_home', (), {'account': self.slug})
+
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     organization = models.ForeignKey(Account)

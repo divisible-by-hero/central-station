@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+        {% block main_title %} - {{ account }} {% endblock main_title %}
+{% block added_nav %}
+
+<li><a href="{% url backlog account=account_slug %}">Backlog</a></li>
+<li><a href="{% url account_home account=account_slug %}">Current Sprint</a></li>
+<li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+        Sprints
+        <b class="caret"></b>
+    </a>
+    <ul class="dropdown-menu">
+        <li><a href=""></a></li>
+    </ul>
+</li>
+
+{% endblock added_nav %}
+
+        {% block sidebar_super %}{% endblock sidebar_super %}
+
+{% block main_content %}
+{% for sprint in sprints %}
+        <h3>Current Sprint for {{ sprint.team }}</h3>
+<table class='table table-bordered table-hover'>
+    <tr>
+        <th>Item</th>
+        <th>Story Points</th>
+        <th>Status</th>
+        <th>Ticket</th>
+        <th>Project</th>
+        <th>Person</th>
+    </tr>
+    {% for story in sprint.story_set.all %}
+    <tr{% if story.status == 'done' %} class='success'{% elif story.status == 'road-blocked' %} class='error'{% elif story.status == 'in-progress' %} class='info'{% endif %}>
+    <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
+    <td>{{ story.points }}</td>
+    <td>{% if story.status %}{{ story.get_status_display }}{% endif %}</td>
+    <td></td>
+    <td>{{ story.project }}</td>
+    <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+    </tr>
+    {% if story.task_set.all %}
+    {% for task in story.task_set.all %}
+    <tr {% if task.status == 'done' %}class='success' {% elif task.status == 'road-blocked' %}class='error' {% elif task.status == 'in-progress' %} class='info' {% endif %}>
+    <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
+    <td></td>
+    <td>{% if task.status %}{{ task.get_status_display }}{% endif %}</td>
+    <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
+    <td>{{ story.project }}</td>
+    <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% endfor %}
+
+</table>
+{% endfor %}
+{% endblock %}
