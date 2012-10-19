@@ -10,7 +10,9 @@
         <b class="caret"></b>
     </a>
     <ul class="dropdown-menu">
-        <li><a href=""></a></li>
+        {% for sprint in account_sprints %}
+        <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.team }}</a></li>
+        {% endfor %}
     </ul>
 </li>
 
@@ -23,28 +25,28 @@
         <h3>Current Sprint for {{ sprint.team }}</h3>
 <table class='table table-bordered table-hover'>
     <tr>
+        <th>Status</th>
         <th>Item</th>
         <th>Story Points</th>
-        <th>Status</th>
         <th>Ticket</th>
         <th>Project</th>
         <th>Person</th>
     </tr>
     {% for story in sprint.story_set.all %}
-    <tr{% if story.status == 'done' %} class='success'{% elif story.status == 'road-blocked' %} class='error'{% elif story.status == 'in-progress' %} class='info'{% endif %}>
-    <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
-    <td>{{ story.points }}</td>
-    <td>{% if story.status %}{{ story.get_status_display }}{% endif %}</td>
-    <td></td>
-    <td>{{ story.project }}</td>
-    <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+    <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}">
+        <td>{% if story.status %}<span class="label {% if story.status == 'road-blocked' or story.roadblocked %}label-important{% elif story.status == 'in-progress' %}label-info{% elif story.status == 'done' %}label-success{% endif %}">{{ story.get_status_display }}</span>{% endif %}</td>
+        <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
+        <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.points }}</td>
+        <td></td>
+        <td>{{ story.project }}</td>
+        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
     </tr>
     {% if story.task_set.all %}
     {% for task in story.task_set.all %}
-    <tr {% if task.status == 'done' %}class='success' {% elif task.status == 'road-blocked' %}class='error' {% elif task.status == 'in-progress' %} class='info' {% endif %}>
+    <tr {% if task.status == 'road-blocked' %}class='error'{% endif %}>
+    <td>{% if task.status %}<span class="label {% if task.status == 'road-blocked' %}label-important{% elif task.status == 'in-progress' %}label-info{% elif task.status == 'done' %}label-success{% endif %}">{{ task.get_status_display }}</span>{% endif %}</td>
     <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
     <td></td>
-    <td>{% if task.status %}{{ task.get_status_display }}{% endif %}</td>
     <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
     <td>{{ story.project }}</td>
     <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
