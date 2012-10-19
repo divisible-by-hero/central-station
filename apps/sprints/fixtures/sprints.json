@@ -1,0 +1,857 @@
+[
+  {
+    "pk": 1, 
+    "model": "sprints.sprint", 
+    "fields": {
+      "locked": false, 
+      "name": "", 
+      "end_date": "2012-10-19", 
+      "deleted": false, 
+      "team": 1, 
+      "created_date": "2012-10-17T21:51:56", 
+      "deleted_date": null, 
+      "start_date": "2012-10-08"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "K-State Zimbra user -  not all Cal appts showing up in Connect", 
+      "deleted": false, 
+      "project": 1, 
+      "points": 1, 
+      "created_date": "2012-10-18T14:15:48", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a Unit, we need to populate this site with current information", 
+      "deleted": false, 
+      "project": 12, 
+      "points": 1, 
+      "created_date": "2012-10-18T14:42:38", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 18, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a user, I need to submit a Proposals via a web form", 
+      "deleted": false, 
+      "project": 3, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:45:40", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "SS not hittting txhub to talk with Talisma", 
+      "deleted": false, 
+      "project": 5, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:47:51", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As Kiley I want to download archive of scholarships submitted", 
+      "deleted": false, 
+      "project": 5, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:49:18", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a user I want the scholarship detail page easy to understand", 
+      "deleted": false, 
+      "project": 5, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:50:38", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As an Admin, I want a good way to distribute news and updates", 
+      "deleted": false, 
+      "project": 13, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:53:35", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As a stakeholder I want updates to the Union homepage", 
+      "deleted": false, 
+      "project": 12, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:55:10", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a stakeholder, I want to see additional occurrence changes in alpha", 
+      "deleted": false, 
+      "project": 2, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:55:50", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As API developer I need to get info out that I can use in my applications", 
+      "deleted": false, 
+      "project": 2, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:57:10", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As a K-Stater I want the Secure IT Training to be less painful", 
+      "deleted": false, 
+      "project": 14, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:57:30", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a user I need to a way to submitt Proposals to ITL", 
+      "deleted": false, 
+      "project": 3, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:58:36", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As a K-Stater I want the Secure IT Training to be less painful", 
+      "deleted": false, 
+      "project": 14, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:59:13", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an Unit Director, this site needs to be deployed soon", 
+      "deleted": false, 
+      "project": 12, 
+      "points": 1, 
+      "created_date": "2012-10-18T14:41:44", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an end user, the search needs styled", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:41:04", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an end user, the site should look the same throughout", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:39:25", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As an K-Stater I want the Connect bar to be consistant in IE along with other browsers", 
+      "deleted": false, 
+      "project": 1, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:18:35", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "Connect Notifications Demo", 
+      "deleted": false, 
+      "project": 1, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:19:51", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As a dev, Elatewiki and elearningfacultymodules.org need to be in version control", 
+      "deleted": false, 
+      "project": 11, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:21:22", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a KSOL student, I want to easily find help in the online help", 
+      "deleted": false, 
+      "project": 10, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:21:55", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As a dev, need an alpha space for Elatewiki and elearningfacultymodules.org", 
+      "deleted": false, 
+      "project": 11, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:24:21", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As an Admin users I want to be able to bulk add new courses", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:26:26", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "in-progress", 
+      "title": "As an Admin user I want helpful documentation on batch upload tool", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:27:13", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a KSOL instructor, I want to easily find help in the online help", 
+      "deleted": false, 
+      "project": 10, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:32:50", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an Admin user I want to be able to copy courses", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:34:19", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an Admin user need fields to not be required", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 1, 
+      "created_date": "2012-10-18T14:35:36", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As an end user I want a good looking homepage", 
+      "deleted": false, 
+      "project": 9, 
+      "points": 5, 
+      "created_date": "2012-10-18T14:36:23", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a user I need to a way to submitt Proposals to ITL", 
+      "deleted": false, 
+      "project": 3, 
+      "points": 13, 
+      "created_date": "2012-10-18T14:36:33", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "sprints.story", 
+    "fields": {
+      "status": "done", 
+      "title": "As a KSOL instructor, I want to easily find help in the online help", 
+      "deleted": false, 
+      "project": 10, 
+      "points": 5, 
+      "created_date": "2012-10-18T15:00:40", 
+      "position": null, 
+      "deleted_date": null, 
+      "sprint": 1
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 1, 
+      "title": "format=RSS", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:17:58", 
+      "deleted_date": null, 
+      "ticket": "https://github.com/kstateome/k-state-connect/issues/249"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 2, 
+      "title": "Patch Django cache for this issue", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:19:14", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 3, 
+      "title": "working Demo of Notifications - style updates", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:20:41", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 4, 
+      "title": "put in version control", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:23:44", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 6, 
+      "title": "talk to ASAs", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:25:11", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 6, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 6, 
+      "title": "deployment script to automate updating alpha", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:25:58", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 7, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 7, 
+      "title": "write batch upload tool", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:26:49", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 8, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 5, 
+      "title": "Upgrade Student Flare output to HTML 5", 
+      "deleted": false, 
+      "assigned": 4, 
+      "created_date": "2012-10-18T14:27:25", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 9, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "road-blocked", 
+      "story": 5, 
+      "title": "Send communication", 
+      "deleted": false, 
+      "assigned": 5, 
+      "created_date": "2012-10-18T14:31:28", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 10, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 9, 
+      "title": "Upgrade Instructor Flare output to HTML 5", 
+      "deleted": false, 
+      "assigned": 4, 
+      "created_date": "2012-10-18T14:33:34", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 11, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "in-progress", 
+      "story": 8, 
+      "title": "write and find a place for it", 
+      "deleted": false, 
+      "assigned": 3, 
+      "created_date": "2012-10-18T14:33:50", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 12, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "road-blocked", 
+      "story": 9, 
+      "title": "Send communication", 
+      "deleted": false, 
+      "assigned": 5, 
+      "created_date": "2012-10-18T14:34:41", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 13, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 12, 
+      "title": "Redesign the home page", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:37:50", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 14, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 14, 
+      "title": "Match styles throughout the site", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:40:10", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 15, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 13, 
+      "title": "Design proposals webpage (and form, but then form was not needed)", 
+      "deleted": false, 
+      "assigned": 6, 
+      "created_date": "2012-10-18T14:42:42", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 16, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 13, 
+      "title": "Implement proposals webpage", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:44:10", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 17, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 17, 
+      "title": "Training and/or population of site with current jobs", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:44:14", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 19, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 18, 
+      "title": "Design this", 
+      "deleted": false, 
+      "assigned": 6, 
+      "created_date": "2012-10-18T14:46:43", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 20, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 18, 
+      "title": "Implement this", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:47:13", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 21, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 19, 
+      "title": "Alpha celery workers not working", 
+      "deleted": false, 
+      "assigned": 1, 
+      "created_date": "2012-10-18T14:48:09", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 22, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": null, 
+      "story": 20, 
+      "title": "Ensure this works with Amazon S3 buckets", 
+      "deleted": false, 
+      "assigned": 1, 
+      "created_date": "2012-10-18T14:49:42", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 23, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 21, 
+      "title": "Design this", 
+      "deleted": false, 
+      "assigned": 1, 
+      "created_date": "2012-10-18T14:52:25", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 24, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 21, 
+      "title": "Implement this", 
+      "deleted": false, 
+      "assigned": 1, 
+      "created_date": "2012-10-18T14:52:57", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 25, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "in-progress", 
+      "story": 22, 
+      "title": "Design this", 
+      "deleted": false, 
+      "assigned": 6, 
+      "created_date": "2012-10-18T14:54:35", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 26, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 24, 
+      "title": "Fix/review alpha issues", 
+      "deleted": false, 
+      "assigned": 1, 
+      "created_date": "2012-10-18T14:56:19", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 27, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "in-progress", 
+      "story": 26, 
+      "title": "Concept design", 
+      "deleted": false, 
+      "assigned": 6, 
+      "created_date": "2012-10-18T14:57:58", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 28, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 27, 
+      "title": "Design proposals webpage (and form, but then form was not needed)", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:58:59", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 29, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "done", 
+      "story": 27, 
+      "title": "Implement proposals webpage", 
+      "deleted": false, 
+      "assigned": 2, 
+      "created_date": "2012-10-18T14:59:30", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }, 
+  {
+    "pk": 30, 
+    "model": "sprints.task", 
+    "fields": {
+      "status": "in-progress", 
+      "story": 28, 
+      "title": "Concept design", 
+      "deleted": false, 
+      "assigned": 6, 
+      "created_date": "2012-10-18T15:01:38", 
+      "deleted_date": null, 
+      "ticket": ""
+    }
+  }
+]
