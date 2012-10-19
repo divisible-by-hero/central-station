@@ -5,6 +5,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from sprints.choices import STORY_STATUS_CHOICES
+from sprints.managers import SprintManager
 from accounts.models import Team
 from projects.models import Project
 
@@ -23,6 +24,8 @@ class Sprint(AuditBase):
     team = models.ForeignKey(Team) # TODO this should be M2M
 
     locked = models.BooleanField()
+
+    objects = SprintManager()
 
     def __unicode__(self):
         if self.name:
@@ -61,7 +64,7 @@ class Story(AuditBase):
     position = models.IntegerField(blank=True, null=True)
     
     points = models.IntegerField(blank=False, null=False)
-    sprint = models.ForeignKey(Sprint, null=True)
+    sprint = models.ForeignKey(Sprint, null=True, blank=True)
     project = models.ForeignKey(Project, null=True)
 
     def __unicode__(self):
@@ -69,7 +72,7 @@ class Story(AuditBase):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('story_edit', (), {'account': self.sprint.team.organization.slug, 'pk': self.id})
+        return ('story_edit', (), {'account': self.project.account.slug, 'pk': self.id})
 
     class Meta:
         ordering = ['position']

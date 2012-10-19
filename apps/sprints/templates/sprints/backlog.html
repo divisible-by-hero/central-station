@@ -1,9 +1,74 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block extra_head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
+{% endblock extra_head %}
+{% block sidebar_super %}{% endblock sidebar_super %}
+{% block main_content %}
+<h3>Backlog</h3>
+<div class='btn-group'>
+    <a href="#addStory" data-toggle="modal" class="btn">Add Story</a>
+    <a href="#addProject" data-toggle="modal" class="btn">Add Project</a>
+</div>
+{% load crispy_forms_tags %}
+<div class="modal hide fade" id="addStory">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Story</h3>
+    </div>
+    <form method='POST' action="{% url story_add account=account_slug %}">
+        <div class="modal-body">
+            {% csrf_token %}
+            {% crispy story_form %}
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <input type="submit" value="Add Story" class="btn btn-primary">
+        </div>
+    </form>
+</div>
 
-</body>
-</html>
+<div class="modal hide fade" id="addProject">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Project</h3>
+    </div>
+    <form method='POST' action="{% url project_add %}">
+        <div class="modal-body">
+            {% csrf_token %}
+            {% crispy project_form %}
+
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <input type="submit" value="Add Project" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<table class='table table-bordered table-hover'>
+    <tr>
+        <th>Item</th>
+        <th>Story Points</th>
+        <th>Status</th>
+        <th>Ticket</th>
+        <th>Project</th>
+        <th>Person</th>
+    </tr>
+    {% for story in stories %}
+    <tr{% if story.status == 'done' %} class='success'{% elif story.status == 'road-blocked' %} class='error'{% elif story.status == 'in-progress' %} class='info'{% endif %}>
+    <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
+    <td>{{ story.points }}</td>
+    <td>{% if story.status %}{{ story.get_status_display }}{% endif %}</td>
+    <td></td>
+    <td>{{ story.project }}</td>
+    <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+    </tr>
+
+    {% endfor %}
+
+</table>
+
+
+
+
+{% endblock main_content %}

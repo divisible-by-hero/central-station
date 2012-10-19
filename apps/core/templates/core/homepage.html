@@ -1,9 +1,13 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-</head>
-<body>
+{% extends "base.html" %}
+{% block extra_head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
+{% endblock extra_head %}
+{% block sidebar_super %}{% endblock sidebar_super %}
+{% block main_content %}
 
-</body>
-</html>
+<div class='span8'>
+    <h3>Select Organization</h3>
+
+</div>
+
+{% endblock main_content %}

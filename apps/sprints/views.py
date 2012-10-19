@@ -17,6 +17,17 @@ from sprints.forms import StoryForm, TaskForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
+class Backlog(LoginRequiredMixin, ListView):
+    queryset = Story.objects.filter(sprint__isnull=True)
+    template_name = 'sprints/backlog.html'
+    context_object_name = 'stories'
+
+    def get_context_data(self, **kwargs):
+        context = super(Backlog, self).get_context_data(**kwargs)
+        context['story_form'] = StoryForm()
+        context['project_form'] = ProjectForm()
+        return context
+
 class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint
     template_name = "sprints/sprint_list.html"
