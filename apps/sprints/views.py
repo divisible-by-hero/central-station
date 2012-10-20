@@ -3,6 +3,7 @@ __date__ = '9/6/12'
 
 from itertools import groupby
 
+from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404, redirect
@@ -81,6 +82,12 @@ class StoryEditForm(UpdateView):
     template_name = 'sprints/forms/story_form.html'
     form_class = StoryForm
 
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(self.request)
+        return HttpResponseRedirect(self.get_success_url())
+
+
 class TaskEditForm(UpdateView):
     model = Task
     template_name = 'sprints/forms/task_form.html'
@@ -98,6 +105,11 @@ class AddStory(CreateView):
 
     def get_success_url(self):
         return self.object.sprint.get_absolute_url()
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.create(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 class AddTask(CreateView):
     model = Task

@@ -79,7 +79,7 @@
         
       <div class="row-fluid">
         
-        <div class="xspan9 doweneedtheseextradivs?">
+        <div class="{% block main_class %}span12{% endblock main_class %}">
         {% if messages %}
             {% for message in messages %}
             <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
@@ -90,7 +90,7 @@
             {% endfor %}
         {% endif %}
         
-        <div class="xspan12 doweneedtheseextradivs?">
+
             <div class="main_content">
             {% block main_content %}
                 <ul>
@@ -100,7 +100,6 @@
                 </ul>
             {% endblock %}
             </div>
-        </div>
           
         </div><!--/span-->
         {% block sidebar_super %}

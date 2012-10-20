@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
 
     url(r'^projects/', include('projects.urls')),
+    url('^activity/', include('actstream.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
 
