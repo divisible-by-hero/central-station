@@ -56,13 +56,13 @@ class RoadBlockForm(forms.ModelForm):
 
 class SprintForm(forms.ModelForm):
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Field('name'),
-            Field('start_date'),
-            Field('end_date'),
+            Field('name', css_class='span12'),
+            Field('start_date', css_class='datepicker'),
+            Field('end_date', css_class='datepicker'),
             Field('team')
         )
 
@@ -70,4 +70,5 @@ class SprintForm(forms.ModelForm):
         
     class Meta:
         model = Sprint
+        exclude = ('deleted', 'deleted_date', 'locked')
 

@@ -14,7 +14,7 @@ from django.utils import simplejson # TODO, use python SL...but I'm on a plane r
 from braces.views import LoginRequiredMixin
 
 from sprints.models import Sprint, Story, Task
-from sprints.forms import StoryForm, TaskForm
+from sprints.forms import StoryForm, TaskForm, SprintForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
@@ -79,7 +79,7 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
 
 class StoryEditForm(UpdateView):
     model = Story
-    template_name = 'sprints/forms/story_form.html'
+    template_name = 'sprints/forms/edit.html'
     form_class = StoryForm
 
     def form_valid(self, form):
@@ -90,7 +90,7 @@ class StoryEditForm(UpdateView):
 
 class TaskEditForm(UpdateView):
     model = Task
-    template_name = 'sprints/forms/task_form.html'
+    template_name = 'sprints/forms/edit.html'
     form_class = TaskForm
 
     def get_form_kwargs(self):
@@ -99,6 +99,17 @@ class TaskEditForm(UpdateView):
             {'sprint': self.object.story.sprint}
         )
         return kwargs
+
+class SprintEditForm(UpdateView):
+    model = Sprint
+    template_name = 'sprints/forms/edit.html'
+    form_class = SprintForm
+    pk_url_kwarg = 'id'
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 class AddStory(CreateView):
     model = Story
@@ -116,6 +127,14 @@ class AddTask(CreateView):
 
     def get_success_url(self):
         return self.object.story.sprint.get_absolute_url()
+
+class AddSprint(CreateView):
+    model = Sprint
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.create(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 
 def sprint_detail(request, id):
