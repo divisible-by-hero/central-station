@@ -148,7 +148,7 @@ CS_MEDIUM_POINT_VALUE = 5
 CS_HARD_POINT_VALUE = 13
 
 ACTSTREAM_SETTINGS = {
-    'MODELS': ('auth.user', 'auth.group', 'sprints.sprint', 'sprints.task', 'sprints.story', 'projects.project'),
+    'MODELS': ('auth.user', 'auth.group', 'sprints.sprint', 'sprints.task', 'sprints.story', 'projects.project', 'accounts.team'),
     'FETCH_RELATIONS': True,
     'USE_PREFETCH': True,
     'USE_JSONFIELD': False,
