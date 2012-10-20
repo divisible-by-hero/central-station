@@ -17,7 +17,10 @@ class StoryForm(forms.ModelForm):
         self.helper.form_tag = False
 
         self.helper.layout = Layout(
-            Field('title'),
+            Field('title', css_class='span12'),
+            Field('status'),
+            Field('project'),
+            Field('points', css_class='span3'),
         )
 
         super(StoryForm, self).__init__(*args, **kwargs)
