@@ -105,6 +105,9 @@ class AddTask(CreateView):
     def get_success_url(self):
         return self.object.story.sprint.get_absolute_url()
 
+class AddSprint(CreateView):
+    model = Sprint
+
 
 def sprint_detail(request, id):
     context = {}

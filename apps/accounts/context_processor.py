@@ -3,6 +3,7 @@ __date__ = '10/19/12'
 
 from accounts.models import RoleAssigned, Account
 from sprints.models import Sprint
+from sprints.forms import SprintForm
 
 def accounts(request):
     try:
@@ -12,6 +13,7 @@ def accounts(request):
         account_sprints = Sprint.objects.current().filter(team__organization__slug=request.session.get('account_slug'))
         context['account_sprints'] = account_sprints
         context['account'] = account
+        context['sprint_form'] = SprintForm
     except:
         context = {}
         pass
