@@ -77,11 +77,11 @@ class Story(AuditBase):
 
     def close(self, request):
         self.status = 'done'
-        action.send(request.user, verb='closed', target=self)
+        action.send(request.user, verb='closed', action_object=self, target=self.project)
         self.save()
 
     def update(self, request):
-        action.send(request.user, verb='updated', target=self)
+        action.send(request.user, verb='updated', action_object=self, target=self.project)
 
     def mark_roadblocked(self, request):
         self.status = 'road-blocked'

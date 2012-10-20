@@ -13,7 +13,7 @@
     <h3>Recent Activity</h3>
     {% for item in model_stream %}
     <div class="alert alert-success">
-        <p>{{ item.actor }} {{ item.verb }} {{ item.action_object_content_type }} <a href="{{ item.action_object.get_absolute_url }}">{{ item.action_object }}</a> in {{ item.target }} {{ item.timesince }} ago</p>
+        <p> <img src="{% get_gravatar request.user.email 45 %}" width="45" class="img-rounded">{{ item.actor }} {{ item.verb }} {{ item.action_object_content_type }} <a href="{{ item.action_object.get_absolute_url }}">{{ item.action_object }}</a> in {{ item.target }} {{ item.timesince }} ago</p>
     </div>
     {% endfor %}
 </div>

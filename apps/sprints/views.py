@@ -84,8 +84,7 @@ class StoryEditForm(UpdateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        self.object.create(self.request)
-        print(self.object.id)
+        self.object.update(self.request)
         return HttpResponseRedirect(self.get_success_url())
 
 
