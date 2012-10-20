@@ -72,10 +72,20 @@ class Story(AuditBase):
     def __unicode__(self):
         return self.title
 
-    def save(self, *args, **kwargs):
+    def create(self, request):
+        action.send(request.user, verb='created', action_object=self, target=self.project)
 
+    def close(self, request):
+        self.status = 'done'
+        action.send(request.user, verb='closed', target=self)
+        self.save()
 
-        super(Story, self).save(*args, **kwargs)
+    def update(self, request):
+        action.send(request.user, verb='updated', target=self)
+
+    def mark_roadblocked(self, request):
+        self.status = 'road-blocked'
+        action.send(request.user, verb='marked as Road Blocked', action_object=self, target=self.project)
 
     @models.permalink
     def get_absolute_url(self):
@@ -119,11 +129,3 @@ class OrderedStory(AuditBase):
     story = models.ForeignKey(Story, null=True, blank=False)
     position = models.IntegerField(blank=False)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
-
-from django.db.models.signals import post_save
-from actstream import action
-
-def my_handler(sender, instance, created, **kwargs):
-    action.send(instance, verb='was saved', action_object=instance)
-
-post_save.connect(my_handler, sender=Story)
