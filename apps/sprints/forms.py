@@ -61,8 +61,8 @@ class SprintForm(forms.ModelForm):
         self.helper.form_tag = False
         self.helper.layout = Layout(
             Field('name', css_class='span12'),
-            Field('start_date'),
-            Field('end_date'),
+            Field('start_date', css_class='datepicker'),
+            Field('end_date', css_class='datepicker'),
             Field('team')
         )
 
