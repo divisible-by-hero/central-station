@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block main_title %} - {{ account }} {% endblock main_title %}
+{% block title %}Central Station | {{ account }} | {% block page_title %}{% endblock page_title %}{% endblock title %}
 {% block sidebar_super %}{% endblock sidebar_super %}
 {% block added_nav %}
 <li><a href="{% url account_home account=account_slug %}">Current Sprints</a></li>

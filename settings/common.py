@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     #'tastypie',
     'south',
     'actstream',
+    'hadrian.contrib.gravatar',
 
     'django_extensions',
     'bootstrap',
