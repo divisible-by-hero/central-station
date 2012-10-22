@@ -17,10 +17,7 @@ class StoryForm(forms.ModelForm):
         self.helper.form_tag = False
 
         self.helper.layout = Layout(
-            Field('title', css_class='span12'),
-            Field('status'),
-            Field('project'),
-            Field('points', css_class='span3'),
+            Field('title'),
         )
 
         super(StoryForm, self).__init__(*args, **kwargs)
@@ -28,7 +25,6 @@ class StoryForm(forms.ModelForm):
     class Meta:
         model = Story
         exclude = ('deleted', 'deleted_date', 'position', 'sprint')
-
 
 class TaskForm(forms.ModelForm):
 
@@ -43,6 +39,19 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         exclude = ('deleted', 'deleted_date')
+
+class StoryTaskForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        super(StoryTaskForm, self).__init__(*args, **kwargs)
+
+        class Meta:
+            model = Task
+            exclude = ('deleted', 'deleted_user', 'story')
+
 class RoadBlockForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
@@ -59,13 +68,13 @@ class RoadBlockForm(forms.ModelForm):
 
 class SprintForm(forms.ModelForm):
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         self.helper = FormHelper()
         self.helper.form_tag = False
         self.helper.layout = Layout(
-            Field('name'),
-            Field('start_date'),
-            Field('end_date'),
+            Field('name', css_class='span12'),
+            Field('start_date', css_class='datepicker'),
+            Field('end_date', css_class='datepicker'),
             Field('team')
         )
 
@@ -73,4 +82,5 @@ class SprintForm(forms.ModelForm):
         
     class Meta:
         model = Sprint
+        exclude = ('deleted', 'deleted_date', 'locked')
 
