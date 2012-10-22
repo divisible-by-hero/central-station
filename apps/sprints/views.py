@@ -14,7 +14,7 @@ from django.utils import simplejson # TODO, use python SL...but I'm on a plane r
 from braces.views import LoginRequiredMixin
 
 from sprints.models import Sprint, Story, Task
-from sprints.forms import StoryForm, TaskForm, StoryTaskForm
+from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 

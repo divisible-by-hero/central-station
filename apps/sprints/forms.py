@@ -48,9 +48,9 @@ class StoryTaskForm(forms.ModelForm):
 
         super(StoryTaskForm, self).__init__(*args, **kwargs)
 
-        class Meta:
-            model = Task
-            exclude = ('deleted', 'deleted_user', 'story')
+    class Meta:
+        model = Task
+        exclude = ('deleted', 'deleted_date', 'story')
 
 class RoadBlockForm(forms.ModelForm):
 
