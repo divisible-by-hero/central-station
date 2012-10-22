@@ -35,6 +35,12 @@ class Sprint(AuditBase):
         else:
             return "Sprint from %s through %s" % (str(self.start_date), str(self.end_date))
 
+    def create(self, request):
+        action.send(request.user, verb='created', action_object=self, target=self.team)
+
+    def update(self, request):
+        action.send(request.user, verb='updated', action_object=self, target=self.team)
+
     def total_points(self):
         points = 0
         for story in self.story_set.all():
@@ -59,6 +65,10 @@ class Sprint(AuditBase):
     @models.permalink
     def get_task_add(self):
         return ('task_add', (), {'account': self.team.organization.slug})
+
+    @models.permalink
+    def get_sprint_edit(self):
+        return ('sprint_edit', (), { 'account': self.team.organization.slug, 'id': self.id })
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)

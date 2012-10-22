@@ -12,8 +12,18 @@
 <div class='span12'>
     <h3>Recent Activity</h3>
     {% for item in model_stream %}
-    <div class="alert alert-success">
-        <p> <img src="{% get_gravatar request.user.email 45 %}" width="45" class="img-rounded">{{ item.actor }} {{ item.verb }} {{ item.action_object_content_type }} <a href="{{ item.action_object.get_absolute_url }}">{{ item.action_object }}</a> in {{ item.target }} {{ item.timesince }} ago</p>
+
+    <div class='activity-stream {{ item.verb }}'>
+
+        {% if item.verb == 'marked as Road Blocked' %}
+        <div class="ribbon-wrapper"><div class="ribbon-roadblocked">Blocked</div></div>
+        {% endif %}
+        <div class="img-area">
+            <img src="{% get_gravatar item.actor.email 80 %}" width="80" height="80">
+        </div>
+        <h4>{{ item.actor.first_name }} {{ item.actor.last_name }} {{ item.verb }} {{ item.action_object_content_type }}, <a href="{{ item.action_object.get_absolute_url }}">{{ item.action_object }}</a> in {{ item.target }}</h4>
+
+        <div class='clearfix'></div>
     </div>
     {% endfor %}
 </div>

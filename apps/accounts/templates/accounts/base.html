@@ -1,6 +1,15 @@
 {% extends "base.html" %}
 {% block main_title %} - {{ account }} {% endblock main_title %}
+
+{% block extra_js %}
+        {{ block.super }}
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.9.0/themes/base/jquery-ui.css" />
+<script src="http://code.jquery.com/ui/1.9.0/jquery-ui.js"></script>
+        <script src="{{ STATIC_URL }}accounts/js/global.js"></script>
+{% endblock extra_js %}
+
 {% block title %}Central Station | {{ account }} | {% block page_title %}{% endblock page_title %}{% endblock title %}
+
 {% block sidebar_super %}{% endblock sidebar_super %}
 {% block added_nav %}
 <li><a href="{% url account_home account=account_slug %}">Current Sprints</a></li>
@@ -14,8 +23,29 @@
         <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.team }}</a></li>
         {% endfor %}
         <li class="divider"></li>
-        <li><a href="#">Start New Sprint</a></li>
+        <li><a href="#addSprint" data-toggle="modal">Start New Sprint</a></li>
     </ul>
 </li>
 <li><a href="{% url backlog account=account_slug %}">Backlog</a></li>
 {% endblock added_nav %}
+
+{% block extra_modals %}
+<div class="modal hide fade" id="addSprint">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Sprint</h3>
+    </div>
+    <form method='POST' action="{% url sprint_add account=account_slug %}">
+        <div class="modal-body">
+            {% csrf_token %}
+            {% load crispy_forms_tags %}
+            {% crispy sprint_form %}
+
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <input type="submit" value="Add Project" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+{% endblock extra_modals %}
