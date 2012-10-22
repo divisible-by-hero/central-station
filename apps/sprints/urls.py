@@ -8,13 +8,13 @@ from tastypie.api import Api
 
 from sprints.api import SprintResource
 
-<<<<<<< HEAD
-from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog
+
+
 from sprints.ajax import change_story, change_task
-=======
+
 from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog, AddSprint, SprintEditForm
 
->>>>>>> develop
+
 
 v1_api = Api(api_name="v1")
 v1_api.register(SprintResource())
