@@ -48,7 +48,7 @@ class UserProfileForm(forms.Form):
 
     def clean(self):
         cleaned_data = super(UserProfileForm, self).clean()
-        if cleaned_data.get('password', None):
+        if cleaned_data.get('change_password', None):
             password = cleaned_data.get('change_password')
             confirm = cleaned_data.get('change_password_confirm')
             if password != confirm:
