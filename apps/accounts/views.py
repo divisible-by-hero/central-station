@@ -1,7 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib import messages
 
-from accounts.forms import RegistrationForm
-from accounts.models import Account
+from accounts.forms import RegistrationForm, UserProfileForm
+from accounts.models import Account, RoleAssigned
 
 from sprints.models import Sprint
 
@@ -16,3 +18,31 @@ def account_home(request, account):
     sprints = Sprint.objects.current().filter(team__organization=account)
     context = {'sprints': sprints}
     return render(request, 'accounts/account_home.html', context)
+
+def profile(request):
+    context = {}
+    user = User.objects.get(pk=request.user.id)
+    teams = RoleAssigned.objects.filter(user=request.user)
+
+    context['teams'] = teams
+    if request.method == "POST":
+        form = UserProfileForm(request.POST)
+        if form.is_valid():
+            user.first_name = form.cleaned_data['first_name']
+            user.last_name = form.cleaned_data['last_name']
+            user.email = form.cleaned_data['email']
+            if form.cleaned_data['change_password']:
+                user.set_password(form.cleaned_data['change_password'])
+            user.save()
+            messages.add_message(request, messages.SUCCESS, "Your profile has been updated.")
+    else:
+        form_initial = {}
+        form_initial['first_name'] = request.user.first_name
+        form_initial['last_name'] = request.user.last_name
+        form_initial['email'] = request.user.email
+
+
+        form = UserProfileForm(initial=form_initial)
+    context['profile_form'] = form
+
+    return render(request, "accounts/profile.html", context)
