@@ -93,6 +93,8 @@ class StoryEditForm(UpdateView):
         messages.add_message(self.request, messages.SUCCESS, "%s story updated." % self.object.title)
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_success_url(self):
+        return self.object.sprint.get_absolute_url() + "#story_%d" % self.object.id
 
 class TaskEditForm(UpdateView):
     model = Task
@@ -109,6 +111,9 @@ class TaskEditForm(UpdateView):
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, "Task updated.")
         return super(TaskEditForm, self).form_valid(form)
+
+    def get_success_url(self):
+        return self.object.story.sprint.get_absolute_url() + "#task_%d" % self.object.id
 
 class SprintEditForm(UpdateView):
     model = Sprint
