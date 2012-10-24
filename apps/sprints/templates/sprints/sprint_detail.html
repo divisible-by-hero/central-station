@@ -113,7 +113,7 @@
 
 
         <td>{% if story.status %}<span class="label {% if story.status == 'road-blocked' or story.roadblocked %}label-important{% elif story.status == 'in-progress' %}label-info{% elif story.status == 'done' %}label-success{% endif %}">{{ story.get_status_display }}</span>{% endif %}</td>
-        <td><a href="{{ story.get_absolute_url }}">{{ story }}</a></td>
+        <td><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></td>
         <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.get_points_display }}</td>
         <td></td>
         <td>{{ story.project }}</td>
@@ -174,11 +174,17 @@
 </table>
 
 <style>
-    ul.cs-sprint-board-column { margin: 0; padding:0; width: 19%; height: 500px; float: left; border: 1px solid #333333; }
-    ul.cs-sprint-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #cccccc; }
+    ul.cs-sprint-board-column { margin: 0; padding:0; width: 19%; min-height: 500px; float: left; border: 1px solid #dddddd; }
+    ul.cs-sprint-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #dddddd; }
 
-    ul.cs-sprint-board-column-header { margin: 0; padding:0; height: 60px; background-color: #333333; }
+    ul.cs-sprint-board-column-header { margin: 0; padding:0; min-height: 60px; height: 60px; background-color: #f5f5f5; }
     ul.cs-sprint-board-column-header li { color: #ffffff; }
+
+    ul#cs-sprint-board-header-not-started li { background-color: #999999;}
+    ul#cs-sprint-board-header-in-progress li { background-color: #F89406;}
+    ul#cs-sprint-board-header-testing li { background-color: #468847;}
+    ul#cs-sprint-board-header-done li { background-color: #3A87AD;}
+    ul#cs-sprint-board-header-road-blocked li { background-color: #B94A48;}
     
     .cs-story-card { clear: both;}
     .cs-story-card-points { margin: 0; padding: 0; float: left; }
@@ -202,8 +208,8 @@
         {% for story in column.stories %}
           <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
               <h1 class='cs-story-card-points'>{{ story.points }}</h1>
-              <p class='cs-story-card-title'>{{ story.title }}</p>
-              <p class='cs-story-card-title'>{{ story.status }}</p>
+              <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
+              <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
               <div class='clear'></div>
           </li>
         {% endfor %}
