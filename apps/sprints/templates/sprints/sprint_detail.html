@@ -1,16 +1,273 @@
-{% extends 'base.html' %}
+{% extends "accounts/base.html" %}
+{% block extra_head %}
+<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
+{% endblock extra_head %}
+
+{% block sidebar_super %}{% endblock sidebar_super %}
+{% block main_content %}
+<div class="navbar navbar-fixed-bottom">
+    <div class="navbar-inner">
+        <span class="brand">Sprint {{ sprint.start_date }} through {{ sprint.end_date }}</span>
+        <ul class="nav">
+            <li><a href="#addProject" data-toggle="modal">Add Project</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="#addStory" data-toggle="modal">Add Story</a></li>
+            <li class="divider-vertical"></li>
+            <li><a href="#addTask" data-toggle="modal">Add Task</a></li>
+            <li class='divider-vertical'></li>
+            <li><a href="{{ sprint.get_sprint_edit }}">Edit Sprint</a></li>
+        </ul>
+    </div><!-- /.navbar-inner -->
+</div><!-- /.navbar -->
+<div class="modal hide fade" id="addTask">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Task</h3>
+    </div>
+    <form method="POST" action="{{ sprint.get_task_add }}">
+    <div class="modal-body">
+        {% load crispy_forms_tags %}
+            {% csrf_token %}
+        {% crispy task_form %}
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss='modal'>Close</a>
+        <input type="submit" value="Add Task" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+
+<div class="modal hide fade" id="addStory">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Story</h3>
+    </div>
+    <form method='POST' action="{{ sprint.get_story_add }}">
+    <div class="modal-body">
+        {% csrf_token %}
+        {% crispy story_form %}
+        <input type="hidden" name="sprint" value="{{ sprint.id }}">
+    </div>
+    <div class="modal-footer">
+        <a href="#" class="btn" data-dismiss="modal">Close</a>
+        <input type="submit" value="Add Story" class="btn btn-primary">
+    </div>
+    </form>
+</div>
+
+<div class="modal hide fade" id="addProject">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add Project</h3>
+    </div>
+    <form method='POST' action="{% url project_add %}">
+        <div class="modal-body">
+            {% csrf_token %}
+            {% crispy project_form %}
+
+        </div>
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss="modal">Close</a>
+            <input type="submit" value="Add Project" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+<div id='cs-sprint-switcher' class="btn-toolbar">
+    <div class="btn-group" data-toggle="buttons-radio"> 
+        <button id='cs-sprint-table-button' type='button' class="btn active" data-toggle="button"><i class="icon-list"></i></button>
+        <button id='cs-sprint-board-button' type='button' class="btn" data-toggle="button"><i class="icon-th-large"></i></button>
+    </div>
+</div>
+
+<table id='cs-sprint-table' class='table table-bordered table-hover'>
+    <tr>
+        <th>Status</th>
+        <th>Item</th>
+        <th>Story Points</th>
+        <th>Ticket</th>
+        <th>Project</th>
+        <th>Person</th>
+        <th>Action</th>
+    </tr>
+    {% for story in sprint.story_set.all %}
+    <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
+        <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h3>Add Task</h3>
+            </div>
+            <form method="POST" action="{{ sprint.get_task_add }}">
+                <div class="modal-body">
+                    {% load crispy_forms_tags %}
+                    {% csrf_token %}
+                    {% crispy story_task_form %}
+                    <input type="hidden" name="story" value="{{ story.id }}">
+                </div>
+                <div class="modal-footer">
+                    <a href="#" class="btn" data-dismiss='modal'>Close</a>
+                    <input type="submit" value="Add Task" class="btn btn-primary">
+                </div>
+            </form>
+        </div>
+
+
+        <td>{% if story.status %}<span class="label {% if story.status == 'road-blocked' or story.roadblocked %}label-important{% elif story.status == 'in-progress' %}label-info{% elif story.status == 'done' %}label-success{% endif %}">{{ story.get_status_display }}</span>{% endif %}</td>
+        <td><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></td>
+        <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.get_points_display }}</td>
+        <td></td>
+        <td>{{ story.project }}</td>
+        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn">Action</button>
+                <button class="btn dropdown-toggle" data-toggle="dropdown">
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a href="#addTaskStory_{{ story.id }}" data-toggle="modal">Add Task</li>
+
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% if story.task_set.all %}
+    {% for task in story.task_set.all %}
+    <tr id='task_{{ task.id }}' {% if task.status == 'road-blocked' %}class='error'{% endif %}>
+        <td>{% if task.status %}<span class="label {% if task.status == 'road-blocked' %}label-important{% elif task.status == 'in-progress' %}label-info{% elif task.status == 'done' %}label-success{% endif %}">{{ task.get_status_display }}</span>{% endif %}</td>
+        <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
+        <td></td>
+        <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
+        <td>{{ story.project }}</td>
+        <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
+        <td>
+            <div class="btn-group">
+                <button class="btn disabled" disabled>Action</button>
+                <button class="btn dropdown-toggle disabled" data-toggle="dropdown" disabled>
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    {% if not task.status %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Mark as In progress</a></li>
+                    {% endif %}
+                    {% if task.status != 'done' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='done' %}">Mark as Done</a></li>
+                    {% else %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Re-Open</a></li>
+                    {% endif %}
+
+
+                    {% if task.status != 'road-blocked' and task.status != 'done' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='road-blocked' %}">Mark as Roadblocked</a></li>
+                    {% elif task.status == 'road-blocked' %}
+                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Clear Roadblock</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+
+    {% endfor %}
+
+</table>
+
+<style>
+    ul.cs-sprint-board-column { margin: 0; padding:0; width: 19%; min-height: 500px; float: left; border: 1px solid #dddddd; }
+    ul.cs-sprint-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #dddddd; }
+
+    ul.cs-sprint-board-column-header { margin: 0; padding:0; min-height: 60px; height: 60px; background-color: #f5f5f5; }
+    ul.cs-sprint-board-column-header li { color: #ffffff; }
+
+    ul#cs-sprint-board-header-not-started li { background-color: #999999;}
+    ul#cs-sprint-board-header-in-progress li { background-color: #F89406;}
+    ul#cs-sprint-board-header-testing li { background-color: #468847;}
+    ul#cs-sprint-board-header-done li { background-color: #3A87AD;}
+    ul#cs-sprint-board-header-road-blocked li { background-color: #B94A48;}
+    
+    .cs-story-card { clear: both;}
+    .cs-story-card-points { margin: 0; padding: 0; float: left; }
+    .cs-story-card-title { margin: 0 0 0 45px; }
+    
+    .clear { clear: both;}
+    
+</style>
+
+<div id='cs-sprint-board'>
+    
+    {% for col in columns %}
+    <!-- Markup is placeholder... clearly shouldn't be ULs -->
+    <ul id='cs-sprint-board-header-{{ col.0 }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.0 }}'>
+        <li>{{ col.1 }}</li>
+    </ul>
+    {% endfor %}        
+    
+    {% for column in sorted_stories %}
+    <ul id='cs-sprint-board-{{ column.id }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.id }}'>
+        {% for story in column.stories %}
+          <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
+              <h1 class='cs-story-card-points'>{{ story.points }}</h1>
+              <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
+              <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
+              <div class='clear'></div>
+          </li>
+        {% endfor %}
+    </ul>
+    {% endfor %}
+
+    <div class='clear'></div>
+</div>
+
+<h3>Stats</h3>
+<table class="table table-bordered">
+    <tr>
+        <th>Stat</th>
+        <th>Value</th>
+    </tr>
+    <tr>
+        <td>Total Story Points</td>
+        <td>{{ sprint.total_points }}</td>
+    </tr>
+    <tr>
+        <td>Completed Points</td>
+        <td>{{ sprint.completed_points }}</td>
+    </tr>
+
+</table>
+
+
+{% endblock main_content %}
 
 {% block extra_js %}
+{{ block.super }}
 <link href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css"/>
-<script src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
-<script src="{{ STATIC_URL }}js/jquery-ui-1.8.23.custom.min.js"></script>
 <script type="text/javascript">
     var csrf_token = "{{ csrf_token }}";
 </script>
 <script>
 $(document).ready(function(){
-    $( ".cs-board-column-list" ).sortable({
-        connectWith: '.cs-board-column-list',
+    
+    $(".error").effect("pulsate", { times:2 }, 1500);
+    
+    //Sprint Views
+    $('#cs-sprint-board').hide();
+    
+    $('#cs-sprint-switcher button').click(function(e){
+        if ( $(this).attr('id') == 'cs-sprint-board-button' ){
+            $('#cs-sprint-board').show();
+            $('#cs-sprint-table').hide();
+        }
+        else{
+            $('#cs-sprint-board').hide();
+            $('#cs-sprint-table').show();            
+        }
+        
+    });
+    
+    
+    $( ".cs-sprint-board-column-list" ).sortable({
+        connectWith: '.cs-sprint-board-column-list',
         cursor: 'move',
         receive: function(event, ui){
             //console.log(ui.item)
@@ -51,7 +308,7 @@ function updateStoryStatus(story_id, story_status){
 function updateStories(post_data){
 	$.ajax({
 		type: "POST",
-		url: "/sprints/update/stories/",
+		url: "/k-state/sprints/update/stories/",
 		dataType: 'json',
         data: JSON.stringify(post_data),
 		success: function(data){
@@ -69,7 +326,7 @@ function serializeStories(){
     //stuff
     var json = {'stories':[]}
     
-    $( ".cs-board-column-list" ).each(function(){
+    $( ".cs-sprint-board-column-list" ).each(function(){
         $(this).children('li.cs-story-card').each(function(){
             story = {};
             story.id = $(this).attr('data-id');
@@ -84,53 +341,3 @@ function serializeStories(){
 
 </script>
 {% endblock %}
-
-
-{% block main_content %}
-
-    <style>
-        ul.cs-board-column { margin: 0; padding:0; width: 24%; height: 500px; float: left; border: 1px solid #333333; }
-        ul.cs-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #cccccc; }
-
-        ul.cs-board-column-header { margin: 0; padding:0; height: 60px; background-color: #333333; }
-        ul.cs-board-column-header li { color: #ffffff; }
-        
-        .cs-story-card { clear: both;}
-        .cs-story-card-points { margin: 0; padding: 0; float: left; }
-        .cs-story-card-title { margin: 0 0 0 30px; }
-        
-        .clear { clear: both;}
-        
-    </style>
-
-    <h1>{{ sprint.name }}</h1>
-    <div id='cs-board'>
-        
-        {% for col in columns %}
-        <!-- Markup is placeholder... clearly shouldn't be ULs -->
-        <ul id='cs-board-header-{{ col.0 }}' class='cs-board-column cs-board-column-header' data-column='{{ col.0 }}'>
-            <li>{{ col.1 }}</li>
-        </ul>
-        {% endfor %}        
-        
-        {% for column in sorted_stories %}
-        <ul id='cs-board-{{ column.id }}' class='cs-board-column cs-board-column-list' data-column='{{ column.id }}'>
-            {% for story in column.stories %}
-              <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
-                  <h1 class='cs-story-card-points'>{{ story.points }}</h1>
-                  <p class='cs-story-card-title'>{{ story.title }}</p>
-                  <p class='cs-story-card-title'>{{ story.status }}</p>
-                  <div class='clear'></div>
-              </li>
-            {% endfor %}
-        </ul>
-        {% endfor %}
-
-        
-    </div>
-
-    <div class='clear'></div>    
-
-
-{% endblock %}
-

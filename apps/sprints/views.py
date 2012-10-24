@@ -44,7 +44,7 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
     # into a Class.
 
     model = Sprint
-    template_name = 'sprints/sprint_detail_table.html'
+    template_name = 'sprints/sprint_detail.html'
     context_object_name = 'sprint'
     stories = None
     pk_url_kwarg = 'id'
@@ -262,9 +262,11 @@ def update_story_status(request):
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def update_stories(request):
+def update_stories(request, account):
     """
     Looks for query parms, updates story and returns JSON
+    
+    'account' does nothing right now
 
     """
 
