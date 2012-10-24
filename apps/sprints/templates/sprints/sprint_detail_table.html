@@ -83,7 +83,7 @@
         <th>Action</th>
     </tr>
     {% for story in sprint.story_set.all %}
-    <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}">
+    <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
         <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -125,7 +125,7 @@
     </tr>
     {% if story.task_set.all %}
     {% for task in story.task_set.all %}
-    <tr {% if task.status == 'road-blocked' %}class='error'{% endif %}>
+    <tr id='task_{{ task.id }}' {% if task.status == 'road-blocked' %}class='error'{% endif %}>
         <td>{% if task.status %}<span class="label {% if task.status == 'road-blocked' %}label-important{% elif task.status == 'in-progress' %}label-info{% elif task.status == 'done' %}label-success{% endif %}">{{ task.get_status_display }}</span>{% endif %}</td>
         <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
         <td></td>
