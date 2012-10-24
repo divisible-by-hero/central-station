@@ -127,6 +127,12 @@ class Task(AuditBase):
     def get_absolute_url(self):
         return ('task_edit', (), {'account': self.story.sprint.team.organization.slug, 'pk': self.id})
 
+    def create(self, request):
+        action.send(request.user, verb='created', action_object=self, target=self.story)
+
+    def update(self, request):
+        action.send(request.user, verb='updated', action_object=self, target=self.story)
+
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
     story = models.ForeignKey(Story, null=True, blank=False)

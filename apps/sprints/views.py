@@ -100,6 +100,11 @@ class TaskEditForm(UpdateView):
             {'sprint': self.object.story.sprint}
         )
         return kwargs
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 class SprintEditForm(UpdateView):
     model = Sprint
@@ -128,6 +133,11 @@ class AddTask(CreateView):
 
     def get_success_url(self):
         return self.object.story.sprint.get_absolute_url()
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.create(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 class AddSprint(CreateView):
     model = Sprint
