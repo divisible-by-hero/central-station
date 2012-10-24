@@ -308,7 +308,7 @@ function updateStoryStatus(story_id, story_status){
 function updateStories(post_data){
 	$.ajax({
 		type: "POST",
-		url: "/k-state/sprints/update/stories/",
+		url: "/kansas-state-university/sprints/update/stories/", //yeah, that is WRONG
 		dataType: 'json',
         data: JSON.stringify(post_data),
 		success: function(data){
