@@ -26,6 +26,40 @@ class StoryForm(forms.ModelForm):
         model = Story
         exclude = ('deleted', 'deleted_date', 'position', 'sprint')
 
+# These are scumbag violations of DRY.  Doing this to patch
+# the app until a better solution is found.
+# Love, Derek
+class NewStoryForm(forms.ModelForm):
+
+    def __init__(self, *args, **kwargs):
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        self.helper.layout = Layout(
+            Field('title'),
+        )
+
+        super(NewStoryForm, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Story
+        exclude = ('deleted', 'deleted_date', 'position')
+
+
+class NewTaskForm(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+
+        super(NewTaskForm, self).__init__(*args, **kwargs)
+
+
+    class Meta:
+        model = Task
+        exclude = ('deleted', 'deleted_date')
+
 class TaskForm(forms.ModelForm):
 
     def __init__(self, *args, **kwargs):
