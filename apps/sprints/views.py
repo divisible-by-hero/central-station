@@ -107,6 +107,11 @@ class TaskEditForm(UpdateView):
             {'sprint': self.object.story.sprint}
         )
         return kwargs
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, "Task updated.")
@@ -152,6 +157,11 @@ class AddTask(CreateView):
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, "Task added.")
         return super(AddTask, self).form_valid(form)
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.create(self.request)
+        return HttpResponseRedirect(self.get_success_url())
 
 class AddSprint(CreateView):
     model = Sprint
