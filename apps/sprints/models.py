@@ -75,7 +75,7 @@ class Story(AuditBase):
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)
     
-    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False)
+    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
     project = models.ForeignKey(Project, null=True)
 
