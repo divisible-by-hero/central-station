@@ -75,7 +75,7 @@ class Story(AuditBase):
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     position = models.IntegerField(blank=True, null=True)
     
-    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False)
+    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
     project = models.ForeignKey(Project, null=True)
 
@@ -126,6 +126,12 @@ class Task(AuditBase):
     @models.permalink
     def get_absolute_url(self):
         return ('task_edit', (), {'account': self.story.sprint.team.organization.slug, 'pk': self.id})
+
+    def create(self, request):
+        action.send(request.user, verb='created', action_object=self, target=self.story)
+
+    def update(self, request):
+        action.send(request.user, verb='updated', action_object=self, target=self.story)
 
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)

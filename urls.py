@@ -14,6 +14,7 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'core.views.homepage', name='homepage'),
+    url(r'^myprofile/$', 'accounts.views.profile', name='user_profile'),
     url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
     url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
 

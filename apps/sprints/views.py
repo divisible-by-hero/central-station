@@ -8,15 +8,19 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from django.core.urlresolvers import reverse_lazy
 from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
 from braces.views import LoginRequiredMixin
 
 from sprints.models import Sprint, Story, Task
-from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm
+from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
+
+#actions need messages
+
 
 class Backlog(LoginRequiredMixin, ListView):
     queryset = Story.objects.filter(sprint__isnull=True)
@@ -40,7 +44,7 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
     # into a Class.
 
     model = Sprint
-    template_name = 'sprints/sprint_detail_table.html'
+    template_name = 'sprints/sprint_detail.html'
     context_object_name = 'sprint'
     stories = None
     pk_url_kwarg = 'id'
@@ -86,8 +90,11 @@ class StoryEditForm(UpdateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.update(self.request)
+        messages.add_message(self.request, messages.SUCCESS, "%s story updated." % self.object.title)
         return HttpResponseRedirect(self.get_success_url())
 
+    def get_success_url(self):
+        return self.object.sprint.get_absolute_url() + "#story_%d" % self.object.id
 
 class TaskEditForm(UpdateView):
     model = Task
@@ -100,6 +107,18 @@ class TaskEditForm(UpdateView):
             {'sprint': self.object.story.sprint}
         )
         return kwargs
+    
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.update(self.request)
+        return HttpResponseRedirect(self.get_success_url())
+
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, "Task updated.")
+        return super(TaskEditForm, self).form_valid(form)
+
+    def get_success_url(self):
+        return self.object.story.sprint.get_absolute_url() + "#task_%d" % self.object.id
 
 class SprintEditForm(UpdateView):
     model = Sprint
@@ -110,24 +129,39 @@ class SprintEditForm(UpdateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.update(self.request)
+        messages.add_message(self.request, messages.SUCCESS, "Sprint updated.")
         return HttpResponseRedirect(self.get_success_url())
 
 class AddStory(CreateView):
     model = Story
+    template_name = 'sprints/forms/edit.html'
+    form_class = NewStoryForm
 
     def get_success_url(self):
-        return self.object.sprint.get_absolute_url()
+        return self.object.sprint.get_absolute_url() + "#story_%d" % self.object.id
+
+    def form_valid(self, form):
+        self.object = form.save()
+        self.object.create(self.request)
+        messages.add_message(self.request, messages.SUCCESS, "%s story added." % self.object.title)
+        return HttpResponseRedirect(self.get_success_url())
+
+class AddTask(CreateView):
+    model = Task
+    template_name = 'sprints/forms/edit.html'
+    form_class = NewTaskForm
+
+    def get_success_url(self):
+        return self.object.story.sprint.get_absolute_url() + "#task_%d" % self.object.id
+
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, "Task added.")
+        return super(AddTask, self).form_valid(form)
 
     def form_valid(self, form):
         self.object = form.save()
         self.object.create(self.request)
         return HttpResponseRedirect(self.get_success_url())
-
-class AddTask(CreateView):
-    model = Task
-
-    def get_success_url(self):
-        return self.object.story.sprint.get_absolute_url()
 
 class AddSprint(CreateView):
     model = Sprint
@@ -135,6 +169,7 @@ class AddSprint(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.create(self.request)
+        messages.add_message(self.request, messages.SUCCESS, "Sprint created.")
         return HttpResponseRedirect(self.get_success_url())
 
 
@@ -237,9 +272,11 @@ def update_story_status(request):
 from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
-def update_stories(request):
+def update_stories(request, account):
     """
     Looks for query parms, updates story and returns JSON
+    
+    'account' does nothing right now
 
     """
 
