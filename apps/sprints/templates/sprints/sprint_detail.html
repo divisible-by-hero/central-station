@@ -195,17 +195,18 @@
 </style>
 
 <div id='cs-sprint-board'>
+    {% regroup sprint.story_set.all by story_status as story_list %}
     
-    {% for col in columns %}
+    {% for col in story_list %}
     <!-- Markup is placeholder... clearly shouldn't be ULs -->
-    <ul id='cs-sprint-board-header-{{ col.0 }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.0 }}'>
-        <li>{{ col.1 }}</li>
+    <ul id='cs-sprint-board-header-{{ col.grouper.slug }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.grouper.slug }}'>
+        <li>{{ col.grouper.status }}</li>
     </ul>
-    {% endfor %}        
-    
-    {% for column in sorted_stories %}
-    <ul id='cs-sprint-board-{{ column.id }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.id }}'>
-        {% for story in column.stories %}
+    {% endfor %}
+
+    {% for column in story_list %}
+    <ul id='cs-sprint-board-{{ column.grouper }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.grouper }}'>
+        {% for story in column.list %}
           <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
               <h1 class='cs-story-card-points'>{{ story.points }}</h1>
               <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>

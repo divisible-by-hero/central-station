@@ -6,7 +6,7 @@ from django.contrib.auth.models import User
 
 from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES
 from sprints.managers import SprintManager
-from accounts.models import Team
+from accounts.models import Team, Account
 from projects.models import Project
 
 from actstream import action
@@ -70,9 +70,23 @@ class Sprint(AuditBase):
     def get_sprint_edit(self):
         return ('sprint_edit', (), { 'account': self.team.organization.slug, 'id': self.id })
 
+class StoryStatus(models.Model):
+    account = models.ForeignKey(Account, null=True)
+    status = models.CharField(max_length=250, blank=True, null=True)
+    order = models.IntegerField(null=True, blank=True)
+    slug = models.SlugField(null=True, blank=True)
+
+    def __unicode__(self):
+        return "%s - %s" % (self.account, self.status)
+
+    class Meta:
+        ordering = ['order']
+
+
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
-    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
+    story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
     position = models.IntegerField(blank=True, null=True)
     
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
@@ -109,7 +123,7 @@ class Story(AuditBase):
         return False
 
     class Meta:
-        ordering = ['position']
+        ordering = ['story_status']
 
 
 class Task(AuditBase):

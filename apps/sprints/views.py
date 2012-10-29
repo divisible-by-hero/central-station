@@ -46,36 +46,10 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
     model = Sprint
     template_name = 'sprints/sprint_detail.html'
     context_object_name = 'sprint'
-    stories = None
     pk_url_kwarg = 'id'
-
-    def sort_out_columns(self):
-        self.stories = self.get_object().story_set.all()
-        column_list = []
-        for col in STORY_STATUS_CHOICES:
-            column = {}
-            column['id'] = col[0]
-            column['stories'] = []
-            column_list.append(column)
-            #Stories, sorted by Column
-        for key, group in groupby(self.stories, lambda x: x.status):
-            column = {}
-            column['id'] = key
-            column['stories'] = []
-            for item in group:
-                column['stories'].append(item)
-
-            for emtpy_column in column_list:
-                if emtpy_column['id'] == column['id']:
-                    index = column_list.index(emtpy_column)
-                    column_list[index] = column
-        return column_list
 
     def get_context_data(self, **kwargs):
         context = super(SprintDetailView, self).get_context_data(**kwargs)
-        context['stories'] = self.stories
-        context['columns'] = STORY_STATUS_CHOICES
-        context['sorted_stories'] = self.sort_out_columns()
         context['task_form'] = TaskForm(sprint=self.object)
         context['story_form'] = StoryForm()
         context['story_task_form'] = StoryTaskForm()
