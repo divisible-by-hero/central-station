@@ -20,7 +20,7 @@
     </a>
     <ul class="dropdown-menu">
         {% for sprint in account_sprints %}
-        <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.team }}</a></li>
+        <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.team }} - {{ sprint.start_date }} - {{ sprint.end_date }}</a></li>
         {% endfor %}
         <li class="divider"></li>
         <li><a href="#addSprint" data-toggle="modal">Start New Sprint</a></li>

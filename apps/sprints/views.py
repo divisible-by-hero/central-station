@@ -1,26 +1,21 @@
 __author__ = 'Derek Stegelman'
 __date__ = '9/6/12'
 
-from itertools import groupby
-
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, get_object_or_404, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.core.urlresolvers import reverse_lazy
 from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
 from braces.views import LoginRequiredMixin
 
-from sprints.models import Sprint, Story, Task
+from sprints.models import Sprint, Story, Task, StoryStatus
 from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
 #actions need messages
-
 
 class Backlog(LoginRequiredMixin, ListView):
     queryset = Story.objects.filter(sprint__isnull=True)
@@ -38,7 +33,6 @@ class SprintListView(LoginRequiredMixin, ListView):
     template_name = "sprints/sprint_list.html"
     context_object_name = "sprints"
 
-
 class SprintDetailView(LoginRequiredMixin, DetailView):
     # For an academic exercise, Derek will build the sprint_detail view func
     # into a Class.
@@ -46,36 +40,14 @@ class SprintDetailView(LoginRequiredMixin, DetailView):
     model = Sprint
     template_name = 'sprints/sprint_detail.html'
     context_object_name = 'sprint'
-    stories = None
     pk_url_kwarg = 'id'
 
-    def sort_out_columns(self):
-        self.stories = self.get_object().story_set.all()
-        column_list = []
-        for col in STORY_STATUS_CHOICES:
-            column = {}
-            column['id'] = col[0]
-            column['stories'] = []
-            column_list.append(column)
-            #Stories, sorted by Column
-        for key, group in groupby(self.stories, lambda x: x.status):
-            column = {}
-            column['id'] = key
-            column['stories'] = []
-            for item in group:
-                column['stories'].append(item)
-
-            for emtpy_column in column_list:
-                if emtpy_column['id'] == column['id']:
-                    index = column_list.index(emtpy_column)
-                    column_list[index] = column
-        return column_list
+    def get_account_story_status(self):
+        return StoryStatus.objects.filter(account=self.get_object().team.organization)
 
     def get_context_data(self, **kwargs):
         context = super(SprintDetailView, self).get_context_data(**kwargs)
-        context['stories'] = self.stories
-        context['columns'] = STORY_STATUS_CHOICES
-        context['sorted_stories'] = self.sort_out_columns()
+        context['story_statuses'] = self.get_account_story_status()
         context['task_form'] = TaskForm(sprint=self.object)
         context['story_form'] = StoryForm()
         context['story_task_form'] = StoryTaskForm()
@@ -172,55 +144,11 @@ class AddSprint(CreateView):
         messages.add_message(self.request, messages.SUCCESS, "Sprint created.")
         return HttpResponseRedirect(self.get_success_url())
 
-
-def sprint_detail(request, id):
-    context = {}
-
-
-    sprint = get_object_or_404(Sprint, pk=id)
-    context['sprint'] = sprint
-
-    #Stories, all
-    stories = sprint.story_set.all()
-    context['stories'] = stories
-
-
-    #Columns, all
-    column_list = []
-    for col in STORY_STATUS_CHOICES:
-        column = {}
-        column['id'] = col[0]
-        column['stories'] = []
-        column_list.append(column)
-
-    context['columns'] = STORY_STATUS_CHOICES
-
-    #Stories, sorted by Column
-    for key, group in groupby(stories, lambda x: x.status):
-        column = {}
-        column['id'] = key
-        column['stories'] = []
-        for item in group:
-            column['stories'].append(item)
-
-        for emtpy_column in column_list:
-            if emtpy_column['id'] == column['id']:
-                index = column_list.index(emtpy_column)
-                column_list[index] = column
-
-    context['sorted_stories'] = column_list
-
-    return render(request, 'sprints/sprint_detail.html', context)
-
-
-
 class StoryListView(LoginRequiredMixin, ListView):
     template_name = 'sprints/story_list.html'
 
     def get_queryset(self):
         return Story.objects.all()
-
-
 
 #Ajax Views
 

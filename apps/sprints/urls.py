@@ -12,7 +12,7 @@ from sprints.api import SprintResource
 
 from sprints.ajax import change_story, change_task
 
-from sprints.views import SprintListView, sprint_detail, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog, AddSprint, SprintEditForm
+from sprints.views import SprintListView, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog, AddSprint, SprintEditForm
 
 
 
