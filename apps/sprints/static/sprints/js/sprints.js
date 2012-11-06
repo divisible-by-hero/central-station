@@ -43,8 +43,24 @@ $(document).ready(function(){
             updateStories(data);
         }
     });
+
+
+    /* Tasks  */
+    $('.cs-task-item-completed').change(function(){
+        if ( this.checked ){
+            console.log('checked');
+        }
+        else{
+            console.log('unchecked');
+        }
+    });
+
     
 });
+
+
+
+
 
 /*
 Maybe Deprecated ?
