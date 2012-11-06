@@ -134,16 +134,20 @@
         </td>
         <td>            
             <div class="btn-group {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}">
-                <button class="btn">{{ story.story_status.status }}</button>
+                <button class="btn">
+                    {% if story.story_status %}
+                    {{ story.story_status.status }}
+                    {% else %}
+                    ------
+                    {% endif %}
+                </button>
                 <button class="btn dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#addTaskStory_30" data-toggle="modal">Non started</li>
-                    <li><a href="#addTaskStory_30" data-toggle="modal">In Progress</li>
-                    <li><a href="#addTaskStory_30" data-toggle="modal">Testing</li>
-                    <li><a href="#addTaskStory_30" data-toggle="modal">Done</li>
-                    <li><a href="#addTaskStory_30" data-toggle="modal">Roadblock</li>
+                    {% for status in story_statuses %}
+                    <li><a href="#addTaskStory_30" data-toggle="modal" data-value='{{ status.slug }}'>{{ status.status }}</li>
+                    {% endfor %}
                 </ul>
             </div>
         <td>{{ story.project }}</td>
