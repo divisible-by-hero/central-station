@@ -82,16 +82,15 @@
 
 <table id='cs-sprint-table' class='table table-bordered table-hover'>
     <tr>
-        <th>Status</th>
+        <th>Points</th>
         <th>Item</th>
-        <th>Difficulty</th>
-        <th>Ticket</th>
+        <th>Status</th>
         <th>Project</th>
         <th>Person</th>
-        <th>Action</th>
     </tr>
     {% for story in sprint.story_set.all %}
     <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
+        <!-- Let's find a new place for this modal.  not valid markup -->
         <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
@@ -111,64 +110,45 @@
             </form>
         </div>
 
-
-        <td>{% if story.story_status %}<span class="label {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}label-important{% elif story.story_status.status == 'In Progress' %}label-info{% elif story.story_status.status == 'Done' %}label-success{% endif %}">{{ story.story_status.status }}</span>{% endif %}</td>
-        <td><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></td>
-        <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.get_points_display }}</td>
-        <td></td>
-        <td>{{ story.project }}</td>
-        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+        <td><div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'></div></td>
         <td>
-            <div class="btn-group">
-                <button class="btn">Action</button>
+            <a href="/kansas-state-university/sprints/stories/30/">As an K-Stater this is a story that is currently completed and other words about stuff</a>
+            <div class="items">
+                <ul>
+                    {% if story.task_set.all %}
+                    {% for task in story.task_set.all %}
+                    <li style="line-height: 30px;"id='task_{{ task.id }}' {% if task.status == 'road-blocked' %}class='error'{% endif %}>
+                        <div class="completed">
+                            <input type='checkbox' />
+                        </div>
+                        <span><a href="{{ task.get_absolute_url }}">{{ task }}</a></span>
+                        {% if task.ticket %}<span style="margin-left: 10px;"><a href="{{ task.ticket }}">Issue</a></span>{% endif %}
+                        {% if task.assigned %}<span style="margin-left: 10px;">{{ task.assigned.first_name }} {{ task.assigned.last_name }}</span>{% endif %}
+                    </li>
+                    {% endfor %}
+                    {% endif %}
+                </ul>
+                <span class="add-new"><a href='#'>Add Task</a></span>
+                <span class="add-new"><a href='#'>Hide Tasks</a></span>
+            </div>
+        </td>
+        <td>            
+            <div class="btn-group {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}">
+                <button class="btn">{{ story.story_status.status }}</button>
                 <button class="btn dropdown-toggle" data-toggle="dropdown">
                     <span class="caret"></span>
                 </button>
                 <ul class="dropdown-menu">
-                    <li><a href="#addTaskStory_{{ story.id }}" data-toggle="modal">Add Task</li>
-
+                    <li><a href="#addTaskStory_30" data-toggle="modal">Non started</li>
+                    <li><a href="#addTaskStory_30" data-toggle="modal">In Progress</li>
+                    <li><a href="#addTaskStory_30" data-toggle="modal">Testing</li>
+                    <li><a href="#addTaskStory_30" data-toggle="modal">Done</li>
+                    <li><a href="#addTaskStory_30" data-toggle="modal">Roadblock</li>
                 </ul>
             </div>
-        </td>
-    </tr>
-    {% if story.task_set.all %}
-    {% for task in story.task_set.all %}
-    <tr id='task_{{ task.id }}' {% if task.status == 'road-blocked' %}class='error'{% endif %}>
-        <td>{% if task.status %}<span class="label {% if task.status == 'road-blocked' %}label-important{% elif task.status == 'in-progress' %}label-info{% elif task.status == 'done' %}label-success{% endif %}">{{ task.get_status_display }}</span>{% endif %}</td>
-        <td class='cs-row-task'><a href="{{ task.get_absolute_url }}">{{ task }}</a></td>
-        <td></td>
-        <td>{% if task.ticket %}<a href="{{ task.ticket }}">Issue</a>{% endif %}</td>
         <td>{{ story.project }}</td>
-        <td>{{ task.assigned.first_name }} {{ task.assigned.last_name }}</td>
-        <td>
-            <div class="btn-group">
-                <button class="btn disabled" disabled>Action</button>
-                <button class="btn dropdown-toggle disabled" data-toggle="dropdown" disabled>
-                    <span class="caret"></span>
-                </button>
-                <ul class="dropdown-menu">
-                    {% if not task.status %}
-                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Mark as In progress</a></li>
-                    {% endif %}
-                    {% if task.status != 'done' %}
-                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='done' %}">Mark as Done</a></li>
-                    {% else %}
-                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Re-Open</a></li>
-                    {% endif %}
-
-
-                    {% if task.status != 'road-blocked' and task.status != 'done' %}
-                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='road-blocked' %}">Mark as Roadblocked</a></li>
-                    {% elif task.status == 'road-blocked' %}
-                    <li><a href="{% url ajax_change_task account=account_slug task_id=task.id change='in-progress' %}">Clear Roadblock</a></li>
-                    {% endif %}
-                </ul>
-            </div>
-        </td>
+        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
     </tr>
-    {% endfor %}
-    {% endif %}
-
     {% endfor %}
 
 </table>
