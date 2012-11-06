@@ -5,7 +5,7 @@ from django.contrib import admin
 from sprints.models import Story, Roadblock, Sprint, Task, StoryStatus
 
 class StoryAdmin(admin.ModelAdmin):
-    list_display = ('title', 'status', 'story_status')
+    list_display = ('title', 'status', 'story_status', 'sprint')
 
 class StoryStatusAdmin(admin.ModelAdmin):
     list_display = ('status', 'account')
