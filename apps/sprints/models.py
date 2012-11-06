@@ -77,7 +77,7 @@ class StoryStatus(models.Model):
     slug = models.SlugField(null=True, blank=True)
 
     def __unicode__(self):
-        return "%s - %s" % (self.account, self.status)
+        return self.status
 
     class Meta:
         ordering = ['order']
