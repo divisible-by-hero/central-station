@@ -112,7 +112,7 @@
         </div>
 
 
-        <td>{% if story.status %}<span class="label {% if story.status == 'road-blocked' or story.roadblocked %}label-important{% elif story.status == 'in-progress' %}label-info{% elif story.status == 'done' %}label-success{% endif %}">{{ story.get_status_display }}</span>{% endif %}</td>
+        <td>{% if story.story_status %}<span class="label {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}label-important{% elif story.story_status.status == 'In Progress' %}label-info{% elif story.story_status.status == 'Done' %}label-success{% endif %}">{{ story.story_status.status }}</span>{% endif %}</td>
         <td><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></td>
         <td><span class="badge {% if story.points == 13 %}badge-important{% elif story.points == 5 %}badge-warning{% elif story.points == 1 %}badge-success{% endif %}">{{ story.get_points_display }}</td>
         <td></td>
