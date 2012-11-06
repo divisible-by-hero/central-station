@@ -46,7 +46,7 @@ $(document).ready(function(){
 
 
     /* Tasks  */
-    $('.cs-task-item-completed').change(function(){
+    $('.cs-task-item-complete').change(function(){
         var id = $(this).attr('data-id');
         if ( this.checked ){
             taskToggle(id, true);

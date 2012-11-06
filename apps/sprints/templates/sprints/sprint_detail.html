@@ -111,10 +111,13 @@
     .items li:last-child { border: none; }
 
     .items div{ padding: 5px;  display: inline;}
-    .completed {  xbackground-color: #ccffcc;  }
 
     .add-new { float: right; margin-left: 25px; margin-top:10px;}
     .add-new a { color: #333333; font-size: 85%;}
+    
+    /* begin good namespaced styles */
+    .cs-task-item-completed .cs-task-item-title { text-decoration: line-through; }
+    
 
 </style>
 
@@ -155,11 +158,11 @@
                 <ul>
                     {% if story.task_set.all %}
                     {% for task in story.task_set.all %}
-                    <li style="line-height: 30px;" id='cs-task-item-{{ task.id }}' class='cs-task-item {% if task.status == 'road-blocked' %}error{% endif %}' data-id='{{ task.id }}'>
+                    <li style="line-height: 30px;" id='cs-task-item-{{ task.id }}' class='cs-task-item{% if task.complete %} cs-task-item-completed{% endif %}' data-id='{{ task.id }}'>
                         <div>
-                            <input type='checkbox' id='cs-task-item-completed-{{ task.id }}' class='cs-task-item-completed' data-id='{{ task.id }}'/>
+                            <input type='checkbox' id='cs-task-item-complete-{{ task.id }}' class='cs-task-item-complete' data-id='{{ task.id }}' {% if task.complete %}checked{% endif %} />
                         </div>
-                        <span><a href="{{ task.get_absolute_url }}">{{ task }}</a></span>
+                        <span class="cs-task-item-title"><a href="{{ task.get_absolute_url }}">{{ task }}</a></span>
                         {% if task.ticket %}<span style="margin-left: 10px;"><a href="{{ task.ticket }}">Issue</a></span>{% endif %}
                         {% if task.assigned %}<span style="margin-left: 10px;">{{ task.assigned.first_name }} {{ task.assigned.last_name }}</span>{% endif %}
                     </li>
