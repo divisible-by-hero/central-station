@@ -23,7 +23,7 @@ def change_task(request, task_id, change):
     Change task status from complete/un-complete
     """
     task = Task.objects.get(pk=task_id)
-    if change == "1":
+    if change == "true":
         task.complete = True
     else:
         task.complete = False

@@ -16,7 +16,10 @@ urlpatterns = patterns('',
     url(r'^$', 'core.views.homepage', name='homepage'),
     url(r'^myprofile/$', 'accounts.views.profile', name='user_profile'),
     url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
+
+    url(r'^ajax/sprints/', include('sprints.ajax_urls')),
     url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
+
 
     url(r'^projects/', include('projects.urls')),
     url('^activity/', include('actstream.urls')),

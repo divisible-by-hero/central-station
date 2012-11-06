@@ -47,18 +47,34 @@ $(document).ready(function(){
 
     /* Tasks  */
     $('.cs-task-item-completed').change(function(){
+        var id = $(this).attr('data-id');
         if ( this.checked ){
-            console.log('checked');
+            taskToggle(id, true);
+            console.log(id);
         }
         else{
-            console.log('unchecked');
+            taskToggle(id, false);
+            console.log(id);
         }
     });
+
 
     
 });
 
 
+function taskToggle(id, value){
+    $.ajax({
+        type: "POST",
+        url: "/ajax/sprints/task/" + id + "/" + value + "/",
+        dataType: 'json',
+        data: "csrfmiddlewaretoken=" + csrf_token,
+        success: function(data){
+            console.log('success');
+        }
+    });
+
+}
 
 
 
