@@ -150,14 +150,14 @@
 
         <td><div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'></div></td>
         <td>
-            <a href="/kansas-state-university/sprints/stories/30/">As an K-Stater this is a story that is currently completed and other words about stuff</a>
+            <a href="{{ story.get_absolute_url }}">{{ story }}</a>
             <div class="items">
                 <ul>
                     {% if story.task_set.all %}
                     {% for task in story.task_set.all %}
                     <li style="line-height: 30px;"id='task_{{ task.id }}' {% if task.status == 'road-blocked' %}class='error'{% endif %}>
                         <div class="completed">
-                            <input type='checkbox' />
+                            <input type='checkbox' id="task_checkbox_{{ task.id }}" />
                         </div>
                         <span><a href="{{ task.get_absolute_url }}">{{ task }}</a></span>
                         {% if task.ticket %}<span style="margin-left: 10px;"><a href="{{ task.ticket }}">Issue</a></span>{% endif %}
@@ -188,6 +188,7 @@
                     {% endfor %}
                 </ul>
             </div>
+        </td>
         <td>{{ story.project }}</td>
         <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
     </tr>
