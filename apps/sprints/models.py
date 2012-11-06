@@ -85,6 +85,7 @@ class StoryStatus(models.Model):
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
+    # Status no longer used.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
     story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
     position = models.IntegerField(blank=True, null=True)
@@ -128,11 +129,13 @@ class Story(AuditBase):
 
 class Task(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
+    # Status not used anymore.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     ticket = models.URLField(blank=True, null=True)
     assigned = models.ForeignKey(User, null=True)
 
     story = models.ForeignKey(Story, null=True)
+    complete = models.BooleanField()
 
     def __unicode__(self):
         return self.title
