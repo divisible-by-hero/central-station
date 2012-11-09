@@ -169,13 +169,13 @@
                     {% endfor %}
                     {% endif %}
                 </ul>
-                <span class="add-new"><a href='#'>Add Task</a></span>
+                <span class="add-new"><a href='#addTask' data-toggle='modal'>Add Task</a></span>
                 <span class="add-new"><a href='#'>Hide Tasks</a></span>
             </div>
         </td>
         <td>            
-            <div class="btn-group {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}">
-                <button class="btn">
+            <div class="btn-group">
+                <button class="btn {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}">
                     {% if story.story_status %}
                     {{ story.story_status.status }}
                     {% else %}
