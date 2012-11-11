@@ -10,6 +10,8 @@ from django.views.generic import TemplateView
 from django.contrib import admin
 admin.autodiscover()
 
+from sprints.ajax import update_status, change_task
+
 urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 
@@ -22,9 +24,13 @@ urlpatterns = patterns('',
 
 
     url(r'^projects/', include('projects.urls')),
-    url('^activity/', include('actstream.urls')),
+    url(r'^activity/', include('actstream.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
+
+    #AJAX
+    url(r'^ajax/update/task/(?P<task_id>\d+)/$', change_task, name='ajax_change_task'),
+    url(r'^ajax/update/story/(?P<story_id>\d+)/$', update_status, name='ajax_update_status'),
 
 
 )

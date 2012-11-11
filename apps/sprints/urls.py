@@ -6,7 +6,7 @@ from django.conf.urls import patterns, url, include
 from tastypie.api import Api
 
 from sprints.api import SprintResource
-from sprints.ajax import change_story, change_task
+#from sprints.ajax import change_task, update_status
 from sprints.views import SprintListView, update_story_status, update_stories, SprintDetailView, StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog, AddSprint, SprintEditForm
 
 v1_api = Api(api_name="v1")
@@ -38,7 +38,7 @@ urlpatterns = patterns('',
     url(r'^api/', include(v1_api.urls)),
 
     #AJAX
-    url(r'^ajax/task/(?P<task_id>\d+)/(?P<change>[-\w]+)/$', change_task, name='ajax_change_task'),
-    url(r'^ajax/story/(?P<story_id>\d+)/(?P<status_id>[-\w]+)/$', change_story, name='ajax_change_story'),
+    #/ajax/update/task/13/?value=true
+    #/ajax/update/story/24/?value=437
 
 )

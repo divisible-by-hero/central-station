@@ -12,7 +12,7 @@ $(document).ready(function(){
     $(".error").effect("pulsate", { times:2 }, 1500);
     
     //Sprint Views
-    $('#cs-sprint-board').hide();
+    $('x#cs-sprint-board').hide();
     
     $('#cs-sprint-switcher button').click(function(e){
         if ( $(this).attr('id') == 'cs-sprint-board-button' ){
@@ -45,6 +45,11 @@ $(document).ready(function(){
     });
 
 
+    /* Story Status */
+    $('.cs-story-status-item').click(function(){
+        updateStatus( $(this).attr('data-story'), $(this).attr('data-story-status-id') )
+    });
+
     /* Tasks  */
     $('.cs-task-item-complete').change(function(){
         var id = $(this).attr('data-id');
@@ -66,16 +71,35 @@ $(document).ready(function(){
 function taskToggle(id, value){
     $.ajax({
         type: "POST",
-        url: "/ajax/sprints/task/" + id + "/" + value + "/",
+        url: "/ajax/update/task/" + id + "/",
         dataType: 'json',
-        data: "csrfmiddlewaretoken=" + csrf_token,
+        data: {
+            "csrfmiddlewaretoken":csrf_token,
+            'value':value
+        },
         success: function(data){
             console.log('success');
         }
     });
-
 }
 
+
+function updateStatus(id, value){
+    console.log(id, value);
+    
+    $.ajax({
+        type: "POST",
+        url: "/ajax/update/story/" + id + "/",
+        dataType: 'json',
+        data: {
+            "csrfmiddlewaretoken":csrf_token,
+            "value": value,
+        },
+        success: function(data){
+            console.log('success');
+        }
+    });
+}
 
 
 /*
@@ -130,4 +154,5 @@ function serializeStories(){
     });
     return json
 }
+
 
