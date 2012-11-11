@@ -152,7 +152,7 @@
         <td><div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'></div></td>
         <td>
             <a href="{{ story.get_absolute_url }}">{{ story.title }}</a>
-            {% include 'sprints/items.html' %}
+            {% include 'sprints/tasks.html' %}
         </td>
         <td>            
             <div class="btn-group">
@@ -216,7 +216,7 @@
               <h1 class='cs-story-card-points'>{{ story.points }}</h1>
               <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
               <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
-              {% include 'sprints/items.html' %}
+              {% include 'sprints/tasks.html' %}
               <div class='clear'></div>
           </li>
         {% endfor %}
