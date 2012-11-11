@@ -1,0 +1,18 @@
+<div class="cs-tasks">
+    <ul>
+        {% if story.task_set.all %}
+        {% for task in story.task_set.all %}
+        <li style="line-height: 30px;" id='cs-task-item-{{ task.id }}' class='cs-task-item{% if task.complete %} cs-task-item-completed{% endif %}' data-id='{{ task.id }}'>
+            <div>
+                <input type='checkbox' id='cs-task-item-complete-{{ task.id }}' class='cs-task-item-complete' data-id='{{ task.id }}' {% if task.complete %}checked{% endif %} />
+            </div>
+            <span class="cs-task-item-title"><a href="{{ task.get_absolute_url }}">{{ task }}</a></span>
+            {% if task.ticket %}<span style="margin-left: 10px;"><a href="{{ task.ticket }}">Issue</a></span>{% endif %}
+            <!--{% if task.assigned %}<span style="margin-left: 10px;">{{ task.assigned.first_name }} {{ task.assigned.last_name }}</span>{% endif %} -->
+        </li>
+        {% endfor %}
+        {% endif %}
+    </ul>
+    <span class="add-new"><a href='#addTask' data-toggle='modal'>Add Task</a></span>
+    <span class="add-new"><a href='#'>Hide Tasks</a></span>
+</div>
