@@ -47,7 +47,7 @@ $(document).ready(function(){
 
     /* Story Status */
     $('.cs-story-status-item').click(function(){
-        updateStatus( $(this).attr('data-story'), $(this).attr('data-story-status-id') )
+        updateStatus( $(this).attr('data-story'), $(this).attr('data-story-status-id') );
     });
 
     /* Tasks  */
@@ -96,11 +96,25 @@ function updateStatus(id, value){
             "value": value,
         },
         success: function(data){
-            console.log('success');
+            buttonStatus(id, data.value)
         }
     });
 }
 
+
+function buttonStatus(id, value){
+    console.log(id, value);    
+    var button = $('.cs-story-status-item-current[data-story=' + id +']')
+    //remove btn- classes
+    button.attr('class', function(i, c){
+        return c.replace(/\bbtn-\S+/g, '');
+    });
+    //add new button class
+    //TODO pass new class as value based on rendered data- attribute
+    button.addClass('btn-danger');
+    
+    
+}
 
 /*
 Maybe Deprecated ?
