@@ -47,18 +47,18 @@ $(document).ready(function(){
 
     /* Story Status */
     $('.cs-story-status-item').click(function(){
-        updateStatus( $(this).attr('data-story'), $(this).attr('data-story-status-id') );
+        updateStatus( $(this).attr('data-story-id'), $(this).attr('data-story-status-id') );
     });
 
     /* Tasks  */
     $('.cs-task-item-complete').change(function(){
-        var id = $(this).attr('data-id');
+        var id = $(this).attr('data-task-id');
         if ( this.checked ){
-            taskToggle(id, true);
+            toggleTask(id, true);
             console.log(id);
         }
         else{
-            taskToggle(id, false);
+            toggleTask(id, false);
             console.log(id);
         }
     });
@@ -67,8 +67,8 @@ $(document).ready(function(){
     
 });
 
-
-function taskToggle(id, value){
+/* Story Tasks */
+function toggleTask(id, value){
     $.ajax({
         type: "POST",
         url: "/ajax/update/task/" + id + "/",
@@ -78,15 +78,26 @@ function taskToggle(id, value){
             'value':value
         },
         success: function(data){
-            console.log('success');
+            //console.log('success');
+            updateTaskItem(id, true)
         }
     });
 }
 
+function updateTaskItem(id, value){
+    var task = $('.cs-task-item[data-task-id=' + id +']');
+    //remove btn- classes
+    if (value){
+        task.addClass('cs-task-item-completed');
+    }
+    else{
+        task.removeClass('cs-task-item-completed');
+    }
+}
 
+
+/* Story Status */
 function updateStatus(id, value){
-    console.log(id, value);
-    
     $.ajax({
         type: "POST",
         url: "/ajax/update/story/" + id + "/",
@@ -96,15 +107,14 @@ function updateStatus(id, value){
             "value": value,
         },
         success: function(data){
-            buttonStatus(id, data.value)
+            updateStatusButton(id, data.value)
         }
     });
 }
 
-
-function buttonStatus(id, value){
+function updateStatusButton(id, value){
     console.log(id, value);    
-    var button = $('.cs-story-status-item-current[data-story=' + id +']')
+    var button = $('.cs-story-status-item-current[data-story-id=' + id +']')
     //remove btn- classes
     button.attr('class', function(i, c){
         return c.replace(/\bbtn-\S+/g, '');
@@ -112,9 +122,11 @@ function buttonStatus(id, value){
     //add new button class
     //TODO pass new class as value based on rendered data- attribute
     button.addClass('btn-danger');
-    
-    
+
 }
+
+
+
 
 /*
 Maybe Deprecated ?
@@ -160,7 +172,7 @@ function serializeStories(){
     $( ".cs-sprint-board-column-list" ).each(function(){
         $(this).children('li.cs-story-card').each(function(){
             story = {};
-            story.id = $(this).attr('data-id');
+            story.id = $(this).attr('data-story-id');
             story.status = $(this).parent().attr('data-column');
             story.position = $(this).index();
             json.stories.push(story);
