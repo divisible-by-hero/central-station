@@ -7,17 +7,32 @@ from sprints.models import Task, Story, StoryStatus
 __author__ = 'Derek Stegelman, Garrett Pennington'
 __date__ = '10/19/12'
 
+"""
+Contains views for asynchronus requests.
+
+These views should accept a request and other parameters, but
+only if those parameters refer to a specific instance of that resource.
+Otherwise, any extra data should be pass through query parametrs.
+
+These views should return the appropriate status code and a JSON response
+regardless of success.  Views that handle for a request that contains
+erroneous or incomplete input and should still return a 200 response, even
+if the desred action was a failure.  The failure should be identified
+in the JSON.
+
+Anatomy of a JSON response:
+{
+    'success':true, (or false)
+    'message':"Status saved.", (Human readable description of tranaction result)
+    'value':'done', (New value of story, even if it was the old value)
+    'error':"StoryStatus couldn't be found." (Optional technical explanation of error)
+}
+
+"""
+
 def update_status(request, story_id):
     """
     Change story status via ajax
-    
-    JSON Response format:
-    {
-        'success':true, (or false)
-        'message':"Status saved.", (Human readable description of tranaction result)
-        'value':'done', (New value of story, even if it was the old value)
-        'error':"StoryStatus couldn't be found." (Optional technical explanation of error)
-    }
     """
 
     #Get the story, but it mave have been deleted
