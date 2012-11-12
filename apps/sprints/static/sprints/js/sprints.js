@@ -79,7 +79,7 @@ function toggleTask(id, value){
         },
         success: function(data){
             //console.log('success');
-            updateTaskItem(id, true)
+            updateTaskItem(id, data.value)
         }
     });
 }

@@ -74,4 +74,10 @@ def change_task(request, task_id):
         task.complete = False
     task.save()
 
-    return HttpResponse(mimetype="text/plain")
+
+    response = simplejson.dumps({
+        'success':True,
+        'message':"Task completed.",
+        'value':task.complete
+    })
+    return HttpResponse(response, mimetype='application/json', status=200)
