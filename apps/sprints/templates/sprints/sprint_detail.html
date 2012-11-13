@@ -156,7 +156,7 @@
         </td>
         <td>            
             <div class="btn-group">
-                <a class="btn dropdown-toggle cs-story-status-item-current {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}" data-toggle='dropdown' data-id='{{ story.id }}'>
+                <a class="btn dropdown-toggle cs-story-status-item-current {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
                     {% if story.story_status %}
                     {{ story.story_status.status }}
                     {% else %}

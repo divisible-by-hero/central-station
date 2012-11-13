@@ -107,13 +107,12 @@ function updateStatus(id, value){
             "value": value,
         },
         success: function(data){
-            updateStatusButton(id, data.value)
+            updateStatusButton(id, data)
         }
     });
 }
 
-function updateStatusButton(id, value){
-    console.log(id, value);    
+function updateStatusButton(id, data){
     var button = $('.cs-story-status-item-current[data-story-id=' + id +']')
     //remove btn- classes
     button.attr('class', function(i, c){
@@ -122,7 +121,7 @@ function updateStatusButton(id, value){
     //add new button class
     //TODO pass new class as value based on rendered data- attribute
     button.addClass('btn-danger');
-
+    button.text(data.value.status);
 }
 
 

@@ -24,7 +24,7 @@ Anatomy of a JSON response:
 {
     'success':true, (or false)
     'message':"Status saved.", (Human readable description of tranaction result)
-    'value':'done', (New value of story, even if it was the old value)
+    'value':'done', (New value of story, string, number, even a dictionary)
     'error':"StoryStatus couldn't be found." (Optional technical explanation of error)
 }
 
@@ -67,7 +67,10 @@ def update_status(request, story_id):
     response = simplejson.dumps({
         'success':True,
         'message':"Status not saved.",
-        'value':status.slug
+        'value': {
+            'slug':status.slug,
+            'status':status.status
+        }
     })
     return HttpResponse(response, mimetype='application/json', status=200)
 
