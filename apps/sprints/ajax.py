@@ -38,12 +38,10 @@ def update_status(request, story_id):
     #Get the story, but it mave have been deleted
     try:
         story = Story.objects.get(pk=story_id)
-        current_status = story.story_status
-    except Stort.DoesNotExist:
+    except Story.DoesNotExist:
         response = simplejson.dumps({
             'success':False,
             'message':"Status not saved.",
-            'value':current_status
         })
         return HttpResponse(response, mimetype='application/json', status=200)
 
@@ -56,7 +54,6 @@ def update_status(request, story_id):
         response = simplejson.dumps({
             'success':False,
             'message':"Status not saved.",
-            'value':current_status
         })
         return HttpResponse(response, mimetype='application/json', status=200)
     except Exception, e:
@@ -80,19 +77,34 @@ def change_task(request, task_id):
     Change task status from complete/un-complete
     """
     
-    change = request.POST.get('value')
+    #Get the task, but it mave have been deleted
+    try:
+        task = Task.objects.get(pk=task_id)
+    except Task.DoesNotExist:
+        response = simplejson.dumps({
+            'success':False,
+            'message':"Task not saved.",
+        })
+        return HttpResponse(response, mimetype='application/json', status=200)
+
     
-    task = Task.objects.get(pk=task_id)
-    if change == "true":
+    value = request.POST.get('value')
+    if value == None:
+        response = simplejson.dumps({
+            'success':False,
+            'message':"Task not saved.",
+            'error':"No value defined in POST."
+        })
+        return HttpResponse(response, mimetype='application/json', status=200)
+
+    if value == "true":
         task.complete = True
+        response_dict = {'message':"Task completed."}
     else:
         task.complete = False
+        response_dict = {'message':"Task incomplete."}
     task.save()
-
-
-    response = simplejson.dumps({
-        'success':True,
-        'message':"Task completed.",
-        'value':task.complete
-    })
+    response_dict['success'] = True
+    response_dict['value'] = task.complete
+    response = simplejson.dumps(response_dict)
     return HttpResponse(response, mimetype='application/json', status=200)
