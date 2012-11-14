@@ -80,50 +80,14 @@
     </div>
 </div>
 
-<style>
-    /* super awful styles that aren't great or namespaced */
-    
-    .circle {
-      border-radius: 50%;
-      width: 30px;
-      height: 30px;
-      background-color: #333333;
-      margin: 0 auto;
-    }
 
-    .circle-big {
-      width: 30px;
-      height: 30px;
-    }
 
-    .circle-med {
-      width: 20px;
-      height: 20px;
-    }
-
-    .circle-small {
-      width: 10px;
-      height: 10px;
-    }
-
-    .cs-tasks ul { margin: 0; padding:0; }
-    .cs-tasks li { margin: 0; padding: 0 5px; list-style-type: none; xborder-bottom: 1px solid #bbbbbb; }
-    .cs-tasks div { padding: 5px;  display: inline;}
-
-    .add-new { float: right; margin-left: 25px; margin-top:10px;}
-    .add-new a { color: #333333; font-size: 85%;}
-    
-    /* begin good namespaced styles */
-    .cs-task-item-completed .cs-task-item-title { text-decoration: line-through; }
-    
-
-</style>
 
 <table id='cs-sprint-table' class='table table-bordered table-hover'>
     <tr>
-        <th>Points</th>
+        <th style="width: 50px;">Points</th>
         <th>Item</th>
-        <th>Status</th>
+        <th style="width: 150px;">Status</th>
         <th>Project</th>
         <th>Person</th>
     </tr>
@@ -151,17 +115,25 @@
 
         <td><div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'></div></td>
         <td>
-            <a href="{{ story.get_absolute_url }}">{{ story.title }}</a>
-            {% include 'sprints/tasks.html' %}
+            <div class='cs-story-item'>
+                <a class='cs-story-item-title' href="{{ story.get_absolute_url }}">{{ story.title }}</a>
+                {% include 'sprints/tasks.html' %}
+                <div class='cs-tasks-menu'>
+                    <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
+                    <span><a href='#'>Hide Tasks</a></span>
+                </div>
+            <div>
         </td>
         <td>            
             <div class="btn-group">
-                <a class="btn dropdown-toggle cs-story-status-item-current {% if story.story_status.status == 'Road Blocked' or story.roadblocked %}btn-danger{% elif story.story_status.status == 'In Progress' %}btn-warning{% elif story.story_status.status == 'Done' %}btn-primary{% endif %}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
+                <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current {{ story.story_status.button_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
+                    <span class="cs-story-status-item-current-name">
                     {% if story.story_status %}
                     {{ story.story_status.status }}
                     {% else %}
                     ------
                     {% endif %}
+                    </span>
                     <span class="caret"></span>
                 </a>
                 <ul class="dropdown-menu">
@@ -180,26 +152,7 @@
 
 </table>
 
-<style>
-    ul.cs-sprint-board-column { margin: 0; padding:0; width: 19%; min-height: 500px; float: left; border: 1px solid #dddddd; }
-    ul.cs-sprint-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #dddddd; }
 
-    ul.cs-sprint-board-column-header { margin: 0; padding:0; min-height: 60px; height: 60px; background-color: #f5f5f5; }
-    ul.cs-sprint-board-column-header li { color: #ffffff; }
-
-    ul#cs-sprint-board-header-not-started li { background-color: #999999;}
-    ul#cs-sprint-board-header-in-progress li { background-color: #F89406;}
-    ul#cs-sprint-board-header-testing li { background-color: #468847;}
-    ul#cs-sprint-board-header-done li { background-color: #3A87AD;}
-    ul#cs-sprint-board-header-road-blocked li { background-color: #B94A48;}
-    
-    .cs-story-card { clear: both;}
-    .cs-story-card-points { margin: 0; padding: 0; float: left; }
-    .cs-story-card-title { margin: 0 0 0 45px; }
-    
-    .clear { clear: both;}
-    
-</style>
 
 <div id='cs-sprint-board'>
     {% regroup sprint.story_set.all by story_status as story_list %}
@@ -207,9 +160,9 @@
     {% for col in story_statuses %}
     <!-- Markup is placeholder... clearly shouldn't be ULs -->
     <ul id='cs-sprint-board-header-{{ col.slug }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.slug }}'>
-        <li>{{ col.status }}</li>
+        <li class="{{ col.button_class }}">{{ col.status }}</li>
     </ul>
-        {% endfor %}
+    {% endfor %}
 
     {% for column in story_list %}
     <ul id='cs-sprint-board-{{ column.grouper.slug }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.grouper.slug }}'>

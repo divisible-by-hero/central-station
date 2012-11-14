@@ -66,10 +66,11 @@ def update_status(request, story_id):
     story.save()
     response = simplejson.dumps({
         'success':True,
-        'message':"Status not saved.",
+        'message':"Status saved.",
         'value': {
             'slug':status.slug,
-            'status':status.status
+            'status':status.status,
+            'button_class':status.button_class
         }
     })
     return HttpResponse(response, mimetype='application/json', status=200)

@@ -23,9 +23,7 @@ $(document).ready(function(){
             $('#cs-sprint-board').hide();
             $('#cs-sprint-table').show();            
         }
-        
     });
-    
     
     $( ".cs-sprint-board-column-list" ).sortable({
         connectWith: '.cs-sprint-board-column-list',
@@ -55,11 +53,9 @@ $(document).ready(function(){
         var id = $(this).attr('data-task-id');
         if ( this.checked ){
             toggleTask(id, true);
-            console.log(id);
         }
         else{
             toggleTask(id, false);
-            console.log(id);
         }
     });
 
@@ -89,9 +85,11 @@ function updateTaskItem(id, value){
     //remove btn- classes
     if (value){
         task.addClass('cs-task-item-completed');
+        task.find('input').prop('checked', true);
     }
     else{
         task.removeClass('cs-task-item-completed');
+        task.find('input').prop('checked', false);
     }
 }
 
@@ -119,9 +117,8 @@ function updateStatusButton(id, data){
         return c.replace(/\bbtn-\S+/g, '');
     });
     //add new button class
-    //TODO pass new class as value based on rendered data- attribute
-    button.addClass('btn-danger');
-    button.text(data.value.status);
+    button.addClass(data.value.button_class);
+    button.children('.cs-story-status-item-current-name').text(data.value.status);
 }
 
 

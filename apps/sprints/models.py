@@ -4,7 +4,7 @@ __date__ = '9/5/12'
 from django.db import models
 from django.contrib.auth.models import User
 
-from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES
+from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES, STATUS_COLORS, color_choices
 from sprints.managers import SprintManager
 from accounts.models import Team, Account
 from projects.models import Project
@@ -75,9 +75,18 @@ class StoryStatus(models.Model):
     status = models.CharField(max_length=250, blank=True, null=True)
     order = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
-
+    color = models.CharField(max_length=20, choices=color_choices())
+    
     def __unicode__(self):
         return self.status
+
+    @property
+    def button_class(self):
+        return STATUS_COLORS[self.color]['class']
+
+    @property
+    def hex_code(self):
+        return STATUS_COLORS[self.color]['hex']
 
     class Meta:
         ordering = ['order']

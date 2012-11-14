@@ -1,4 +1,4 @@
-<div class="cs-tasks">
+<div class='cs-tasks'>
     <ul>
         {% if story.task_set.all %}
         {% for task in story.task_set.all %}
@@ -13,6 +13,4 @@
         {% endfor %}
         {% endif %}
     </ul>
-    <span class="add-new"><a href='#addTask' data-toggle='modal'>Add Task</a></span>
-    <span class="add-new"><a href='#'>Hide Tasks</a></span>
 </div>
