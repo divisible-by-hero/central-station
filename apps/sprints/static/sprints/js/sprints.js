@@ -12,7 +12,7 @@ $(document).ready(function(){
     $(".error").effect("pulsate", { times:2 }, 1500);
     
     //Sprint Views
-    $('x#cs-sprint-board').hide();
+    $('#cs-sprint-board').hide();
     
     $('#cs-sprint-switcher button').click(function(e){
         if ( $(this).attr('id') == 'cs-sprint-board-button' ){
@@ -117,7 +117,7 @@ function updateStatusButton(id, data){
         return c.replace(/\bbtn-\S+/g, '');
     });
     //add new button class
-    button.addClass(data.value.button_class);
+    button.addClass('btn-' + data.value.style_class);
     button.children('.cs-story-status-item-current-name').text(data.value.status);
 }
 

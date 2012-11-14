@@ -73,15 +73,13 @@
     </form>
 </div>
 
+
 <div id='cs-sprint-switcher' class="btn-toolbar">
     <div class="btn-group" data-toggle="buttons-radio"> 
         <button id='cs-sprint-table-button' type='button' class="btn active" data-toggle="button"><i class="icon-list"></i></button>
         <button id='cs-sprint-board-button' type='button' class="btn" data-toggle="button"><i class="icon-th-large"></i></button>
     </div>
 </div>
-
-
-
 
 <table id='cs-sprint-table' class='table table-bordered table-hover'>
     <tr>
@@ -126,7 +124,7 @@
         </td>
         <td>            
             <div class="btn-group">
-                <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current {{ story.story_status.button_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
+                <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ story.story_status.style_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
                     <span class="cs-story-status-item-current-name">
                     {% if story.story_status %}
                     {{ story.story_status.status }}
@@ -160,7 +158,7 @@
     {% for col in story_statuses %}
     <!-- Markup is placeholder... clearly shouldn't be ULs -->
     <ul id='cs-sprint-board-header-{{ col.slug }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.slug }}'>
-        <li class="{{ col.button_class }}">{{ col.status }}</li>
+        <li class="btn-{{ col.style_class }}">{{ col.status }}</li>
     </ul>
     {% endfor %}
 
@@ -182,6 +180,13 @@
 </div>
 
 <h3>Stats</h3>
+<div class="well well-small">
+    <div class="progress">
+        {% for status in sprint.perc %}
+        <div class="bar bar-{{ status.style_class }}" style="width: {{ status.percentage }}%;">{{ status.status }}</div>
+        {% endfor %}
+    </div>
+</div>
 <table class="table table-bordered">
     <tr>
         <th>Stat</th>
@@ -197,7 +202,6 @@
     </tr>
 
 </table>
-
 
 {% endblock main_content %}
 

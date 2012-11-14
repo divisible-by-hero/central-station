@@ -70,7 +70,7 @@ def update_status(request, story_id):
         'value': {
             'slug':status.slug,
             'status':status.status,
-            'button_class':status.button_class
+            'style_class':status.style_class
         }
     })
     return HttpResponse(response, mimetype='application/json', status=200)

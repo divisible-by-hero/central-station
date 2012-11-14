@@ -24,32 +24,32 @@ for choice in STORY_STATUS_CHOICES:
 STATUS_COLORS = {
     'grey': {
         'name':'Grey',
-        'class':'',
+        'style_class':'',
         'hex':'cccccc'
     },
     'blue': {
         'name':'Blue',
-        'class':'btn-primary',
+        'style_class':'primary',
         'hex':'0000ff'
     },
     'light_blue': {
         'name':'Light Blue',
-        'class':'btn-info',
+        'style_class':'info',
         'hex':'ccccff'
     },
     'green': {
         'name':'Green',
-        'class':'btn-success',
+        'style_class':'success',
         'hex':'00ff00'
     },
     'yellow': {
         'name':'Yellow',
-        'class':'btn-warning',
+        'style_class':'warning',
         'hex':'00ffff'
     },
     'red': {
         'name':'Red',
-        'class':'btn-danger',
+        'style_class':'danger',
         'hex':'ff0000'
     }
 }

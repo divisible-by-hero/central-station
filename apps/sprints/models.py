@@ -50,9 +50,34 @@ class Sprint(AuditBase):
     def completed_points(self):
         points = 0
         for story in self.story_set.all():
-            if story.status == 'done':
+            if story.story_status.slug == 'done':
                 points = points + story.points
         return points
+
+    def stories(self):
+        return self.story_set.all()
+            
+    def perc(self):
+        total = self.total_points()
+        perc = []
+        for status in self.team.organization.statuses():
+            stories_of_a_certain_status = []
+            #statuses.append(status.status)
+            for story in self.stories():
+                if story.story_status.slug == status.slug:
+                    stories_of_a_certain_status.append(story)
+            
+            s = {
+                'status' : status.status,
+                'style_class': status.style_class
+            }
+            status_points = 0
+            for story in stories_of_a_certain_status:
+                status_points += story.points
+            s['percentage'] = float(status_points) / float(total) * 100
+            perc.append(s)
+
+        return perc
 
     @models.permalink
     def get_absolute_url(self):
@@ -81,8 +106,8 @@ class StoryStatus(models.Model):
         return self.status
 
     @property
-    def button_class(self):
-        return STATUS_COLORS[self.color]['class']
+    def style_class(self):
+        return STATUS_COLORS[self.color]['style_class']
 
     @property
     def hex_code(self):
