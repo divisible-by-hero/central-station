@@ -57,7 +57,7 @@ class Sprint(AuditBase):
     def stories(self):
         return self.story_set.all()
             
-    def perc(self):
+    def completed_by_status(self):
         total = self.total_points()
         perc = []
         for status in self.team.organization.statuses():
@@ -78,7 +78,7 @@ class Sprint(AuditBase):
             perc.append(s)
 
         return perc
-
+        
     @models.permalink
     def get_absolute_url(self):
         return ('sprint_detail', (), { 'account': self.team.organization.slug, 'id': self.id })

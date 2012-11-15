@@ -111,6 +111,7 @@ function updateStatus(id, value){
 }
 
 function updateStatusButton(id, data){
+    console.log(data)
     var button = $('.cs-story-status-item-current[data-story-id=' + id +']')
     //remove btn- classes
     button.attr('class', function(i, c){
@@ -119,6 +120,12 @@ function updateStatusButton(id, data){
     //add new button class
     button.addClass('btn-' + data.value.style_class);
     button.children('.cs-story-status-item-current-name').text(data.value.status);
+    
+    //update progress bar
+    for (var i=0;i<data.sprint.completed_by_status.length;i++){ 
+        console.log(i)
+        $('.cs-progress-bar-item:eq(' + i + ')').css('width', data.sprint.completed_by_status[i].percentage + '%');
+    }
 }
 
 

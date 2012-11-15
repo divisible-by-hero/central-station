@@ -20,6 +20,7 @@ erroneous or incomplete input and should still return a 200 response, even
 if the desred action was a failure.  The failure should be identified
 in the JSON.
 
+#THIS IS ALREADY DEPRICATED.  THIS WILL CHANGE EVEN MORE
 Anatomy of a JSON response:
 {
     'success':true, (or false)
@@ -64,6 +65,10 @@ def update_status(request, story_id):
     #If Story and StoryStatus are found, save story
     story.story_status = status
     story.save()
+    
+    #Also, get sprint information to update the whole page
+    sprint = story.sprint    
+
     response = simplejson.dumps({
         'success':True,
         'message':"Status saved.",
@@ -71,6 +76,9 @@ def update_status(request, story_id):
             'slug':status.slug,
             'status':status.status,
             'style_class':status.style_class
+        },
+        'sprint': {
+            'completed_by_status':sprint.completed_by_status()
         }
     })
     return HttpResponse(response, mimetype='application/json', status=200)
