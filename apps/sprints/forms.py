@@ -62,10 +62,13 @@ class NewTaskForm(forms.ModelForm):
 
         super(NewTaskForm, self).__init__(*args, **kwargs)
 
-
     class Meta:
         model = Task
         exclude = ('deleted', 'deleted_date')
+        widgets = {
+            'story': ChosenSelect(overlay='Choose a story'),
+            'assigned': ChosenSelect(overlay='Choose')
+        }
 
 class TaskForm(forms.ModelForm):
 
@@ -73,29 +76,27 @@ class TaskForm(forms.ModelForm):
         sprint = kwargs.pop('sprint')
         self.helper = FormHelper()
         self.helper.form_tag = False
-
         super(TaskForm, self).__init__(*args, **kwargs)
         self.fields['story'].queryset = Story.objects.filter(sprint=sprint)
-
 
     class Meta:
         model = Task
         exclude = ('deleted', 'deleted_date')
         widgets = {
-            'story': ChosenSelect(overlay='Choose a Story')
+            'story': ChosenSelect(overlay='Choose a Story'),
+            'assigned': ChosenSelect(overlay='Choose an assignee')
         }
 
 class StoryTaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
-
         self.helper = FormHelper()
         self.helper.form_tag = False
-
         super(StoryTaskForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Task
         exclude = ('deleted', 'deleted_date', 'story')
+
 
 class RoadBlockForm(forms.ModelForm):
 
