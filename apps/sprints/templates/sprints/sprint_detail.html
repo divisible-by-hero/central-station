@@ -81,6 +81,45 @@
     </div>
 </div>
 
+
+
+<table id='cs-sprint-board' class="table table-bordered">
+{% regroup sprint.story_set.all by story_status as story_list %}
+<thead>
+    <tr>
+    {% for col in story_statuses %}
+        <th>
+            <div class="btn-{{ col.style_class }}">{{ col.status }}</div>
+        </th>
+    {% endfor %}
+    </tr>
+</thead>
+<tbody>
+    <tr>
+    {% for column in story_list %}
+    <td class='cs-sprint-board-cell'>
+        <ul id='cs-sprint-board-{{ column.grouper.slug }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.grouper.slug }}'>
+            {% for story in column.list %}
+            <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
+                <div class='cs-story-card-points circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
+                <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
+                <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
+                <div class='cs-tasks-menu'>
+                    <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
+                    <span><a href='#'>Hide Tasks</a></span>
+                </div>
+                {% include 'sprints/tasks.html' %}
+                <div class='clear'></div>
+            </li>
+            {% endfor %}
+        </ul>
+    </td>
+    {% endfor %}
+    </tr>
+</tbody>
+</table>
+
+
 <table id='cs-sprint-table' class='table table-bordered table-hover'>
     <tr>
         <th style="width: 50px;">Points</th>
@@ -111,7 +150,9 @@
             </form>
         </div>
 
-        <td><div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'></div></td>
+        <td>
+            <div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
+        </td>
         <td>
             <div class='cs-story-item'>
                 <a class='cs-story-item-title' href="{{ story.get_absolute_url }}">{{ story.title }}</a>
@@ -137,7 +178,7 @@
                 <ul class="dropdown-menu">
                     {% for status in story_statuses %}
                     <li>
-                        <a href="#" class='cs-story-status-item' data-story-status-id='{{ status.id }}' data-story-id='{{ story.id }}' data-value='{{ status.slug }}'>{{ status.status }}</a>
+                        <a class='cs-story-status-item' data-story-status-id='{{ status.id }}' data-story-id='{{ story.id }}' data-value='{{ status.slug }}'>{{ status.status }}</a>
                         </li>
                     {% endfor %}
                 </ul>
@@ -151,33 +192,7 @@
 </table>
 
 
-
-<div id='cs-sprint-board'>
-    {% regroup sprint.story_set.all by story_status as story_list %}
-    
-    {% for col in story_statuses %}
-    <!-- Markup is placeholder... clearly shouldn't be ULs -->
-    <ul id='cs-sprint-board-header-{{ col.slug }}' class='cs-sprint-board-column cs-sprint-board-column-header' data-column='{{ col.slug }}'>
-        <li class="btn-{{ col.style_class }}">{{ col.status }}</li>
-    </ul>
-    {% endfor %}
-
-    {% for column in story_list %}
-    <ul id='cs-sprint-board-{{ column.grouper.slug }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.grouper.slug }}'>
-        {% for story in column.list %}
-          <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
-              <h1 class='cs-story-card-points'>{{ story.points }}</h1>
-              <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
-              <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
-              {% include 'sprints/tasks.html' %}
-              <div class='clear'></div>
-          </li>
-        {% endfor %}
-    </ul>
-    {% endfor %}
-
-    <div class='clear'></div>
-</div>
+<!-- -->
 
 <h3>Stats</h3>
 <div class="well well-small">

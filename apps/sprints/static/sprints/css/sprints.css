@@ -7,7 +7,7 @@
 * Description: Style for Central Station sprints
 * ========================================================== */
 
-
+.cs-container { padding: 20px;}
 td.cs-row-task
 {
     padding-left:30px;
@@ -19,13 +19,14 @@ Sprint Detail
 -------------
 */
 
-.circle { margin: 0 auto; width: 30px; height: 30px; border-radius: 50%; background-color: #333333; }
-.circle-big { width: 30px; height: 30px; }
-.circle-medium { width: 20px; height: 20px; }
-.circle-small { width: 10px; height: 10px; }
+.circle { margin: 0 auto; width: 30px; height: 30px; border-radius: 50%; background-color: #333333; color: #ffffff; text-align: center; font-weight: bold;}
+.circle-big { width: 30px; height: 30px; line-height: 30px; font-size: 13px; }
+.circle-medium { width: 20px; height: 20px; line-height: 20px; font-size: 11px; }
+.circle-small { width: 15px; height: 15px; line-height: 15px; font-size: 9px; }
 
 .cs-tasks { }
-.cs-tasks ul { margin: 0; padding:0; }
+.cs-tasks a { color: #555555; }
+.cs-tasks ul { margin: 0; padding: 0; }
 .cs-tasks li { margin: 0; padding: 0 5px; list-style-type: none; xborder-bottom: 1px solid #bbbbbb; }
 .cs-tasks div { padding: 5px;  display: inline;}
 
@@ -42,18 +43,25 @@ Sprint Detail
 .cs-story-item-title { padding-right: 150px; }
     
     
-/* Board Sprints Detail */    
+/* Board Sprints Detail */
 
-.cs-sprint-board-column { margin: 0; padding:0; width: 19%; min-height: 500px; float: left; border: 1px solid #dddddd; }
-.cs-sprint-board-column li { margin: 10px; padding: 10px; list-style-type: none; border: 1px solid #dddddd; }
+#cs-sprint-board { table-layout: fixed;}
+#cs-sprint-board th div { text-align: center; padding: 5px; border-radius: 4px;}
+
+.cs-sprint-board-cell {width: auto;}
+
+.cs-sprint-board-column { margin: 0; padding: 0; }
+
+.cs-sprint-board-column > li  { margin: 0 0 8px 0; padding: 5px; list-style-type: none; border: 1px solid #dddddd; }
 
 .cs-sprint-board-column-header { margin: 0; padding:0; min-height: 60px; height: 60px; background-color: #f5f5f5; }
 .cs-sprint-board-column-header li { color: #ffffff; }
 
 .cs-story-card { clear: both;}
-.cs-story-card-points { margin: 0; padding: 0; float: left; }
+.cs-story-card-points { margin: 0 15px 0 5px; padding: 0; float: left; }
 .cs-story-card-title { margin: 0 0 0 45px; }
 
+.cs-board .cs-tasks { border-top: 1px dashed #bbbbbb; }
 
 
 
