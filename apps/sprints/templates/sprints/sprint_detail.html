@@ -100,7 +100,7 @@
     <td class='cs-sprint-board-cell'>
         <ul id='cs-sprint-board-{{ column.grouper.slug }}' class='cs-sprint-board-column cs-sprint-board-column-list' data-column='{{ column.grouper.slug }}'>
             {% for story in column.list %}
-            <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-id='{{ story.id }}'>
+            <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-story-id='{{ story.id }}'>
                 <div class='cs-story-card-points circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
                 <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
                 <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
