@@ -140,6 +140,7 @@ INSTALLED_APPS = (
     'accounts',
     'projects',
     'core',
+    'debug_toolbar',
 )
 
 # Sprint Settings
