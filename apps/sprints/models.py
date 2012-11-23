@@ -90,7 +90,8 @@ class Story(AuditBase):
     position = models.IntegerField(blank=True, null=True)
     
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
-    sprint = models.ForeignKey(Sprint, null=True, blank=True)
+    # Sprint should not longer be accessed.  Use the sprint/story object model instead.
+    sprint = models.ForeignKey(Sprint, null=True, blank=True, editable=False)
     project = models.ForeignKey(Project, null=True)
 
     def __unicode__(self):
