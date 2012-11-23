@@ -179,7 +179,7 @@ class OrderedStory(AuditBase):
 class SprintStory(AuditBase):
     story = models.ForeignKey(Story, null=True, blank=False)
     sprint = models.ForeignKey(Sprint, null=True, blank=False)
-    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+    status = models.ForeignKey(StoryStatus, null=True, blank=True)
 
     def __unicode__(self):
         return "Story sprint object for %s %s" % (self.story, self.sprint)
