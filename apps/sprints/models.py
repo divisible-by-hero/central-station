@@ -111,6 +111,20 @@ class Story(AuditBase):
         self.status = 'road-blocked'
         action.send(request.user, verb='marked as Road Blocked', action_object=self, target=self.project)
 
+    def add_to_sprint(self, sprint):
+        """ Add a story to a sprint, creates the story/sprint object
+        """
+
+        SprintStory.objects.create(sprint=sprint, story=self)
+
+    def remove_from_sprint(self, sprint):
+        """ Remove a story from a sprint.  Deletes the object because
+         we do not want a historical record of this being attached to this sprint.
+        """
+
+        sprint_story_object = SprintStory.objects.get(sprint=sprint, story=self)
+        sprint_story_object.delete()
+
     @models.permalink
     def get_absolute_url(self):
         return ('story_edit', (), {'account': self.project.account.slug, 'pk': self.id})
@@ -159,3 +173,12 @@ class OrderedStory(AuditBase):
     story = models.ForeignKey(Story, null=True, blank=False)
     position = models.IntegerField(blank=False)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+
+
+class SprintStory(AuditBase):
+    story = models.ForeignKey(Story, null=True, blank=False)
+    sprint = models.ForeignKey(Sprint, null=True, blank=False)
+    status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
+
+    def __unicode__(self):
+        return "Story sprint object for %s %s" % (self.story, self.sprint)
