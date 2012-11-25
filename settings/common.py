@@ -8,7 +8,6 @@ ADMINS = (
     ('Derek Stegelman', 'dstegelman@gmail.com'),
 )
 
-
 MANAGERS = ADMINS
 
 # Local time zone for this installation. Choices can be found here:
