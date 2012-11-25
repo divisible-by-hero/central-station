@@ -144,8 +144,6 @@ class Story(AuditBase):
 class Task(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
-    # Use this new account defined version of status instead.
-    task_status = models.ForeignKey(StoryStatus, null=True, blank=True)
     ticket = models.URLField(blank=True, null=True)
     assigned = models.ForeignKey(User, null=True)
 
