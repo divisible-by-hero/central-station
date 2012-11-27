@@ -19,6 +19,10 @@ Sprint Detail
 -------------
 */
 
+/* javascript hiding */
+.js #cs-sprint-board { display: none; }
+.js #cs-sprint-board .cs-tasks { display: none; }
+
 .circle { margin: 0 auto; width: 30px; height: 30px; border-radius: 50%; background-color: #333333; color: #ffffff; text-align: center; font-weight: bold;}
 .circle-big { width: 30px; height: 30px; line-height: 30px; font-size: 13px; }
 .circle-medium { width: 20px; height: 20px; line-height: 20px; font-size: 11px; }

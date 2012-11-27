@@ -13,7 +13,7 @@ $(document).ready(function(){
     
     //Sprint Views
     //$('#cs-sprint-board').hide();
-    $('#cs-sprint-board .cs-tasks').hide();
+    //$('#cs-sprint-board .cs-tasks').hide();
     
     $('#cs-sprint-switcher button').click(function(e){
         if ( $(this).attr('id') == 'cs-sprint-board-button' ){
