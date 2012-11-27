@@ -29,6 +29,9 @@ class Account(models.Model):
         unique_slugify(self, self.company_name)
         super(Account, self).save(*args, **kwargs)
 
+    def create_new_account(self):
+        raise NotImplementedError()
+
     @models.permalink
     def get_absolute_url(self):
         return ('account_home', (), {'account': self.slug})
@@ -65,3 +68,6 @@ class RoleAssigned(AuditBase):
 
     def __unicode__(self):
         return self.user.username
+
+def generic_account_procedures():
+    raise NotImplementedError()
