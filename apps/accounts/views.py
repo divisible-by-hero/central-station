@@ -15,6 +15,7 @@ def registration(request):
             username = form.cleaned_data['username']
             email = form.cleaned_data['email']
             password = form.cleaned_data['password']
+            company = form.cleaned_data['company_name']
             try:
                 User.objects.get(username=username)
                 # No exception raised? Need to return to the form.
@@ -24,6 +25,9 @@ def registration(request):
             except User.DoesNotExist:
                 # Can Create
                 user = User.objects.create_user(username, email=email, password=password)
+
+            company = Account.objects.create(company_name=company)
+
 
 
 

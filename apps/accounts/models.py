@@ -69,5 +69,19 @@ class RoleAssigned(AuditBase):
     def __unicode__(self):
         return self.user.username
 
-def generic_account_procedures():
+def generic_account_procedures(user, company):
+    # Create 'default' team
+    default_team = Team.objects.create(name='default', organization=company)
+
+    # Create User profile for this user.
+    user_profile = UserProfile.objects.create(user=user)
+    user_profile.teams.add(default_team)
+    user_profile.save()
+
+    role = Role.objects.get(name='Owner')
+    assigned = RoleAssigned.objects.create(user=user)
+    assigned.team = default_team
+    assigned.role = role
+    assigned.save()
+
     raise NotImplementedError()
