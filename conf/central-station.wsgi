@@ -12,9 +12,12 @@ PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, PROJECT_ROOT)
 sys.path.insert(0, os.path.join(PROJECT_ROOT, "apps"))
 
+import newrelic.agent
+
+newrelic.agent.initialize('/home/dstegelman/projects/central-station/conf/newrelic.ini')
 
 from django.conf import settings
 os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.production'
 from django.core.handlers.wsgi import WSGIHandler
 application = WSGIHandler()
-
+application = newrelic.agent.wsgi_application()(application)

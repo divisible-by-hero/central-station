@@ -1,13 +1,11 @@
-__author__ = 'Derek Stegelman'
-__date__ = '9/5/12'
-
 from django.conf.urls import patterns, include, url
 from django.conf import settings
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
-
-from django.views.generic import TemplateView
-
 from django.contrib import admin
+
+__author__ = 'Derek Stegelman'
+__date__ = '9/5/12'
+
 admin.autodiscover()
 
 urlpatterns = patterns('',
