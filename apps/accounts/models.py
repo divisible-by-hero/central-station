@@ -1,11 +1,10 @@
-__author__ = 'Derek Stegelman'
-__date__ = '9/5/12'
-
-
 from django.db import models
 from django.contrib.auth.models import User
 
 from hadrian.utils.slugs import unique_slugify
+
+__author__ = 'Derek Stegelman'
+__date__ = '9/5/12'
 
 class AuditBase(models.Model):
     deleted = models.BooleanField()
