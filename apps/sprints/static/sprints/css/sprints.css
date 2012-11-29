@@ -42,7 +42,10 @@ Sprint Detail
 .cs-task-item-completed .cs-task-item-title { text-decoration: line-through; }
 
 /* Table Sprint Detail */
-    
+
+.js #cs-sprint-table th { cursor: pointer; }
+#cs-sprint-table th.headerSortDown,
+#cs-sprint-table th.headerSortUp { background-color: #f5f5f5; }
 .cs-story-item { position:relative; }
 .cs-story-item-title { padding-right: 150px; }
     

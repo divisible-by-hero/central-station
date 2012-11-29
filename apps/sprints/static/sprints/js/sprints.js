@@ -15,6 +15,8 @@ $(document).ready(function(){
     //$('#cs-sprint-board').hide();
     //$('#cs-sprint-board .cs-tasks').hide();
     
+    $("table#cs-sprint-table").tablesorter(); 
+    
     $('#cs-sprint-switcher button').click(function(e){
         if ( $(this).attr('id') == 'cs-sprint-board-button' ){
             $('#cs-sprint-board').show();

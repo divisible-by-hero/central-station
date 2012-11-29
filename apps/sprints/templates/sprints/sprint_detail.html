@@ -120,79 +120,79 @@
 </table>
 
 
-<table id='cs-sprint-table' class='table table-bordered table-hover'>
-    <tr>
-        <th style="width: 50px;">Points</th>
-        <th>Item</th>
-        <th style="width: 150px;">Status</th>
-        <th>Project</th>
-        <th>Person</th>
-    </tr>
+<table id='cs-sprint-table' class='table table-bordered table-hover tablesorter'>
+    <thead>
+        <tr>
+            <th style="width: 50px;">Points</th>
+            <th>Item</th>
+            <th style="width: 150px;">Status</th>
+            <th>Project</th>
+            <th>Person</th>
+        </tr>
+    </thead>
+    <tbody>
     {% for story in sprint.story_set.all %}
-    <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
-        <!-- Let's find a new place for this modal.  not valid markup -->
-        <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h3>Add Task</h3>
+        <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
+            <!-- Let's find a new place for this modal.  not valid markup -->
+            <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h3>Add Task</h3>
+                </div>
+                <form method="POST" action="{{ sprint.get_task_add }}">
+                    <div class="modal-body">
+                        {% load crispy_forms_tags %}
+                        {% csrf_token %}
+                        {% crispy story_task_form %}
+                        <input type="hidden" name="story" value="{{ story.id }}">
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#" class="btn" data-dismiss='modal'>Close</a>
+                        <input type="submit" value="Add Task" class="btn btn-primary">
+                    </div>
+                </form>
             </div>
-            <form method="POST" action="{{ sprint.get_task_add }}">
-                <div class="modal-body">
-                    {% load crispy_forms_tags %}
-                    {% csrf_token %}
-                    {% crispy story_task_form %}
-                    <input type="hidden" name="story" value="{{ story.id }}">
-                </div>
-                <div class="modal-footer">
-                    <a href="#" class="btn" data-dismiss='modal'>Close</a>
-                    <input type="submit" value="Add Task" class="btn btn-primary">
-                </div>
-            </form>
-        </div>
 
-        <td>
-            <div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
-        </td>
-        <td>
-            <div class='cs-story-item'>
-                <a class='cs-story-item-title' href="{{ story.get_absolute_url }}">{{ story.title }}</a>
-                {% include 'sprints/tasks.html' %}
-                <div class='cs-tasks-menu'>
-                    <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
-                    <span><a href='#'>Hide Tasks</a></span>
+            <td>
+                <div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
+            </td>
+            <td>
+                <div class='cs-story-item'>
+                    <a class='cs-story-item-title' href="{{ story.get_absolute_url }}">{{ story.title }}</a>
+                    {% include 'sprints/tasks.html' %}
+                    <div class='cs-tasks-menu'>
+                        <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
+                        <span><a href='#'>Hide Tasks</a></span>
+                    </div>
+                <div>
+            </td>
+            <td>            
+                <div class="btn-group">
+                    <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ story.story_status.style_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
+                        <span class="cs-story-status-item-current-name">
+                        {% if story.story_status %}
+                        {{ story.story_status.status }}
+                        {% else %}
+                        ------
+                        {% endif %}
+                        </span>
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for status in story_statuses %}
+                        <li>
+                            <a class='cs-story-status-item' data-story-status-id='{{ status.id }}' data-story-id='{{ story.id }}' data-value='{{ status.slug }}'>{{ status.status }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
                 </div>
-            <div>
-        </td>
-        <td>            
-            <div class="btn-group">
-                <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ story.story_status.style_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
-                    <span class="cs-story-status-item-current-name">
-                    {% if story.story_status %}
-                    {{ story.story_status.status }}
-                    {% else %}
-                    ------
-                    {% endif %}
-                    </span>
-                    <span class="caret"></span>
-                </a>
-                <ul class="dropdown-menu">
-                    {% for status in story_statuses %}
-                    <li>
-                        <a class='cs-story-status-item' data-story-status-id='{{ status.id }}' data-story-id='{{ story.id }}' data-value='{{ status.slug }}'>{{ status.status }}</a>
-                        </li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </td>
-        <td>{{ story.project }}</td>
-        <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
-    </tr>
+            </td>
+            <td>{{ story.project }}</td>
+            <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
+        </tr>
     {% endfor %}
-
+    </tbody>
 </table>
-
-
-<!-- -->
 
 <h3>Stats</h3>
 <div class="well well-small">
@@ -226,5 +226,6 @@
 <script type="text/javascript">
     var csrf_token = "{{ csrf_token }}";
 </script>
+<script src="/static/js/jquery.tablesorter.min.js" ></script>
 <script src="/static/sprints/js/sprints.js" ></script>
 {% endblock %}
