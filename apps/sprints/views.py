@@ -210,14 +210,12 @@ def update_stories(request, account):
 
     _input = request.raw_post_data
     _input = simplejson.loads(request.raw_post_data)
-    #print _input
-
 
     for story in _input['stories']:
-        print story
         s = Story.objects.get(id=story['id'])
         s.position = story['position']
-        s.status = story['status']
+        ss = StoryStatus.objects.get(slug=story['status'])  #THIS ADDS SO MANY QUERIES RIGHT NOW
+        s.story_status = ss
         s.save()
 
     json_response = simplejson.dumps({'success':True})

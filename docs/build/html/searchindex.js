@@ -1,1 +1,0 @@
-Search.setIndex({objects:{},terms:{rundown:[0,1],index:0,search:0,document:0,central:0,welcom:0,wiki:1,indic:0,modul:0,project:1,start:[0,1],station:0,issu:1,chat:1,tabl:0,quick:[0,1],app:[0,1],content:0,page:0},objtypes:{},titles:["Welcome to Central Station&#8217;s documentation!","Quick Start"],objnames:{},filenames:["index","quick_start"]})

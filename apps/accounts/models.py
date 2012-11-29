@@ -1,11 +1,10 @@
-__author__ = 'Derek Stegelman'
-__date__ = '9/5/12'
-
-
 from django.db import models
 from django.contrib.auth.models import User
 
 from hadrian.utils.slugs import unique_slugify
+
+__author__ = 'Derek Stegelman'
+__date__ = '9/5/12'
 
 class AuditBase(models.Model):
     deleted = models.BooleanField()
@@ -33,6 +32,9 @@ class Account(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('account_home', (), {'account': self.slug})
+        
+    def statuses(self):
+        return self.storystatus_set.all()
 
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
