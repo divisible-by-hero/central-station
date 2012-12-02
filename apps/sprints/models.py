@@ -4,7 +4,7 @@ __date__ = '9/5/12'
 from django.db import models
 from django.contrib.auth.models import User
 
-from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES
+from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES, STATUS_COLORS, color_choices
 from sprints.managers import SprintManager
 from accounts.models import Team, Account
 from projects.models import Project
@@ -50,10 +50,35 @@ class Sprint(AuditBase):
     def completed_points(self):
         points = 0
         for story in self.story_set.all():
-            if story.status == 'done':
+            if story.story_status.slug == 'done':
                 points = points + story.points
         return points
 
+    def stories(self):
+        return self.story_set.all()
+            
+    def completed_by_status(self):
+        total = self.total_points()
+        perc = []
+        for status in self.team.organization.statuses():
+            stories_of_a_certain_status = []
+            #statuses.append(status.status)
+            for story in self.stories():
+                if story.story_status.slug == status.slug:
+                    stories_of_a_certain_status.append(story)
+            
+            s = {
+                'status' : status.status,
+                'style_class': status.style_class
+            }
+            status_points = 0
+            for story in stories_of_a_certain_status:
+                status_points += story.points
+            s['percentage'] = float(status_points) / float(total) * 100
+            perc.append(s)
+
+        return perc
+        
     @models.permalink
     def get_absolute_url(self):
         return ('sprint_detail', (), { 'account': self.team.organization.slug, 'id': self.id })
@@ -75,9 +100,18 @@ class StoryStatus(models.Model):
     status = models.CharField(max_length=250, blank=True, null=True)
     order = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
-
+    color = models.CharField(max_length=20, choices=color_choices())
+    
     def __unicode__(self):
         return self.status
+
+    @property
+    def style_class(self):
+        return STATUS_COLORS[self.color]['style_class']
+
+    @property
+    def hex_code(self):
+        return STATUS_COLORS[self.color]['hex']
 
     class Meta:
         ordering = ['order']
@@ -85,6 +119,7 @@ class StoryStatus(models.Model):
 
 class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
+    # Status no longer used.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
     story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
     position = models.IntegerField(blank=True, null=True)
@@ -128,11 +163,13 @@ class Story(AuditBase):
 
 class Task(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)
+    # Status not used anymore.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True)
     ticket = models.URLField(blank=True, null=True)
     assigned = models.ForeignKey(User, null=True)
 
     story = models.ForeignKey(Story, null=True)
+    complete = models.BooleanField()
 
     def __unicode__(self):
         return self.title

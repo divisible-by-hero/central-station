@@ -10,6 +10,9 @@ class SprintQuerySet(QuerySet):
     def current(self):
         return self.filter(start_date__lte=datetime.date.today(), end_date__gte=datetime.date.today())
 
+    def by_team(self, team_slug):
+        return self.filter(team__slug=team_slug)
+
 class SprintManager(Manager):
 
     def get_query_set(self):
@@ -17,6 +20,9 @@ class SprintManager(Manager):
 
     def current(self):
         return self.get_query_set().current()
+
+    def by_team(self, team_slug):
+        return self.get_query_set().by_team(team_slug)
 
 
 
