@@ -1,50 +1,48 @@
 {% extends "accounts/base.html" %}
-{% block extra_head %}
-<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
-{% endblock extra_head %}
-{% block sidebar_super %}{% endblock sidebar_super %}
+{% block head_css %}
+{{ block.super }}
+    <link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css">
+{% endblock head_css %}
 {% block main_content %}
+{% block sidebar_super %}{% endblock sidebar_super %}
 <h3>Backlog</h3>
 <div class='btn-group'>
     <a href="#addStory" data-toggle="modal" class="btn">Add Story</a>
     <a href="#addProject" data-toggle="modal" class="btn">Add Project</a>
-</div>
+</div><!-- /.btn-group -->
 {% load crispy_forms_tags %}
 <div class="modal hide fade" id="addStory">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Story</h3>
-    </div>
+    </div><!-- /.modal-header -->
     <form method='POST' action="{% url story_add account=account_slug %}">
         <div class="modal-body">
             {% csrf_token %}
             {% crispy story_form %}
-        </div>
+        </div><!-- /.modal-body -->
         <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Close</a>
             <input type="submit" value="Add Story" class="btn btn-primary">
-        </div>
+        </div><!-- /.modal-footer -->
     </form>
-</div>
-
+</div><!-- /.modal -->
 <div class="modal hide fade" id="addProject">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Project</h3>
-    </div>
+    </div><!-- /.modal-header -->
     <form method='POST' action="{% url project_add %}">
         <div class="modal-body">
             {% csrf_token %}
             {% crispy project_form %}
-
-        </div>
+        </div><!-- /.modal-body -->
         <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Close</a>
             <input type="submit" value="Add Project" class="btn btn-primary">
-        </div>
+        </div><!-- /.modal-footer -->
     </form>
-</div>
-
+</div><!-- /.modal -->
 <table class='table table-bordered table-hover'>
     <tr>
         <th>Status</th>
@@ -73,16 +71,9 @@
                     <li><a href="#">Add to Sprint</a></li>
                     <li><a href="#">Delete</a></li>
                 </ul>
-            </div>
+            </div><!-- /.btn-group -->
         </td>
     </tr>
-
-
     {% endfor %}
-
 </table>
-
-
-
-
 {% endblock main_content %}
