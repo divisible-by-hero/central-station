@@ -22,9 +22,9 @@ class RegistrationForm(forms.Form):
             Field('password'),
             Field('password_confirm'),
         )
-
-
         super(RegistrationForm, self).__init__(*args, **kwargs)
+
+    # @TODO - Need to make sure password is entered correctly twice.
 
     username = forms.CharField()
     company_name = forms.CharField()

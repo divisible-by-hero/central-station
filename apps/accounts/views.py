@@ -8,7 +8,29 @@ from accounts.models import Account, RoleAssigned
 from sprints.models import Sprint
 
 def registration(request):
-    form = RegistrationForm()
+    context = {}
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            company = form.cleaned_data['company_name']
+            try:
+                User.objects.get(username=username)
+                # No exception raised? Need to return to the form.
+                messages.add_message(request, messages.ERROR, "The username %s is already taken." % username)
+                context['form'] = form
+                return render(request, 'accounts/registration_form.html', context)
+            except User.DoesNotExist:
+                # Can Create
+                user = User.objects.create_user(username, email=email, password=password)
+
+            company = Account.objects.create(company_name=company)
+
+
+
+
     context = {'form': form}
     return render(request, "accounts/registration_form.html", context)
 
