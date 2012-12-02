@@ -1,10 +1,11 @@
 {% extends "accounts/base.html" %}
-{% block extra_head %}
-<link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css" type="text/css">
-{% endblock extra_head %}
-
-{% block sidebar_super %}{% endblock sidebar_super %}
+{% block head_css %}
+    {{ block.super }}
+    <link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css">
+{% endblock head_css %}
 {% block main_content %}
+{% block sidebar_super %}
+{% endblock sidebar_super %}
 <div class="navbar navbar-fixed-bottom">
     <div class="navbar-inner">
         <span class="brand">Sprint {{ sprint.start_date }} through {{ sprint.end_date }}</span>
@@ -23,66 +24,59 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Task</h3>
-    </div>
+    </div><!-- /.modal-header -->
     <form method="POST" action="{{ sprint.get_task_add }}">
     <div class="modal-body">
         {% load crispy_forms_tags %}
             {% csrf_token %}
         {% crispy task_form %}
-    </div>
+    </div><!-- /.modal-body -->
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss='modal'>Close</a>
         <input type="submit" value="Add Task" class="btn btn-primary">
-    </div>
+    </div><!-- /.modal-footer -->
     </form>
-</div>
-
+</div><!-- /.modal -->
 <div class="modal hide fade" id="addStory">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Story</h3>
-    </div>
+    </div><!-- /.modal -->
     <form method='POST' action="{{ sprint.get_story_add }}">
     <div class="modal-body">
         {% csrf_token %}
         {% crispy story_form %}
         <input type="hidden" name="sprint" value="{{ sprint.id }}">
-    </div>
+    </div><!-- /.modal-body -->
     <div class="modal-footer">
         <a href="#" class="btn" data-dismiss="modal">Close</a>
         <input type="submit" value="Add Story" class="btn btn-primary">
-    </div>
+    </div><!-- /.modal-footer -->
     </form>
-</div>
-
+</div><!-- /.modal -->
 <div class="modal hide fade" id="addProject">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Project</h3>
-    </div>
+    </div><!-- /.modal-header -->
     <form method='POST' action="{% url project_add %}">
         <div class="modal-body">
             {% csrf_token %}
             {% crispy project_form %}
 
-        </div>
+        </div><!-- /.modal-body -->
         <div class="modal-footer">
             <a href="#" class="btn" data-dismiss="modal">Close</a>
             <input type="submit" value="Add Project" class="btn btn-primary">
-        </div>
+        </div><!-- /.modal-footer -->
     </form>
-</div>
-
-
+</div><!-- /.modal -->
 <div id='cs-sprint-switcher' class="btn-toolbar">
     <div class="btn-group" data-toggle="buttons-radio"> 
         <button id='cs-sprint-table-button' type='button' class="btn active" data-toggle="button"><i class="icon-list"></i></button>
         <button id='cs-sprint-board-button' type='button' class="btn" data-toggle="button"><i class="icon-th-large"></i></button>
-    </div>
-</div>
-
-
-
+    </div><!-- /.btn-group -->
+</div><!-- /#cs-sprint-switcher -->
 <table id='cs-sprint-board' class="table table-bordered">
 {% regroup sprint.story_set.all by story_status as story_list %}
 <thead>
@@ -107,7 +101,7 @@
                 <div class='cs-tasks-menu'>
                     <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
                     <span><a href='#'>Hide Tasks</a></span>
-                </div>
+                </div><!-- /.cs-tasks-menu -->
                 {% include 'sprints/tasks.html' %}
                 <div class='clear'></div>
             </li>
@@ -118,8 +112,6 @@
     </tr>
 </tbody>
 </table>
-
-
 <table id='cs-sprint-table' class='table table-bordered table-hover tablesorter'>
     <thead>
         <tr>
@@ -138,21 +130,20 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3>Add Task</h3>
-                </div>
+                </div><!-- /.modal-header -->
                 <form method="POST" action="{{ sprint.get_task_add }}">
                     <div class="modal-body">
                         {% load crispy_forms_tags %}
                         {% csrf_token %}
                         {% crispy story_task_form %}
                         <input type="hidden" name="story" value="{{ story.id }}">
-                    </div>
+                    </div><!-- /.modal-body -->
                     <div class="modal-footer">
                         <a href="#" class="btn" data-dismiss='modal'>Close</a>
                         <input type="submit" value="Add Task" class="btn btn-primary">
-                    </div>
+                    </div><!-- /.modal-footer -->
                 </form>
-            </div>
-
+            </div><!-- /.modal -->
             <td>
                 <div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
             </td>
@@ -163,8 +154,8 @@
                     <div class='cs-tasks-menu'>
                         <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
                         <span><a href='#'>Hide Tasks</a></span>
-                    </div>
-                <div>
+                    </div><!-- /.cs-tasks-menu -->
+                <div><!-- /.cs-story-item -->
             </td>
             <td>            
                 <div class="btn-group">
@@ -185,7 +176,7 @@
                             </li>
                         {% endfor %}
                     </ul>
-                </div>
+                </div><!-- /.btn-group -->
             </td>
             <td>{{ story.project }}</td>
             <td>{{ story.assigned.first_name }} {{ story.assigned.last_name }}</td>
@@ -193,7 +184,6 @@
     {% endfor %}
     </tbody>
 </table>
-
 <h3>Stats</h3>
 <div class="well well-small">
     <div class="progress">
@@ -215,17 +205,13 @@
         <td>Completed Points</td>
         <td>{{ sprint.completed_points }}</td>
     </tr>
-
 </table>
-
 {% endblock main_content %}
-
-{% block extra_js %}
-{{ block.super }}
-<link href="{{ STATIC_URL }}css/smoothness/jquery-ui-1.8.23.custom.css" rel="stylesheet" type="text/css"/>
-<script type="text/javascript">
-    var csrf_token = "{{ csrf_token }}";
-</script>
-<script src="/static/js/jquery.tablesorter.min.js" ></script>
-<script src="/static/sprints/js/sprints.js" ></script>
-{% endblock %}
+{% block body_js %}
+    {{ block.super }}
+    <script>
+        var csrf_token = "{{ csrf_token }}";
+    </script>
+    <script src="{{ STATIC_URL }}js/jquery.tablesorter.min.js"></script>
+    <script src="{{ STATIC_URL }}js/sprints.js"></script>
+{% endblock body_js %}
