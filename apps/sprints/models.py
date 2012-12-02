@@ -4,12 +4,12 @@ __date__ = '9/5/12'
 from django.db import models
 from django.contrib.auth.models import User
 
+from actstream import action
+
 from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES, STATUS_COLORS, color_choices
 from sprints.managers import SprintManager
 from accounts.models import Team, Account
 from projects.models import Project
-
-from actstream import action
 
 class AuditBase(models.Model):
     deleted = models.BooleanField()
