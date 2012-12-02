@@ -1,6 +1,3 @@
-__author__ = 'Derek Stegelman'
-__date__ = '10/17/12'
-
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
@@ -8,6 +5,9 @@ from actstream.models import model_stream
 
 from sprints.models import Sprint
 from accounts.models import RoleAssigned
+
+__author__ = 'Derek Stegelman'
+__date__ = '10/17/12'
 
 @login_required
 def homepage(request):
