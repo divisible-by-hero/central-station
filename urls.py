@@ -11,10 +11,13 @@ admin.autodiscover()
 from sprints.ajax import update_status, change_task
 
 urlpatterns = patterns('',
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
     url(r'^admin/', include(admin.site.urls)),
 
     url(r'^$', 'core.views.homepage', name='homepage'),
     url(r'^myprofile/$', 'accounts.views.profile', name='user_profile'),
+    url(r'^registration/$', 'accounts.views.registration', name="account_registration"),
     url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
 
     url(r'^ajax/sprints/', include('sprints.ajax_urls')),
@@ -23,8 +26,9 @@ urlpatterns = patterns('',
 
     url(r'^projects/', include('projects.urls')),
     url(r'^activity/', include('actstream.urls')),
-    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}, name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
+
 
     #AJAX
     url(r'^ajax/update/task/(?P<task_id>\d+)/$', change_task, name='ajax_change_task'),

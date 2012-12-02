@@ -1,14 +1,36 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import messages
 
 from accounts.forms import RegistrationForm, UserProfileForm
-from accounts.models import Account, RoleAssigned
+from accounts.models import Account, RoleAssigned, Team
 
 from sprints.models import Sprint
 
 def registration(request):
-    form = RegistrationForm()
+    context = {}
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            email = form.cleaned_data['email']
+            password = form.cleaned_data['password']
+            company = form.cleaned_data['company_name']
+            try:
+                User.objects.get(username=username)
+                # No exception raised? Need to return to the form.
+                messages.add_message(request, messages.ERROR, "The username %s is already taken." % username)
+                context['form'] = form
+                return render(request, 'accounts/registration_form.html', context)
+            except User.DoesNotExist:
+                # Can Create
+                user = User.objects.create_user(username, email=email, password=password)
+
+            company = Account.objects.create(company_name=company)
+
+
+
+
     context = {'form': form}
     return render(request, "accounts/registration_form.html", context)
 
@@ -18,6 +40,16 @@ def account_home(request, account):
     sprints = Sprint.objects.current().filter(team__organization=account)
     context = {'sprints': sprints}
     return render(request, 'accounts/account_home.html', context)
+
+def team_home(request, account, team):
+    context = {}
+    account = get_object_or_404(Account, slug=account)
+    team = get_object_or_404(Team, slug=team)
+    context['account'] = account
+    context['team'] = team
+    team_sprints = Sprint.objects.current().by_team(team.slug)
+    context['team_sprints'] = team_sprints
+    return render(request, 'accounts/team_home.html', context)
 
 def profile(request):
     context = {}
