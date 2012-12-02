@@ -1,0 +1,73 @@
+[
+  {
+    "pk": 1, 
+    "model": "accounts.account", 
+    "fields": {
+      "is_deleted": false, 
+      "is_active": true, 
+      "company_name": "Kansas State University", 
+      "slug": "kansas-state-university"
+    }
+  }, 
+  {
+    "pk": 2, 
+    "model": "accounts.account", 
+    "fields": {
+      "is_deleted": false, 
+      "is_active": true, 
+      "company_name": "Divisible By Hero", 
+      "slug": "divisible-by-hero"
+    }
+  }, 
+  {
+    "pk": 1, 
+    "model": "accounts.team", 
+    "fields": {
+      "deleted": false, 
+      "organization": 1, 
+      "deleted_date": null, 
+      "name": "webteam", 
+      "created_date": "2012-10-17T20:07:25"
+    }
+  }, 
+  {
+    "pk": 5, 
+    "model": "accounts.role", 
+    "fields": {
+      "deleted": false, 
+      "deleted_date": null, 
+      "name": "Team Member", 
+      "created_date": "2012-10-19T18:29:10"
+    }
+  }, 
+  {
+    "pk": 4, 
+    "model": "accounts.role", 
+    "fields": {
+      "deleted": false, 
+      "deleted_date": null, 
+      "name": "Manager", 
+      "created_date": "2012-10-19T18:29:04"
+    }
+  }, 
+  {
+    "pk": 3, 
+    "model": "accounts.role", 
+    "fields": {
+      "deleted": false, 
+      "deleted_date": null, 
+      "name": "Developer", 
+      "created_date": "2012-10-19T18:28:43"
+    }
+  },
+    {
+    "pk": 1,
+    "model": "accounts.role",
+    "fields": {
+        "deleted": false,
+        "deleted_date": null,
+        "name": "Owner",
+        "created_date": "2012-10-19T18:28:43"
+    }
+  }
+]

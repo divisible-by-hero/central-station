@@ -9,10 +9,15 @@ from accounts.models import RoleAssigned
 __author__ = 'Derek Stegelman'
 __date__ = '10/17/12'
 
-@login_required
+
 def homepage(request):
-    context = {'sprints': Sprint.objects.all()}
-    teams = RoleAssigned.objects.filter(user=request.user)
-    context['teams'] = teams
-    context['model_stream'] = model_stream(request.user)[:25]
-    return render(request, 'core/homepage.html', context)
+    if request.user.is_authenticated():
+
+        context = {'sprints': Sprint.objects.all()}
+        teams = RoleAssigned.objects.filter(user=request.user)
+        context['teams'] = teams
+        context['model_stream'] = model_stream(request.user)[:25]
+
+        return render(request, 'core/homepage.html', context)
+    else:
+        return render(request, 'index.html')
