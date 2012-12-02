@@ -35,6 +35,9 @@ class Account(models.Model):
     @models.permalink
     def get_absolute_url(self):
         return ('account_home', (), {'account': self.slug})
+        
+    def statuses(self):
+        return self.storystatus_set.all()
 
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)

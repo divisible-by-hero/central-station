@@ -7,9 +7,15 @@
     <meta name="description" content="issue tracking">
     <meta name="author" content="">
 
+    <script type="text/javascript">
+        //replace with modernizr?
+        document.documentElement.className = 'js';
+    </script>
+
     <!-- Le styles -->
     <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}js/chosen/chosen.css" rel="stylesheet">
     {% block extra_head %}{% endblock %}
     <style type="text/css">
       body {
@@ -36,7 +42,7 @@
   <body>
 
 
-    <div class="container">
+    <div class="cs-container">
         
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -129,7 +135,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
-    <script src="{{ STATIC_URL }}js/jquery-1.8.0.min.js"></script>
+
     <script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
@@ -142,9 +148,28 @@
     <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
+    <script src="{{ STATIC_URL }}js/chosen/chosen.jquery.min.js"></script>
 
-    
+    <script>
+            $(document).ready(function(){
+                $(".chzn-select").chosen();
+            });
+    </script>
+
     {% block extra_js %}{% endblock %}
+    <script type="text/javascript">
 
+        var _gaq = _gaq || [];
+        _gaq.push(['_setAccount', 'UA-4439935-13']);
+        _gaq.push(['_setDomainName', 'centralstationproject.com']);
+        _gaq.push(['_trackPageview']);
+
+        (function() {
+            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+        })();
+
+    </script>
   </body>
 </html>
