@@ -41,10 +41,15 @@ class Account(models.Model):
 
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
+    slug = models.SlugField(blank=True)
     organization = models.ForeignKey(Account)
 
     def __unicode__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        unique_slugify(self, self.name)
+        super(Team, self).save(*args, **kwargs)
 
 class UserProfile(AuditBase):
     user = models.ForeignKey(User)
