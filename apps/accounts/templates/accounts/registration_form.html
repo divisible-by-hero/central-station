@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block main_content %}
-<h3>Register for Central Station</h3>
-{% load crispy_forms_tags %}
-<form method="POST">
-{% crispy form %}
-<div class='form-actions'>
-<input type="submit" value="Sign Me Up!" class="btn btn-primary">
-</div>
-</form>
+    {% block sidebar_super %}{% endblock sidebar_super %}
+    <h3>Register for Central Station</h3>
+    {% load crispy_forms_tags %}
+    <form method="POST">
+        {% crispy form %}
+        <div class='form-actions'>
+            <input type="submit" value="Sign Me Up!" class="btn btn-primary">
+        </div><!-- /.form-actions -->
+    </form>
 {% endblock main_content %}
-{% block sidebar_super %}{% endblock sidebar_super %}

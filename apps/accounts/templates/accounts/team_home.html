@@ -1,31 +1,23 @@
 {% extends "accounts/base.html" %}
-
 {% block page_title %}{{ team.name }}|Home{% endblock %}
-
 {% block main_content %}
-<h1>Team: {{ team }}</h1>
-
-<h3>Stories</h3>
-
-{% if team_sprints %}
-<ul>
-    {% for sprint in team_sprints.all %}
-        {% for story in sprint.all %}
-        <li>{{ story }}</li>
+    <h1>Team: {{ team }}</h1>
+    <h3>Stories</h3>
+    {% if team_sprints %}
+    <ul>
+        {% for sprint in team_sprints.all %}
+            {% for story in sprint.all %}
+            <li>{{ story }}</li>
+            {% endfor %}
         {% endfor %}
-    {% endfor %}
-</ul>
-{% endif %}
-
-
-<h3>Sprints</h3>
-
-{% if team_sprints %}
-<ul>
-    {% for sprint in team_sprints %}
-    <li>{{ sprint }}</li>
-    {% endfor %}
-</ul>
-{% endif %}
-
+    </ul>
+    {% endif %}
+    <h3>Sprints</h3>
+    {% if team_sprints %}
+    <ul>
+        {% for sprint in team_sprints %}
+        <li>{{ sprint }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
 {% endblock %}
