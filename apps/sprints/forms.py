@@ -42,13 +42,14 @@ class NewStoryForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Field('title'),
+            Field('story_status')
         )
 
         super(NewStoryForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Story
-        exclude = ('deleted', 'deleted_date', 'position')
+        exclude = ('deleted', 'deleted_date', 'position', 'status')
         widgets = {
             'project': ChosenSelect(overlay="Project")
         }

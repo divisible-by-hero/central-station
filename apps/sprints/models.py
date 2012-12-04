@@ -128,7 +128,7 @@ class Story(AuditBase):
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
     story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
-    sprint = models.ForeignKey(Sprint, null=True, blank=True, editable=False)
+    sprint = models.ForeignKey(Sprint, null=True, blank=True)
 
     def __unicode__(self):
         return self.title
@@ -152,7 +152,7 @@ class Story(AuditBase):
         """ Add a story to a sprint, creates the story/sprint object
         """
 
-        SprintStory.objects.create(sprint=sprint, story=self, status=self.status, points=self.points)
+        SprintStory.objects.create(sprint=sprint, story=self, status=self.story_status, points=self.points)
 
     def remove_from_sprint(self, sprint):
         """ Remove a story from a sprint.  Deletes the object because
