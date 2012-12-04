@@ -131,8 +131,8 @@
         </tr>
     </thead>
     <tbody>
-    {% for story in sprint.story_set.all %}
-        <tr class="story {% if story.status == 'road-blocked' or story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
+    {% for sprint_story in stories %}
+        <tr class="story {% if sprint_story.story.status == 'road-blocked' or sprint_story.story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
             <!-- Let's find a new place for this modal.  not valid markup -->
             <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
                 <div class="modal-header">
@@ -154,11 +154,11 @@
             </div>
 
             <td>
-                <div class='circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
+                <div class='circle {% if sprint_story.story.points == 13 %}circle-big{% elif sprint_story.story.points == 5 %}circle-medium{% elif sprint_story.story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
             </td>
             <td>
                 <div class='cs-story-item'>
-                    <a class='cs-story-item-title' href="{{ story.get_absolute_url }}">{{ story.title }}</a>
+                    <a class='cs-story-item-title' href="{{ sprint_story.story.get_absolute_url }}">{{ sprint_story.story.title }}</a>
                     {% include 'sprints/tasks.html' %}
                     <div class='cs-tasks-menu'>
                         <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
@@ -170,8 +170,8 @@
                 <div class="btn-group">
                     <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ story.story_status.style_class }}" data-toggle='dropdown' data-story-id='{{ story.id }}'>
                         <span class="cs-story-status-item-current-name">
-                        {% if story.story_status %}
-                        {{ story.story_status.status }}
+                        {% if sprint_story.story.story_status %}
+                        {{ sprint_story.story.story_status.status }}
                         {% else %}
                         ------
                         {% endif %}

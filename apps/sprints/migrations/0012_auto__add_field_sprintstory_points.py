@@ -8,22 +8,15 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'SprintStory'
-        db.create_table('sprints_sprintstory', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('deleted', self.gf('django.db.models.fields.BooleanField')(default=False)),
-            ('deleted_date', self.gf('django.db.models.fields.DateTimeField')(null=True, blank=True)),
-            ('created_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, null=True, blank=True)),
-            ('story', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sprints.Story'], null=True)),
-            ('sprint', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sprints.Sprint'], null=True)),
-            ('status', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['sprints.StoryStatus'], null=True, blank=True)),
-        ))
-        db.send_create_signal('sprints', ['SprintStory'])
+        # Adding field 'SprintStory.points'
+        db.add_column('sprints_sprintstory', 'points',
+                      self.gf('django.db.models.fields.IntegerField')(null=True),
+                      keep_default=False)
 
 
     def backwards(self, orm):
-        # Deleting model 'SprintStory'
-        db.delete_table('sprints_sprintstory')
+        # Deleting field 'SprintStory.points'
+        db.delete_column('sprints_sprintstory', 'points')
 
 
     models = {
@@ -42,7 +35,8 @@ class Migration(SchemaMigration):
             'deleted_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '250', 'null': 'True', 'blank': 'True'}),
-            'organization': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['accounts.Account']"})
+            'organization': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['accounts.Account']"}),
+            'slug': ('django.db.models.fields.SlugField', [], {'max_length': '50', 'blank': 'True'})
         },
         'actstream.action': {
             'Meta': {'ordering': "('-timestamp',)", 'object_name': 'Action'},
@@ -137,6 +131,7 @@ class Migration(SchemaMigration):
             'deleted': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'deleted_date': ('django.db.models.fields.DateTimeField', [], {'null': 'True', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'points': ('django.db.models.fields.IntegerField', [], {'null': 'True'}),
             'sprint': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sprints.Sprint']", 'null': 'True'}),
             'status': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sprints.StoryStatus']", 'null': 'True', 'blank': 'True'}),
             'story': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['sprints.Story']", 'null': 'True'})

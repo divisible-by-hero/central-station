@@ -43,8 +43,8 @@ class Sprint(AuditBase):
 
     def total_points(self):
         points = 0
-        for story in self.story_set.all():
-            points = points + story.points
+        for sprint_story in SprintStory.objects.filter(sprint=self):
+            points = points + sprint_story.points
         return points
 
     def completed_points(self):
@@ -217,6 +217,7 @@ class SprintStory(AuditBase):
     story = models.ForeignKey(Story, null=True, blank=False)
     sprint = models.ForeignKey(Sprint, null=True, blank=False)
     status = models.ForeignKey(StoryStatus, null=True, blank=True)
+    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=True, verbose_name="Difficulty")
 
     def __unicode__(self):
         return "Story sprint object for %s %s" % (self.story, self.sprint)

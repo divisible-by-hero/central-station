@@ -8,9 +8,9 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
-from braces.views import LoginRequiredMixin
+from infuse.auth.permissions import LoginRequiredMixin
 
-from sprints.models import Sprint, Story, Task, StoryStatus
+from sprints.models import Sprint, Story, Task, StoryStatus, SprintStory
 from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
@@ -32,6 +32,32 @@ class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint
     template_name = "sprints/sprint_list.html"
     context_object_name = "sprints"
+
+class SprintStoryDetailView(LoginRequiredMixin, ListView):
+    template_name = 'sprints/sprint_detail.html'
+    context_object_name = 'stories'
+
+    def get_sprint(self):
+        return Sprint.objects.get(pk=self.kwargs.get('id'))
+
+    def get_queryset(self):
+        return SprintStory.objects.filter(sprint=self.get_sprint())
+
+    def get_account_story_status(self):
+        return StoryStatus.objects.filter(account=self.get_sprint().team.organization)
+
+    def get_context_data(self, **kwargs):
+        context = super(SprintStoryDetailView, self).get_context_data(**kwargs)
+        context['story_statuses'] = self.get_account_story_status()
+        context['task_form'] = TaskForm(sprint=self.get_sprint())
+        context['story_form'] = StoryForm()
+        context['story_task_form'] = StoryTaskForm()
+        context['project_form'] = ProjectForm()
+        context['sprint'] = self.get_sprint()
+        return context
+
+
+
 
 class SprintDetailView(LoginRequiredMixin, DetailView):
     # For an academic exercise, Derek will build the sprint_detail view func
