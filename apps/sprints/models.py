@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from actstream import action
 
 from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES, STATUS_COLORS, color_choices
-from sprints.managers import SprintManager
+from sprints.managers import SprintManager, SprintStoryManager
 from accounts.models import Team, Account
 from projects.models import Project
 
@@ -79,7 +79,7 @@ class Sprint(AuditBase):
 
         return perc
 
-    def complete_sprint(self, moved=True):
+    def complete(self, moved=True, sprint=None):
         """ Ask user if they want incomplete stories move to the next
          sprint, or moved to the backlog.  If moved to the next sprint,
          force user to create a new sprint object, and then create
@@ -87,7 +87,26 @@ class Sprint(AuditBase):
          and use the attributes of the story for now when creating
          the new records.  Points/Status, etc.
         """
-        raise NotImplementedError("Need to implement the complete sprint method.")
+
+        # Get all SprintStory objects for this sprint.
+        for sprint_story in SprintStory.objects.by_sprint(self):
+            # Check to see if this story
+            # is in Terminal state.
+            if sprint_story.story.terminal:
+                # It must be.  Add to new sprint object
+                # or, move to backlog.
+                if moved:
+                    if sprint:
+                        # Checking to make sure you provided
+                        # a sprint.
+                        SprintStory.objects.create(sprint=sprint, story=sprint_story.story, status=sprint_story.status, points=sprint_story.points)
+                    else:
+                        raise ValueError("You must provide a valid sprint to move this object to.")
+                else:
+                    # Backlog this bitch.
+                    # Just realized I have no idea how to do that.  Ugh..
+                    sprint_story.story.move_to_backlog()
+            # pass
         
     @models.permalink
     def get_absolute_url(self):
@@ -172,6 +191,9 @@ class Story(AuditBase):
         sprint_story_object = SprintStory.objects.get(sprint=sprint, story=self)
         sprint_story_object.delete()
 
+    def move_to_backlog(self):
+        raise NotImplementedError("Not sure if I need this.  Been drinking..")
+
     @models.permalink
     def get_absolute_url(self):
         return ('story_edit', (), {'account': self.project.account.slug, 'pk': self.id})
@@ -229,6 +251,8 @@ class SprintStory(AuditBase):
     sprint = models.ForeignKey(Sprint, null=True, blank=False)
     status = models.ForeignKey(StoryStatus, null=True, blank=True)
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=True, verbose_name="Difficulty")
+
+    objects = SprintStoryManager()
 
     def __unicode__(self):
         return "Story sprint object for %s %s" % (self.story, self.sprint)
