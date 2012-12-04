@@ -84,7 +84,7 @@
 
 
 <table id='cs-sprint-board' class="table table-bordered">
-{% regroup sprint.story_set.all by story_status as story_list %}
+{% regroup stories by status as story_list %}
 <thead>
     <tr>
     {% for col in story_statuses %}
