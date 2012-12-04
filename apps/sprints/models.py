@@ -1,6 +1,3 @@
-__author__ = 'Derek Stegelman'
-__date__ = '9/5/12'
-
 from django.db import models
 from django.contrib.auth.models import User
 
@@ -10,6 +7,9 @@ from sprints.choices import STORY_STATUS_CHOICES, STORY_POINT_CHOICES, STATUS_CO
 from sprints.managers import SprintManager
 from accounts.models import Team, Account
 from projects.models import Project
+
+__author__ = 'Derek Stegelman, Garrett Pennington'
+__date__ = '9/5/12'
 
 class AuditBase(models.Model):
     deleted = models.BooleanField()
@@ -41,39 +41,39 @@ class Sprint(AuditBase):
     def update(self, request):
         action.send(request.user, verb='updated', action_object=self, target=self.team)
 
+    @property
     def total_points(self):
         points = 0
         for sprint_story in SprintStory.objects.filter(sprint=self):
             points = points + sprint_story.points
         return points
 
+    @property
     def completed_points(self):
         points = 0
-        for story in self.story_set.all():
-            if story.story_status.slug == 'done':
-                points = points + story.points
+        for sprint_story in SprintStory.objects.filter(sprint=self):
+            # Remember to check for "Terminal" status
+            if sprint_story.status.slug == 'done':
+                points = points + sprint_story.points
         return points
 
-    def stories(self):
-        return self.story_set.all()
-            
     def completed_by_status(self):
-        total = self.total_points()
+        total = self.total_points
         perc = []
         for status in self.team.organization.statuses():
             stories_of_a_certain_status = []
             #statuses.append(status.status)
-            for story in self.stories():
-                if story.story_status.slug == status.slug:
-                    stories_of_a_certain_status.append(story)
+            for sprint_story in SprintStory.objects.filter(sprint=self):
+                if sprint_story.status.slug == status.slug:
+                    stories_of_a_certain_status.append(sprint_story)
             
             s = {
                 'status' : status.status,
                 'style_class': status.style_class
             }
             status_points = 0
-            for story in stories_of_a_certain_status:
-                status_points += story.points
+            for sprint_story in stories_of_a_certain_status:
+                status_points += sprint_story.points
             s['percentage'] = float(status_points) / float(total) * 100
             perc.append(s)
 
@@ -101,6 +101,7 @@ class StoryStatus(models.Model):
     order = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
     color = models.CharField(max_length=20, choices=color_choices())
+    terminal = models.BooleanField()
     
     def __unicode__(self):
         return self.status
@@ -118,16 +119,16 @@ class StoryStatus(models.Model):
 
 
 class Story(AuditBase):
+    # Valid properties at the top.
     title = models.CharField(max_length=250, blank=False, null=True)
-    # Status no longer used.
+    project = models.ForeignKey(Project, null=True)
+    position = models.IntegerField(blank=True, null=True)
+
+    # No Longer used.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
     story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
-    position = models.IntegerField(blank=True, null=True)
-    
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
-    # Sprint should not longer be accessed.  Use the sprint/story object model instead.
     sprint = models.ForeignKey(Sprint, null=True, blank=True, editable=False)
-    project = models.ForeignKey(Project, null=True)
 
     def __unicode__(self):
         return self.title
@@ -151,7 +152,7 @@ class Story(AuditBase):
         """ Add a story to a sprint, creates the story/sprint object
         """
 
-        SprintStory.objects.create(sprint=sprint, story=self)
+        SprintStory.objects.create(sprint=sprint, story=self, points=self.points, status=self.status)
 
     def remove_from_sprint(self, sprint):
         """ Remove a story from a sprint.  Deletes the object because
