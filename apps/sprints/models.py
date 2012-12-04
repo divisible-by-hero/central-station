@@ -120,7 +120,7 @@ class StoryStatus(models.Model):
 
 class Story(AuditBase):
     # Valid properties at the top.
-    title = models.CharField(max_length=250, blank=False, null=True)
+    title = models.CharField(max_length=250, blank=False, null=True, help_text="As a User I would like to...")
     project = models.ForeignKey(Project, null=True)
     position = models.IntegerField(blank=True, null=True)
 
@@ -152,7 +152,7 @@ class Story(AuditBase):
         """ Add a story to a sprint, creates the story/sprint object
         """
 
-        SprintStory.objects.create(sprint=sprint, story=self, points=self.points, status=self.status)
+        SprintStory.objects.create(sprint=sprint, story=self, status=self.status, points=self.points)
 
     def remove_from_sprint(self, sprint):
         """ Remove a story from a sprint.  Deletes the object because

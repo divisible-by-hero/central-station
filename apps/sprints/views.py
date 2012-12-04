@@ -56,30 +56,6 @@ class SprintStoryDetailView(LoginRequiredMixin, ListView):
         context['sprint'] = self.get_sprint()
         return context
 
-
-
-
-class SprintDetailView(LoginRequiredMixin, DetailView):
-    # For an academic exercise, Derek will build the sprint_detail view func
-    # into a Class.
-
-    model = Sprint
-    template_name = 'sprints/sprint_detail.html'
-    context_object_name = 'sprint'
-    pk_url_kwarg = 'id'
-
-    def get_account_story_status(self):
-        return StoryStatus.objects.filter(account=self.get_object().team.organization)
-
-    def get_context_data(self, **kwargs):
-        context = super(SprintDetailView, self).get_context_data(**kwargs)
-        context['story_statuses'] = self.get_account_story_status()
-        context['task_form'] = TaskForm(sprint=self.object)
-        context['story_form'] = StoryForm()
-        context['story_task_form'] = StoryTaskForm()
-        context['project_form'] = ProjectForm()
-        return context
-
 class StoryEditForm(UpdateView):
     model = Story
     template_name = 'sprints/forms/edit.html'
@@ -141,6 +117,8 @@ class AddStory(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.create(self.request)
+        # Add sprint object to SprintStory object.
+        self.object.add_to_sprint(self.object.sprint)
         messages.add_message(self.request, messages.SUCCESS, "%s story added." % self.object.title)
         return HttpResponseRedirect(self.get_success_url())
 
