@@ -78,6 +78,16 @@ class Sprint(AuditBase):
             perc.append(s)
 
         return perc
+
+    def complete_sprint(self, moved=True):
+        """ Ask user if they want incomplete stories move to the next
+         sprint, or moved to the backlog.  If moved to the next sprint,
+         force user to create a new sprint object, and then create
+         SprintStory objects for that next sprint.  Go ahead
+         and use the attributes of the story for now when creating
+         the new records.  Points/Status, etc.
+        """
+        raise NotImplementedError("Need to implement the complete sprint method.")
         
     @models.permalink
     def get_absolute_url(self):
