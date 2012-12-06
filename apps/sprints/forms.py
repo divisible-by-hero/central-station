@@ -96,7 +96,7 @@ class StoryTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        exclude = ('deleted', 'deleted_date', 'story')
+        exclude = ('deleted', 'deleted_date', 'story', 'complete')
 
 
 class RoadBlockForm(forms.ModelForm):

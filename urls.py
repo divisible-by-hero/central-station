@@ -18,14 +18,16 @@ urlpatterns = patterns('',
     url(r'^$', 'core.views.homepage', name='homepage'),
     url(r'^myprofile/$', 'accounts.views.profile', name='user_profile'),
     url(r'^registration/$', 'accounts.views.registration', name="account_registration"),
-    url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
+
 
     url(r'^ajax/sprints/', include('sprints.ajax_urls')),
-    url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
+
 
 
     url(r'^projects/', include('projects.urls')),
     url(r'^activity/', include('actstream.urls')),
+    url(r'^(?P<account>[-\w]+)/', include('accounts.urls')),
+    url(r'^(?P<account>[-\w]+)/sprints/', include('sprints.urls')),
     url(r'^accounts/login/$', 'django.contrib.auth.views.login', {'template_name': 'accounts/login.html'}, name='login'),
     url(r'^accounts/logout/$', 'django.contrib.auth.views.logout', {'template_name': 'accounts/login.html'}, name="logout"),
 

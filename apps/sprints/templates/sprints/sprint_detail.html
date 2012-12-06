@@ -3,6 +3,7 @@
     {{ block.super }}
     <link rel='stylesheet' href="{{ STATIC_URL }}sprints/css/sprints.css">
 {% endblock head_css %}
+{% block page_title %}{{ sprint }}{% endblock page_title %}
 {% block main_content %}
 {% block sidebar_super %}
 {% endblock sidebar_super %}
@@ -17,6 +18,8 @@
             <li><a href="#addTask" data-toggle="modal">Add Task</a></li>
             <li class='divider-vertical'></li>
             <li><a href="{{ sprint.get_sprint_edit }}">Edit Sprint</a></li>
+            <li class='divider-vertical'></li>
+            <li><a href="#">Complete Sprint</a></li>
         </ul>
     </div><!-- /.navbar-inner -->
 </div><!-- /.navbar -->
@@ -63,6 +66,8 @@
         <div class="modal-body">
             {% csrf_token %}
             {% crispy project_form %}
+            <input type="hidden" value="{{ account.id }}" name="account">
+            <input type="hidden" value="{{ sprint.id }}" name="sprint">
 
         </div><!-- /.modal-body -->
         <div class="modal-footer">
@@ -126,7 +131,7 @@
     {% for sprint_story in stories %}
         <tr class="story {% if sprint_story.story.status == 'road-blocked' or sprint_story.story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
             <!-- Let's find a new place for this modal.  not valid markup -->
-            <div class="modal hide fade" id="addTaskStory_{{ story.id }}">
+            <div class="modal hide fade" id="addTaskStory_{{ sprint_story.story.id }}">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                     <h3>Add Task</h3>
@@ -136,7 +141,8 @@
                         {% load crispy_forms_tags %}
                         {% csrf_token %}
                         {% crispy story_task_form %}
-                        <input type="hidden" name="story" value="{{ story.id }}">
+                        <input type="hidden" name="story" value="{{ sprint_story.story.id }}">
+                        <input type='hidden' name="sprint" value="{{ sprint.id }}">
                     </div><!-- /.modal-body -->
                     <div class="modal-footer">
                         <a href="#" class="btn" data-dismiss='modal'>Close</a>
@@ -152,7 +158,7 @@
                     <a class='cs-story-item-title' href="{{ sprint_story.story.get_absolute_url }}">{{ sprint_story.story.title }}</a>
                     {% include 'sprints/tasks.html' %}
                     <div class='cs-tasks-menu'>
-                        <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
+                        <span><a href='#addTaskStory_{{ sprint_story.story.id }}' data-toggle='modal'>Add Task</a></span>
                         <span><a href='#'>Hide Tasks</a></span>
                     </div><!-- /.cs-tasks-menu -->
                 <div><!-- /.cs-story-item -->

@@ -10,6 +10,7 @@ from django.utils import simplejson # TODO, use python SL...but I'm on a plane r
 
 from infuse.auth.permissions import LoginRequiredMixin
 
+from accounts.models import Account
 from sprints.models import Sprint, Story, Task, StoryStatus, SprintStory
 from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
 from projects.forms import ProjectForm
@@ -40,6 +41,9 @@ class SprintStoryDetailView(LoginRequiredMixin, ListView):
     def get_sprint(self):
         return Sprint.objects.get(pk=self.kwargs.get('id'))
 
+    def get_account(self):
+        return Account.objects.get(slug=self.kwargs.get('account'))
+
     def get_queryset(self):
         return SprintStory.objects.filter(sprint=self.get_sprint())
 
@@ -54,6 +58,7 @@ class SprintStoryDetailView(LoginRequiredMixin, ListView):
         context['story_task_form'] = StoryTaskForm()
         context['project_form'] = ProjectForm()
         context['sprint'] = self.get_sprint()
+        context['account'] = self.get_account()
         return context
 
 class StoryEditForm(UpdateView):
@@ -128,7 +133,10 @@ class AddTask(CreateView):
     form_class = NewTaskForm
 
     def get_success_url(self):
-        return self.object.story.sprint.get_absolute_url() + "#task_%d" % self.object.id
+        return self.get_sprint().get_absolute_url() + "#task_%d" % self.object.id
+
+    def get_sprint(self):
+        return Sprint.objects.get(id=self.request.POST.get('sprint'))
 
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, "Task added.")

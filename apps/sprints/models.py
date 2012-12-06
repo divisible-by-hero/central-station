@@ -224,13 +224,18 @@ class Task(AuditBase):
 
     @models.permalink
     def get_absolute_url(self):
-        return ('task_edit', (), {'account': self.story.sprint.team.organization.slug, 'pk': self.id})
+        return ('task_edit', (), {'account': self.get_account().slug, 'pk': self.id})
 
     def create(self, request):
         action.send(request.user, verb='created', action_object=self, target=self.story)
 
     def update(self, request):
         action.send(request.user, verb='updated', action_object=self, target=self.story)
+
+    def get_account(self):
+        story = SprintStory.objects.filter(story=self.story)[0]
+        for story in story:
+            return story.sprint.account
 
 class Roadblock(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True)

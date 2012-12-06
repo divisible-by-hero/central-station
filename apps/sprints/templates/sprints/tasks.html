@@ -1,7 +1,7 @@
 <div class='cs-tasks'>
     <ul>
-        {% if story.task_set.all %}
-        {% for task in story.task_set.all %}
+        {% if sprint_story.story.task_set.all %}
+        {% for task in sprint_story.story.task_set.all %}
         <li style="line-height: 30px;" id='cs-task-item-{{ task.id }}' class='cs-task-item{% if task.complete %} cs-task-item-completed{% endif %}' data-task-id='{{ task.id }}'>
             <div>
                 <input type='checkbox' id='cs-task-item-complete-{{ task.id }}' class='cs-task-item-complete' data-task-id='{{ task.id }}' {% if task.complete %}checked{% endif %} />
