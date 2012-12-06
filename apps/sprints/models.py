@@ -53,7 +53,7 @@ class Sprint(AuditBase):
         points = 0
         for sprint_story in SprintStory.objects.filter(sprint=self):
             # Remember to check for "Terminal" status
-            if sprint_story.status.slug == 'done':
+            if sprint_story.status.terminal:
                 points = points + sprint_story.points
         return points
 
