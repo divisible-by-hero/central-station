@@ -19,10 +19,30 @@
             <li class='divider-vertical'></li>
             <li><a href="{{ sprint.get_sprint_edit }}">Edit Sprint</a></li>
             <li class='divider-vertical'></li>
-            <li><a href="#">Complete Sprint</a></li>
+            <li><a href="#completeSprint" data-toggle="modal">Complete Sprint</a></li>
         </ul>
     </div><!-- /.navbar-inner -->
 </div><!-- /.navbar -->
+<div class="modal hide fade" id="completeSprint">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Complete Sprint</h3>
+    </div><!-- /.modal-header -->
+    <form method="POST" action="{{ sprint.get_task_add }}">
+        <div class="modal-body">
+            You have unfinished stories on this sprint.  You can either
+            move the stories to a new sprint, or move all unfinished stories
+            to the backlog.
+        </div><!-- /.modal-body -->
+        <div class="modal-footer">
+            <a href="#" class="btn" data-dismiss='modal'>Close</a>
+            <a href="#" class="btn btn-success">Move to Next Sprint</a>
+            <a href="#" class="btn btn-primary">Move to Backlog</a>
+        </div><!-- /.modal-footer -->
+    </form>
+</div><!-- /.modal -->
+
+
 <div class="modal hide fade" id="addTask">
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
