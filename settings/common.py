@@ -133,7 +133,7 @@ INSTALLED_APPS = (
     'hadrian.contrib.gravatar',
 
     'django_extensions',
-    'bootstrap',
+    'frontend.skeleton',
     'sprints',
     'crispy_forms',
     'accounts',

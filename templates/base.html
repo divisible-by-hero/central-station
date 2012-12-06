@@ -1,175 +1,101 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>{% block title %}Central Station{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="issue tracking">
-    <meta name="author" content="">
-
-    <script type="text/javascript">
-        //replace with modernizr?
-        document.documentElement.className = 'js';
-    </script>
-
-    <!-- Le styles -->
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap.css" rel="stylesheet">
+{% extends 'skeleton/base.html' %}
+{% load h5bp %}
+{% block title %}Central Station{% endblock %}
+{% block meta_description %}issue tracking{% endblock meta_description %}
+{% block head_css %}
+{{ block.super }}
     <link href="{{ STATIC_URL }}css/styles.css" rel="stylesheet">
     <link href="{{ STATIC_URL }}js/chosen/chosen.css" rel="stylesheet">
-    {% block extra_head %}{% endblock %}
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    {% block extra_style %}{% endblock %}
-    <link href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css" rel="stylesheet">
-
-    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
-    <!--[if lt IE 9]>
-      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Le fav and touch icons -->
-    <link rel="shortcut icon" href="images/favicon.ico">
-    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="images/apple-touch-icon-114x114.png">
-    
-  </head>
-
-  <body>
-
-
-    <div class="cs-container">
-        
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class='container'>
-                    <a class="brand" href="{% url homepage %}">Central Station{% block main_title %}{% endblock main_title %}</a>
-                    <ul class='nav'>
-                     {% block added_nav %}{% endblock added_nav %}
-
-                    </ul>
-                    <ul class='nav pull-right'>
-                        {% if not request.user.is_authenticated %}
-                        <li><a href="{% url django.contrib.auth.views.login %}">Login</a></li>
-                        {% else %}
-                        <li>
-                            {% load gravatar_tags %}
-                            <img src="{% get_gravatar request.user.email 30 %}" width="30" class="img-rounded">
-                        </li>
-                        <li class='dropdown'>
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{ request.user.username }}
-                                <b class="caret"></b>
-                            </a>
-                            <ul class="dropdown-menu">
-
-                                <li><a href="{% url user_profile %}">My Profile</a></li>
-                                <li><a href="{% url django.contrib.auth.views.logout %}">Logout</a></li>
-                                <li class="divider"></li>
-                                <li class="nav-header">Accounts</li>
-                                {% for team in teams %}
-                                <li><a href="{{ team.team.organization.get_absolute_url }}">{{ team.team }} - {{ team.team.organization }}</a></li>
-                                {% endfor %}
-
-                            </ul>
-                        </li>
-
-                        {% endif %}
-                    </ul>
-
-                </div>
-            </div>
-        </div>
-        
-      <div class="row-fluid">
-        
-        <div class="{% block main_class %}span12{% endblock main_class %}">
-        {% if messages %}
-            {% for message in messages %}
-            <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
-                <a class="close" data-dismiss="alert">×</a>
-            <h4 class="alert-heading">{% if message.tags == "success" %}Success{% else %}Warning!{% endif %}</h4>
-            {{ message }}
-            </div>
-            {% endfor %}
-        {% endif %}
-        
-
-            <div class="main_content">
-            {% block main_content %}
-                <ul>
-                {% for sprint in sprints %}
-                    <li><a href="{{ sprint.get_absolute_url }}">Sprint from {{ sprint.start_date }} through {{ sprint.end_date }}</a></li>
-                {% endfor %}
+{% endblock head_css %}
+{% block body_content %}
+<div class="cs-container">
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class='container'>
+                <a class="brand" href="{% url homepage %}">Central Station{% block main_title %}{% endblock main_title %}</a>
+                <ul class='nav'>
+                 {% block added_nav %}{% endblock added_nav %}
                 </ul>
-            {% endblock %}
-            {% block extra_modals %}{% endblock extra_modals %}
-            </div>
-          
-        </div><!--/span-->
-        {% block sidebar_super %}
-        <div class="span3">
-          <div class="well">
-          {% block sidebar %}
-          {% endblock %}
-            
-          </div><!--/.well -->
-        </div><!--/span-->
-        {% endblock sidebar_super %}
-      </div><!--/row-->
+                <ul class='nav pull-right'>
+                    {% if not request.user.is_authenticated %}
+                    <li><a href="{% url django.contrib.auth.views.login %}">Login</a></li>
+                    {% else %}
+                    <li>
+                        {% load gravatar_tags %}
+                        <img src="{% get_gravatar request.user.email 30 %}" width="30" class="img-rounded">
+                    </li>
+                    <li class='dropdown'>
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            {{ request.user.username }}
+                            <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
 
-      <hr>
-
-      <footer>
-        <p>&copy; 2012 <a href="http://www.divisiblebyhero.com">Divisible By Hero </a></p>
-      </footer>
-
-    </div><!--/.fluid-container-->
-    
-    <!-- Le javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+                            <li><a href="{% url user_profile %}">My Profile</a></li>
+                            <li><a href="{% url django.contrib.auth.views.logout %}">Logout</a></li>
+                            <li class="divider"></li>
+                            <li class="nav-header">Accounts</li>
+                            {% for team in teams %}
+                            <li><a href="{{ team.team.organization.get_absolute_url }}">{{ team.team }} - {{ team.team.organization }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </li>
+                    {% endif %}
+                </ul>
+            </div><!-- /.container -->
+        </div><!-- /.navbar-inner -->
+    </div><!-- /.navbar -->
+  <div class="row-fluid">
+    <div class="{% block main_class %}span12{% endblock main_class %}">
+    {% if messages %}
+        {% for message in messages %}
+        <div class="alert {% if message.tags == "error" %}alert-error{% endif %}{% if message.tags == "success" %}alert-success{% endif %}{% if message.tags == "info" %}alert-info{% endif %}{% if message.tags == "warning" %}alert-block{% endif %}">
+            <a class="close" data-dismiss="alert">×</a>
+        <h4 class="alert-heading">{% if message.tags == "success" %}Success{% else %}Warning!{% endif %}</h4>
+        {{ message }}
+        </div><!-- /.alert -->
+        {% endfor %}
+    {% endif %}
+        <div class="main_content">
+        {% block main_content %}
+            <ul>
+            {% for sprint in sprints %}
+                <li><a href="{{ sprint.get_absolute_url }}">Sprint from {{ sprint.start_date }} through {{ sprint.end_date }}</a></li>
+            {% endfor %}
+            </ul>
+        {% endblock %}
+        {% block extra_modals %}{% endblock extra_modals %}
+        </div><!-- /.main-content -->
+    </div><!-- /.span -->
+    {% block sidebar_super %}
+    <div class="span3">
+      <div class="well">
+      {% block sidebar %}
+      {% endblock %}
+      </div><!-- /.well -->
+    </div><!-- /.span -->
+    {% endblock sidebar_super %}
+  </div><!-- /.row-fluid -->
+  <hr>
+  <footer>
+    <p>&copy; <a href="http://www.divisiblebyhero.com">Divisible By Hero </a></p>
+  </footer>
+</div><!-- /.cs-container -->
+{% endblock body_content %}
+{% block body_js %}
+    {{ block.super }}
     <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.0/jquery-ui.min.js"></script>
-
-    <script src="{{ STATIC_URL }}js/bootstrap-transition.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-alert.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-modal.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-dropdown.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-scrollspy.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-tab.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-tooltip.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-popover.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-button.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-collapse.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-carousel.js"></script>
-    <script src="{{ STATIC_URL }}js/bootstrap-typeahead.js"></script>
     <script src="{{ STATIC_URL }}js/chosen/chosen.jquery.min.js"></script>
-
     <script>
             $(document).ready(function(){
                 $(".chzn-select").chosen();
             });
     </script>
-
-    {% block extra_js %}{% endblock %}
-    <script type="text/javascript">
-
-        var _gaq = _gaq || [];
-        _gaq.push(['_setAccount', 'UA-4439935-13']);
-        _gaq.push(['_setDomainName', 'centralstationproject.com']);
-        _gaq.push(['_trackPageview']);
-
-        (function() {
-            var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-            ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-            var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-        })();
-
-    </script>
-  </body>
-</html>
+    {% h5bp_ga 'UA-4439935-13' %}
+{% endblock body_js %}

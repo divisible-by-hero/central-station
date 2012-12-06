@@ -1,7 +1,6 @@
 {% extends "base.html" %}
-
-{% block sidebar_super %}{% endblock sidebar_super %}
 {% block main_content %}
+{% block sidebar_super %}{% endblock sidebar_super %}
 <form method="POST" action="{% url django.contrib.auth.views.login %}?next=/">{% csrf_token %}
     {% if form.errors %}
     <div class='alert alert-danger'>
@@ -12,20 +11,20 @@
             {% endif %}
         {% endfor %}
         </ul>
-    </div>
+    </div><!-- /.alert -->
     {% endif %}
     <div class="control-group">
         <label class="control-label" for="inputUsername">Username</label>
         <div class="controls">
             <input type="text" id="inputUsername" placeholder="Username" name="username">
-        </div>
-    </div>
+        </div><!-- /.controls -->
+    </div><!-- /.control-group -->
     <div class="control-group">
         <label class="control-label" for="inputPassword">Password</label>
         <div class="controls">
             <input type="password" id="inputPassword" placeholder="Password" name="password">
-        </div>
-    </div>
+        </div><!-- /.controls -->
+    </div><!-- /.control-group -->
     <input type="submit" value="Log In" class="btn btn-primary">
 </form>
 {% endblock main_content %}
