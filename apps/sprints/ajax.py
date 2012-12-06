@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.utils import simplejson
 
 
-from sprints.models import Task, Story, StoryStatus
+from sprints.models import Task, SprintStory, StoryStatus
 
 __author__ = 'Derek Stegelman, Garrett Pennington'
 __date__ = '10/19/12'
@@ -36,9 +36,9 @@ def update_status(request, story_id):
     Change story status via ajax
     """
 
-    #Get the story, but it mave have been deleted
+    #Get the SprintStory, but it mave have been deleted
     try:
-        story = Story.objects.get(pk=story_id)
+        sprint_story = SprintStory.objects.get(pk=story_id)
     except Story.DoesNotExist:
         response = simplejson.dumps({
             'success':False,
@@ -63,11 +63,11 @@ def update_status(request, story_id):
 
 
     #If Story and StoryStatus are found, save story
-    story.story_status = status
-    story.save()
+    sprint_story.status = status
+    sprint_story.save()
     
     #Also, get sprint information to update the whole page
-    sprint = story.sprint    
+    sprint = sprint_story.sprint    
 
     response = simplejson.dumps({
         'success':True,

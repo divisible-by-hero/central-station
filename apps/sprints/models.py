@@ -64,7 +64,7 @@ class Sprint(AuditBase):
             stories_of_a_certain_status = []
             #statuses.append(status.status)
             for sprint_story in SprintStory.objects.filter(sprint=self):
-                if sprint_story.status.slug == status.slug:
+                if sprint_story.status == status.slug:
                     stories_of_a_certain_status.append(sprint_story)
             
             s = {
@@ -74,7 +74,10 @@ class Sprint(AuditBase):
             status_points = 0
             for sprint_story in stories_of_a_certain_status:
                 status_points += sprint_story.points
-            s['percentage'] = float(status_points) / float(total) * 100
+            if total > 0:
+                s['percentage'] = float(status_points) / float(total) * 100
+            else:
+                s['percentage'] = 0
             perc.append(s)
 
         return perc
