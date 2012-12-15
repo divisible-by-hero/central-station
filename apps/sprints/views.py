@@ -35,18 +35,18 @@ class MoveToNewSprint(CreateView):
         sprint.complete(moved=True, sprint=self.object)
         return HttpResponseRedirect(self.get_success_url())
 
-def move_to_backlog(request, id):
+def move_to_backlog(request, id, account):
     """ Take a given sprint, and move
     all non terminal stories to the backlog.
     """
     sprint = Sprint.objects.get(pk=id)
     sprint.complete(moved=False)
-    messages.add_message(request, 'Incomplete stories moved to backlog.')
-    return redirect('account_home', account=sprint.team.organization)
+    messages.add_message(request, messages.SUCCESS, 'Incomplete stories moved to backlog.')
+    return redirect('account_home', account=account)
 
 
 class Backlog(LoginRequiredMixin, ListView):
-    queryset = Story.objects.filter(sprint__isnull=True)
+    queryset = Story.objects.filter(backlog=True)
     template_name = 'sprints/backlog.html'
     context_object_name = 'stories'
 
