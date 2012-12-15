@@ -35,9 +35,10 @@
             to the backlog.
         </div><!-- /.modal-body -->
         <div class="modal-footer">
+
+            <a href="{% url sprint_move_to_new_sprint account=sprint.team.organization id=sprint.id %}" class="btn btn-success">Move to Next Sprint</a>
+            <a href="{% url sprint_move_to_backlog account=sprint.team.organization id=sprint.id %}" class="btn btn-primary">Move to Backlog</a>
             <a href="#" class="btn" data-dismiss='modal'>Close</a>
-            <a href="#" class="btn btn-success">Move to Next Sprint</a>
-            <a href="#" class="btn btn-primary">Move to Backlog</a>
         </div><!-- /.modal-footer -->
     </form>
 </div><!-- /.modal -->

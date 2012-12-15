@@ -92,7 +92,7 @@ class Sprint(AuditBase):
         for sprint_story in SprintStory.objects.by_sprint(self):
             # Check to see if this story
             # is in Terminal state.
-            if sprint_story.story.terminal:
+            if not sprint_story.status.terminal:
                 # It must be.  Add to new sprint object
                 # or, move to backlog.
                 if moved:
@@ -105,7 +105,7 @@ class Sprint(AuditBase):
                 else:
                     # Backlog this bitch.
                     # Just realized I have no idea how to do that.  Ugh..
-                    sprint_story.story.move_to_backlog()
+                    sprint_story.story.move_to_backlog(points=sprint_story.points)
             # pass
         
     @models.permalink
@@ -152,11 +152,13 @@ class Story(AuditBase):
     title = models.CharField(max_length=250, blank=False, null=True, help_text="As a User I would like to...")
     project = models.ForeignKey(Project, null=True)
     position = models.IntegerField(blank=True, null=True)
+    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
+    backlog = models.BooleanField()
 
     # No Longer used.
     status = models.CharField(choices=STORY_STATUS_CHOICES, max_length=20, blank=True, null=True, editable=False)
     story_status = models.ForeignKey(StoryStatus, null=True, blank=True)
-    points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=False, verbose_name="Difficulty")
+
     sprint = models.ForeignKey(Sprint, null=True, blank=True)
 
     def __unicode__(self):
@@ -191,8 +193,14 @@ class Story(AuditBase):
         sprint_story_object = SprintStory.objects.get(sprint=sprint, story=self)
         sprint_story_object.delete()
 
-    def move_to_backlog(self):
-        raise NotImplementedError("Not sure if I need this.  Been drinking..")
+    def move_to_backlog(self, points):
+        """ Mark story as backloged.  Update
+         point value if necessary.
+        """
+        self.backlog = True
+        self.points = points
+        self.save()
+
 
     @models.permalink
     def get_absolute_url(self):
