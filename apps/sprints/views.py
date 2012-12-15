@@ -27,11 +27,11 @@ class MoveToNewSprint(CreateView):
     form_class = SprintForm
 
     def form_valid(self, form):
-        previous_sprint_id = self.request.kwargs('id')
+        previous_sprint_id = self.kwargs.get('id')
         self.object = form.save()
         self.object.create(self.request)
         messages.add_message(self.request, messages.SUCCESS, "Sprint created.  Stories from previous sprint moved over.")
-        sprint = Sprint.objects.get(previous_sprint_id)
+        sprint = Sprint.objects.get(pk=previous_sprint_id)
         sprint.complete(moved=True, sprint=self.object)
         return HttpResponseRedirect(self.get_success_url())
 
@@ -39,7 +39,7 @@ def move_to_backlog(request, id):
     """ Take a given sprint, and move
     all non terminal stories to the backlog.
     """
-    sprint = Sprint.objects.get(pk=sprint_id)
+    sprint = Sprint.objects.get(pk=id)
     sprint.complete(moved=False)
     messages.add_message(request, 'Incomplete stories moved to backlog.')
     return redirect('account_home', account=sprint.team.organization)
