@@ -78,15 +78,19 @@ class SprintStoryDetailView(LoginRequiredMixin, ListView):
         return StoryStatus.objects.filter(account=self.get_sprint().team.organization)
 
     def get_context_data(self, **kwargs):
+        sprint = self.get_sprint()
         context = super(SprintStoryDetailView, self).get_context_data(**kwargs)
         context['story_statuses'] = self.get_account_story_status()
-        context['task_form'] = TaskForm(sprint=self.get_sprint())
+        context['task_form'] = TaskForm(sprint=sprint)
         context['story_form'] = StoryForm()
         context['story_task_form'] = StoryTaskForm()
         context['project_form'] = ProjectForm()
-        context['sprint'] = self.get_sprint()
+        context['sprint'] = sprint
         context['account'] = self.get_account()
+        context['total_points'] = sprint.total_points
+        context['completed_points'] = sprint.completed_points
         return context
+
 
 class StoryEditForm(UpdateView):
     model = Story
