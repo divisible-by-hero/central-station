@@ -272,3 +272,7 @@ class SprintStory(AuditBase):
 
     def __unicode__(self):
         return "Story sprint object for %s %s" % (self.story, self.sprint)
+        
+    class Meta:
+        ordering = ['status']
+
