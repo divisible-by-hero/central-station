@@ -104,7 +104,7 @@
     </div><!-- /.btn-group -->
 </div><!-- /#cs-sprint-switcher -->
 <table id='cs-sprint-board' class="table table-bordered">
-{% regroup stories by status as story_list %}
+{% regroup sprint_stories by status as story_list %}
 <thead>
     <tr>
     {% for col in story_statuses %}
@@ -122,7 +122,7 @@
             {% for story in column.list %}
             <li id='cs-story-card_{{ story.id }}' class='cs-story-card' data-story-id='{{ story.id }}'>
                 <div class='cs-story-card-points circle {% if story.points == 13 %}circle-big{% elif story.points == 5 %}circle-medium{% elif story.points == 1 %}circle-small{% endif %}'>{{ story.points }}</div>
-                <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.title }}</a></p>
+                <p class='cs-story-card-title'><a href="{{ story.get_absolute_url }}">{{ story.story.title }}</a></p>
                 <p class='cs-story-card-title'>{{ story.task_set.all|length }} Tasks</p>
                 <div class='cs-tasks-menu'>
                     <span><a href='#addTask' data-toggle='modal'>Add Task</a></span>
@@ -138,6 +138,7 @@
     </tr>
 </tbody>
 </table>
+
 <table id='cs-sprint-table' class='table table-bordered table-hover tablesorter'>
     <thead>
         <tr>
@@ -149,7 +150,7 @@
         </tr>
     </thead>
     <tbody>
-    {% for sprint_story in stories %}
+    {% for sprint_story in sprint_stories %}
         <tr class="story {% if sprint_story.story.status == 'road-blocked' or sprint_story.story.roadblocked %}error{% endif %}" id="story_{{ story.id }}">
             <!-- Let's find a new place for this modal.  not valid markup -->
             <div class="modal hide fade" id="addTaskStory_{{ sprint_story.story.id }}">

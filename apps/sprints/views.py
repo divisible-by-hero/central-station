@@ -63,7 +63,7 @@ class SprintListView(LoginRequiredMixin, ListView):
 
 class SprintStoryDetailView(LoginRequiredMixin, ListView):
     template_name = 'sprints/sprint_detail.html'
-    context_object_name = 'stories'
+    context_object_name = 'sprint_stories'
 
     def get_sprint(self):
         return Sprint.objects.get(pk=self.kwargs.get('id'))
