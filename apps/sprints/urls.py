@@ -7,7 +7,7 @@ from tastypie.api import Api
 
 from sprints.api import SprintResource
 #from sprints.ajax import change_task, update_status
-from sprints.views import SprintListView, update_story_status, update_stories, \
+from sprints.views import SprintListView, update_status, update_stories, \
     StoryEditForm, AddStory, AddTask, TaskEditForm, Backlog, AddSprint, SprintEditForm, SprintStoryDetailView, move_to_backlog, MoveToNewSprint
 
 v1_api = Api(api_name="v1")
@@ -34,7 +34,7 @@ urlpatterns = patterns('',
     url(r'^task/add/$', AddTask.as_view(), name='task_add'),
     url(r'^task/(?P<pk>\d+)/$', TaskEditForm.as_view(), name='task_edit'),
     
-    url(r'^update/story-status/$', update_story_status, name='update_story_status'),
+    url(r'^update/story-status/$', update_status, name='update_status'),
     url(r'^update/stories/$', update_stories, name='update_stories'),
     # API
     url(r'^api/', include(v1_api.urls)),

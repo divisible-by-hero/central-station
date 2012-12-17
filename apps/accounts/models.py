@@ -37,7 +37,7 @@ class Account(models.Model):
         return ('account_home', (), {'account': self.slug})
         
     def statuses(self):
-        return self.storystatus_set.all()
+        return self.status_set.all()
 
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)

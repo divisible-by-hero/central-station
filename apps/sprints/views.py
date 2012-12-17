@@ -12,7 +12,7 @@ from django.utils import simplejson # TODO, use python SL...but I'm on a plane r
 from infuse.auth.permissions import LoginRequiredMixin
 
 from accounts.models import Account
-from sprints.models import Sprint, Story, Task, StoryStatus, SprintStory
+from sprints.models import Sprint, Story, Task, Status, SprintStory
 from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
@@ -74,13 +74,13 @@ class SprintStoryDetailView(LoginRequiredMixin, ListView):
     def get_queryset(self):
         return SprintStory.objects.filter(sprint=self.get_sprint())
 
-    def get_account_story_status(self):
-        return StoryStatus.objects.filter(account=self.get_sprint().team.organization)
+    def get_account_status(self):
+        return Status.objects.filter(account=self.get_sprint().team.organization)
 
     def get_context_data(self, **kwargs):
         sprint = self.get_sprint()
         context = super(SprintStoryDetailView, self).get_context_data(**kwargs)
-        context['story_statuses'] = self.get_account_story_status()
+        context['statuses'] = self.get_account_status()
         context['task_form'] = TaskForm(sprint=sprint)
         context['story_form'] = StoryForm()
         context['story_task_form'] = StoryTaskForm()
@@ -195,7 +195,7 @@ class StoryListView(LoginRequiredMixin, ListView):
 
 #Ajax Views
 
-def update_story_status(request):
+def update_status(request):
     """
     Looks for query parms, updates story and returns JSON
 
@@ -214,7 +214,7 @@ def update_story_status(request):
 
         #Correct params?
     id = request.REQUEST['story_id']
-    status = request.REQUEST['story_status']
+    status = request.REQUEST['status']
 
     if id and status and status in VALID_STORY_STATUSES:
         try:
@@ -257,8 +257,8 @@ def update_stories(request, account):
     for story in _input['stories']:
         s = Story.objects.get(id=story['id'])
         s.position = story['position']
-        ss = StoryStatus.objects.get(slug=story['status'])  #THIS ADDS SO MANY QUERIES RIGHT NOW
-        s.story_status = ss
+        ss = Status.objects.get(slug=story['status'])  #THIS ADDS SO MANY QUERIES RIGHT NOW
+        s.status = ss
         s.save()
 
     json_response = simplejson.dumps({'success':True})
@@ -279,7 +279,7 @@ def update_stories(request, account):
 
     #Correct params?
     id = request.REQUEST['story_id']
-    status = request.REQUEST['story_status']
+    status = request.REQUEST['status']
 
     if id and status and status in VALID_STORY_STATUSES:
         try:
