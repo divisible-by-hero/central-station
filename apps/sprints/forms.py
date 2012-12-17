@@ -42,7 +42,7 @@ class NewStoryForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Field('title'),
-            Field('story_status')
+            Field('status')
         )
 
         super(NewStoryForm, self).__init__(*args, **kwargs)

@@ -128,12 +128,12 @@ function updateStatusButton(id, data){
 
 /*
 Maybe Deprecated ?
-function updateStoryStatus(story_id, story_status){
+function updateStatus(story_id, status){
 	$.ajax({
 		type: "POST",
 		url: "/sprints/update/story-status/",
 		dataType: 'json',
-		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&story_status=" + story_status,
+		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&status=" + status,
 		success: function(data){
 		    if ( data.success ){
 		        //do something

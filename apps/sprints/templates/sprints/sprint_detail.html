@@ -107,7 +107,7 @@
 {% regroup sprint_stories by status as story_list %}
 <thead>
     <tr>
-    {% for col in story_statuses %}
+    {% for col in statuses %}
         <th>
             <div class="btn-{{ col.style_class }}">{{ col.status }}</div>
         </th>
@@ -189,7 +189,7 @@
                 <div class="btn-group">
                     <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ sprint_story.status.style_class }}" data-toggle='dropdown' data-story-id='{{ sprint_story.id }}'>
                         <span class="cs-story-status-item-current-name">
-                        {% if sprint_story.story.story_status %}
+                        {% if sprint_story.story.status %}
                         {{ sprint_story.status.status }}
                         {% else %}
                         ------
@@ -198,7 +198,7 @@
                         <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
-                        {% for status in story_statuses %}
+                        {% for status in statuses %}
                         <li>
                             <a class='cs-story-status-item' data-story-status-id='{{ status.id }}' data-story-id='{{ sprint_story.id }}' data-value='{{ status.slug }}'>{{ status.status }}</a>
                             </li>
