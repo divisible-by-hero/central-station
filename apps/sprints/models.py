@@ -133,6 +133,7 @@ class Status(models.Model):
     order = models.IntegerField(null=True, blank=True)
     slug = models.SlugField(null=True, blank=True)
     color = models.CharField(max_length=20, choices=color_choices())
+    initial = models.BooleanField()
     terminal = models.BooleanField()
     
     def __unicode__(self):
@@ -145,6 +146,22 @@ class Status(models.Model):
     @property
     def hex_code(self):
         return STATUS_COLORS[self.color]['hex']
+        
+    def save(self, *args, **kwargs):
+        if self.initial == True:
+            statuses = self.account.statuses()
+            for status in statuses:
+                status.initial = False
+                status.save()
+
+        if self.terminal == True:
+            statuses = self.account.statuses()
+            for status in statuses:
+                status.terminal = False
+                status.save()
+            
+        super(Status, self).save(*args, **kwargs)
+
 
     class Meta:
         ordering = ['order']
@@ -269,6 +286,12 @@ class SprintStory(AuditBase):
     points = models.IntegerField(choices=STORY_POINT_CHOICES, blank=False, null=True, verbose_name="Difficulty")
 
     objects = SprintStoryManager()
+
+    def save(self, *args, **kwargs):
+        if self.status is None:
+            self.status = self.sprint.team.organization.get_initial_status()
+            
+        super(SprintStory, self).save(*args, **kwargs)
 
     def __unicode__(self):
         return "Story sprint object for %s %s" % (self.story, self.sprint)

@@ -189,7 +189,7 @@
                 <div class="btn-group">
                     <a style="width: 125px;" class="btn dropdown-toggle cs-story-status-item-current btn-{{ sprint_story.status.style_class }}" data-toggle='dropdown' data-story-id='{{ sprint_story.id }}'>
                         <span class="cs-story-status-item-current-name">
-                        {% if sprint_story.story.status %}
+                        {% if sprint_story.status %}
                         {{ sprint_story.status.status }}
                         {% else %}
                         ------

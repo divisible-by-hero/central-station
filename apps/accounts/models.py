@@ -39,6 +39,13 @@ class Account(models.Model):
     def statuses(self):
         return self.status_set.all()
 
+    def get_initial_status(self):
+        return self.status_set.get(initial=True)
+
+    def get_terminal_status(self):
+        return self.status_set.get(terminal=True)
+
+
 class Team(AuditBase):
     name = models.CharField(max_length=250, blank=True, null=True)
     slug = models.SlugField(blank=True)
