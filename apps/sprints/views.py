@@ -71,6 +71,14 @@ def handle_new_story_backlog(request, account):
     context['form'] = form
     return render(request, 'sprints/forms/edit.html', context)
 
+class ArchivedSprintView(LoginRequiredMixin, ListView):
+    template_name = 'sprints/sprint_list.html'
+    context_object_name = 'sprints'
+
+    def get_queryset(self):
+        account = self.kwargs.get('account')
+        return Sprint.objects.filter(team__organization__slug=account)
+
 class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint
     template_name = "sprints/sprint_list.html"
