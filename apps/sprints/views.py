@@ -1,7 +1,7 @@
 __author__ = 'Derek Stegelman'
 __date__ = '9/6/12'
 
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -13,7 +13,7 @@ from infuse.auth.permissions import LoginRequiredMixin
 
 from accounts.models import Account
 from sprints.models import Sprint, Story, Task, Status, SprintStory
-from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
+from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm, NewStoryBacklog
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
@@ -52,9 +52,24 @@ class Backlog(LoginRequiredMixin, ListView):
 
     def get_context_data(self, **kwargs):
         context = super(Backlog, self).get_context_data(**kwargs)
-        context['story_form'] = StoryForm()
+        context['story_form'] = NewStoryBacklog()
         context['project_form'] = ProjectForm()
         return context
+
+def handle_new_story_backlog(request, account):
+    if request.method == "POST":
+        form = NewStoryBacklog(request.POST)
+        if form.is_valid():
+            story = form.save()
+            story.backlog = True
+            story.save()
+
+            return redirect('backlog', account=account)
+    else:
+        form = NewStoryBacklog()
+    context = {}
+    context['form'] = form
+    return render(request, 'sprints/forms/edit.html', context)
 
 class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint

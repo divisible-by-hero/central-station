@@ -54,6 +54,21 @@ class NewStoryForm(forms.ModelForm):
             'project': ChosenSelect(overlay="Project")
         }
 
+class NewStoryBacklog(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field('title', css_class='span8'),
+            Field('status')
+        )
+
+        super(NewStoryBacklog, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Story
+        exclude = ('deleted', 'deleted_date', 'position', 'status', 'backlog', 'sprint')
+
 
 class NewTaskForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
