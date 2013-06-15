@@ -194,6 +194,7 @@ class StoryListView(LoginRequiredMixin, ListView):
         return Story.objects.all()
 
 #Ajax Views
+#Well clearly this shoudl be added to/combined with the sprints.ajax.views
 
 def update_status(request):
     """
