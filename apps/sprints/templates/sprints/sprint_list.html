@@ -1,6 +1,9 @@
-{% extends 'base.html' %}
+{% extends 'accounts/base.html' %}
 {% block main_content %}
-    {% for sprint in sprints %}
-    <a href="{{ sprint.id }}">{{ sprint.name }}</a>
-    {% endfor %}
+    <ul>
+        {% for sprint in sprints %}
+    <li><a href="{{ sprint.get_absolute_url }}">{{ sprint.name }}</a></li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}
