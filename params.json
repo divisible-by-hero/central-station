@@ -1,0 +1,1 @@
+{"name":"Central-station","tagline":"Django Based Agile project tracking system.  Manage projects, tickets, milestones, the whole nine yards.","body":"### Running Tests\r\n\r\n    ./run_tests.sh\r\n\r\n### To run\r\n\r\n    pip install -r conf/requirements.txt\r\n    fab run_local","google":"","note":"Don't delete this file! It's used internally to help with page regeneration."}
