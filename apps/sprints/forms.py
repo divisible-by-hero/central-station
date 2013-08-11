@@ -42,16 +42,32 @@ class NewStoryForm(forms.ModelForm):
 
         self.helper.layout = Layout(
             Field('title'),
+            Field('status')
         )
 
         super(NewStoryForm, self).__init__(*args, **kwargs)
 
     class Meta:
         model = Story
-        exclude = ('deleted', 'deleted_date', 'position')
+        exclude = ('deleted', 'deleted_date', 'position', 'status')
         widgets = {
             'project': ChosenSelect(overlay="Project")
         }
+
+class NewStoryBacklog(forms.ModelForm):
+    def __init__(self, *args, **kwargs):
+        self.helper = FormHelper()
+        self.helper.form_tag = False
+        self.helper.layout = Layout(
+            Field('title', css_class='span8'),
+            Field('status')
+        )
+
+        super(NewStoryBacklog, self).__init__(*args, **kwargs)
+
+    class Meta:
+        model = Story
+        exclude = ('deleted', 'deleted_date', 'position', 'status', 'backlog', 'sprint')
 
 
 class NewTaskForm(forms.ModelForm):
@@ -95,7 +111,7 @@ class StoryTaskForm(forms.ModelForm):
 
     class Meta:
         model = Task
-        exclude = ('deleted', 'deleted_date', 'story')
+        exclude = ('deleted', 'deleted_date', 'story', 'complete')
 
 
 class RoadBlockForm(forms.ModelForm):

@@ -16,7 +16,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
         <h3>Add Story</h3>
     </div><!-- /.modal-header -->
-    <form method='POST' action="{% url story_add account=account_slug %}">
+    <form method='POST' action="{% url backlog_add_story account=account_slug %}">
         <div class="modal-body">
             {% csrf_token %}
             {% crispy story_form %}
