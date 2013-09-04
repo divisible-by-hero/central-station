@@ -1,6 +1,7 @@
 __author__ = 'Derek Stegelman'
 __date__ = '9/6/12'
 
+from django.shortcuts import redirect, render
 from django.http import HttpResponseRedirect
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
@@ -8,51 +9,111 @@ from django.http import HttpResponse
 from django.contrib import messages
 from django.utils import simplejson # TODO, use python SL...but I'm on a plane right now
 
-from braces.views import LoginRequiredMixin
+from infuse.auth.permissions import LoginRequiredMixin
 
-from sprints.models import Sprint, Story, Task, StoryStatus
-from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm
+from accounts.models import Account
+from sprints.models import Sprint, Story, Task, Status, SprintStory
+from sprints.forms import StoryForm, TaskForm, StoryTaskForm, SprintForm, NewTaskForm, NewStoryForm, NewStoryBacklog
 from projects.forms import ProjectForm
 from sprints.choices import STORY_STATUS_CHOICES, VALID_STORY_STATUSES
 
 #actions need messages
+class MoveToNewSprint(CreateView):
+    """ Take a given sprint, and move
+    all non terminal stories to the next sprint.
+    """
+    model = Sprint
+    template_name = 'sprints/forms/edit.html'
+    form_class = SprintForm
+
+    def form_valid(self, form):
+        previous_sprint_id = self.kwargs.get('id')
+        self.object = form.save()
+        self.object.create(self.request)
+        messages.add_message(self.request, messages.SUCCESS, "Sprint created.  Stories from previous sprint moved over.")
+        sprint = Sprint.objects.get(pk=previous_sprint_id)
+        sprint.complete(moved=True, sprint=self.object)
+        return HttpResponseRedirect(self.get_success_url())
+
+def move_to_backlog(request, id, account):
+    """ Take a given sprint, and move
+    all non terminal stories to the backlog.
+    """
+    sprint = Sprint.objects.get(pk=id)
+    sprint.complete(moved=False)
+    messages.add_message(request, messages.SUCCESS, 'Incomplete stories moved to backlog.')
+    return redirect('account_home', account=account)
+
 
 class Backlog(LoginRequiredMixin, ListView):
-    queryset = Story.objects.filter(sprint__isnull=True)
+    queryset = Story.objects.filter(backlog=True)
     template_name = 'sprints/backlog.html'
     context_object_name = 'stories'
 
     def get_context_data(self, **kwargs):
         context = super(Backlog, self).get_context_data(**kwargs)
-        context['story_form'] = StoryForm()
+        context['story_form'] = NewStoryBacklog()
         context['project_form'] = ProjectForm()
         return context
+
+def handle_new_story_backlog(request, account):
+    if request.method == "POST":
+        form = NewStoryBacklog(request.POST)
+        if form.is_valid():
+            story = form.save()
+            story.backlog = True
+            story.save()
+
+            return redirect('backlog', account=account)
+    else:
+        form = NewStoryBacklog()
+    context = {}
+    context['form'] = form
+    return render(request, 'sprints/forms/edit.html', context)
+
+class ArchivedSprintView(LoginRequiredMixin, ListView):
+    template_name = 'sprints/sprint_list.html'
+    context_object_name = 'sprints'
+
+    def get_queryset(self):
+        account = self.kwargs.get('account')
+        return Sprint.objects.filter(team__organization__slug=account)
 
 class SprintListView(LoginRequiredMixin, ListView):
     model = Sprint
     template_name = "sprints/sprint_list.html"
     context_object_name = "sprints"
 
-class SprintDetailView(LoginRequiredMixin, DetailView):
-    # For an academic exercise, Derek will build the sprint_detail view func
-    # into a Class.
-
-    model = Sprint
+class SprintStoryDetailView(LoginRequiredMixin, ListView):
     template_name = 'sprints/sprint_detail.html'
-    context_object_name = 'sprint'
-    pk_url_kwarg = 'id'
+    context_object_name = 'sprint_stories'
 
-    def get_account_story_status(self):
-        return StoryStatus.objects.filter(account=self.get_object().team.organization)
+    def get_sprint(self):
+        return Sprint.objects.get(pk=self.kwargs.get('id'))
+
+    def get_account(self):
+        return Account.objects.get(slug=self.kwargs.get('account'))
+
+    def get_queryset(self):
+        return SprintStory.objects.filter(sprint=self.get_sprint())
+
+    def get_account_status(self):
+        return Status.objects.filter(account=self.get_sprint().team.organization)
 
     def get_context_data(self, **kwargs):
-        context = super(SprintDetailView, self).get_context_data(**kwargs)
-        context['story_statuses'] = self.get_account_story_status()
-        context['task_form'] = TaskForm(sprint=self.object)
+        sprint = self.get_sprint()
+        context = super(SprintStoryDetailView, self).get_context_data(**kwargs)
+        context['statuses'] = self.get_account_status()
+        context['task_form'] = TaskForm(sprint=sprint)
         context['story_form'] = StoryForm()
         context['story_task_form'] = StoryTaskForm()
         context['project_form'] = ProjectForm()
+        context['sprint'] = sprint
+        context['account'] = self.get_account()
+        context['total_points'] = sprint.total_points
+        context['completed_points'] = sprint.completed_points
         return context
+
 
 class StoryEditForm(UpdateView):
     model = Story
@@ -115,6 +176,8 @@ class AddStory(CreateView):
     def form_valid(self, form):
         self.object = form.save()
         self.object.create(self.request)
+        # Add sprint object to SprintStory object.
+        self.object.add_to_sprint(self.object.sprint)
         messages.add_message(self.request, messages.SUCCESS, "%s story added." % self.object.title)
         return HttpResponseRedirect(self.get_success_url())
 
@@ -124,7 +187,10 @@ class AddTask(CreateView):
     form_class = NewTaskForm
 
     def get_success_url(self):
-        return self.object.story.sprint.get_absolute_url() + "#task_%d" % self.object.id
+        return self.get_sprint().get_absolute_url() + "#task_%d" % self.object.id
+
+    def get_sprint(self):
+        return Sprint.objects.get(id=self.request.POST.get('sprint'))
 
     def form_valid(self, form):
         messages.add_message(self.request, messages.SUCCESS, "Task added.")
@@ -151,8 +217,9 @@ class StoryListView(LoginRequiredMixin, ListView):
         return Story.objects.all()
 
 #Ajax Views
+#Well clearly this shoudl be added to/combined with the sprints.ajax.views
 
-def update_story_status(request):
+def update_status(request):
     """
     Looks for query parms, updates story and returns JSON
 
@@ -171,7 +238,7 @@ def update_story_status(request):
 
         #Correct params?
     id = request.REQUEST['story_id']
-    status = request.REQUEST['story_status']
+    status = request.REQUEST['status']
 
     if id and status and status in VALID_STORY_STATUSES:
         try:
@@ -214,8 +281,8 @@ def update_stories(request, account):
     for story in _input['stories']:
         s = Story.objects.get(id=story['id'])
         s.position = story['position']
-        ss = StoryStatus.objects.get(slug=story['status'])  #THIS ADDS SO MANY QUERIES RIGHT NOW
-        s.story_status = ss
+        ss = Status.objects.get(slug=story['status'])  #THIS ADDS SO MANY QUERIES RIGHT NOW
+        s.status = ss
         s.save()
 
     json_response = simplejson.dumps({'success':True})
@@ -236,7 +303,7 @@ def update_stories(request, account):
 
     #Correct params?
     id = request.REQUEST['story_id']
-    status = request.REQUEST['story_status']
+    status = request.REQUEST['status']
 
     if id and status and status in VALID_STORY_STATUSES:
         try:

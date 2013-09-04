@@ -24,5 +24,17 @@ class SprintManager(Manager):
     def by_team(self, team_slug):
         return self.get_query_set().by_team(team_slug)
 
+class SprintStoryQuerySet(QuerySet):
+    def by_sprint(self, sprint):
+        return self.filter(sprint=sprint)
+
+class SprintStoryManager(Manager):
+
+    def get_query_set(self):
+        return SprintStoryQuerySet(self.model, using=self._db)
+
+    def by_sprint(self, sprint):
+        return self.get_query_set().by_sprint(sprint)
+
 
 

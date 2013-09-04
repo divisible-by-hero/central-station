@@ -31,14 +31,6 @@ $(document).ready(function(){
     $( ".cs-sprint-board-column-list" ).sortable({
         connectWith: '.cs-sprint-board-column-list',
         cursor: 'move',
-        receive: function(event, ui){
-            //console.log(ui.item)
-            //var id = ui.item.attr('data-id');
-            //var status = ui.item.parent().attr('data-column');
-            //updateStoryStatus(id, status);
-            //alert($(this).sortable('serialize'));
-
-        },
         stop: function(event, ui){
             data = serializeStories();
             updateStories(data);
@@ -114,7 +106,7 @@ function updateStatus(id, value){
 }
 
 function updateStatusButton(id, data){
-    console.log(data)
+    //console.log(data)
     var button = $('.cs-story-status-item-current[data-story-id=' + id +']')
     //remove btn- classes
     button.attr('class', function(i, c){
@@ -126,7 +118,7 @@ function updateStatusButton(id, data){
     
     //update progress bar
     for (var i=0;i<data.sprint.completed_by_status.length;i++){ 
-        console.log(i)
+        //console.log(i)
         $('.cs-progress-bar-item:eq(' + i + ')').css('width', data.sprint.completed_by_status[i].percentage + '%');
     }
 }
@@ -136,12 +128,12 @@ function updateStatusButton(id, data){
 
 /*
 Maybe Deprecated ?
-function updateStoryStatus(story_id, story_status){
+function updateStatus(story_id, status){
 	$.ajax({
 		type: "POST",
 		url: "/sprints/update/story-status/",
 		dataType: 'json',
-		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&story_status=" + story_status,
+		data: "csrfmiddlewaretoken=" + csrf_token + "&story_id=" + story_id + "&status=" + status,
 		success: function(data){
 		    if ( data.success ){
 		        //do something
